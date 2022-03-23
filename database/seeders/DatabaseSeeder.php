@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\GolonganDarah;
 use Illuminate\Database\Seeder;
 use Database\Seeders\AgamaSeeder;
 use Database\Factories\UserFactory;
@@ -29,7 +30,9 @@ class DatabaseSeeder extends Seeder
             PekerjaanSeeder::class,
             PendidikanSeeder::class,
             StatusKawinSeeder::class,
-            SettingSeeder::class
+            SettingSeeder::class,
+            RoleSeeder::class,
+            GolonganDarahSeeder::class
         ]);
     }
 }
