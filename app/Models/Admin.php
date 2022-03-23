@@ -32,6 +32,6 @@ class Admin extends Authenticatable
 
     public function department()
     {
-        return $this->belongsTo(AdminDepartment::class);
+        return $this->belongsTo(AdminRole::class);
     }
 }
