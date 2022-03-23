@@ -16,7 +16,8 @@ class CreateAdminRoleTable extends Migration
         Schema::create('admin_role', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->timestamps();
+            $table->enum('status', ['aktif', 'non-aktif'])->default('aktif');
+            $table->softDeletes();
         });
     }
 

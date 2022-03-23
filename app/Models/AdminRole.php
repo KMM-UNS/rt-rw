@@ -15,7 +15,7 @@ class AdminRole extends Model
     protected $fillable = [
         'name'
     ];
-
+    public $timestamps = false;
     public function admin()
     {
         return $this->hasOne(Admin::class);
