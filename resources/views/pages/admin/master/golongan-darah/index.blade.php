@@ -1,6 +1,6 @@
 @extends('layouts.default', ['topMenu' => true, 'sidebarHide' => true])
 
-@section('title', 'Pengguna')
+@section('title', 'Golongan Darah')
 
 @push('css')
 <!-- datatables -->
@@ -13,9 +13,9 @@
 @section('content')
 <!-- begin breadcrumb -->
 <ol class="breadcrumb float-xl-right">
-    <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
-    <li class="breadcrumb-item"><a href="javascript:;">Master Data</a></li>
-    <li class="breadcrumb-item active">@yield('title')</li>
+  <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
+  <li class="breadcrumb-item"><a href="javascript:;">Master Data</a></li>
+  <li class="breadcrumb-item active">@yield('title')</li>
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
@@ -25,20 +25,20 @@
 
 <!-- begin panel -->
 <div class="panel panel-inverse">
-    <!-- begin panel-heading -->
-    <div class="panel-heading">
-        <h4 class="panel-title">DataTable - @yield('title')</h4>
-        <div class="panel-heading-btn">
-            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-        </div>
+  <!-- begin panel-heading -->
+  <div class="panel-heading">
+    <h4 class="panel-title">DataTable - @yield('title')</h4>
+    <div class="panel-heading-btn">
+      <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+      <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
     </div>
-    <!-- end panel-heading -->
-    <!-- begin panel-body -->
-    <div class="panel-body">
-        {{ $dataTable->table() }}
-    </div>
-    <!-- end panel-body -->
+  </div>
+  <!-- end panel-heading -->
+  <!-- begin panel-body -->
+  <div class="panel-body">
+    {{ $dataTable->table() }}
+  </div>
+  <!-- end panel-body -->
 </div>
 <!-- end panel -->
 @endsection
@@ -51,8 +51,8 @@
 
 <script src="{{ asset('assets/js/custom/delete-with-confirmation.js') }}"></script>
 <script>
-    $(document).on('delete-with-confirmation.success', function() {
-        $('.buttons-reload').trigger('click')
-    })
+  $(document).on('delete-with-confirmation.success', function() {
+    $('.buttons-reload').trigger('click')
+  })
 </script>
 @endpush

@@ -16,7 +16,9 @@ class StatusKawinSeeder extends Seeder
     {
         $status = [
             'KAWIN',
-            'BELUM KAWIN'
+            'BELUM KAWIN',
+            'CERAI HIDUP',
+            'CERAI MATI'
         ];
 
         foreach ($status as $data) :
