@@ -44,14 +44,20 @@ return [
                     'url' => '/admin/master-data/agama',
                     'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Agama'
                 ], [
+                    'url' => '/admin/master-data/golongan-darah',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Golongan Darah'
+                ], [
                     'url' => '/admin/master-data/pekerjaan',
                     'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Pekerjaan'
+                ], [
+                    'url' => '/admin/master-data/pendidikan',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Pendidikan'
                 ], [
                     'url' => '/admin/master-data/status-kawin',
                     'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Status Kawin'
                 ], [
-                    'url' => '/admin/master-data/pendidikan',
-                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Pendidikan'
+                    'url' => '/admin/master-data/status-keluarga',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Status Keluarga'
                 ]
             ]
         ]

@@ -2,18 +2,14 @@
 
 namespace Database\Seeders;
 
-use App\Models\GolonganDarah;
 use Illuminate\Database\Seeder;
 use Database\Seeders\AgamaSeeder;
-use Database\Factories\UserFactory;
 use Database\Seeders\SettingSeeder;
 use Database\Seeders\PekerjaanSeeder;
 use Database\Seeders\IndoRegionSeeder;
 use Database\Seeders\PendidikanSeeder;
 use Database\Seeders\StatusKawinSeeder;
-use Database\Seeders\KeperluanSkckSeeder;
 use Database\Seeders\StatusKeluargaSeeder;
-use Database\Seeders\ObjekPengawalanSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -32,7 +28,8 @@ class DatabaseSeeder extends Seeder
             StatusKawinSeeder::class,
             SettingSeeder::class,
             RoleSeeder::class,
-            GolonganDarahSeeder::class
+            GolonganDarahSeeder::class,
+            StatusKeluargaSeeder::class
         ]);
     }
 }
