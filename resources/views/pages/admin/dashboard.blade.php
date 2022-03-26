@@ -42,7 +42,7 @@
           <div class="col-xl-7 col-lg-8">
             <!-- begin title -->
             <div class="mb-3 text-grey">
-              <b>TOTAL SALES</b>
+              <b>TOTAL SALEssS</b>
               <span class="ml-2">
                 <i class="fa fa-info-circle" data-toggle="popover" data-trigger="hover" data-title="Total sales" data-placement="top" data-content="Net sales (gross sales minus discounts and returns) plus taxes and shipping. Includes orders from all sales channels."></i>
               </span>

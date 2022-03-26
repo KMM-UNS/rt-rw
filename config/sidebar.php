@@ -54,7 +54,32 @@ return [
                     'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Pendidikan'
                 ]
             ]
+        ],
+        [
+            'icon' => 'fa fa-cogs',
+            'title' => 'Bendahara',
+            'url' => 'javascript:;',
+            'caret' => true,
+            'sub_menu' => [
+                [
+                    'url' => '/admin/setting',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;App'
+                ], [
+                    'url' => '/admin/master-data/iuran-wajib',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Iuran Wajib'
+                ], [
+                    'url' => '/admin/master-data/iuran-suka-rela',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Iuran Suka Rela'
+                ], [
+                    'url' => '/admin/master-data/iuran-kondisional',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Iuran Kondisional'
+                ], [
+                    'url' => '/admin/master-data/iuran-agenda',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Iuran Agenda'
+                ]
+            ]
         ]
+
     ],
 
     'menu_user' => [
