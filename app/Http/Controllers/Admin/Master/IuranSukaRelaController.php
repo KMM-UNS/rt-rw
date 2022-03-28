@@ -2,76 +2,81 @@
 
 namespace App\Http\Controllers\Admin\Master;
 
-use App\Models\Agama;Wajib
-use App\Models\IuranWajib;
-use Illuminate\Http\Request;
+use App\Datatables\Admin\Master\IuranSukarelaDataTable;
 use App\Http\Controllers\Controller;
-use App\Datatables\Admin\Master\IuranaDataTable;
-use App\DataTables\Admin\Master\IuranWajibDataTable;
+use App\Models\IuranSukarela;
+use Illuminate\Http\Request;
 
-class IuranSukaRelaController extends Controller
+class IuranSukarelaController extends Controller
 {
-    public function index(IuranWajibDataTable $dataTable)
+    public function index(IuranSukarelaDataTable $dataTable)
     {
-        return $dataTable->render('pages.admin.master.agama.index');
+        // return $dataTable->render('pages.admin.master.')
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
-        return view('pages.admin.master.agama.add-edit');
+        //
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
-        try {
-            $request->validate([
-                'nama' => 'required|min:3'
-            ]);
-        } catch (\Throwable $th) {
-            return back()->withInput()->withToastError($th->validator->messages()->all()[0]);
-        }
-
-        try {
-            Agama::create($request->all());
-        } catch (\Throwable $th) {
-            return back()->withInput()->withToastError('Something went wrong');
-        }
-
-        return redirect(route('admin.master-data.agama.index'))->withToastSuccess('Data tersimpan');
+        //
     }
 
-    public function edit($id)
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\IuranSukarela  $iuranSukarela
+     * @return \Illuminate\Http\Response
+     */
+    public function show(IuranSukarela $iuranSukarela)
     {
-        $data = Agama::findOrFail($id);
-        return view('pages.admin.master.agama.add-edit', ['data' => $data]);
+        //
     }
 
-    public function update(Request $request, $id)
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\IuranSukarela  $iuranSukarela
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(IuranSukarela $iuranSukarela)
     {
-        try {
-            $request->validate([
-                'nama' => 'required|min:3'
-            ]);
-        } catch (\Throwable $th) {
-            return back()->withInput()->withToastError($th->validator->messages()->all()[0]);
-        }
-
-        try {
-            $data = Agama::findOrFail($id);
-            $data->update($request->all());
-        } catch (\Throwable $th) {
-            return back()->withInput()->withToastError('Something went wrong');
-        }
-
-        return redirect(route('admin.master-data.agama.index'))->withToastSuccess('Data tersimpan');
+        //
     }
 
-    public function destroy($id)
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\IuranSukarela  $iuranSukarela
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, IuranSukarela $iuranSukarela)
     {
-        try {
-            Agama::find($id)->delete();
-        } catch (\Throwable $th) {
-            return response(['error' => 'Something went wrong']);
-        }
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\IuranSukarela  $iuranSukarela
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(IuranSukarela $iuranSukarela)
+    {
+        //
     }
 }
