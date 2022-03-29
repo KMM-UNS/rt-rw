@@ -15,7 +15,9 @@ class CreateIuranKondisionalsTable extends Migration
     {
         Schema::create('iuran_kondisionals', function (Blueprint $table) {
             $table->id();
+            $table->string('nama');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
