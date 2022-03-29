@@ -29,7 +29,8 @@ class DatabaseSeeder extends Seeder
             SettingSeeder::class,
             RoleSeeder::class,
             GolonganDarahSeeder::class,
-            StatusKeluargaSeeder::class
+            StatusKeluargaSeeder::class,
+            StatusWargaSeeder::class
         ]);
     }
 }
