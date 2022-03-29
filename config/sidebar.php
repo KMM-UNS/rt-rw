@@ -68,7 +68,7 @@ return [
                     'url' => '/admin/master-data/iuran-wajib',
                     'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Iuran Wajib'
                 ], [
-                    'url' => '/admin/master-data/iuran-suka-rela',
+                    'url' => '/admin/master-data/iuran-sukarela',
                     'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Iuran Suka Rela'
                 ], [
                     'url' => '/admin/master-data/iuran-kondisional',

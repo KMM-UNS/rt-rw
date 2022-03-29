@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateIuranSukarelasTable extends Migration
+class CreateIuranKondisionalsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateIuranSukarelasTable extends Migration
      */
     public function up()
     {
-        Schema::create('iuran_sukarelas', function (Blueprint $table) {
+        Schema::create('iuran_kondisionals', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -28,6 +26,6 @@ class CreateIuranSukarelasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('iuran_sukarelas');
+        Schema::dropIfExists('iuran_kondisionals');
     }
 }

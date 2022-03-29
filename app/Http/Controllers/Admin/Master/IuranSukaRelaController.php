@@ -7,76 +7,74 @@ use App\Http\Controllers\Controller;
 use App\Models\IuranSukarela;
 use Illuminate\Http\Request;
 
+
 class IuranSukarelaController extends Controller
 {
     public function index(IuranSukarelaDataTable $dataTable)
     {
-        // return $dataTable->render('pages.admin.master.')
+        return $dataTable->render('pages.admin.master.iuran-sukarela.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('pages.admin.master.iuran-sukarela.add-edit');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        try {
+            $request->validate([
+                'nama' => 'required|min:3'
+            ]);
+        } catch (\Throwable $th) {
+            return back()->withInput()->withToastError($th->validator->messages()->all()[0]);
+        }
+
+        try {
+            IuranSukarela::create($request->all());
+        } catch (\Throwable $th) {
+            return back()->withInput()->withToastError('Something went wrong');
+        }
+
+        return redirect(route('admin.master-data.iuran-sukarela.index'))->withToastSuccess('Data tersimpan');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\IuranSukarela  $iuranSukarela
-     * @return \Illuminate\Http\Response
-     */
-    public function show(IuranSukarela $iuranSukarela)
+    // public function show(IuranSukarela $iuranSukarela)
+    // {
+    //     //
+    // }
+
+    public function edit($id)
     {
-        //
+        $data = IuranSukarela::findOrFail($id);
+        return view('pages.admin.master.iuran-sukarela.add-edit', ['data' => $data]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\IuranSukarela  $iuranSukarela
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(IuranSukarela $iuranSukarela)
+    public function update(Request $request, $id)
     {
-        //
+        try {
+            $request->validate([
+                'nama' => 'required|min:3'
+            ]);
+        } catch (\Throwable $th) {
+            return back()->withInput()->withToastError($th->validator->messages()->all()[0]);
+        }
+        try {
+            $data = IuranSukarela::findOrFail($id);
+            $data->update($request->all());
+        } catch (\Throwable $th) {
+            return back()->withInput()->withToastError('Something went wrong');
+        }
+
+        return redirect(route('admin.master-data.iuran-sukarela.index'))->withToastSuccess('Data Tersimpan');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\IuranSukarela  $iuranSukarela
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, IuranSukarela $iuranSukarela)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\IuranSukarela  $iuranSukarela
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(IuranSukarela $iuranSukarela)
-    {
-        //
+        try {
+            IuranSukarela::find($id)->delete();
+        } catch (\Throwable $th) {
+            return response(['error' => 'Something went wrong']);
+        }
     }
 }
