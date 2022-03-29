@@ -43,6 +43,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
             Route::resource('iuran-wajib', 'IuranWajibController');
             Route::resource('iuran-sukarela', 'IuranSukarelaController');
             Route::resource('iuran-kondisional', 'IuranKondisionalController');
+            Route::resource('iuran-agenda', 'IuranAgendaController');
         });
 
         // tambahan
