@@ -18,18 +18,8 @@ class IuranWajib extends Model
     protected $fillable = ['nama'];
     public $timestamps = false;
 
-    public function setNamaAttribute($value)
+    public function KasIuranWajib()
     {
-        return $this->attributes['nama'] = Str::ucfirst($value);
-    }
-
-    public function scopeActive($query)
-    {
-        return $query->where('status', static::ACTIVE);
-    }
-
-    public function pendaftar()
-    {
-        return $this->hasMany(Pendaftar::class);
+        return $this->hasMany(KasIuranWajib::class);
     }
 }

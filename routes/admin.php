@@ -34,8 +34,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
             Route::resource('agama', 'AgamaController');
             Route::resource('fakultas', 'FakultasController');
             Route::resource('slider', 'SliderController');
-            // Route::get('file-upload', [ SliderController::class, 'Slider' ])->name('file.upload');
-            // Route::post('file-upload', [ SliderController::class, 'Slider' ])->name('file.upload.post');
             Route::resource('tahun', 'TahunController');
             Route::resource('pekerjaan', 'PekerjaanController');
             Route::resource('status-kawin', 'StatusKawinController');
@@ -44,6 +42,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
             Route::resource('iuran-sukarela', 'IuranSukarelaController');
             Route::resource('iuran-kondisional', 'IuranKondisionalController');
             Route::resource('iuran-agenda', 'IuranAgendaController');
+        });
+
+        Route::group(['prefix' => '/kas-rt', 'as' => 'kas-rt.', 'namespace' => 'KasRT'], function () {
+            Route::resource('kas-iuranwajib', 'KasIuranWajibController');
         });
 
         // tambahan

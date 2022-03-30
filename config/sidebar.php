@@ -78,6 +78,30 @@ return [
                     'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Iuran Agenda'
                 ]
             ]
+        ],
+        [
+            'icon' => 'fa fa-cogs',
+            'title' => 'Kas RT',
+            'url' => 'javascript:;',
+            'caret' => true,
+            'sub_menu' => [
+                [
+                    'url' => '/admin/setting',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;App'
+                ], [
+                    'url' => '/admin/kas-rt/kas-iuranwajib',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Iuran Wajib'
+                ], [
+                    'url' => '/admin/kas-rt/kas-iuransukarela',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Iuran Suka Rela'
+                ], [
+                    'url' => '/admin/kas-rt/kas-iurankondisional',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Iuran Kondisional'
+                ], [
+                    'url' => '/admin/kas-rt/kas-iuranagenda',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Iuran Agenda'
+                ]
+            ]
         ]
 
     ],
