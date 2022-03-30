@@ -5,9 +5,8 @@ namespace App\Http\Requests\Admin;
 use App\Constants\RequestRuleConstant;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StatusPenggunaanRumahForm extends FormRequest
+class MasterForm extends FormRequest
 {
-
     /**
      * Indicates if the validator should stop on the first rule failure.
      *
@@ -49,6 +48,6 @@ class StatusPenggunaanRumahForm extends FormRequest
      */
     public function rules()
     {
-        return RequestRuleConstant::statusPenggunaanRumahTable();
+        return RequestRuleConstant::masterTable();
     }
 }

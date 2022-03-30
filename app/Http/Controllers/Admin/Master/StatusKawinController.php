@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin\Master;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\StatusKawin;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\MasterForm;
 use App\Datatables\Admin\Master\StatusKawinDataTable;
 
 class StatusKawinController extends Controller
@@ -19,16 +20,8 @@ class StatusKawinController extends Controller
         return view('pages.admin.master.status-kawin.add-edit');
     }
 
-    public function store(Request $request)
+    public function store(MasterForm $request)
     {
-        try {
-            $request->validate([
-                'nama' => 'required|min:3'
-            ]);
-        } catch (\Throwable $th) {
-            return back()->withInput()->withToastError($th->validator->messages()->all()[0]);
-        }
-
         try {
             StatusKawin::create($request->all());
         } catch (\Throwable $th) {
@@ -44,16 +37,8 @@ class StatusKawinController extends Controller
         return view('pages.admin.master.status-kawin.add-edit', ['data' => $data]);
     }
 
-    public function update(Request $request, $id)
+    public function update(MasterForm $request, $id)
     {
-        try {
-            $request->validate([
-                'nama' => 'required|min:3'
-            ]);
-        } catch (\Throwable $th) {
-            return back()->withInput()->withToastError($th->validator->messages()->all()[0]);
-        }
-
         try {
             $data = StatusKawin::findOrFail($id);
             $data->update($request->all());

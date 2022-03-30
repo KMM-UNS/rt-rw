@@ -24,10 +24,17 @@ class RequestRuleConstant
         ];
     }
 
-    public static function statusPenggunaanRumahTable()
+    // public static function statusPenggunaanRumahTable()
+    // {
+    //     return [
+    //         'nama' => 'required|integer'
+    //     ];
+    // }
+
+    public static function masterTable()
     {
         return [
-            'nama' => 'required|integer'
+            'nama' => 'required'
         ];
     }
 

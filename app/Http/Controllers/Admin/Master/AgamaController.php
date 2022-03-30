@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Master;
 
 use App\Datatables\Admin\Master\AgamaDataTable;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\MasterForm;
 use App\Models\Agama;
 use Illuminate\Http\Request;
 
@@ -19,16 +20,8 @@ class AgamaController extends Controller
         return view('pages.admin.master.agama.add-edit');
     }
 
-    public function store(Request $request)
+    public function store(MasterForm $request)
     {
-        try {
-            $request->validate([
-                'nama' => 'required|min:3'
-            ]);
-        } catch (\Throwable $th) {
-            return back()->withInput()->withToastError($th->validator->messages()->all()[0]);
-        }
-
         try {
             Agama::create($request->all());
         } catch (\Throwable $th) {
@@ -44,16 +37,8 @@ class AgamaController extends Controller
         return view('pages.admin.master.agama.add-edit', ['data' => $data]);
     }
 
-    public function update(Request $request, $id)
+    public function update(MasterForm $request, $id)
     {
-        try {
-            $request->validate([
-                'nama' => 'required|min:3'
-            ]);
-        } catch (\Throwable $th) {
-            return back()->withInput()->withToastError($th->validator->messages()->all()[0]);
-        }
-
         try {
             $data = Agama::findOrFail($id);
             $data->update($request->all());

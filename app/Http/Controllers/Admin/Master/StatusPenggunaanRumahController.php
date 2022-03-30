@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin\Master;
 
-use App\DataTables\Admin\Master\StatusPenggunaanRumahDataTable;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\StatusPenggunaanRumahForm;
-use App\Models\StatusPenggunaanRumah;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\StatusPenggunaanRumah;
+use App\Http\Requests\Admin\MasterForm;
+use App\DataTables\Admin\Master\StatusPenggunaanRumahDataTable;
 
 class StatusPenggunaanRumahController extends Controller
 {
@@ -36,7 +36,7 @@ class StatusPenggunaanRumahController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StatusPenggunaanRumahForm $request)
+    public function store(MasterForm $request)
     {
         try {
             StatusPenggunaanRumah::create($request->all());
@@ -77,7 +77,7 @@ class StatusPenggunaanRumahController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StatusPenggunaanRumahForm $request, $id)
+    public function update(MasterForm $request, $id)
     {
         try {
             $data = StatusPenggunaanRumah::findOrFail($id);

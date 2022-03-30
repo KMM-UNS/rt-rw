@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin\Master;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Pendidikan;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\MasterForm;
 use App\Datatables\Admin\Master\PendidikanDataTable;
 
 class PendidikanController extends Controller
@@ -19,15 +20,8 @@ class PendidikanController extends Controller
         return view('pages.admin.master.pendidikan.add-edit');
     }
 
-    public function store(Request $request)
+    public function store(MasterForm $request)
     {
-        try {
-            $request->validate([
-                'nama' => 'required|min:2'
-            ]);
-        } catch (\Throwable $th) {
-            return back()->withInput()->withToastError($th->validator->messages()->all()[0]);
-        }
 
         try {
             Pendidikan::create($request->all());
@@ -44,15 +38,8 @@ class PendidikanController extends Controller
         return view('pages.admin.master.pendidikan.add-edit', ['data' => $data]);
     }
 
-    public function update(Request $request, $id)
+    public function update(MasterForm $request, $id)
     {
-        try {
-            $request->validate([
-                'nama' => 'required|min:2'
-            ]);
-        } catch (\Throwable $th) {
-            return back()->withInput()->withToastError($th->validator->messages()->all()[0]);
-        }
 
         try {
             $data = Pendidikan::findOrFail($id);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Master;
 use Illuminate\Http\Request;
 use App\Models\StatusKeluarga;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\MasterForm;
 use App\DataTables\Admin\Master\StatusKeluargaDataTable;
 
 class StatusKeluargaController extends Controller
@@ -35,16 +36,8 @@ class StatusKeluargaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MasterForm $request)
     {
-        try {
-            $request->validate([
-                'nama' => 'required|min:3'
-            ]);
-        } catch (\Throwable $th) {
-            return back()->withInput()->withToastError($th->validator->messages()->all()[0]);
-        }
-
         try {
             StatusKeluarga::create($request->all());
         } catch (\Throwable $th) {
@@ -84,16 +77,8 @@ class StatusKeluargaController extends Controller
      * @param  \App\Models\StatusKeluarga  $statusKeluarga
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(MasterForm $request, $id)
     {
-        try {
-            $request->validate([
-                'nama' => 'required|min:3'
-            ]);
-        } catch (\Throwable $th) {
-            return back()->withInput()->withToastError($th->validator->messages()->all()[0]);
-        }
-
         try {
             $data = StatusKeluarga::findOrFail($id);
             $data->update($request->all());
