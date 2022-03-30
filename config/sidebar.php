@@ -59,6 +59,9 @@ return [
                     'url' => '/admin/master-data/status-keluarga',
                     'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Status Keluarga'
                 ], [
+                    'url' => '/admin/master-data/status-penggunaan-rumah',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Status Penggunaan Rumah'
+                ], [
                     'url' => '/admin/master-data/status-warga',
                     'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Status Warga'
                 ]

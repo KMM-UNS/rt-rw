@@ -25,6 +25,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
             Route::resource('golongan-darah', 'GolonganDarahController');
             Route::resource('status-keluarga', 'StatusKeluargaController');
             Route::resource('status-warga', 'StatusWargaController');
+            Route::resource('status-penggunaan-rumah', 'StatusPenggunaanRumahController');
         });
     });
 });

@@ -3,13 +3,17 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Database\Seeders\RoleSeeder;
 use Database\Seeders\AgamaSeeder;
 use Database\Seeders\SettingSeeder;
 use Database\Seeders\PekerjaanSeeder;
 use Database\Seeders\IndoRegionSeeder;
 use Database\Seeders\PendidikanSeeder;
 use Database\Seeders\StatusKawinSeeder;
+use Database\Seeders\StatusWargaSeeder;
+use Database\Seeders\GolonganDarahSeeder;
 use Database\Seeders\StatusKeluargaSeeder;
+use Database\Seeders\StatusPenggunaanRumahSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -30,7 +34,8 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             GolonganDarahSeeder::class,
             StatusKeluargaSeeder::class,
-            StatusWargaSeeder::class
+            StatusWargaSeeder::class,
+            StatusPenggunaanRumahSeeder::class
         ]);
     }
 }

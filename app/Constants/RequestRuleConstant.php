@@ -23,4 +23,13 @@ class RequestRuleConstant
             'department_id' => 'required'
         ];
     }
+
+    public static function statusPenggunaanRumahTable()
+    {
+        return [
+            'nama' => 'required|integer'
+        ];
+    }
+
+
 }
