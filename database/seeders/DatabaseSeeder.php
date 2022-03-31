@@ -11,6 +11,7 @@ use Database\Seeders\IndoRegionSeeder;
 use Database\Seeders\PendidikanSeeder;
 use Database\Seeders\StatusKawinSeeder;
 use Database\Seeders\StatusWargaSeeder;
+use Database\Seeders\StatusHunianSeeder;
 use Database\Seeders\GolonganDarahSeeder;
 use Database\Seeders\StatusKeluargaSeeder;
 use Database\Seeders\StatusPenggunaanRumahSeeder;
@@ -35,7 +36,8 @@ class DatabaseSeeder extends Seeder
             GolonganDarahSeeder::class,
             StatusKeluargaSeeder::class,
             StatusWargaSeeder::class,
-            StatusPenggunaanRumahSeeder::class
+            StatusPenggunaanRumahSeeder::class,
+            StatusHunianSeeder::class
         ]);
     }
 }
