@@ -17,6 +17,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::resource('/admin', 'AdminController');
         Route::resource('/user', 'UserController');
 
+        Route::resource('rumah', 'RumahController');
+
         Route::group(['prefix' => '/master-data', 'as' => 'master-data.', 'namespace' => 'Master'], function () {
             Route::resource('agama', 'AgamaController');
             Route::resource('pekerjaan', 'PekerjaanController');

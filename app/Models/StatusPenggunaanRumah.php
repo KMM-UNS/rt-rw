@@ -16,4 +16,9 @@ class StatusPenggunaanRumah extends Model
     protected $table = 'status_penggunaan_rumah';
     protected $fillable = ['nama'];
     public $timestamps = false;
+
+    public function rumah()
+    {
+        return $this->hasMany(Rumah::class);
+    }
 }

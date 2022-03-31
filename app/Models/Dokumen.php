@@ -14,17 +14,8 @@ class Dokumen extends Model
         'public_url'
     ];
 
-    public function permohonanSkck()
+    public function rumah()
     {
-        return $this->morphedByMany(PermohonanSKCK::class, 'dokumenable');
-    }
-
-    public function pengawalan()
-    {
-        return $this->morphedByMany(Pengawalan::class, 'dokumenable');
-    }
-    public function ijinKeramaian()
-    {
-        return $this->morphedByMany(IjinKeramaian::class, 'dokumenable');
+        return $this->morphedByMany(Rumah::class, 'dokumenable');
     }
 }

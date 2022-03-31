@@ -16,4 +16,9 @@ class StatusHunian extends Model
     protected $table = 'status_hunian';
     protected $fillable = ['nama'];
     public $timestamps = false;
+
+    public function rumah()
+    {
+        return $this->hasMany(Rumah::class);
+    }
 }

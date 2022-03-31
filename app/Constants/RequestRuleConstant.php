@@ -24,13 +24,6 @@ class RequestRuleConstant
         ];
     }
 
-    // public static function statusPenggunaanRumahTable()
-    // {
-    //     return [
-    //         'nama' => 'required|integer'
-    //     ];
-    // }
-
     public static function masterTable()
     {
         return [
@@ -38,5 +31,14 @@ class RequestRuleConstant
         ];
     }
 
-
+    public static function rumahTable()
+    {
+        return [
+            'rumah_alamat' => 'required',
+            'rumah_nomor_rumah' => 'required',
+            'rumah_telp' => 'required',
+            'rumah_status_penggunaan_id' => 'required',
+            'rumah_status_hunian_id' => 'required'
+        ];
+    }
 }
