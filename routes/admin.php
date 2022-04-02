@@ -47,6 +47,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::group(['prefix' => '/kas-rt', 'as' => 'kas-rt.', 'namespace' => 'KasRT'], function () {
             Route::resource('kas-iuranwajib', 'KasIuranWajibController');
             Route::resource('kas-iuransukarela', 'KasIuranSukaRelaController');
+            Route::resource('kas-iurankondisional', 'KasIuranKondisionalController');
+            Route::resource('kas-iuranagenda', 'KasIuranAgendaController');
         });
 
         // tambahan
