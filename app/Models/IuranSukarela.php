@@ -18,18 +18,8 @@ class IuranSukarela extends Model
     protected $fillable = ['nama'];
     public $timestamps = false;
 
-    public function setNamaAtrribute($value)
+    public function KasIuranSukaRela()
     {
-        return $this->attributes['nama'] = Str::ucfirst($value);
-    }
-
-    public function scopeActive($query)
-    {
-        return $query->where('status', static::ACTIVE);
-    }
-
-    public function pendaftar()
-    {
-        return $this->hasMany(Pendaftar::class);
+        return $this->hasMany(KasIuranSukaRela::class);
     }
 }

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin\KasRT;
 
 use App\Datatables\Admin\KasRT\KasIuranSukaRelaDataTable;
-// use App\Models\Iuransukarela;
 use App\Http\Controllers\Controller;
+use App\Models\IuranSukarela;
 use App\Models\KasIuranSukaRela;
 use Illuminate\Http\Request;
 
@@ -17,7 +17,8 @@ class KasIuranSukaRelaController extends Controller
 
     public function create()
     {
-        return view('pages.admin.kas-rt.kasiuransukarela.add-edit');
+        $jenis_iuransukarela = IuranSukarela::pluck('nama', 'id');
+        return view('pages.admin.kas-rt.kasiuransukarela.add-edit', ['jenis_iuransukarela' => $jenis_iuransukarela]);
     }
 
     public function store(Request $request)
@@ -49,7 +50,14 @@ class KasIuranSukaRelaController extends Controller
     public function edit($id)
     {
         $data = KasIuranSukaRela::findOrFail($id);
-        return view('pages.admin.kas-rt.kasiuransukarela.add-edit', ['data' => $data]);
+        $jenis_iuransukarela = IuranSukarela::pluck('nama', 'id');
+        return view(
+            'pages.admin.kas-rt.kasiuransukarela.add-edit',
+            [
+                'data' => $data,
+                'jenis_iuransukarela' => $jenis_iuransukarela
+            ]
+        );
     }
 
     public function update(Request $request, $id)

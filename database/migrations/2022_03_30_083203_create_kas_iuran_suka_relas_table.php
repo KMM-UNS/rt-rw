@@ -11,7 +11,7 @@ class CreateKasIuranSukaRelasTable extends Migration
     {
         Schema::create('kas_iuran_suka_relas', function (Blueprint $table) {
             $table->id();
-            $table->string('jenis_iuran');
+            $table->string('jenis_iuran_id');
             $table->string('bulan');
             $table->string('tahun');
             $table->string('penerima');

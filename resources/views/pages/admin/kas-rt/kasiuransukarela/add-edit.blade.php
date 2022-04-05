@@ -1,6 +1,6 @@
 @extends('layouts.default', ['topMenu' => true, 'sidebarHide' => true])
 
-@section('title', isset($data) ? 'Edit Kas Iuran Wajib' : 'Create Kas Iuran Wajib' )
+@section('title', isset($data) ? 'Edit Kas Iuran Sukarela' : 'Create Kas Iuran Sukarela' )
 
 @push('css')
 <link href="{{ asset('/assets/plugins/smartwizard/dist/css/smart_wizard.css') }}" rel="stylesheet" />
@@ -40,8 +40,7 @@
     <div class="panel-body">
       <div class="form-group">
         <label for="name">jenis Iuran</label>
-        <input type="text" id='jenis_iuran' name='jenis_iuran' class="form-control" autofocus data-parsley-required="true"
-        value="{{ $data->jenis_iuran ?? old('jenis_iuran') }}">
+        <x-form.Dropdown name="jenis_iuran_id" :options="$jenis_iuransukarela" selected="{{{ old('jenis_iuran_id') ?? ($data['jenis_iuran_id'] ?? null) }}}" required />
       </div>
       <div class="form-group">
         <label for="bulan">Bulan</label>

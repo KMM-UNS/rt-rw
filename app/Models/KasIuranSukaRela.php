@@ -15,8 +15,13 @@ class KasIuranSukaRela extends Model
     public const ACTIVE = "aktif";
 
     protected $table = 'kas_iuran_suka_relas';
-    protected $fillable = ['jenis_iuran', 'bulan', 'tahun', 'penerima', 'pemberi', 'total_biaya', 'bukti_pembayaran'];
+    protected $fillable = ['jenis_iuran_id', 'bulan', 'tahun', 'penerima', 'pemberi', 'total_biaya', 'bukti_pembayaran'];
     protected $dates = [
         'created_at'
     ];
+
+    public function iuransukarela()
+    {
+        return $this->belongsTo(IuranSurarela::class, 'jenis_iuran_id');
+    }
 }

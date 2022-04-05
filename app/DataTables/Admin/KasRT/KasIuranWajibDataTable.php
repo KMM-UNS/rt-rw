@@ -18,9 +18,6 @@ class KasIuranWajibDataTable extends DataTable
             ->setRowId(function ($row) {
                 return $row->id;
             })
-            // ->editColumn('created_at', function ($row) {
-            //     return $row->created_at->isoFormat('Y-m-d');
-            // })
             ->addColumn('action', function ($row) {
                 $btn = '<div class="btn-group">';
                 $btn = $btn . '<a href="' . route('admin.kas-rt.kas-iuranwajib.edit', $row->id) . '" class="btn btn-dark buttons-edit"><i class="fas fa-edit"></i></a>';
