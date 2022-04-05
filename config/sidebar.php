@@ -20,6 +20,12 @@ return [
             'caret' => false
         ],
         [
+            'icon' => 'fa fa-user',
+            'title' => 'Warga',
+            'url' => '/admin/warga',
+            'caret' => false,
+        ],
+        [
             'icon' => 'fa fa-home',
             'title' => 'Rumah',
             'url' => '/admin/rumah',
@@ -73,6 +79,9 @@ return [
                 ], [
                     'url' => '/admin/master-data/status-warga',
                     'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Status Warga'
+                ], [
+                    'url' => '/admin/master-data/warga-negara',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Warga Negara'
                 ]
             ]
         ]

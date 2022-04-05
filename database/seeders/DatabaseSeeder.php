@@ -37,7 +37,8 @@ class DatabaseSeeder extends Seeder
             StatusKeluargaSeeder::class,
             StatusWargaSeeder::class,
             StatusPenggunaanRumahSeeder::class,
-            StatusHunianSeeder::class
+            StatusHunianSeeder::class,
+            WargaNegaraSeeder::class
         ]);
     }
 }
