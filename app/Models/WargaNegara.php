@@ -16,4 +16,9 @@ class WargaNegara extends Model
     protected $table = 'warga_negara';
     protected $fillable = ['nama'];
     public $timestamps = false;
+
+    public function warga()
+    {
+        return $this->hasMany(Warga::class);
+    }
 }

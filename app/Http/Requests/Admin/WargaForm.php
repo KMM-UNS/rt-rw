@@ -3,13 +3,12 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Support\Arr;
-use Illuminate\Validation\Rule;
 use App\Constants\RequestRuleConstant;
 use Illuminate\Foundation\Http\FormRequest;
 
-class RumahForm extends FormRequest
+class WargaForm extends FormRequest
 {
-    /**
+   /**
      * Indicates if the validator should stop on the first rule failure.
      *
      * @var bool
@@ -47,12 +46,12 @@ class RumahForm extends FormRequest
     public function rules(RequestRuleConstant $rrc)
     {
         $rules = [
-            'foto_rumah' => [
+            'foto' => [
                 'mimes:pdf,jpeg,jpg,png|max:2048'
             ]
         ];
         $rules = [
-            $rrc->rumahTable(),
+            $rrc->wargaTable(),
             $rules
         ];
 

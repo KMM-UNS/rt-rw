@@ -26,7 +26,7 @@
   {{ method_field('PUT') }}
   @endif
   <div class="row">
-      <div class="col-xl-8 ui-sortable">
+      <div class="col-xl-9 ui-sortable">
           <div class="panel panel-inverse">
             <!-- begin panel-heading -->
             <div class="panel-heading">
@@ -109,7 +109,7 @@
             <!-- end panel-footer -->
           </div>
       </div>
-      <div class="col-xl-4 ui-sortable">
+      <div class="col-xl-3 ui-sortable">
         <div class="panel panel-inverse">
             <!-- begin panel-heading -->
             <div class="panel-heading">
@@ -137,7 +137,7 @@
                 }
                 @endphp
                 <div class="row">
-                    <x-form.ImageUploader :imageSrc="isset($imageSrc) ? asset(DataHelper::filterDokumenData($imageSrc, 'nama', 'pas_foto')->first()['public_url']) : null" name="pas_foto" title="Pas Foto" />
+                    <x-form.ImageUploader :imageSrc="isset($imageSrc) ? asset(DataHelper::filterDokumenData($imageSrc, 'nama', 'foto_rumah')->first()['public_url']) : null" name="foto_rumah" title="Foto Rumah" value="{{{ $data->dokumen  ?? old('foto_rumah') }}}" />
                 </div>
             </div>
         </div>

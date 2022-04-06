@@ -28,8 +28,8 @@ class StatusKawin extends Model
         return $query->where('status', static::ACTIVE);
     }
 
-    public function pemohon()
+    public function warga()
     {
-        return $this->hasMany(Pemohon::class);
+        return $this->hasMany(Warga::class);
     }
 }

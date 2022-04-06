@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Rumah;
+use App\Helpers\DataHelper;
+use App\Helpers\TrashHelper;
 use App\Models\StatusHunian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Helpers\FileUploaderHelper;
 use App\Http\Controllers\Controller;
 use App\Models\StatusPenggunaanRumah;
-use App\DataTables\Admin\RumahDataTable;
-use App\Helpers\FileUploaderHelper;
 use App\Http\Requests\Admin\RumahForm;
-use App\Models\Rumah;
+use App\DataTables\Admin\RumahDataTable;
 
 class RumahController extends Controller
 {
@@ -80,7 +82,7 @@ class RumahController extends Controller
      */
     public function show($id)
     {
-        //
+       //
     }
 
     /**
@@ -89,9 +91,17 @@ class RumahController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, DataHelper $dataHelper)
     {
-        //
+        $data = Rumah::with('dokumen')->findOrFail($id);
+        $status_penggunaan = StatusPenggunaanRumah::pluck('nama', 'id');
+        $status_hunian = StatusHunian::pluck('nama', 'id');
+        return view('pages.admin.rumah.add-edit', [
+            'data' => $data,
+            'status_penggunaan' => $status_penggunaan,
+            'status_hunian' => $status_hunian,
+            'dataHelper' => $dataHelper
+        ]);
     }
 
     /**
@@ -101,9 +111,34 @@ class RumahController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(RumahForm $request, FileUploaderHelper $fileUploaderHelper, $id)
     {
-        //
+        $rumah = Rumah::findOrFail($id);
+        DB::transaction(function () use ($request, $fileUploaderHelper, $rumah) {
+            try {
+                $rumah->updateFromRequest($request);
+                $rumah->save();
+
+                if ($request->file()) {
+                    foreach ($request->file() as $key => $file) {
+                        $existingFile = $rumah->dokumen;
+                        $old = DataHelper::filterDokumenData($existingFile, 'nama', $key)->first();
+
+                        TrashHelper::moveToTrash($old->public_url);
+
+                        $upload = $fileUploaderHelper->store($file, 'rumah$rumah/lampiran');
+                        $old->update([
+                            'public_url' => $upload['public_path']
+                        ]);
+                    }
+                }
+            } catch (\Throwable $th) {
+                dd($th);
+                DB::rollback();
+                return back()->withInput()->withToastError('Something what happen');
+            }
+        });
+        return redirect(route('admin.rumah.index'))->withInput()->withToastSuccess('success saving data');
     }
 
     /**
@@ -114,6 +149,10 @@ class RumahController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            Rumah::find($id)->delete();
+        } catch (\Throwable $th) {
+            return response(['error' => 'Something went wrong']);
+        }
     }
 }

@@ -28,8 +28,8 @@ class Pekerjaan extends Model
         return $query->where('status', static::ACTIVE);
     }
 
-    public function pendaftar()
+    public function warga()
     {
-        return $this->hasMany(Pendaftar::class);
+        return $this->hasMany(Warga::class);
     }
 }

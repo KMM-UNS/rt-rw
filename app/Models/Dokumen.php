@@ -18,4 +18,9 @@ class Dokumen extends Model
     {
         return $this->morphedByMany(Rumah::class, 'dokumenable');
     }
+
+    public function warga()
+    {
+        return $this->morphedByMany(Warga::class, 'dokumenable');
+    }
 }

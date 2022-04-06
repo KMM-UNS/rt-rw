@@ -16,4 +16,9 @@ class StatusWarga extends Model
     protected $table = 'status_warga';
     protected $fillable = ['nama'];
     public $timestamps = false;
+
+    public function warga()
+    {
+        return $this->hasMany(Warga::class);
+    }
 }

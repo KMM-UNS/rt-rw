@@ -28,4 +28,9 @@ class GolonganDarah extends Model
     {
         return $query->where('status', static::ACTIVE);
     }
+
+    public function warga()
+    {
+        return $this->hasMany(Warga::class);
+    }
 }

@@ -21,8 +21,8 @@ class Pendidikan extends Model
         return $this->attributes['nama'] = Str::ucfirst($value);
     }
 
-    public function pendaftar()
+    public function warga()
     {
-        return $this->hasMany(Pendaftar::class);
+        return $this->hasMany(Warga::class);
     }
 }
