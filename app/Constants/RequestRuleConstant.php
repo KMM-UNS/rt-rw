@@ -36,7 +36,6 @@ class RequestRuleConstant
         return [
             'rumah_alamat' => 'required',
             'rumah_nomor_rumah' => 'required',
-            'rumah_telp' => 'required',
             'rumah_status_penggunaan_id' => 'required',
             'rumah_status_hunian_id' => 'required'
         ];
@@ -60,6 +59,16 @@ class RequestRuleConstant
             'warga_status_kawin_id' => 'required',
             'warga_alamat' => 'required',
             'warga_status_warga_id' => 'required'
+        ];
+    }
+
+    public static function keluargaTable()
+    {
+        return [
+            'keluarga_no_kk' => 'required',
+            'keluarga_kepala_keluarga' => 'required',
+            'keluarga_rumah_id' => 'required',
+            'keluarga_telp' => 'required'
         ];
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRumahTable extends Migration
+class CreateKeluargaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateRumahTable extends Migration
      */
     public function up()
     {
-        Schema::create('rumah', function (Blueprint $table) {
+        Schema::create('keluarga', function (Blueprint $table) {
             $table->id();
-            $table->string('alamat',);
-            $table->string('nomor_rumah');
-            $table->bigInteger('status_penggunaan_id');
-            $table->bigInteger('status_hunian_id');
+            $table->string('no_kk');
+            $table->string('kepala_keluarga');
+            $table->string('rumah_id');
+            $table->string('telp');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -31,6 +31,6 @@ class CreateRumahTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rumah');
+        Schema::dropIfExists('keluarga');
     }
 }

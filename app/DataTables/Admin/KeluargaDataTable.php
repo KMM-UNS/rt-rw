@@ -2,14 +2,14 @@
 
 namespace App\DataTables\Admin;
 
-use App\Models\Rumah;
+use App\Models\Keluarga;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class RumahDataTable extends DataTable
+class KeluargaDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -21,10 +21,11 @@ class RumahDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
+            ->addIndexColumn()
             ->addColumn('action', function ($row) {
                 $btn = '<div class="btn-group">';
-                $btn = $btn . '<a href="' . route('admin.rumah.edit', $row->id) . '" class="btn btn-dark buttons-edit"><i class="fas fa-edit"></i></a>';
-                $btn = $btn . '<a href="' . route('admin.rumah.destroy', $row->id) . '" class="btn btn-danger buttons-delete"><i class="fas fa-trash fa-fw"></i></a>';
+                $btn = $btn . '<a href="' . route('admin.keluarga.edit', $row->id) . '" class="btn btn-dark buttons-edit"><i class="fas fa-edit"></i></a>';
+                $btn = $btn . '<a href="' . route('admin.keluarga.destroy', $row->id) . '" class="btn btn-danger buttons-delete"><i class="fas fa-trash fa-fw"></i></a>';
                 $btn = $btn . '</div>';
                 return $btn;
             });
@@ -33,12 +34,12 @@ class RumahDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\App\Models\Admin\RumahDataTable $model
+     * @param \App\App\Models\Admin\KeluargaDataTable $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Rumah $model)
+    public function query(Keluarga $model)
     {
-        return $model->select('rumah.*')->with(['status_penggunaan', 'status_hunian']);
+        return $model->select('keluarga.*')->with(['rumah']);
     }
 
     /**
@@ -49,7 +50,7 @@ class RumahDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('rumah-table')
+                    ->setTableId('keluarga-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('<"dataTables_wrapper dt-bootstrap"B<"row"<"col-xl-7 d-block d-sm-flex d-xl-block justify-content-center"<"d-block d-lg-inline-flex"l>><"col-xl-5 d-flex d-xl-block justify-content-center"fr>>t<"row"<"col-sm-5"i><"col-sm-7"p>>>')
@@ -71,15 +72,16 @@ class RumahDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            Column::make('DT_RowIndex')->title('No')->orderable(false)->searchable(false)->addClass('text-center'),
+            Column::make('no_kk'),
+            Column::make('kepala_keluarga'),
+            Column::make('rumah_id')->title('Alamat Rumah')->data('rumah.alamat'),
+            Column::make('rumah_id')->title('Nomor Rumah')->data('rumah.nomor_rumah'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
                   ->width(60)
-                  ->addClass('text-center'),
-            Column::make('alamat'),
-            Column::make('nomor_rumah'),
-            Column::make('status_penggunaan_id')->title('Status Penggunaan')->data('status_penggunaan.nama'),
-            Column::make('status_hunian_id')->title('Status Hunian')->data('status_hunian.nama'),
+                  ->addClass('text-center')
         ];
     }
 
@@ -90,6 +92,6 @@ class RumahDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Admin\Rumah_' . date('YmdHis');
+        return 'Admin\Keluarga_' . date('YmdHis');
     }
 }

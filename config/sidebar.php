@@ -20,6 +20,12 @@ return [
             'caret' => false
         ],
         [
+            'icon' => 'fa fa-users',
+            'title' => 'Keluarga',
+            'url' => '/admin/keluarga',
+            'caret' => false,
+        ],
+        [
             'icon' => 'fa fa-user',
             'title' => 'Warga',
             'url' => '/admin/warga',

@@ -1,6 +1,6 @@
 @extends('layouts.default', ['topMenu' => true, 'sidebarHide' => true])
 
-@section('title', isset($data) ? 'Edit Rumah' : 'Create Rumah' )
+@section('title', isset($data) ? 'Edit Keluarga' : 'Create Keluarga' )
 
 @push('css')
 <link href="{{ asset('/assets/plugins/select2/dist/css/select2.min.css') }}" rel="stylesheet" />
@@ -20,14 +20,12 @@
 
 
 <!-- begin panel -->
-<form action="{{ isset($data) ? route('admin.rumah.update', $data->id) : route('admin.rumah.store') }}" id="form" name="form" method="POST" data-parsley-validate="true" enctype="multipart/form-data">
+<form action="{{ isset($data) ? route('admin.keluarga.update', $data->id) : route('admin.keluarga.store') }}" id="form" name="form" method="POST" data-parsley-validate="true" enctype="multipart/form-data">
   @csrf
   @if(isset($data))
   {{ method_field('PUT') }}
   @endif
-  <div class="row">
-      <div class="col-xl-9 ui-sortable">
-          <div class="panel panel-inverse">
+    <div class="panel panel-inverse">
             <!-- begin panel-heading -->
             <div class="panel-heading">
               <h4 class="panel-title">Form @yield('title')</h4>
@@ -42,19 +40,19 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-1 my-auto">
-                            <label for="alamat"><strong>Alamat</strong></label>
+                            <label for="no_kk"><strong>No KK</strong></label>
                         </div>
                         <div class="col-md-5">
                             <div class="input-group">
-                                <input type="text" id="alamat" name="rumah_alamat" class="form-control" autofocus data-parsley-required="true" value="{{{ old('rumah_alamat') ?? ($data['alamat'] ?? null) }}}">
+                                <input type="text" id="no_kk" name="keluarga_no_kk" class="form-control" autofocus data-parsley-required="true" value="{{{ old('keluarga_no_kk') ?? ($data['no_kk'] ?? null) }}}">
                             </div>
                         </div>
                         <div class="col-md-1 my-auto">
-                            <label for="nomor_rumah"><strong>Nomor Rumah</strong></label>
+                            <label for="kepala_keluarga"><strong>Nama Kepala Keluarga</strong></label>
                         </div>
                         <div class="col-md-5">
                             <div class="input-group">
-                                <input type="text" id="nomor_rumah" name="rumah_nomor_rumah" class="form-control" autofocus data-parsley-required="true" value="{{{ old('rumah_nomor_rumah') ?? ($data['nomor_rumah'] ?? null) }}}">
+                                <input type="text" id="kepala_keluarga" name="keluarga_kepala_keluarga" class="form-control" autofocus data-parsley-required="true" value="{{{ old('keluarga_kepala_keluarga') ?? ($data['kepala_keluarga'] ?? null) }}}">
                             </div>
                         </div>
                     </div>
@@ -62,19 +60,19 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-1 my-auto">
-                            <label for="status_penggunaan_id"><strong>Status Penggunaan</strong></label>
+                            <label for="rumah_id"><strong>Nomor Rumah</strong></label>
                         </div>
                         <div class="col-md-5">
                             <div class="input-group">
-                                <x-form.Dropdown name="rumah_status_penggunaan_id" :options="$status_penggunaan" selected="{{{ old('rumah_status_penggunaan_id') ?? ($data['status_penggunaan_id'] ?? null) }}}" required />
+                                <x-form.Dropdown name="keluarga_rumah_id" :options="$rumah" selected="{{{ old('keluarga_rumah_id') ?? ($data['rumah_id'] ?? null) }}}" required />
                             </div>
                         </div>
                         <div class="col-md-1 my-auto">
-                            <label for="status_hunian_id"><strong>Status Hunian</strong></label>
+                            <label for="telp"><strong>Nomor Telepon/HP</strong></label>
                         </div>
                         <div class="col-md-5">
                             <div class="input-group">
-                                <x-form.Dropdown name="rumah_status_hunian_id" :options="$status_hunian" selected="{{{ old('rumah_status_hunian_id') ?? ($data['status_hunian_id'] ?? null) }}}" required />
+                                <input type="text" id="telp" name="keluarga_telp" class="form-control" autofocus data-parsley-required="true" value="{{{ old('keluarga_telp') ?? ($data['telp'] ?? null) }}}">
                             </div>
                         </div>
                     </div>
@@ -87,43 +85,7 @@
               <button type="reset" class="btn btn-default">Reset</button>
             </div>
             <!-- end panel-footer -->
-          </div>
-      </div>
-      <div class="col-xl-3 ui-sortable">
-        <div class="panel panel-inverse">
-            <!-- begin panel-heading -->
-            <div class="panel-heading">
-                <h4 class="panel-title">Lampiran Berkas</h4>
-                <div class="panel-heading-btn">
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a>
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
-                </div>
-            </div>
-            <!-- end panel-heading -->
-            <!-- begin panel-body -->
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        {{-- <img src="{{ asset($data->foto)}}" alt="" srcset=""> --}}
-                    </div>
-                    {{-- <img src="{{ asset('storage/app/public/foto')$data->foto }}" alt="" srcset=""> --}}
-                </div>
-                @php
-                $imageSrc = null;
-                if(isset($data->dokumen)){
-                $imageSrc = $data->dokumen->toArray();
-                }
-                @endphp
-                <div class="row">
-                    <x-form.ImageUploader :imageSrc="isset($imageSrc) ? asset(DataHelper::filterDokumenData($imageSrc, 'nama', 'foto_rumah')->first()['public_url']) : null" name="foto_rumah" title="Foto Rumah" value="{{{ $data->dokumen  ?? old('foto_rumah') }}}" />
-                </div>
-            </div>
-        </div>
-        <!-- end panel-body -->
     </div>
-  </div>
 </form>
 <a href="javascript:history.back(-1);" class="btn btn-success">
   <i class="fa fa-arrow-circle-left"></i> Kembali

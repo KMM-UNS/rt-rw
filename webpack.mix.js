@@ -52,6 +52,9 @@ mix.combine([
 ], 'public/assets/js/custom/datatable-assets.js');
 /* end custom resources */
 
+// jquery
+mix.copy('node_modules/jquery/dist/', 'public/assets/plugins/jquery/dist/');
+
 // jquery-migrate
 mix.copy('node_modules/jquery-migrate/dist/', 'public/assets/plugins/jquery-migrate/dist/');
 

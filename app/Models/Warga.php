@@ -74,6 +74,11 @@ class Warga extends Model
         return $this->belongsTo(StatusWarga::class);
     }
 
+    public function keluarga()
+    {
+        return $this->belongsTo(Keluarga::class);
+    }
+
     public function dokumen()
     {
         return $this->morphToMany(Dokumen::class, 'dokumenable');

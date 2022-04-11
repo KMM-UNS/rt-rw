@@ -15,11 +15,15 @@ class Rumah extends Model
     protected $fillable = [
         'alamat',
         'nomor_rumah',
-        'warga_id',
-        'telp',
         'status_penggunaan_id',
         'status_hunian_id',
     ];
+
+
+    public function keluarga()
+    {
+        return $this->hasMany(Keluarga::class);
+    }
 
     public function status_penggunaan()
     {
