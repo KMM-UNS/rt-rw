@@ -97,12 +97,17 @@ return [
         [
             'icon' => 'fa fa-th-large',
             'title' => 'Dashboard',
-            'url' => '/',
+            'url' => '/user',
             'caret' => false
         ], [
-            'icon' => 'fa fa-cogs',
-            'title' => 'Ganti Password',
-            'url' => '#',
+            'icon' => 'fa fa-users',
+            'title' => 'Keluarga',
+            'url' => '/user/keluarga',
+            'caret' => false
+        ], [
+            'icon' => 'fa fa-user',
+            'title' => 'Warga',
+            'url' => '/user/warga',
             'caret' => false
         ], [
             'icon' => 'fa fa-sign-out-alt',

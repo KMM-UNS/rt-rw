@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\User\KeluargaController;
+use App\Models\Keluarga;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,17 +19,18 @@ Route::get('/token', function () {
     return csrf_token();
 });
 
-Route::group(['middleware' => 'auth:web', 'as' => 'user.'], function () {
-    Route::view('/', 'home')->name('home');
+Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
+    require base_path('vendor/laravel/fortify/routes/routes.php');
+    Route::resource('/setting', 'SettingController');
 
-    Route::group(['namespace' => 'User'], function () {
+    Route::group(['namespace' => 'User', 'middleware' => 'auth:web'], function () {
+        Route::get('', 'DashboardController@index');
+        Route::resource('/keluarga', 'KeluargaController');
+        Route::resource('/warga', 'WargaController');
 
     });
-
-
-    
-    
 });
+
 
 
 require __DIR__ . '/demo.php';

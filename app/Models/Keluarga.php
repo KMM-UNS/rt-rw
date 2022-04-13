@@ -28,4 +28,9 @@ class Keluarga extends Model
     {
         return $this->belongsTo(Rumah::class);
     }
+
+    public function createable()
+    {
+        return $this->morphTo();
+    }
 }

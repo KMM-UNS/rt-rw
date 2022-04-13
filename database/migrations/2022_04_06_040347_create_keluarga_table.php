@@ -19,6 +19,8 @@ class CreateKeluargaTable extends Migration
             $table->string('kepala_keluarga');
             $table->string('rumah_id');
             $table->string('telp');
+            $table->bigInteger('createable_id');
+            $table->text('createable_type');
             $table->timestamps();
             $table->softDeletes();
         });
