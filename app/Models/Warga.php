@@ -83,4 +83,9 @@ class Warga extends Model
     {
         return $this->morphToMany(Dokumen::class, 'dokumenable');
     }
+
+    public function createable()
+    {
+        return $this->morphTo();
+    }
 }

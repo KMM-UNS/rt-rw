@@ -47,7 +47,7 @@ class WargaForm extends FormRequest
     {
         $rules = [
             'foto' => [
-                'mimes:pdf,jpeg,jpg,png|max:2048'
+                'mimes:png,jpeg,jpg|max:2048'
             ]
         ];
         $rules = [
