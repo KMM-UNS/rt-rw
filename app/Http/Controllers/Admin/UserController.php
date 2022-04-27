@@ -24,7 +24,7 @@ class UserController extends Controller
         try {
             $request->validate([
                 'name' => 'required|min:3',
-                'email' => 'required|min:7|max:15',
+                'email' => 'required|min:7',
                 'password' => ['required', 'string', 'min:8', 'confirmed'],
             ]);
         } catch (\Throwable $th) {
@@ -33,7 +33,7 @@ class UserController extends Controller
 
         try {
             User::create([
-                'fullname' => $request->fullname,
+                'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'isAdmin' => $request->isAdmin

@@ -20,7 +20,7 @@
 
 
 <!-- begin panel -->
-<form action="{{ isset($data) ? route('user.update', $data->id) : route('user.store') }}" id="form" name="form" method="POST" data-parsley-validate="true">
+<form action="{{ isset($data) ? route('admin.user.update', $data->id) : route('admin.user.store') }}" id="form" name="form" method="POST" data-parsley-validate="true">
     @csrf
     @if(isset($data))
     {{ method_field('PUT') }}
@@ -40,7 +40,7 @@
         <div class="panel-body">
             <div class="form-group">
                 <label for="name">Nama Lengkap</label>
-                <input type="text" id="fullname" name="fullname" class="form-control" autofocus data-parsley-required="true" value="{{{ $data->fullname ?? old('fullname') }}}">
+                <input type="text" id="name" name="name" class="form-control" autofocus data-parsley-required="true" value="{{{ $data->name ?? old('name') }}}">
             </div>
             <div class="form-group">
                 <label for="name">Email</label>
