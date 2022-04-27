@@ -15,66 +15,83 @@
             <div class="panel-body mx-3 text-center">
                 <h3>Data Keluarga</h3>
                 <hr>
-                <p>Anda belum mengisi data keluarga.</p>
-                <a href="{{ route('user.keluarga.create') }}" class="btn btn-primary">Isi data keluarga</a>
+                <p style="font-size: 14px">Anda belum mengisi data keluarga.</p>
+                <a href="{{ route('user.keluarga.create') }}" class="btn btn-primary"><i class="fas fa-pencil-alt fa-fw mr-2"></i>Isi Data Keluarga</a>
             </div>
         </div>
         <!-- end panel -->
     @else
-        <div class="panel panel-inverse">
+        {{-- <div class="panel panel-inverse">
             <div class="panel-body" style="font-size: 14px">
                 <h3 class="text-center">Data Keluarga</h3>
                 <hr>
                 <div class="row">
-                    <div class="col-md-2 my-auto">
-                        <label for="no_kk"><strong>No KK</strong></label>
+                    <div class="col-md-6 my-auto">
+                        No KK
                     </div>
-                    <div class="col-md-1 text-center">
-                        :
-                    </div>
-                    <div class="col-md-3">
-                        <strong>
-                            {{ $keluarga['no_kk'] }}
-                        </strong>
-                    </div>
-                    <div class="col-md-2 my-auto">
-                        <label for="kepala_keluarga"><strong>Nama Kepala Keluarga</strong></label>
-                    </div>
-                    <div class="col-md-1 text-center">
-                        :
-                    </div>
-                    <div class="col-md-3">
-                        <div class="input-group">
-                            {{ $keluarga['kepala_keluarga'] }}
-                        </div>
+                    <div class="col-md-6 my-auto">
+                        Nama Kepala Keluarga
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-2 my-auto">
-                        <label for="rumah_id"><strong>Nomor Rumah</strong></label>
+                <div class="row" style="font-size: 20px">
+                    <div class="col-md-6">
+                        {{ $keluarga['no_kk'] }}
                     </div>
-                    <div class="col-md-1 text-center">
-                        :
+                    <div class="col-md-6">
+                        {{ $keluarga['kepala_keluarga'] }}
                     </div>
-                    <div class="col-md-3">
-                        <div class="input-group">
-                            {{ $keluarga->rumah['nomor_rumah'] }}
-                        </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6 my-auto">
+                        Nomor Rumah
                     </div>
-                    <div class="col-md-2 my-auto">
-                        <label for="telp"><strong>Nomor Telepon/HP</strong></label>
+                    <div class="col-md-6 my-auto">
+                        Nomor Telepon/HP
                     </div>
-                    <div class="col-md-1 text-center">
-                        :
+                </div>
+                <div class="row" style="font-size: 20px">
+                    <div class="col-md-6">
+                        {{ $keluarga->rumah['nomor_rumah']  }}
                     </div>
-                    <div class="col-md-3">
-                        <div class="input-group">
-                            {{ $keluarga['telp'] }}
-                        </div>
+                    <div class="col-md-6">
+                        {{ $keluarga['telp'] }}
                     </div>
                 </div>
                 <div class="text-center">
-                    <a href="#" class="btn btn-primary my-2">Isi data warga</a>
+                    <a href="{{ route('user.warga.index') }}" class="btn btn-primary mt-4 mb-2" style="font-size: 14px"><i class="fas fa-eye fa-fw mr-2"></i>Lihat Anggota Keluarga</a>
+                </div>
+            </div>
+        </div> --}}
+        <div class="panel panel-inverse">
+            <div class="panel-body" style="font-size: 14px">
+                <h3 class="text-center">Data Keluarga</h3>
+                <hr class="m-0">
+                <div class="row mx-4 mt-3">
+                    <div class="col-md-6">
+                        <div>
+                            <label>No KK</label>
+                            <p class="font-weight-bold">{{ $keluarga['no_kk'] }}</p>
+                        </div>
+                        <div>
+                            <label>Nama Kepala Keluarga</label>
+                            <p class="font-weight-bold">{{ $keluarga['kepala_keluarga'] }}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div>
+                            <label>Nomor Rumah</label>
+                            <p class="font-weight-bold">{{ $keluarga->rumah['nomor_rumah'] }}</p>
+                        </div>
+                        <div>
+                            <label>Nomor Telepon/HP</label>
+                            <p class="font-weight-bold">{{ $keluarga['telp'] }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="text-center">
+                    <a href="{{ route('user.warga.index') }}" class="btn btn-primary mt-2 mb-2" style="font-size: 12px"><i class="fas fa-eye fa-fw mr-2"></i>Lihat Anggota Keluarga</a>
                 </div>
             </div>
         </div>
