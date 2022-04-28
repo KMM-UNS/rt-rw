@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\DataTables\Admin\DetailKeluargaDataTable;
 use App\Models\Rumah;
 use App\Models\Warga;
 use Illuminate\Http\Request;
@@ -64,9 +65,12 @@ class KeluargaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(DetailKeluargaDataTable $dataTable, $id)
     {
-
+        $data = Keluarga::findorFail($id);
+        return $dataTable->render('pages.admin.keluarga.show', [
+            'data' => $data
+        ]);
     }
 
 

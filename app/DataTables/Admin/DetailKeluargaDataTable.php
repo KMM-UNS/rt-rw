@@ -3,14 +3,13 @@
 namespace App\DataTables\Admin;
 
 use App\Models\Warga;
-use Illuminate\Http\Request;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class WargaDataTable extends DataTable
+class DetailKeluargaDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -38,12 +37,13 @@ class WargaDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\App\Models\Admin\WargaDataTable $model
+     * @param \App\App\Models\Admin\DetailKeluargaDataTable $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(Warga $model)
     {
-        return $model->select('warga.*')->with(['agama', 'status_keluarga']);
+        $id = request()->segment(3);
+        return $model->select('warga.*')->with(['agama', 'status_keluarga'])->where('keluarga_id', $id);
     }
 
     /**
@@ -54,18 +54,18 @@ class WargaDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('warga-table')
+                    ->setTableId('detailkeluarga-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->dom('<"dataTables_wrapper dt-bootstrap"B<"row"<"col-xl-7 d-block d-sm-flex d-xl-block justify-content-center"<"d-block d-lg-inline-flex"l>><"col-xl-5 d-flex d-xl-block justify-content-center"fr>>t<"row"<"col-sm-5"i><"col-sm-7"p>>>')
-                    ->orderBy(1)
-                    ->buttons(
-                        Button::make('create'),
-                        Button::make('export'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    );
+                    // ->dom('<"dataTables_wrapper dt-bootstrap"B<"row"<"col-xl-7 d-block d-sm-flex d-xl-block justify-content-center"<"d-block d-lg-inline-flex"l>><"col-xl-5 d-flex d-xl-block justify-content-center"fr>>t<"row"<"col-sm-5"i><"col-sm-7"p>>>')
+                    ->orderBy(1);
+                    // ->buttons(
+                    //     Button::make('create'),
+                    //     Button::make('export'),
+                    //     Button::make('print'),
+                    //     Button::make('reset'),
+                    //     Button::make('reload')
+                    // );
     }
 
     /**
@@ -83,7 +83,7 @@ class WargaDataTable extends DataTable
             Column::make('agama_id')->title('Agama')->data('agama.nama'),
             Column::make('tempat_lahir'),
             Column::make('tanggal_lahir'),
-            Column::make('status_keluarga_id')->title('Status dalam Keluarga')->data('status_keluarga.nama'),
+            Column::make('status_keluarga_id')->title('Status dalam Keluarga')->data('status_keluarga.nama')->width(120),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
@@ -99,6 +99,6 @@ class WargaDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Admin\Warga_' . date('YmdHis');
+        return 'Admin\DetailKeluarga_' . date('YmdHis');
     }
 }
