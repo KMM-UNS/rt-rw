@@ -18,7 +18,7 @@ class IuranSukarela extends Model
     protected $fillable = ['nama'];
     public $timestamps = false;
 
-    public function KasIuranSukaRela()
+    public function kasiuransukarela()
     {
         return $this->hasMany(KasIuranSukaRela::class);
     }

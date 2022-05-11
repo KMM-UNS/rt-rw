@@ -11,12 +11,6 @@ use Yajra\DataTables\Services\DataTable;
 
 class AgamaDataTable extends DataTable
 {
-    /**
-     * Build DataTable class.
-     *
-     * @param mixed $query Results from query() method.
-     * @return \Yajra\DataTables\DataTableAbstract
-     */
     public function dataTable($query)
     {
         return datatables()

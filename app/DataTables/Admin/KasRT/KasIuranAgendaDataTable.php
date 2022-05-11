@@ -22,15 +22,23 @@ class KasIuranAgendaDataTable extends DataTable
                 $btn = '<div class="btn-group">';
                 $btn = $btn . '<a href="' . route('admin.kas-rt.kas-iuranagenda.edit', $row->id) . '" class="btn btn-dark buttons-edit"><i class="fas fa-edit"></i></a>';
                 $btn = $btn . '<a href="' . route('admin.kas-rt.kas-iuranagenda.destroy', $row->id) . '" class="btn btn-danger buttons-delete"><i class="fas fa-trash fa-fw"></i></a>';
+
                 $btn = $btn . '</div>';
 
                 return $btn;
-            });
+            })
+
+            ->addColumn('image', function ($row) {
+                $img = '<img src="' . asset($row->dokumen[0]['public_url']) . '" class="img-rounded height-80" >';
+                return $img;
+            })
+            // raw column berfungsi untuk menjalankan tag html
+            ->rawColumns(['image', 'action']);
     }
 
     public function query(KasIuranAgenda $model)
     {
-        return $model->newQuery();
+        return $model->select('kas_iuran_agendas.*')->with(['iuranagenda', 'petugastagihan']);
     }
 
     public function html()
@@ -59,17 +67,18 @@ class KasIuranAgendaDataTable extends DataTable
                 ->width(60)
                 ->addClass('text-center'),
             Column::make('id'),
-            Column::make('jenis_iuran'),
+            Column::make('jenis_iuran_id')->data('iuranagenda.nama'),
             Column::make('bulan'),
             Column::make('tahun'),
-            Column::make('penerima'),
+            Column::make('nama_petugas_id')->data('petugastagihan.nama'),
             Column::make('pemberi'),
             Column::make('total_biaya'),
-            Column::make('bukti_pembayaran'),
+            Column::computed('image'),
             Column::make('created_at'),
             Column::make('updated_at'),
         ];
     }
+
 
 
     protected function filename()

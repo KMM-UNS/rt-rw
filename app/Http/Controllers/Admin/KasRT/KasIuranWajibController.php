@@ -4,9 +4,16 @@ namespace App\Http\Controllers\Admin\KasRT;
 
 use App\Datatables\Admin\KasRT\KasIuranWajibDataTable;
 use App\Models\IuranWajib;
+use App\Models\PetugasTagihan;
 use App\Http\Controllers\Controller;
 use App\Models\KasIuranWajib;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+use App\Helpers\DataHelper;
+use App\Helpers\TrashHelper;
+use App\Helpers\FileUploaderHelper;
+use App\Http\Requests\Admin\IuranWajibForm;
 
 class KasIuranWajibController extends Controller
 {
@@ -18,26 +25,32 @@ class KasIuranWajibController extends Controller
     public function create()
     {
         $jenis_iuranwajib = IuranWajib::pluck('nama', 'id');
-        return view('pages.admin.kas-rt.kasiuranwajib.add-edit', ['jenis_iuranwajib' => $jenis_iuranwajib]);
+        $nama_petugas = PetugasTagihan::pluck('nama', 'id');
+        return view('pages.admin.kas-rt.kasiuranwajib.add-edit', ['jenis_iuranwajib' => $jenis_iuranwajib, 'nama_petugas' => $nama_petugas]);
     }
 
-    public function store(Request $request)
+    public function store(IuranWajibForm $request, FileUploaderHelper $fileUploaderHelper)
     {
-        try {
-            $request->validate([
-                'penerima' => 'required|min:3'
-            ]);
-        } catch (\Throwable $th) {
-            return back()->withInput()->withToastError($th->validator->messages()->all()[0]);
-        }
+        DB::transaction(function () use ($request, $fileUploaderHelper) {
+            try {
+                $wajib = KasIuranWajib::createFromRequest($request);
+                $wajib->save();
+                if ($request->file()) {
 
-        try {
-            KasIuranWajib::create($request->all());
-        } catch (\Throwable $th) {
-            dd($th);
-            return back()->withInput()->withToastError('Something went wrong');
-        }
-
+                    foreach ($request->file() as $key => $file) {
+                        $upload = $fileUploaderHelper->store($file, 'wajib/foto');
+                        $wajib->dokumen()->create([
+                            'nama' => $key,
+                            'public_url' => $upload['public_path']
+                        ]);
+                    }
+                }
+            } catch (\Throwable $th) {
+                dd($th);
+                DB::rollback();
+                return back()->withInput()->withToastError('Something what happen');
+            }
+        });
         return redirect(route('admin.kas-rt.kas-iuranwajib.index'))->withToastSuccess('Data tersimpan');
     }
 
@@ -46,34 +59,47 @@ class KasIuranWajibController extends Controller
         //
     }
 
-    public function edit($id)
+    public function edit($id, DataHelper $dataHelper)
     {
-        $data = KasIuranWajib::findOrFail($id);
+        $data = KasIuranWajib::with('dokumen')->findOrFail($id);
         $jenis_iuranwajib = IuranWajib::pluck('nama', 'id');
+        $nama_petugas = PetugasTagihan::pluck('nama', 'id');
         return view('pages.admin.kas-rt.kasiuranwajib.add-edit', [
             'data' => $data,
-            'jenis_iuranwajib' => $jenis_iuranwajib
+            'jenis_iuranwajib' => $jenis_iuranwajib,
+            'nama_petugas' => $nama_petugas,
+            'dataHelper' => $dataHelper
         ]);
     }
 
 
-    public function update(Request $request, $id)
+    public function update(IuranWajibForm $request, FileUploaderHelper $fileUploaderHelper, $id)
     {
-        try {
-            $request->validate([
-                'penerima' => 'required|min:3'
-            ]);
-        } catch (\Throwable $th) {
-            return back()->withInput()->withToastError($th->validator->messages()->all()[0]);
-        }
+        $wajib = KasIuranWajib::findOrFail($id);
+        DB::transaction(function () use ($request, $fileUploaderHelper, $wajib) {
+            try {
+                $wajib->updateFromRequest($request);
+                $wajib->save();
 
-        try {
-            $data = KasIuranWajib::findOrFail($id);
-            $data->update($request->all());
-        } catch (\Throwable $th) {
-            return back()->withInput()->withToastError('Something went wrong');
-        }
+                if ($request->file()) {
+                    foreach ($request->file() as $key => $file) {
+                        $existingFile = $wajib->dokumen;
+                        $old = DataHelper::filterDokumenData($existingFile, 'nama', $key)->first();
 
+                        TrashHelper::moveToTrash($old->public_url);
+
+                        $upload = $fileUploaderHelper->store($file, 'iuran-wajib/lampiran');
+                        $old->update([
+                            'public_url' => $upload['public_path']
+                        ]);
+                    }
+                }
+            } catch (\Throwable $th) {
+                dd($th);
+                DB::rollback();
+                return back()->withInput()->withToastError('Something what happen');
+            }
+        });
         return redirect(route('admin.kas-rt.kas-iuranwajib.index'))->withToastSuccess('Data tersimpan');
     }
 

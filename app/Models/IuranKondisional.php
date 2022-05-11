@@ -17,4 +17,9 @@ class IuranKondisional extends Model
     protected $table = 'iuran_kondisionals';
     protected $fillable = ['nama'];
     public $timestamps = false;
+
+    public function KasIuranKondisional()
+    {
+        return $this->hasMany(KasIuranKondisional::class);
+    }
 }

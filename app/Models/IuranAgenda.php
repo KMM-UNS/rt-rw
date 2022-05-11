@@ -17,4 +17,9 @@ class IuranAgenda extends Model
     protected $table = 'iuran_agendas';
     protected $fillable = ['nama'];
     public $timestamps = false;
+
+    public function KasIuranSukarela()
+    {
+        return $this->hasMany(KasIuranSukarela::class);
+    }
 }

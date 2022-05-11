@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateKasIuranSukaRelasTable extends Migration
 {
-
     public function up()
     {
         Schema::create('kas_iuran_suka_relas', function (Blueprint $table) {
@@ -14,10 +13,10 @@ class CreateKasIuranSukaRelasTable extends Migration
             $table->string('jenis_iuran_id');
             $table->string('bulan');
             $table->string('tahun');
-            $table->string('penerima');
+            $table->string('nama_petugas');
             $table->string('pemberi');
             $table->string('total_biaya');
-            $table->string('bukti_pembayaran');
+            // $table->string('bukti_pembayaran');
             $table->timestamps();
             $table->softDeletes();
         });

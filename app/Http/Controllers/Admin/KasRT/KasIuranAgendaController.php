@@ -4,8 +4,16 @@ namespace App\Http\Controllers\Admin\KasRT;
 
 use App\Datatables\Admin\KasRT\KasIuranAgendaDataTable;
 use App\Http\Controllers\Controller;
+use App\Models\IuranAgenda;
+use App\Models\PetugasTagihan;
 use App\Models\KasIuranAgenda;
 use Illuminate\Http\Request;
+use App\Helpers\DataHelper;
+use App\Helpers\TrashHelper;
+use App\Helpers\FileUploaderHelper;
+use App\Http\Requests\Admin\IuranAgendaForm;
+use Illuminate\Support\Facades\DB;
+
 
 class KasIuranAgendaController extends Controller
 {
@@ -16,55 +24,82 @@ class KasIuranAgendaController extends Controller
 
     public function create()
     {
-        return view('pages.admin.kas-rt.kasiuranagenda.add-edit');
+        $jenis_iuranagenda = Iuranagenda::pluck('nama', 'id');
+        $nama_petugas = PetugasTagihan::pluck('nama', 'id');
+        return view('pages.admin.kas-rt.kasiuranagenda.add-edit', ['jenis_iuranagenda' => $jenis_iuranagenda, 'nama_petugas' => $nama_petugas]);
     }
 
-    public function store(Request $request)
+    public function store(IuranAgendaForm $request, FileUploaderHelper $fileUploaderHelper)
     {
-        try {
-            $request->validate([
-                'jenis_iuran' => 'required|min:3'
-            ]);
-        } catch (\Throwable $th) {
-            return back()->withInput()->withToastError($th->validator->messages()->all()[0]);
-        }
+        DB::transaction(function () use ($request, $fileUploaderHelper) {
+            try {
+                $agenda = KasIuranAgenda::createFromRequest($request);
+                $agenda->save();
+                if ($request->file()) {
 
-        try {
-            KasIuranAgenda::create($request->all());
-        } catch (\Throwable $th) {
-            dd($th);
-            return back()->withInput()->withToastError('Something went wrong');
-        }
+                    foreach ($request->file() as $key => $file) {
+                        $upload = $fileUploaderHelper->store($file, 'agenda/foto');
+                        $agenda->dokumen()->create([
+                            'nama' => $key,
+                            'public_url' => $upload['public_path']
+                        ]);
+                    }
+                }
+            } catch (\Throwable $th) {
+                dd($th);
+                DB::rollback();
+                return back()->withInput()->withToastError('Something what happen');
+            }
+        });
         return redirect(route('admin.kas-rt.kas-iuranagenda.index'))->withToastSuccess('Data tersimpan');
     }
+
     public function show($id)
     {
-        //
+        // $image = KasIuranAgenda::find($id);
+        // return view('pages.admin.kas-rt.kasiuranagenda.show', compact('image'));
+        // return view('pages.admin.kas-rt.kasiuranagenda.show', ['$bukti_pembayaran' => $bukti_pembayaran]);
     }
-    public function edit($id)
+    public function edit($id, DataHelper $dataHelper)
     {
         $data = KasIuranAgenda::findOrFail($id);
-        return view('pages.admin.kas-rt.kasiuranagenda.add-edit', ['data' => $data]);
+        $jenis_iuranagenda = IuranAgenda::pluck('nama', 'id');
+        $nama_petugas = PetugasTagihan::pluck('nama', 'id');
+        return view('pages.admin.kas-rt.kasiuranagenda.add-edit', [
+            'data' => $data,
+            'jenis_iuranagenda' => $jenis_iuranagenda,
+            'nama_petugas' => $nama_petugas,
+            'dataHelper' => $dataHelper
+        ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(IuranAgendaForm $request, FileUploaderHelper $fileUploaderHelper, $id)
     {
-        try {
-            $request->validate([
-                'jenis_iuran' => 'required|min:3'
-            ]);
-        } catch (\Throwable $th) {
+        $agenda = KasIuranAgenda::findOrFail($id);
+        DB::transaction(function () use ($request, $fileUploaderHelper, $agenda) {
+            try {
+                $agenda->updateFromRequest($request);
+                $agenda->save();
 
-            return back()->withInput()->withToastError($th->validator->messages()->all()[0]);
-        }
-        try {
-            $data = KasIuranAgenda::findOrFail($id);
-            $data->update($request->all());
-        } catch (\Throwable $th) {
-            dd($th);
-            return back()->withInput()->withToastError('Something went wrong');
-        }
+                if ($request->file()) {
+                    foreach ($request->file() as $key => $file) {
+                        $existingFile = $agenda->dokumen;
+                        $old = DataHelper::filterDokumenData($existingFile, 'nama', $key)->first();
 
+                        TrashHelper::moveToTrash($old->public_url);
+
+                        $upload = $fileUploaderHelper->store($file, 'iuran-agenda/lampiran');
+                        $old->update([
+                            'public_url' => $upload['public_path']
+                        ]);
+                    }
+                }
+            } catch (\Throwable $th) {
+                dd($th);
+                DB::rollback();
+                return back()->withInput()->withToastError('Something what happen');
+            }
+        });
         return redirect(route('admin.kas-rt.kas-iuranagenda.index'))->withToastSuccess('Data tersimpan');
     }
 

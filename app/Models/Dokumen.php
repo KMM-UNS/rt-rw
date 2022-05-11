@@ -14,17 +14,29 @@ class Dokumen extends Model
         'public_url'
     ];
 
-    public function permohonanSkck()
+    public function kasiurankondisional()
     {
-        return $this->morphedByMany(PermohonanSKCK::class, 'dokumenable');
+        return $this->morphedByMany(KasIuranKondisional::class, 'dokumenable');
     }
 
-    public function pengawalan()
+    public function kasiuranwajib()
     {
-        return $this->morphedByMany(Pengawalan::class, 'dokumenable');
+        return $this->morphToMany(KasIuranWajib::class, 'dokumenable');
     }
-    public function ijinKeramaian()
+    public function kasiuransukarela()
     {
-        return $this->morphedByMany(IjinKeramaian::class, 'dokumenable');
+        return $this->morphToMany(KasIuranSukaRela::class, 'dokumenable');
     }
+    public function petugas_tagihan()
+    {
+        return $this->morphToMany(PetugasTagihan::class, 'dokumenable');
+    }
+    // public function pengawalan()
+    // {
+    //     return $this->morphedByMany(Pengawalan::class, 'dokumenable');
+    // }
+    // public function ijinKeramaian()
+    // {
+    //     return $this->morphedByMany(IjinKeramaian::class, 'dokumenable');
+    // }
 }

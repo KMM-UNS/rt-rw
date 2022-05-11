@@ -58,7 +58,6 @@ class IuranSukarelaDataTable extends DataTable
                 ->printable(false)
                 ->width(60)
                 ->addClass('text-center'),
-            Column::make('id'),
             Column::make('nama'),
         ];
     }

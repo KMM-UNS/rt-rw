@@ -2,22 +2,22 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
+use App\Traits\FillableInputTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Str;
 
 
 class KasIuranWajib extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use FillableInputTrait;
 
     public const ACTIVE = "aktif";
 
     protected $table = 'kas_iuran_wajibs';
-    protected $fillable = ['jenis_iuran_id', 'bulan', 'tahun', 'penerima', 'pemberi', 'total_biaya', 'bukti_pembayaran'];
+    protected $fillable = ['jenis_iuran_id', 'bulan', 'tahun', 'penerima_id', 'pemberi', 'total_biaya'];
     protected $dates = [
         'created_at'
     ];
@@ -25,5 +25,13 @@ class KasIuranWajib extends Model
     public function iuranwajib()
     {
         return $this->belongsTo(IuranWajib::class, 'jenis_iuran_id');
+    }
+    public function petugastagihan()
+    {
+        return $this->belongsTo(PetugasTagihan::class, 'penerima_id');
+    }
+    public function dokumen()
+    {
+        return $this->morphToMany(Dokumen::class, 'dokumenable');
     }
 }
