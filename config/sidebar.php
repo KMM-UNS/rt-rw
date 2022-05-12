@@ -111,6 +111,27 @@ return [
                     'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Iuran Bulanan'
                 ]
             ]
+        ],
+        [
+            'icon' => 'fa fa-cogs',
+            'title' => 'Rekap Iuran Bulanan',
+            'url' => 'javascript:;',
+            'caret' => true,
+            'sub_menu' => [
+                [
+                    'url' => '/admin/rekap-kas/rekap-iuranwajib',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Rekap Iuran Wajib'
+                ], [
+                    'url' => '/admin/rekap-kas/rekap-iuransukarela',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Rekap Iuran Suka Rela'
+                ], [
+                    'url' => '/admin/rekap-kas/rekap-iurankondisional',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Rekap Iuran Kondisional'
+                ], [
+                    'url' => '/admin/rekap-kas/rekap-iuranagenda',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Rekap Iuran Agenda'
+                ]
+            ]
         ]
 
     ],

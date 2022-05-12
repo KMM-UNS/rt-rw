@@ -30,7 +30,7 @@ class RequestRuleConstant
             'kas_iuran_wajibs_jenis_iuran_id' => 'required',
             'kas_iuran_wajibs_bulan' => 'required',
             'kas_iuran_wajibs_tahun' => 'required',
-            'kas_iuran_wajibs_nama_petugas_id' => 'required',
+            'kas_iuran_wajibs_penerima_id' => 'required',
             'kas_iuran_wajibs_pemberi' => 'required',
             'kas_iuran_wajibs_total_biaya' => 'required'
         ];

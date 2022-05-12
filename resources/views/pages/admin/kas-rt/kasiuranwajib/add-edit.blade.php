@@ -44,12 +44,12 @@
       </div>
       <div class="form-group">
         <label for="bulan">Bulan</label>
-        <input type="text" id="bulan" name="kas_iuran_wajibs_bulan" class="form-control" autofocus data-parsley-required="true" value="{{{ $data->bulan ?? old('kas_iuran_wajibs_bulan') }}}">
-      </div>
+        <x-form.Dropdown name="kas_iuran_wajibs_bulan" :options="$nama_bulan" selected="{{{ old('kas_iuran_wajibs_bulan') ?? ($data['bulan'] ?? null) }}}" required />
+    </div>
       <div class="form-group">
         <label for="tahun">Tahun</label>
-        <input type="text" id="tahun" name="kas_iuran_wajibs_tahun" class="form-control" autofocus data-parsley-required="true" value="{{{ $data->tahun ?? old('kas_iuran_wajibs_tahun') }}}">
-      </div>
+        <x-form.Dropdown name="kas_iuran_wajibs_tahun" :options="$tahun" selected="{{{ old('kas_iuran_wajibs_tahun') ?? ($data['tahun'] ?? null) }}}" required />
+    </div>
       <div class="form-group">
         <label for="penerima">Penerima</label>
         <x-form.Dropdown name="kas_iuran_wajibs_penerima_id" :options="$nama_petugas" selected="{{{ old('kas_iuran_wajibs_penerima_id') ?? ($data['penerima_id'] ?? null) }}}" required />

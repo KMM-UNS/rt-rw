@@ -30,6 +30,14 @@ class KasIuranWajib extends Model
     {
         return $this->belongsTo(PetugasTagihan::class, 'penerima_id');
     }
+    public function namabulanss()
+    {
+        return $this->belongsTo(Bulan::class, 'bulan');
+    }
+    public function tahuns()
+    {
+        return $this->belongsTo(Tahun::class, 'tahun');
+    }
     public function dokumen()
     {
         return $this->morphToMany(Dokumen::class, 'dokumenable');

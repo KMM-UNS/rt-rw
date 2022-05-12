@@ -63,7 +63,7 @@ class KasIuranSukaRelaDataTable extends DataTable
                 ->printable(false)
                 ->width(60)
                 ->addClass('text-center'),
-            Column::make('id'),
+            // Column::make('id'),
             Column::make('jenis_iuran_id')->data('iuransukarela.nama'),
             Column::make('bulan'),
             Column::make('tahun'),
@@ -71,8 +71,8 @@ class KasIuranSukaRelaDataTable extends DataTable
             Column::make('pemberi'),
             Column::make('total_biaya'),
             Column::computed('image'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            // Column::make('created_at'),
+            // Column::make('updated_at'),
         ];
     }
 

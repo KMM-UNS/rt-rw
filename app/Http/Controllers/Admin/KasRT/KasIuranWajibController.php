@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin\KasRT;
 use App\Datatables\Admin\KasRT\KasIuranWajibDataTable;
 use App\Models\IuranWajib;
 use App\Models\PetugasTagihan;
+use App\Models\Bulan;
+use App\Models\Tahun;
 use App\Http\Controllers\Controller;
 use App\Models\KasIuranWajib;
 use Illuminate\Http\Request;
@@ -26,7 +28,9 @@ class KasIuranWajibController extends Controller
     {
         $jenis_iuranwajib = IuranWajib::pluck('nama', 'id');
         $nama_petugas = PetugasTagihan::pluck('nama', 'id');
-        return view('pages.admin.kas-rt.kasiuranwajib.add-edit', ['jenis_iuranwajib' => $jenis_iuranwajib, 'nama_petugas' => $nama_petugas]);
+        $nama_bulan = Bulan::pluck('nama', 'id');
+        $tahun = Tahun::pluck('nama', 'id');
+        return view('pages.admin.kas-rt.kasiuranwajib.add-edit', ['jenis_iuranwajib' => $jenis_iuranwajib, 'nama_petugas' => $nama_petugas, 'nama_bulan' => $nama_bulan, 'tahun' => $tahun]);
     }
 
     public function store(IuranWajibForm $request, FileUploaderHelper $fileUploaderHelper)
@@ -64,10 +68,14 @@ class KasIuranWajibController extends Controller
         $data = KasIuranWajib::with('dokumen')->findOrFail($id);
         $jenis_iuranwajib = IuranWajib::pluck('nama', 'id');
         $nama_petugas = PetugasTagihan::pluck('nama', 'id');
+        $nama_bulan = Bulan::pluck('nama', 'id');
+        $tahun = Tahun::pluck('nama', 'id');
         return view('pages.admin.kas-rt.kasiuranwajib.add-edit', [
             'data' => $data,
             'jenis_iuranwajib' => $jenis_iuranwajib,
             'nama_petugas' => $nama_petugas,
+            'nama_bulan' => $nama_bulan,
+            'tahun' => $tahun,
             'dataHelper' => $dataHelper
         ]);
     }
