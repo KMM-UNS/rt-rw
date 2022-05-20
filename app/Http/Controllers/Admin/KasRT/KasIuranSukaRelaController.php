@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\IuranSukarela;
 use App\Models\KasIuranSukaRela;
 use App\Models\PetugasTagihan;
+use App\Models\Bulan;
+use App\Models\Tahun;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use App\Datatables\Admin\KasRT\KasIuranSukaRelaDataTable;
@@ -27,7 +29,9 @@ class KasIuranSukaRelaController extends Controller
     {
         $jenis_iuransukarela = IuranSukarela::pluck('nama', 'id');
         $nama_petugas = PetugasTagihan::pluck('nama', 'id');
-        return view('pages.admin.kas-rt.kasiuransukarela.add-edit', ['jenis_iuransukarela' => $jenis_iuransukarela, 'nama_petugas' => $nama_petugas]);
+        $nama_bulan = Bulan::pluck('nama', 'id');
+        $tahun = Tahun::pluck('nama', 'id');
+        return view('pages.admin.kas-rt.kasiuransukarela.add-edit', ['jenis_iuransukarela' => $jenis_iuransukarela, 'nama_petugas' => $nama_petugas, 'nama_bulan' => $nama_bulan, 'tahun' => $tahun]);
     }
     public function store(IuranSukarelaForm $request, FileUploaderHelper $fileUploaderHelper)
     {
@@ -86,12 +90,16 @@ class KasIuranSukaRelaController extends Controller
         $data = KasIuranSukaRela::findOrFail($id);
         $jenis_iuransukarela = IuranSukarela::pluck('nama', 'id');
         $nama_petugas = PetugasTagihan::pluck('nama', 'id');
+        $nama_bulan = Bulan::pluck('nama', 'id');
+        $tahun = Tahun::pluck('nama', 'id');
         return view(
             'pages.admin.kas-rt.kasiuransukarela.add-edit',
             [
                 'data' => $data,
                 'jenis_iuransukarela' => $jenis_iuransukarela,
                 'nama_petugas' => $nama_petugas,
+                'nama_bulan' => $nama_bulan,
+                'tahun' => $tahun,
                 'dataHelper' => $dataHelper
             ]
         );

@@ -13,7 +13,7 @@ class CreateKasIuranWajibsTable extends Migration
             $table->string('jenis_iuran_id');
             $table->string('bulan');
             $table->string('tahun');
-            $table->string('penerima_id');
+            $table->string('petugas');
             $table->string('pemberi');
             $table->string('total_biaya');
             // $table->string('bukti_pembayaran');

@@ -39,7 +39,7 @@
         </div>
         <!-- end panel-heading -->
         <!-- begin panel-body -->
-        <form action="{{ route('admin.kas-rt.iuran-bulanan.store') }}" id="form" name="form" method="POST" data-parsley-validate="true"  enctype="multipart/form-data">
+        <form action="{{ route('admin.rekap-kas.rekap-iuransukarela.store') }}" id="form" name="form" method="POST" data-parsley-validate="true"  enctype="multipart/form-data">
             @csrf
             @if(isset($data))
             {{ method_field('PUT') }}

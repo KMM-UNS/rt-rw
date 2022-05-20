@@ -16,7 +16,7 @@ class KasIuranSukaRela extends Model
     public const ACTIVE = "aktif";
 
     protected $table = 'kas_iuran_suka_relas';
-    protected $fillable = ['jenis_iuran_id', 'bulan', 'tahun', 'nama_petugas', 'pemberi', 'total_biaya'];
+    protected $fillable = ['jenis_iuran_id', 'bulan', 'tahun', 'petugas', 'pemberi', 'total_biaya'];
     protected $dates = [
         'created_at'
     ];
@@ -27,7 +27,15 @@ class KasIuranSukaRela extends Model
     }
     public function petugastagihan()
     {
-        return $this->belongsTo(IuranSukarela::class, 'nama_petugas');
+        return $this->belongsTo(PetugasTagihan::class, 'petugas');
+    }
+    public function namabulanss()
+    {
+        return $this->belongsTo(Bulan::class, 'bulan');
+    }
+    public function tahuns()
+    {
+        return $this->belongsTo(Tahun::class, 'tahun');
     }
     public function dokumen()
     {

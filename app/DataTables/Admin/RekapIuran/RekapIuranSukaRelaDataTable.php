@@ -1,15 +1,15 @@
 <?php
 
-namespace App\DataTables\Admin\KasRT;
+namespace App\DataTables\Admin\RekapIuran;
 
-use App\Models\IuranBulanan;
+use App\Models\RekapIuranSukaRela;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class IuranBulananDataTable extends DataTable
+class RekapIuranSukaRelaDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -21,18 +21,18 @@ class IuranBulananDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'admin\kasrt\iuranbulanan.action');
+            ->addColumn('action', 'admin\rekapiuran\rekapiuransukarela.action');
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\App\Models\Admin\KasRT\IuranBulanan $model
+     * @param \App\App\Models\Admin\RekapIuran\RekapIuranSukaRela $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(IuranBulanan $model)
+    public function query(RekapIuranSukaRela $model)
     {
-        return $model->select('iuran_bulanans.*')->with(['nama_bulans']);
+        return $model->newQuery('rekap_iuran_sukarelas')->with(['nama_bulans']);
     }
 
     /**
@@ -43,7 +43,7 @@ class IuranBulananDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('iuranbulanan-table')
+            ->setTableId('rekapiuransukarela-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->dom('<"dataTables_wrapper dt-bootstrap"B<"row"<"col-xl-7 d-block d-sm-flex d-xl-block justify-content-center"<"d-block d-lg-inline-flex"l>><"col-xl-5 d-flex d-xl-block justify-content-center"fr>>t<"row"<"col-sm-5"i><"col-sm-7"p>>>')
@@ -82,6 +82,6 @@ class IuranBulananDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'IuranBulanan_' . date('YmdHis');
+        return 'RekapIuranSukaRela_' . date('YmdHis');
     }
 }

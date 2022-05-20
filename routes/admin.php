@@ -54,11 +54,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
             Route::resource('iuran-bulanan', 'IuranBulananController');
         });
 
-        Route::group(['prefix' => '/rekap-kas', 'as' => 'rekap-kas.', 'namespace' => 'KasRT'], function () {
-            Route::resource('rekapiuranwajib', 'RekapIuranWajibController');
-            Route::resource('rekapiuransukarela', 'RekapIuranSukaRelaController');
-            Route::resource('rekapiurankondisional', 'RekapIuranKondisionalController');
-            Route::resource('rekapiuranagenda', 'RekapIuranAgendaController');
+        Route::group(['prefix' => '/rekap-kas', 'as' => 'rekap-kas.', 'namespace' => 'RekapIuran'], function () {
+            Route::resource('rekap-iuranwajib', 'RekapIuranWajibController');
+            Route::resource('rekap-iuransukarela', 'RekapIuranSukaRelaController');
+            Route::resource('rekap-iurankondisional', 'RekapIuranKondisionalController');
+            Route::resource('rekap-iuranagenda', 'RekapIuranAgendaController');
         });
 
         // tambahan

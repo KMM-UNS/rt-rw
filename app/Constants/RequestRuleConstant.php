@@ -30,7 +30,7 @@ class RequestRuleConstant
             'kas_iuran_wajibs_jenis_iuran_id' => 'required',
             'kas_iuran_wajibs_bulan' => 'required',
             'kas_iuran_wajibs_tahun' => 'required',
-            'kas_iuran_wajibs_penerima_id' => 'required',
+            'kas_iuran_wajibs_petugas' => 'required',
             'kas_iuran_wajibs_pemberi' => 'required',
             'kas_iuran_wajibs_total_biaya' => 'required'
         ];
@@ -41,7 +41,7 @@ class RequestRuleConstant
             'kas_iuran_suka_relas_jenis_iuran_id' => 'required',
             'kas_iuran_suka_relas_bulan' => 'required',
             'kas_iuran_suka_relas_tahun' => 'required',
-            'kas_iuran_suka_relas_nama_petugas' => 'required',
+            'kas_iuran_suka_relas_petugas' => 'required',
             'kas_iuran_suka_relas_pemberi' => 'required',
             'kas_iuran_suka_relas_total_biaya' => 'required'
         ];
@@ -53,7 +53,7 @@ class RequestRuleConstant
             'kas_iuran_kondisionals_jenis_iuran_id' => 'required',
             'kas_iuran_kondisionals_bulan' => 'required',
             'kas_iuran_kondisionals_tahun' => 'required',
-            'kas_iuran_kondisionals_nama_petugas' => 'required',
+            'kas_iuran_kondisionals_petugas' => 'required',
             'kas_iuran_kondisionals_pemberi' => 'required',
             'kas_iuran_kondisionals_total_biaya' => 'required'
         ];
@@ -65,7 +65,7 @@ class RequestRuleConstant
             'kas_iuran_agendas_jenis_iuran_id' => 'required',
             'kas_iuran_agendas_bulan' => 'required',
             'kas_iuran_agendas_tahun' => 'required',
-            'kas_iuran_agendas_nama_petugas_id' => 'required',
+            'kas_iuran_agendas_petugas' => 'required',
             'kas_iuran_agendas_pemberi' => 'required',
             'kas_iuran_agendas_total_biaya' => 'required'
         ];

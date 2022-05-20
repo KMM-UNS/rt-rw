@@ -65,7 +65,7 @@ class KasIuranWajibDataTable extends DataTable
             Column::make('jenis_iuran_id')->data('iuranwajib.nama'),
             Column::make('bulan')->data('namabulanss.nama'),
             Column::make('tahun')->data('tahuns.nama'),
-            Column::make('penerima_id')->data('petugastagihan.nama'),
+            Column::make('petugas')->data('petugastagihan.nama'),
             Column::make('pemberi'),
             Column::make('total_biaya'),
             Column::computed('image'),

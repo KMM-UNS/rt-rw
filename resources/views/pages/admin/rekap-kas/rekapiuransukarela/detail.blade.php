@@ -1,6 +1,6 @@
 @extends('layouts.default', ['topMenu' => true, 'sidebarHide' => true])
 
-@section('title', 'Kas Iuran dKondisional')
+@section('title', 'Kas Iuran Wajib')
 
 @push('css')
     <!-- datatables -->
@@ -39,10 +39,42 @@
         </div>
         <!-- end panel-heading -->
         <!-- begin panel-body -->
-        <div class="panel-body">
-            {{ $dataTable->table() }}
-        </div>
-        <!-- end panel-body -->
+        <form action="{{ route('admin.rekap-kas.rekap-iuransukarela.store') }}" id="form" name="form" method="POST"
+            data-parsley-validate="true" enctype="multipart/form-data">
+            @csrf
+            @if (isset($data))
+                {{ method_field('PUT') }}
+            @endif
+            <div class="panel-body">
+                {{-- {{ $rekap }} --}}
+
+                <table border="1" cellpadding="2">
+                    <thead>
+                        <tr>
+                            <th>Jenis Iuran</th>
+                            <th>Penerima</th>
+                            <th>Pemberi</th>
+                            <th>Total Biaya</th>
+                            <th>Image</th>
+                        </tr>
+                    </thead>
+                    @foreach ($kas as $item)
+                        <tbody>
+                            <tr>
+                                <td>{{ $item->iuransukarela->nama }}</td>
+                                <td>{{ $item->petugastagihan->nama }}</td>
+                                <td>{{ $item->pemberi }}</td>
+                                <td>{{ $item->total_biaya }}</td>
+                                <td> <img src="{{ asset($item->dokumen[0]['public_url']) }}" alt=""></td>
+                            </tr>
+
+                        </tbody>
+                    @endforeach
+
+                </table>
+
+            </div>
+            <!-- end panel-body -->
     </div>
     <!-- end panel -->
 @endsection
@@ -50,7 +82,7 @@
 @push('scripts')
     <!-- datatables -->
     <script src="{{ asset('assets/js/custom/datatable-assets.js') }}"></script>
-    {{ $dataTable->scripts() }}
+    {{-- {{ $dataTable->scripts() }} --}}
     <!-- end datatables -->
 
     <script src="{{ asset('assets/js/custom/delete-with-confirmation.js') }}"></script>

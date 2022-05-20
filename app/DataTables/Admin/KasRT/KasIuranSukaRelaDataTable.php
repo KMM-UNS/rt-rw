@@ -35,7 +35,7 @@ class KasIuranSukaRelaDataTable extends DataTable
 
     public function query(KasIuranSukaRela $model)
     {
-        return $model->select('kas_iuran_suka_relas.*')->with(['iuransukarela', 'petugastagihan']);
+        return $model->select('kas_iuran_suka_relas.*')->with(['iuransukarela', 'petugastagihan', 'namabulanss', 'tahuns']);
     }
 
     public function html()
@@ -65,9 +65,9 @@ class KasIuranSukaRelaDataTable extends DataTable
                 ->addClass('text-center'),
             // Column::make('id'),
             Column::make('jenis_iuran_id')->data('iuransukarela.nama'),
-            Column::make('bulan'),
-            Column::make('tahun'),
-            Column::make('nama_petugas')->data('petugastagihan.nama'),
+            Column::make('bulan')->data('namabulanss.nama'),
+            Column::make('tahun')->data('tahuns.nama'),
+            Column::make('petugas')->data('petugastagihan.nama'),
             Column::make('pemberi'),
             Column::make('total_biaya'),
             Column::computed('image'),

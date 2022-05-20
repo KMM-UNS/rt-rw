@@ -43,16 +43,16 @@
           <x-form.Dropdown name="kas_iuran_agendas_jenis_iuran_id" :options="$jenis_iuranagenda" selected="{{{ old('kas_iuran_agendas_jenis_iuran_id') ?? ($data['jenis_iuran_id'] ?? null) }}}" required />
         </div>
         <div class="form-group">
-          <label for="bulan">Bulan</label>
-          <input type="text" id="bulan" name="kas_iuran_agendas_bulan" class="form-control" autofocus data-parsley-required="true" value="{{{ $data->bulan ?? old('kas_iuran_agendas_bulan') }}}">
+            <label for="bulan">Bulan</label>
+            <x-form.Dropdown name="kas_iuran_agendas_bulan" :options="$nama_bulan" selected="{{{ old('kas_iuran_agendas_bulan') ?? ($data['bulan'] ?? null) }}}" required />
+        </div>
+          <div class="form-group">
+            <label for="tahun">Tahun</label>
+            <x-form.Dropdown name="kas_iuran_agendas_tahun" :options="$tahun" selected="{{{ old('kas_iuran_agendas_tahun') ?? ($data['tahun'] ?? null) }}}" required />
         </div>
         <div class="form-group">
-          <label for="tahun">Tahun</label>
-          <input type="text" id="tahun" name="kas_iuran_agendas_tahun" class="form-control" autofocus data-parsley-required="true" value="{{{ $data->tahun ?? old('kas_iuran_agendas_tahun') }}}">
-        </div>
-        <div class="form-group">
-            <label for="nama_petugas">Nama Petugas Penagih</label>
-            <x-form.Dropdown name="kas_iuran_agendas_nama_petugas_id" :options="$nama_petugas" selected="{{{ old('kas_iuran_agendas_nama_petugas_id') ?? ($data['nama_petugas_id'] ?? null) }}}" required />
+            <label for="petugas">Penerima</label>
+            <x-form.Dropdown name="kas_iuran_agendas_petugas" :options="$nama_petugas" selected="{{{ old('kas_iuran_agendas_petugas') ?? ($data['petugas'] ?? null) }}}" required />
         </div>
         <div class="form-group">
           <label for="pemberi">Pemberi</label>

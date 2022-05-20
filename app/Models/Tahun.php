@@ -22,8 +22,43 @@ class Tahun extends Model
     {
         return $this->hasMany(Tahun::class);
     }
-    public function KasIuranWajib()
+
+
+    // //new
+    // public function rekapiuransukarela()
+    // {
+    //     return $this->hasMany(KasIuranSukaRela::class);
+    // }
+
+    //yang dulu
+    // public function kasiuranWajib()
+    // {
+    //     return $this->hasMany(KasIuranWajib::class);
+    // }
+    public function kasiurankondisional()
+    {
+        return $this->hasMany(KasIuranKondisional::class);
+    }
+    public function kasiuransukarela()
+    {
+        return $this->hasMany(KasIuranSukaRela::class);
+    }
+    public function kasiuranagenda()
+    {
+        return $this->hasMany(KasIuranAgenda::class);
+    }
+    public function kasiuranWajib()
     {
         return $this->hasMany(KasIuranWajib::class);
     }
+
+
+    // public function kasiuransukarela()
+    // {
+    //     return $this->hasMany(KasIuranSukaRela::class);
+    // }
+    // public function rekapiuranwajib()
+    // {
+    //     return $this->hasMany(RekapIuranWajib::class);
+    // }
 }

@@ -1,6 +1,6 @@
 @extends('layouts.default', ['topMenu' => true, 'sidebarHide' => true])
 
-@section('title', 'Kas Iuran Wajib')
+@section('title', 'Rekap Iuran Wajib')
 
 @push('css')
     <!-- datatables -->
@@ -37,7 +37,6 @@
                         class="fa fa-minus"></i></a>
             </div>
         </div>
-        <!-- end panel-heading -->
         <!-- begin panel-body -->
         <div class="panel-body">
             {{-- {{ $kas }} --}}
@@ -52,10 +51,10 @@
                         <th>Image</th>
                     </tr>
                 </thead>
-                @foreach ($kas as $item)
+                @foreach ($rekap as $item)
                     <tbody>
                         <tr>
-                            <td>{{ $item->iuranwajib->nama }}</td>
+                            <td>{{ $item->iurankondisional->nama }}</td>
                             <td>{{ $item->petugastagihan->nama }}</td>
                             <td>{{ $item->pemberi }}</td>
                             <td>{{ $item->total_biaya }}</td>
@@ -69,20 +68,18 @@
 
         </div>
         <!-- end panel-body -->
-    </div>
-    <!-- end panel -->
-@endsection
+    @endsection
 
-@push('scripts')
-    <!-- datatables -->
-    <script src="{{ asset('assets/js/custom/datatable-assets.js') }}"></script>
-    {{-- {{ $dataTable->scripts() }} --}}
-    <!-- end datatables -->
+    @push('scripts')
+        <!-- datatables -->
+        <script src="{{ asset('assets/js/custom/datatable-assets.js') }}"></script>
+        {{-- {{ $dataTable->scripts() }} --}}
+        <!-- end datatables -->
 
-    <script src="{{ asset('assets/js/custom/delete-with-confirmation.js') }}"></script>
-    <script>
-        $(document).on('delete-with-confirmation.success', function() {
-            $('.buttons-reload').trigger('click')
-        })
-    </script>
-@endpush
+        <script src="{{ asset('assets/js/custom/delete-with-confirmation.js') }}"></script>
+        <script>
+            $(document).on('delete-with-confirmation.success', function() {
+                $('.buttons-reload').trigger('click')
+            })
+        </script>
+    @endpush

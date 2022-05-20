@@ -38,7 +38,7 @@ class KasIuranAgendaDataTable extends DataTable
 
     public function query(KasIuranAgenda $model)
     {
-        return $model->select('kas_iuran_agendas.*')->with(['iuranagenda', 'petugastagihan']);
+        return $model->select('kas_iuran_agendas.*')->with(['iuranagenda', 'petugastagihan', 'namabulanss', 'tahuns']);
     }
 
     public function html()
@@ -68,8 +68,8 @@ class KasIuranAgendaDataTable extends DataTable
                 ->addClass('text-center'),
             // Column::make('id'),
             Column::make('jenis_iuran_id')->data('iuranagenda.nama'),
-            Column::make('bulan'),
-            Column::make('tahun'),
+            Column::make('bulan')->data('namabulanss.nama'),
+            Column::make('tahun')->data('tahuns.nama'),
             Column::make('nama_petugas_id')->data('petugastagihan.nama'),
             Column::make('pemberi'),
             Column::make('total_biaya'),

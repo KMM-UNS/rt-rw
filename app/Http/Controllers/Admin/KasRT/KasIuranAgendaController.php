@@ -6,6 +6,8 @@ use App\Datatables\Admin\KasRT\KasIuranAgendaDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\IuranAgenda;
 use App\Models\PetugasTagihan;
+use App\Models\Bulan;
+use App\Models\Tahun;
 use App\Models\KasIuranAgenda;
 use Illuminate\Http\Request;
 use App\Helpers\DataHelper;
@@ -26,7 +28,9 @@ class KasIuranAgendaController extends Controller
     {
         $jenis_iuranagenda = Iuranagenda::pluck('nama', 'id');
         $nama_petugas = PetugasTagihan::pluck('nama', 'id');
-        return view('pages.admin.kas-rt.kasiuranagenda.add-edit', ['jenis_iuranagenda' => $jenis_iuranagenda, 'nama_petugas' => $nama_petugas]);
+        $nama_bulan = Bulan::pluck('nama', 'id');
+        $tahun = Tahun::pluck('nama', 'id');
+        return view('pages.admin.kas-rt.kasiuranagenda.add-edit', ['jenis_iuranagenda' => $jenis_iuranagenda,  'nama_petugas' => $nama_petugas, 'nama_bulan' => $nama_bulan, 'tahun' => $tahun]);
     }
 
     public function store(IuranAgendaForm $request, FileUploaderHelper $fileUploaderHelper)
@@ -65,10 +69,14 @@ class KasIuranAgendaController extends Controller
         $data = KasIuranAgenda::findOrFail($id);
         $jenis_iuranagenda = IuranAgenda::pluck('nama', 'id');
         $nama_petugas = PetugasTagihan::pluck('nama', 'id');
+        $nama_bulan = Bulan::pluck('nama', 'id');
+        $tahun = Tahun::pluck('nama', 'id');
         return view('pages.admin.kas-rt.kasiuranagenda.add-edit', [
             'data' => $data,
             'jenis_iuranagenda' => $jenis_iuranagenda,
             'nama_petugas' => $nama_petugas,
+            'nama_bulan' => $nama_bulan,
+            'tahun' => $tahun,
             'dataHelper' => $dataHelper
         ]);
     }

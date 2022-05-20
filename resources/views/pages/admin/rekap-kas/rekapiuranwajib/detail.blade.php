@@ -1,6 +1,6 @@
 @extends('layouts.default', ['topMenu' => true, 'sidebarHide' => true])
 
-@section('title', 'Kas Iuran Wajib')
+@section('title', 'Rekap Iuran Wajib')
 
 @push('css')
     <!-- datatables -->
@@ -37,7 +37,6 @@
                         class="fa fa-minus"></i></a>
             </div>
         </div>
-        <!-- end panel-heading -->
         <!-- begin panel-body -->
         <div class="panel-body">
             {{-- {{ $kas }} --}}
@@ -45,51 +44,42 @@
             <table border="1" cellpadding="2">
                 <thead>
                     <tr>
-                        <th>Nama Warga</th>
-                        <th>JAN</th>
-                        <th>FEB</th>
-                        <th>MAR</th>
-                        <th>APR</th>
-                        <th>MEI</th>
-                        <th>JUN</th>
-                        <th>JUL</th>
-                        <th>AGS</th>
-                        <th>SEP</th>
-                        <th>OKT</th>
-                        <th>NOP</th>
-                        <th>DES</th>
-
+                        <th>Jenis Iuran</th>
+                        <th>Penerima</th>
+                        <th>Pemberi</th>
+                        <th>Total Biaya</th>
+                        <th>Image</th>
                     </tr>
                 </thead>
-                {{-- @foreach ($kas as $item)
+                @foreach ($rekap as $item)
                     <tbody>
                         <tr>
+                            <td>{{ $item->iuranwajib->nama }}</td>
+                            <td>{{ $item->petugastagihan->nama }}</td>
                             <td>{{ $item->pemberi }}</td>
                             <td>{{ $item->total_biaya }}</td>
                             <td> <img src="{{ asset($item->dokumen[0]['public_url']) }}" alt=""></td>
                         </tr>
 
                     </tbody>
-                @endforeach --}}
+                @endforeach
 
             </table>
 
         </div>
         <!-- end panel-body -->
-    </div>
-    <!-- end panel -->
-@endsection
+    @endsection
 
-@push('scripts')
-    <!-- datatables -->
-    <script src="{{ asset('assets/js/custom/datatable-assets.js') }}"></script>
-    {{-- {{ $dataTable->scripts() }} --}}
-    <!-- end datatables -->
+    @push('scripts')
+        <!-- datatables -->
+        <script src="{{ asset('assets/js/custom/datatable-assets.js') }}"></script>
+        {{-- {{ $dataTable->scripts() }} --}}
+        <!-- end datatables -->
 
-    <script src="{{ asset('assets/js/custom/delete-with-confirmation.js') }}"></script>
-    <script>
-        $(document).on('delete-with-confirmation.success', function() {
-            $('.buttons-reload').trigger('click')
-        })
-    </script>
-@endpush
+        <script src="{{ asset('assets/js/custom/delete-with-confirmation.js') }}"></script>
+        <script>
+            $(document).on('delete-with-confirmation.success', function() {
+                $('.buttons-reload').trigger('click')
+            })
+        </script>
+    @endpush

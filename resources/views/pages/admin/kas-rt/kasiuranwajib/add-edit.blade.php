@@ -51,8 +51,8 @@
         <x-form.Dropdown name="kas_iuran_wajibs_tahun" :options="$tahun" selected="{{{ old('kas_iuran_wajibs_tahun') ?? ($data['tahun'] ?? null) }}}" required />
     </div>
       <div class="form-group">
-        <label for="penerima">Penerima</label>
-        <x-form.Dropdown name="kas_iuran_wajibs_penerima_id" :options="$nama_petugas" selected="{{{ old('kas_iuran_wajibs_penerima_id') ?? ($data['penerima_id'] ?? null) }}}" required />
+        <label for="petugas">Penerima</label>
+        <x-form.Dropdown name="kas_iuran_wajibs_petugas" :options="$nama_petugas" selected="{{{ old('kas_iuran_wajibs_petugas') ?? ($data['petugas'] ?? null) }}}" required />
       </div>
       <div class="form-group">
         <label for="pemberi">Pemberi</label>

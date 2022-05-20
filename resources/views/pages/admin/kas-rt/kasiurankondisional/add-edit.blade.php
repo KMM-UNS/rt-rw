@@ -43,17 +43,17 @@
           <x-form.Dropdown name="kas_iuran_kondisionals_jenis_iuran_id" :options="$jenis_iurankondisional" selected="{{{ old('kas_iuran_kondisionals_jenis_iuran_id') ?? ($data['jenis_iuran_id'] ?? null) }}}" required />
         </div>
         <div class="form-group">
-          <label for="bulan">Bulan</label>
-          <input type="text" id="bulan" name="kas_iuran_kondisionals_bulan" class="form-control" autofocus data-parsley-required="true" value="{{{ $data->bulan ?? old('kas_iuran_kondisionals_bulan') }}}">
+            <label for="bulan">Bulan</label>
+            <x-form.Dropdown name="kas_iuran_kondisionals_bulan" :options="$nama_bulan" selected="{{{ old('kas_iuran_kondisionals_bulan') ?? ($data['bulan'] ?? null) }}}" required />
+        </div>
+          <div class="form-group">
+            <label for="tahun">Tahun</label>
+            <x-form.Dropdown name="kas_iuran_kondisionals_tahun" :options="$tahun" selected="{{{ old('kas_iuran_kondisionals_tahun') ?? ($data['tahun'] ?? null) }}}" required />
         </div>
         <div class="form-group">
-          <label for="tahun">Tahun</label>
-          <input type="text" id="tahun" name="kas_iuran_kondisionals_tahun" class="form-control" autofocus data-parsley-required="true" value="{{{ $data->tahun ?? old('kas_iuran_kondisionals_tahun') }}}">
+            <label for="penerima">Penerima</label>
+            <x-form.Dropdown name="kas_iuran_kondisionals_petugas" :options="$nama_petugas" selected="{{{ old('kas_iuran_kondisionals_petugas') ?? ($data['petugas'] ?? null) }}}" required />
         </div>
-        <div class="form-group">
-          <label for="nama_petugas">Nama Petugas Tagihan</label>
-          <x-form.Dropdown name="kas_iuran_kondisionals_nama_petugas" :options="$nama_petugas" selected="{{{ old('kas_iuran_kondisionals_nama_petugas') ?? ($data['nama_petugas'] ?? null) }}}" required />
-         </div>
         <div class="form-group">
           <label for="pemberi">Pemberi</label>
           <input type="text" id="pemberi" name="kas_iuran_kondisionals_pemberi" class="form-control" autofocus data-parsley-required="true" value="{{{ $data->pemberi ?? old('kas_iuran_kondisionals_pemberi') }}}">

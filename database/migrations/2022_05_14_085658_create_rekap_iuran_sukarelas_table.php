@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRekapIuranWajibsTable extends Migration
+class CreateRekapIuranSukarelasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class CreateRekapIuranWajibsTable extends Migration
      */
     public function up()
     {
-        Schema::create('rekap_iuran_wajibs', function (Blueprint $table) {
+        Schema::create('rekap_iuran_sukarelas', function (Blueprint $table) {
             $table->id();
-            // $table->string('jenis_iuran_id');
             $table->string('bulan');
             $table->string('tahun');
             $table->timestamps();
@@ -30,6 +29,6 @@ class CreateRekapIuranWajibsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rekap_iuran_wajibs');
+        Schema::dropIfExists('rekap_iuran_sukarelas');
     }
 }

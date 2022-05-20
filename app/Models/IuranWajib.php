@@ -22,4 +22,10 @@ class IuranWajib extends Model
     {
         return $this->hasMany(KasIuranWajib::class);
     }
+
+    //yang dulu
+    // public function rekapiuranwajib()
+    // {
+    //     return $this->hasMany(RekapIuranWajib::class);
+    // }
 }

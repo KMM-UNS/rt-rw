@@ -17,13 +17,12 @@ class IuranBulananController extends Controller
         $nama_bulans = Bulan::pluck('nama', 'id');
         $tahuns = Tahun::pluck('nama', 'id');
         return view('pages.admin.kas-rt.iuranbulanan.index', ['nama_bulans' => $nama_bulans, 'tahuns' => $tahuns]);
-
-        // return $dataTable->render('pages.admin.kas-rt.iuranbulanan.detail');
     }
 
-    function detail(KasIuranWajibDataTable $dataTable)
-    {
-    }
+    // function detail(KasIuranWajibDataTable $dataTable)
+    // {
+    // }
+
     public function create()
     {
         // $nama_bulans = Bulan::pluck('nama', 'id');

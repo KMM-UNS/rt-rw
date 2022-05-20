@@ -6,6 +6,8 @@ use App\Datatables\Admin\KasRT\KasIuranKondisionalDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\IuranKondisional;
 use App\Models\PetugasTagihan;
+use App\Models\Bulan;
+use App\Models\Tahun;
 use App\Models\KasIuranKondisional;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -28,7 +30,9 @@ class KasIuranKondisionalController extends Controller
     {
         $jenis_iurankondisional = IuranKondisional::pluck('nama', 'id');
         $nama_petugas = PetugasTagihan::pluck('nama', 'id');
-        return view('pages.admin.kas-rt.kasiurankondisional.add-edit', ['jenis_iurankondisional' => $jenis_iurankondisional, 'nama_petugas' => $nama_petugas]);
+        $nama_bulan = Bulan::pluck('nama', 'id');
+        $tahun = Tahun::pluck('nama', 'id');
+        return view('pages.admin.kas-rt.kasiurankondisional.add-edit', ['jenis_iurankondisional' => $jenis_iurankondisional,  'nama_petugas' => $nama_petugas, 'nama_bulan' => $nama_bulan, 'tahun' => $tahun]);
     }
 
     public function store(IuranKondisionalForm $request, FileUploaderHelper $fileUploaderHelper)
@@ -64,35 +68,48 @@ class KasIuranKondisionalController extends Controller
 
     public function edit($id, DataHelper $dataHelper)
     {
-        $data = KasIuranAgenda::with('dokumen')->findOrFail($id);
+        $data = KasIuranKondisional::with('dokumen')->findOrFail($id);
         $jenis_iurankondisional = IuranKondisional::pluck('nama', 'id');
         $nama_petugas = PetugasTagihan::pluck('nama', 'id');
+        $nama_bulan = Bulan::pluck('nama', 'id');
+        $tahun = Tahun::pluck('nama', 'id');
         return view('pages.admin.kas-rt.kasiurankondisional.add-edit', [
             'data' => $data,
             'jenis_iurankondisional' => $jenis_iurankondisional,
             'nama_petugas' => $nama_petugas,
+            'nama_bulan' => $nama_bulan,
+            'tahun' => $tahun,
             'dataHelper' => $dataHelper
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(IuranKondisionalForm $request, FileUploaderHelper $fileUploaderHelper, $id)
     {
-        try {
-            $request->validate([
-                'nama_petugas' => 'required|min:3'
-            ]);
-        } catch (\Throwable $th) {
+        $kondisional = KasIuranKondisional::findOrFail($id);
+        DB::transaction(function () use ($request, $fileUploaderHelper, $kondisional) {
+            try {
+                $kondisional->updateFromRequest($request);
+                $kondisional->save();
 
-            return back()->withInput()->withToastError($th->validator->messages()->all()[0]);
-        }
+                if ($request->file()) {
+                    foreach ($request->file() as $key => $file) {
+                        $existingFile = $kondisional->dokumen;
+                        $old = DataHelper::filterDokumenData($existingFile, 'nama', $key)->first();
 
-        try {
-            $data = KasIuranKondisional::findOrFail($id);
-            $data->update($request->all());
-        } catch (\Throwable $th) {
-            dd($th);
-            return back()->withInput()->withToastError('Something went wrong');
-        }
+                        TrashHelper::moveToTrash($old->public_url);
+
+                        $upload = $fileUploaderHelper->store($file, 'iuran-kondisional/lampiran');
+                        $old->update([
+                            'public_url' => $upload['public_path']
+                        ]);
+                    }
+                }
+            } catch (\Throwable $th) {
+                dd($th);
+                DB::rollback();
+                return back()->withInput()->withToastError('Something what happen');
+            }
+        });
 
         //tambahan
         // $foto = KasIuranKondisional::findorfail($id);

@@ -18,12 +18,45 @@ class Bulan extends Model
     protected $fillable = ['nama'];
     public $timestamps = false;
 
-    public function iuranbulanan()
+    // public function iuranbulanan()
+    // {
+    //     return $this->hasMany(IuranBulanan::class);
+    // }
+
+    // //membuat iuran bulanan
+    // public function rekapiuranwajib()
+    // {
+    //     return $this->hasMany(rekapiuranwajib::class);
+    // }
+
+    //yang dulu
+    // public function rekapiuransukarela()
+    // {
+    //     return $this->hasMany(KasIuranSukarela::class);
+    // }
+    // public function kasiuranwajib()
+    // {
+    //     return $this->hasMany(KasIuranWajib::class);
+    // }
+    public function kasiurankonsisional()
     {
-        return $this->hasMany(IuranBulanan::class);
+        return $this->hasMany(KasIuranKondisional::class);
     }
-    public function KasIuranWajib()
+    public function kasiuransukarela()
+    {
+        return $this->hasMany(KasIuranSukaRela::class);
+    }
+    public function kasiuranagenda()
+    {
+        return $this->hasMany(KasIuranAgenda::class);
+    }
+    public function kasiuranwajib()
     {
         return $this->hasMany(KasIuranWajib::class);
     }
+    //new
+    // public function rekapbulanansukarela()
+    // {
+    //     return $this->hasMany(KasIuranSukarela::class);
+    // }
 }
