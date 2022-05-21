@@ -1,6 +1,6 @@
 @extends('layouts.default', ['topMenu' => true, 'sidebarHide' => true])
 
-@section('title', 'Rekap Iuran Wajib')
+@section('title', 'Rekap Iuran Kondisional')
 
 @push('css')
     <!-- datatables -->
@@ -40,15 +40,14 @@
         <!-- begin panel-body -->
         <div class="panel-body">
             {{-- {{ $kas }} --}}
-
-            <table border="1" cellpadding="2">
+            <table border="1" cellpadding="2" class="table">
                 <thead>
                     <tr>
-                        <th>Jenis Iuran</th>
-                        <th>Penerima</th>
-                        <th>Pemberi</th>
-                        <th>Total Biaya</th>
-                        <th>Image</th>
+                        <th scope="col">Jenis Iuran</th>
+                        <th scope="col">Penerima</th>
+                        <th scope="col">Pemberi</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Total Biaya</th>
                     </tr>
                 </thead>
                 @foreach ($rekap as $item)
@@ -57,12 +56,14 @@
                             <td>{{ $item->iurankondisional->nama }}</td>
                             <td>{{ $item->petugastagihan->nama }}</td>
                             <td>{{ $item->pemberi }}</td>
+                            <td> <img src="{{ asset($item->dokumen[0]['public_url']) }}" alt=""
+                                    class="img-rounded height-80"></td>
                             <td>{{ $item->total_biaya }}</td>
-                            <td> <img src="{{ asset($item->dokumen[0]['public_url']) }}" alt=""></td>
                         </tr>
-
                     </tbody>
                 @endforeach
+                <td colspan="4">TOTAL</td>
+                <td>@total</td>
 
             </table>
 

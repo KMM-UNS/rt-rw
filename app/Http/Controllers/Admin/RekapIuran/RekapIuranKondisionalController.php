@@ -1,6 +1,6 @@
 <?php
 
-namespace Http\Controllers\Admin\RekapIuran;
+namespace App\Http\Controllers\Admin\RekapIuran;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -15,10 +15,10 @@ class RekapIuranKondisionalController extends Controller
 {
     public function index()
     {
-        // $jenis_iuran = IuranKondisional::pluck('nama', 'id');
+        $jenis_iuran = IuranKondisional::pluck('nama', 'id');
         $nama_bulans = Bulan::pluck('nama', 'id');
         $tahun = Tahun::pluck('nama', 'id');
-        return view('pages.admin.rekap-kas.rekapiurankondisional.index', ['nama_bulans' => $nama_bulans, 'tahun' => $tahun]);
+        return view('pages.admin.rekap-kas.rekapiurankondisional.index', ['jenis_iuran' => $jenis_iuran, 'nama_bulans' => $nama_bulans, 'tahun' => $tahun]);
     }
 
     public function create()
@@ -29,12 +29,12 @@ class RekapIuranKondisionalController extends Controller
 
     public function store(Request $request)
     {
-        // $jenis_iuran = $request->jenis_iuran_id;
+        $jenis_iuran = $request->jenis_iuran_id;
         $bulan = $request->bulan;
         $tahun = $request->tahun;
 
         // $rekap = KasIuranKondisional::with('iurankondisional', 'rekapiurankondisional', 'tahuns')->where('jenis_iuran_id', $jenis_iuran)->where('tahun', $tahun)->get();
-        $rekap = KasIuranKondisional::with('iurankondisional', 'petugastagihan', 'namabulanss', 'tahuns')->where('bulan', $bulan)->where('tahun', $tahun)->get();
+        $rekap = KasIuranKondisional::with('iurankondisional', 'petugastagihan', 'namabulanss', 'tahuns')->where('jenis_iuran_id', $jenis_iuran)->where('bulan', $bulan)->where('tahun', $tahun)->get();
         return view('pages.admin.rekap-kas.rekapiurankondisional.detail', ['rekap' => $rekap]);
     }
 

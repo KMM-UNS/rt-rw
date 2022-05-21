@@ -37,28 +37,29 @@
                         class="fa fa-minus"></i></a>
             </div>
         </div>
-        <!-- end panel-heading -->
 
-        <h1>HAIIIIIIIIIII</h1>
         <!-- begin panel-body -->
         <form action="{{ route('admin.rekap-kas.rekap-iurankondisional.store') }}" id="form" name="form" method="POST" data-parsley-validate="true"  enctype="multipart/form-data">
             @csrf
-            @if (isset($data))
+            @if (isset($datas))
             {{ method_field('PUT') }}
             @endif
             <div class="panel-body">
-                <h1>haiii</h1>
+
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-1 my-auto">
-                            <label for="bulan"><strong>Jenis Iuran</strong></label>
+                            <label for="jenis_iuran_id"><strong>Jenis Iuran</strong></label>
                         </div>
-                        {{-- <div class="col-md-5">
+                        <div class="col-md-3">
                             <div class="input-group">
                                 <x-form.Dropdown name="jenis_iuran_id" :options="$jenis_iuran" selected="{{{ old('jenis_iuran_id') ?? ($data['jenis_iuran_id'] ?? null) }}}" required />
                             </div>
-                        </div> --}}
-                        <div class="col-md-5">
+                        </div>
+                        <div class="col-md-1 my-auto">
+                            <label for="bulan"><strong>Bulan</strong></label>
+                        </div>
+                        <div class="col-md-3">
                             <div class="input-group">
                                 <x-form.Dropdown name="bulan" :options="$nama_bulans" selected="{{{ old('bulan') ?? ($data['bulan'] ?? null) }}}" required />
                             </div>
@@ -66,13 +67,13 @@
                         <div class="col-md-1 my-auto">
                             <label for="status_hunian_id"><strong>Tahun</strong></label>
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-md-3">
                             <div class="input-group">
                                 <x-form.Dropdown name="tahun" :options="$tahun" selected="{{{ old('tahun') ?? ($data['tahun'] ?? null) }}}" required />
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary center">Submit</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </div>
         </form>
