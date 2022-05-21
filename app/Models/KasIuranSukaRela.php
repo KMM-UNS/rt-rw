@@ -37,6 +37,11 @@ class KasIuranSukaRela extends Model
     {
         return $this->belongsTo(Tahun::class, 'tahun');
     }
+    //membuat dropdown jenis iuran
+    public function jenisiuransukarela()
+    {
+        return $this->belongsTo(IuranSukarela::class, 'jenis_iuran_id');
+    }
     public function dokumen()
     {
         return $this->morphToMany(Dokumen::class, 'dokumenable');

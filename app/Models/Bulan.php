@@ -38,6 +38,8 @@ class Bulan extends Model
     // {
     //     return $this->hasMany(KasIuranWajib::class);
     // }
+
+    //membuat crud kas
     public function kasiurankonsisional()
     {
         return $this->hasMany(KasIuranKondisional::class);
@@ -54,6 +56,9 @@ class Bulan extends Model
     {
         return $this->hasMany(KasIuranWajib::class);
     }
+
+
+
     //new
     // public function rekapbulanansukarela()
     // {

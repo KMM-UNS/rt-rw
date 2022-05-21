@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Admin\RekapIuran;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\KasIuranSukaRela;
+use App\Models\IuranSukaRela;
 use App\Models\Bulan;
 use App\Models\Tahun;
 use App\Models\IuranBulanan;
 use App\Datatables\Admin\KasRT\KasIuranSukaRelaDataTable;
-use App\Models\KasIuranSukaRela;
+
 
 class RekapIuranSukarelaController extends Controller
 {
@@ -19,9 +21,10 @@ class RekapIuranSukarelaController extends Controller
      */
     public function index()
     {
+        $jenis_iuran = IuranSukaRela::pluck('nama', 'id');
         $nama_bulans = Bulan::pluck('nama', 'id');
-        $tahuns = Tahun::pluck('nama', 'id');
-        return view('pages.admin.rekap-kas.rekapiuransukarela.index', ['nama_bulans' => $nama_bulans, 'tahuns' => $tahuns]);
+        $tahun = Tahun::pluck('nama', 'id');
+        return view('pages.admin.rekap-kas.rekapiuransukarela.index', ['jenis_iuran' => $jenis_iuran, 'nama_bulans' => $nama_bulans, 'tahun' => $tahun]);
     }
 
     /**
@@ -42,11 +45,12 @@ class RekapIuranSukarelaController extends Controller
      */
     public function store(Request $request)
     {
+        $jenis_iuran = $request->jenis_iuran_id;
         $bulan = $request->bulan;
         $tahun = $request->tahun;
 
-        $kas = KasIuranSukaRela::with('iuransukarela', 'petugastagihan', 'namabulanss', 'tahuns')->where('bulan', $bulan)->where('tahun', $tahun)->get();
-        return view('pages.admin.rekap-kas.rekapiuransukarela.detail', ['kas' => $kas]);
+        $rekap = KasIuranSukaRela::with('iuransukarela', 'jenisiuransukarela', 'petugastagihan', 'namabulanss', 'tahuns')->where('jenis_iuran_id', $jenis_iuran)->where('bulan', $bulan)->where('tahun', $tahun)->get();
+        return view('pages.admin.rekap-kas.rekapiuransukarela.detail', ['rekap' => $rekap]);
     }
 
     /**

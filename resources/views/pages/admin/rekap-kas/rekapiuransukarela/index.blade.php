@@ -16,12 +16,12 @@
     <!-- begin breadcrumb -->
     <ol class="breadcrumb float-xl-right">
         <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
-        <li class="breadcrumb-item"><a href="javascript:;">Master Data</a></li>
+        <li class="breadcrumb-item"><a href="javascript:;">Rekap Iuran</a></li>
         <li class="breadcrumb-item active">@yield('title')</li>
     </ol>
     <!-- end breadcrumb -->
     <!-- begin page-header -->
-    <h1 class="page-header">Master Data<small> @yield('title')</small></h1>
+    <h1 class="page-header">Rekap Iuran<small> @yield('title')</small></h1>
     <!-- end page-header -->
 
 
@@ -49,9 +49,17 @@
             <div class="form-group">
                 <div class="row">
                     <div class="col-md-1 my-auto">
-                        <label for="bulan"><strong>Iuran Bulanan</strong></label>
+                        <label for="jenis_iuran_id"><strong>Jenis Iuran</strong></label>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <x-form.Dropdown name="jenis_iuran_id" :options="$jenis_iuran" selected="{{{ old('jenis_iuran_id') ?? ($data['jenis_iuran_id'] ?? null) }}}" required />
+                        </div>
+                    </div>
+                    <div class="col-md-1 my-auto">
+                        <label for="bulan"><strong>Bulan</strong></label>
+                    </div>
+                    <div class="col-md-3">
                         <div class="input-group">
                             <x-form.Dropdown name="bulan" :options="$nama_bulans" selected="{{{ old('bulan') ?? ($data['bulan'] ?? null) }}}" required />
                         </div>
@@ -59,9 +67,9 @@
                     <div class="col-md-1 my-auto">
                         <label for="status_hunian_id"><strong>Tahun</strong></label>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-3">
                         <div class="input-group">
-                            <x-form.Dropdown name="tahun" :options="$tahuns" selected="{{{ old('tahun') ?? ($data['tahun'] ?? null) }}}" required />
+                            <x-form.Dropdown name="tahun" :options="$tahun" selected="{{{ old('tahun') ?? ($data['tahun'] ?? null) }}}" required />
                         </div>
                     </div>
                 </div>

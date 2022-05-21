@@ -14,6 +14,8 @@ class CreateRekapIuranKondisonalsTable extends Migration
     public function up()
     {
         Schema::create('rekap_iuran_kondisonals', function (Blueprint $table) {
+            $table->id();
+            $table->string('jenis_iuran_id');
             $table->string('bulan');
             $table->string('tahun');
             $table->timestamps();

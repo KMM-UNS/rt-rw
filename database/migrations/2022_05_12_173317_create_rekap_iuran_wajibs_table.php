@@ -15,7 +15,7 @@ class CreateRekapIuranWajibsTable extends Migration
     {
         Schema::create('rekap_iuran_wajibs', function (Blueprint $table) {
             $table->id();
-            // $table->string('jenis_iuran_id');
+            $table->string('jenis_iuran_id');
             $table->string('bulan');
             $table->string('tahun');
             $table->timestamps();

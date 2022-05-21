@@ -15,10 +15,10 @@ class RekapIuranWajibController extends Controller
 {
     public function index()
     {
-        // $jenis_iuran = IuranWajib::pluck('nama', 'id');
+        $jenis_iuran = IuranWajib::pluck('nama', 'id');
         $nama_bulans = Bulan::pluck('nama', 'id');
         $tahun = Tahun::pluck('nama', 'id');
-        return view('pages.admin.rekap-kas.rekapiuranwajib.index', ['nama_bulans' => $nama_bulans, 'tahun' => $tahun]);
+        return view('pages.admin.rekap-kas.rekapiuranwajib.index', ['jenis_iuran' => $jenis_iuran, 'nama_bulans' => $nama_bulans, 'tahun' => $tahun]);
     }
 
     public function create()
@@ -29,12 +29,12 @@ class RekapIuranWajibController extends Controller
 
     public function store(Request $request)
     {
-        // $jenis_iuran = $request->jenis_iuran_id;
+        $jenis_iuran = $request->jenis_iuran_id;
         $bulan = $request->bulan;
         $tahun = $request->tahun;
 
         // $rekap = KasIuranWajib::with('iuranwajib', 'rekapiuranwajib', 'tahuns')->where('jenis_iuran_id', $jenis_iuran)->where('tahun', $tahun)->get();
-        $rekap = KasIuranWajib::with('iuranwajib', 'petugastagihan', 'namabulanss', 'tahuns')->where('bulan', $bulan)->where('tahun', $tahun)->get();
+        $rekap = KasIuranWajib::with('iuranwajib', 'jenisiuranwajib', 'petugastagihan', 'namabulanss', 'tahuns')->where('jenis_iuran_id', $jenis_iuran)->where('bulan', $bulan)->where('tahun', $tahun)->get();
         return view('pages.admin.rekap-kas.rekapiuranwajib.detail', ['rekap' => $rekap]);
     }
 

@@ -32,7 +32,7 @@ class RekapIuranWajibDataTable extends DataTable
      */
     public function query(RekapIuranWajib $model)
     {
-        return $model->newQuery('rekap_iuran_wajibs.*')->with(['nama_bulans', 'tahun']);
+        return $model->newQuery('rekap_iuran_wajibs.*')->with(['nama_bulans', 'tahun', 'jenisiuranwajib']);
     }
 
     /**
@@ -70,8 +70,7 @@ class RekapIuranWajibDataTable extends DataTable
                 ->printable(false)
                 ->width(60)
                 ->addClass('text-center'),
-            // Column::make('jenis_iuran_id')->data('rekapiuranwajib.jenis_iuran_id'),
-            // Column::make('jenis_iuran_id')->data('jenisiuranwajib.jenis_iuran_id'),
+            Column::make('jenis_iuran_id')->data('jenisiuranwajib.jenis_iuran_id'),
             Column::make('bulan')->data('namabulanss.nama'),
             Column::make('tahun')->data('tahun.nama')
         ];
