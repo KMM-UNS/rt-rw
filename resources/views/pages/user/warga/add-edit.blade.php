@@ -193,7 +193,7 @@
                           }
                           @endphp
                           <div class="row">
-                              <x-form.ImageUploader :imageSrc="isset($imageSrc) ? asset(DataHelper::filterDokumenData($imageSrc, 'nama', 'foto')->first()['public_url']) : null" name="foto" title="Pas Foto" />
+                              <x-form.ImageUploader :imageSrc="isset($imageSrc) ? asset(DataHelper::filterDokumenData($imageSrc, 'nama', 'foto')->first()['public_url']) :  null" name="foto" title="Pas Foto" />
                           </div>
                       </div>
                   </div>
