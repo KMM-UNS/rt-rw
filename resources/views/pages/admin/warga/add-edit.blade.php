@@ -89,6 +89,14 @@
                         <div class="col-md-4">
                             <div class="input-group">
                                 <x-form.Dropdown name="warga_agama_id" :options="$agama" selected="{{{ old('warga_agama_id') ?? ($data['agama_id'] ?? null) }}}" required />
+                                {{-- <select name="warga_agama_id" id="agama_id">
+                                    @foreach ($agama as $id => $agama)
+                                        <option value="{{ $id }}">
+                                        {{ in_array($id, old('agama', [])) ? 'selected' : '' }}
+                                        {{ $agama }}
+                                        </option>
+                                    @endforeach
+                                </select> --}}
                             </div>
                         </div>
                         <div class="col-md-2 my-auto">
