@@ -10,6 +10,7 @@ use App\Models\Tahun;
 use App\Models\Bulan;
 use App\Models\IuranBulanan;
 use App\Datatables\Admin\RekapIuran\RekapIuranKondisionalDataTable;
+use App\Models\KasIuranWajib;
 
 class RekapIuranKondisionalController extends Controller
 {
@@ -33,9 +34,10 @@ class RekapIuranKondisionalController extends Controller
         $bulan = $request->bulan;
         $tahun = $request->tahun;
 
-        // $rekap = KasIuranKondisional::with('iurankondisional', 'rekapiurankondisional', 'tahuns')->where('jenis_iuran_id', $jenis_iuran)->where('tahun', $tahun)->get();
+        $total = KasIuranKondisional::where('jenis_iuran_id', $jenis_iuran)->where('bulan', $bulan)->where('tahun', $tahun)->get()->sum('total_biaya');
+
         $rekap = KasIuranKondisional::with('iurankondisional', 'petugastagihan', 'namabulanss', 'tahuns')->where('jenis_iuran_id', $jenis_iuran)->where('bulan', $bulan)->where('tahun', $tahun)->get();
-        return view('pages.admin.rekap-kas.rekapiurankondisional.detail', ['rekap' => $rekap]);
+        return view('pages.admin.rekap-kas.rekapiurankondisional.detail', ['rekap' => $rekap, 'total' => $total]);
     }
 
 

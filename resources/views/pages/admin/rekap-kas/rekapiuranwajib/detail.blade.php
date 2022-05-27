@@ -1,6 +1,6 @@
 @extends('layouts.default', ['topMenu' => true, 'sidebarHide' => true])
 
-@section('title', 'Rekap Iuran Wajib')
+@section('title', 'Rekap Iuran Sukarela')
 
 @push('css')
     <!-- datatables -->
@@ -37,51 +37,72 @@
                         class="fa fa-minus"></i></a>
             </div>
         </div>
+        <!-- end panel-heading -->
         <!-- begin panel-body -->
-        <div class="panel-body">
-            {{-- {{ $kas }} --}}
+        <form action="{{ route('admin.rekap-kas.rekap-iuranwajib.store') }}" id="form" name="form" method="POST"
+            data-parsley-validate="true" enctype="multipart/form-data">
+            @csrf
+            @if (isset($data))
+                {{ method_field('PUT') }}
+            @endif
+            <div class="panel-body">
+                {{-- {{ $rekap }} --}}
 
-            <table border="1" cellpadding="2" class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Jenis Iuran</th>
-                        <th scope="col">Penerima</th>
-                        <th scope="col">Pemberi</th>
-                        <th scope="col">Image</th>
-                        <th scope="col">Total Biaya</th>
-                    </tr>
-                </thead>
-                @foreach ($rekap as $item)
-                    <tbody>
+                <table border="1" cellpadding="2" class="table">
+                    <thead>
                         <tr>
-                            <td>{{ $item->iuranwajib->nama }}</td>
-                            <td>{{ $item->petugastagihan->nama }}</td>
-                            <td>{{ $item->pemberi }}</td>
-                            <td> <img src="{{ asset($item->dokumen[0]['public_url']) }}" alt=""
-                                    class="img-rounded height-80"></td>
-                            <td>{{ $item->total_biaya }}</td>
+                            <th scope="col">Jenis Iuran</th>
+                            <th scope="col">Penerima</th>
+                            <th scope="col">Pemberi</th>
+                            <th scope="col">Image</th>
+                            <th scope="col">Total Biaya</th>
                         </tr>
-                    </tbody>
-                @endforeach
-                <td colspan="4">TOTAL</td>
-                <td>@total</td>
+                    </thead>
+                    @foreach ($rekap as $item)
+                        @php
+                            $total_biaya = number_format($item->total_biaya, 2, ',', '.');
+                        @endphp
+                        <tbody>
+                            <tr>
+                                <td>{{ $item->iuranwajib->nama }}</td>
+                                <td>{{ $item->petugastagihan->nama }}</td>
+                                <td>{{ $item->pemberi }}</td>
+                                <td> <img src="{{ asset($item->dokumen[0]['public_url']) }}" alt=""
+                                        class="img-rounded height-80"></td>
+                                <td>Rp.{{ $item->total_biaya }}</td>
+                            </tr>
+                        </tbody>
+                    @endforeach
+                    <td colspan="4">TOTAL</td>
+                    <td>Rp.{{ $total }}</td>
 
-            </table>
+                </table>
 
-        </div>
-        <!-- end panel-body -->
-    @endsection
+            </div>
+            <!-- end panel-body -->
+    </div>
+    <!-- end panel -->
+@endsection
 
-    @push('scripts')
-        <!-- datatables -->
-        <script src="{{ asset('assets/js/custom/datatable-assets.js') }}"></script>
-        {{-- {{ $dataTable->scripts() }} --}}
-        <!-- end datatables -->
+@push('scripts')
+    <!-- datatables -->
+    <script src="{{ asset('assets/js/custom/datatable-assets.js') }}"></script>
+    {{-- {{ $dataTable->scripts() }} --}}
+    <!-- end datatables -->
 
-        <script src="{{ asset('assets/js/custom/delete-with-confirmation.js') }}"></script>
-        <script>
-            $(document).on('delete-with-confirmation.success', function() {
-                $('.buttons-reload').trigger('click')
-            })
-        </script>
-    @endpush
+    <script src="{{ asset('assets/js/custom/delete-with-confirmation.js') }}"></script>
+    <script>
+        $(document).on('delete-with-confirmation.success', function() {
+            $('.buttons-reload').trigger('click')
+        })
+    </script>
+    <script>
+        function hitung() {
+            var txtFirstNumberValue = document.getElementById('total_biaya').value;
+            var result = (txtFirstNumberValue) ++;
+            if (!isNaN(result)) {
+                document.getElementById('total').value = result;
+            }
+        }
+    </script>
+@endpush

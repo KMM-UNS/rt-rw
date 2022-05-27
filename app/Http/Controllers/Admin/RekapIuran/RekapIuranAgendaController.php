@@ -31,9 +31,10 @@ class RekapIuranAgendaController extends Controller
         $bulan = $request->bulan;
         $tahun = $request->tahun;
 
-        // $rekap = KasIuranAgenda::with('iuranagenda', 'rekapiuranagenda', 'tahuns')->where('jenis_iuran_id', $jenis_iuran)->where('tahun', $tahun)->get();
+        $total = KasIuranAgenda::where('jenis_iuran_id', $jenis_iuran)->where('bulan', $bulan)->where('tahun', $tahun)->get()->sum('total_biaya');
+
         $rekap = KasIuranAgenda::with('iuranagenda', 'jenisiuranagenda', 'petugastagihan', 'namabulanss', 'tahuns')->where('jenis_iuran_id', $jenis_iuran)->where('bulan', $bulan)->where('tahun', $tahun)->get();
-        return view('pages.admin.rekap-kas.rekapiuranagenda.detail', ['rekap' => $rekap]);
+        return view('pages.admin.rekap-kas.rekapiuranagenda.detail', ['rekap' => $rekap, 'total' => $total]);
     }
 
 

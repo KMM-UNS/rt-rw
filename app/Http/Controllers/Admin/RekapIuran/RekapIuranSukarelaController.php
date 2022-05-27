@@ -10,7 +10,7 @@ use App\Models\Bulan;
 use App\Models\Tahun;
 use App\Models\IuranBulanan;
 use App\Datatables\Admin\KasRT\KasIuranSukaRelaDataTable;
-
+use App\Models\KasIuranWajib;
 
 class RekapIuranSukarelaController extends Controller
 {
@@ -49,8 +49,10 @@ class RekapIuranSukarelaController extends Controller
         $bulan = $request->bulan;
         $tahun = $request->tahun;
 
+        $total = KasIuranSukarela::where('jenis_iuran_id', $jenis_iuran)->where('bulan', $bulan)->where('tahun', $tahun)->get()->sum('total_biaya');
+
         $rekap = KasIuranSukaRela::with('iuransukarela', 'jenisiuransukarela', 'petugastagihan', 'namabulanss', 'tahuns')->where('jenis_iuran_id', $jenis_iuran)->where('bulan', $bulan)->where('tahun', $tahun)->get();
-        return view('pages.admin.rekap-kas.rekapiuransukarela.detail', ['rekap' => $rekap]);
+        return view('pages.admin.rekap-kas.rekapiuransukarela.detail', ['rekap' => $rekap, 'total' => $total]);
     }
 
     /**

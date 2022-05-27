@@ -39,6 +39,9 @@
         </div>
         <!-- end panel-heading -->
 
+        {{-- <div class="panel-body">
+            {{ $dataTable->table() }}
+        </div> --}}
 
         <!-- begin panel-body -->
         <form action="{{ route('admin.rekap-kas.rekap-iuranwajib.store') }}" id="form" name="form" method="POST" data-parsley-validate="true"  enctype="multipart/form-data">
@@ -101,4 +104,16 @@
             });
         });
     </script>
+
+        {{-- <!-- datatables -->
+        <script src="{{ asset('assets/js/custom/datatable-assets.js') }}"></script>
+        {{ $dataTable->scripts() }}
+        <!-- end datatables --> --}}
+
+        <script src="{{ asset('assets/js/custom/delete-with-confirmation.js') }}"></script>
+        <script>
+            $(document).on('delete-with-confirmation.success', function() {
+                $('.buttons-reload').trigger('click')
+            })
+        </script>
 @endpush

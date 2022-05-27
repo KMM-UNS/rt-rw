@@ -14,7 +14,7 @@ class RekapIuranWajib extends Model
     public const ACTIVE = "aktif";
 
     protected $table = 'rekap_iuran_wajibs';
-    protected $fillable = ['jenis_iuran_id', 'tahun'];
+    protected $fillable = ['jenis_iuran_id', 'tahun', 'bulan'];
     protected $dates = [
         'created_at'
     ];

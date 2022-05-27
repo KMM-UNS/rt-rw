@@ -15,7 +15,7 @@ class CreateKasIuranSukaRelasTable extends Migration
             $table->string('tahun');
             $table->string('petugas');
             $table->string('pemberi');
-            $table->string('total_biaya');
+            $table->integer('total_biaya');
             // $table->string('bukti_pembayaran');
             $table->timestamps();
             $table->softDeletes();

@@ -59,6 +59,9 @@
                         </tr>
                     </thead>
                     @foreach ($rekap as $item)
+                        @php
+                            $total_biaya = number_format($item->total_biaya, 2, ',', '.');
+                        @endphp
                         <tbody>
                             <tr>
                                 <td>{{ $item->iuransukarela->nama }}</td>
@@ -66,12 +69,12 @@
                                 <td>{{ $item->pemberi }}</td>
                                 <td> <img src="{{ asset($item->dokumen[0]['public_url']) }}" alt=""
                                         class="img-rounded height-80"></td>
-                                <td>{{ $item->total_biaya }}</td>
+                                <td>Rp.{{ $item->total_biaya }}</td>
                             </tr>
                         </tbody>
                     @endforeach
                     <td colspan="4">TOTAL</td>
-                    <td>@total</td>
+                    <td>Rp.{{ $total }}</td>
 
                 </table>
 
@@ -92,5 +95,14 @@
         $(document).on('delete-with-confirmation.success', function() {
             $('.buttons-reload').trigger('click')
         })
+    </script>
+    <script>
+        function hitung() {
+            var txtFirstNumberValue = document.getElementById('total_biaya').value;
+            var result = (txtFirstNumberValue) ++;
+            if (!isNaN(result)) {
+                document.getElementById('total').value = result;
+            }
+        }
     </script>
 @endpush
