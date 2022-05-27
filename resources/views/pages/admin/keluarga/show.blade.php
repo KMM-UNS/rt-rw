@@ -41,15 +41,51 @@
                     <label>Nama Kepala Keluarga</label>
                     <p class="font-weight-bold">{{ $data['kepala_keluarga'] }}</p>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div>
-                    <label>Nomor Rumah</label>
-                    <p class="font-weight-bold">{{ $data->rumah['nomor_rumah'] }}</p>
-                </div>
                 <div>
                     <label>Nomor Telepon/HP</label>
                     <p class="font-weight-bold">{{ $data['telp'] }}</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div>
+                    <label>Alamat</label>
+                    <p class="font-weight-bold">{{ !empty($data->rumah_id) ? $data->rumah['alamat'] : "-" }}</p>
+                </div>
+                <div>
+                    <label>Nomor Rumah</label>
+                    <p class="font-weight-bold">{{ !empty($data->rumah_id) ? $data->rumah['nomor_rumah'] : "-" }}</p>
+                </div>
+            </div>
+        </div>
+        <a href="#modal-dialog" class="btn btn-sm btn-danger fw-normal float-right" data-toggle="modal" style="font-size: 13px">Pindah Rumah</a>
+    </div>
+    <div class="modal fade" id="modal-dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Modal Dialog</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('admin.keluarga.pindah', $data->id) }}" method="POST" name="form-wizard" class="form-control-with-bg"  data-parsley-validate="true" enctype="multipart/form-data">
+                        @csrf
+                        <div>
+                            <select class="form-control select2" onchange="pindahChange()" name="lokasi" id="pindah">
+                                <option value="Dalam Lingkungan" selected>Dalam Lingkungan</option>
+                                <option value="Luar Lingkungan">Luar Lingkungan</option>
+                            </select>
+                        </div>
+                        <div id="dropdownRumah" class="mt-2">
+                            <x-form.Dropdown name="keluarga_rumah_id" :options="$rumah" selected="{{{ old('keluarga_rumah_id') ?? ($data['rumah_id'] ?? null) }}}" required />
+                        </div>
+                        {{-- <div class="input-group">
+                            <x-form.Dropdown name="keluarga_status_tinggal" :options="$status_tinggal" selected="2" required />
+                        </div> --}}
+                    </div>
+                    <div class="modal-footer">
+                        <a href="javascript:;" class="btn btn-white" data-dismiss="modal">Close</a>
+                        <button type="submit" id="submit" class="btn btn-primary">Simpan</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -87,5 +123,44 @@
   $(document).on('delete-with-confirmation.success', function() {
     $('.buttons-reload').trigger('click')
   })
+</script>
+<script>
+    function pindahChange() {
+    var lokasiPindah = document.getElementById("pindah");
+    var keluargaId = document.getElementById("keluarga_rumah_id");
+    var dropdownRumah = document.getElementById("dropdownRumah");
+    var submit = document.getElementById("submit");
+    var rumah = "<?= "$data->rumah_id"?>";
+
+    function empty(e) {
+    switch (e) {
+        case "":
+        case 0:
+        case "0":
+        case null:
+        case false:
+        case undefined:
+        return true;
+        default:
+        return false;
+    }
+    }
+
+    if (empty(rumah) && lokasiPindah.value == "Luar Lingkungan" ) {
+        submit.disabled = true;
+        keluargaId.disabled = true;
+        dropdownRumah.style.display = "none";
+    }
+    else if (lokasiPindah.value == "Luar Lingkungan"){
+        submit.disabled = false;
+        keluargaId.disabled = true;
+        dropdownRumah.style.display = "none";
+    }
+    else {
+        submit.disabled = false;
+        keluargaId.disabled = false;
+        dropdownRumah.style.display = "block";
+    }
+}
 </script>
 @endpush

@@ -25,6 +25,11 @@ class Rumah extends Model
         return $this->hasMany(Keluarga::class);
     }
 
+    public function riwayat_rumah()
+    {
+        return $this->hasMany(RiwayatRumah::class);
+    }
+
     public function status_penggunaan()
     {
         return $this->belongsTo(StatusPenggunaanRumah::class);

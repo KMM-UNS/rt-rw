@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\DataTables\User\KeluargaDataTable;
 use App\Http\Requests\Admin\KeluargaForm;
+use App\Models\RiwayatRumah;
+use App\Models\StatusTinggal;
+use Carbon\Carbon;
 
 class KeluargaController extends Controller
 {
@@ -38,9 +41,18 @@ class KeluargaController extends Controller
     {
         DB::transaction(function () use ($request) {
             try {
+                $status_tinggal = StatusTinggal::select('id')->where('nama', 'Warga Tinggal')->first();
                 $keluarga = Keluarga::createFromRequest($request);
+                $keluarga->status_tinggal = $status_tinggal->id;
                 $keluarga->createable()->associate($request->user());
                 $keluarga->save();
+
+                $riwayat = RiwayatRumah::createFromRequest($request);
+                $riwayat->rumah_id = $keluarga->rumah_id;
+                $riwayat->keluarga_id = $keluarga->id;
+                $riwayat->tanggal_masuk = Carbon::now()->format('Y-m-d');
+                $riwayat->save();
+
             } catch (\Throwable $th) {
                 dd($th);
                 DB::rollback();

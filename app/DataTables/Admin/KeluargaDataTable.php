@@ -40,7 +40,7 @@ class KeluargaDataTable extends DataTable
      */
     public function query(Keluarga $model)
     {
-        return $model->select('keluarga.*')->with(['rumah']);
+        return $model->select('keluarga.*')->with(['rumah', 'status_tinggal']);
     }
 
     /**
@@ -76,8 +76,8 @@ class KeluargaDataTable extends DataTable
             Column::make('DT_RowIndex')->title('No')->orderable(false)->searchable(false)->addClass('text-center'),
             Column::make('no_kk'),
             Column::make('kepala_keluarga'),
-            Column::make('rumah_id')->title('Alamat Rumah')->data('rumah.alamat'),
-            Column::make('rumah_id')->title('Nomor Rumah')->data('rumah.nomor_rumah'),
+            Column::make('status_tinggal')->title('Status')->data('status_tinggal.nama'),
+            // Column::make('rumah_id')->title('Nomor Rumah')->data('rumah.nomor_rumah'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)

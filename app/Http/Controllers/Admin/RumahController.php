@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\DataTables\Admin\RiwayatDataTable;
 use App\Models\Rumah;
 use App\Helpers\DataHelper;
 use App\Helpers\TrashHelper;
@@ -13,6 +14,7 @@ use App\Http\Controllers\Controller;
 use App\Models\StatusPenggunaanRumah;
 use App\Http\Requests\Admin\RumahForm;
 use App\DataTables\Admin\RumahDataTable;
+use App\Models\RiwayatRumah;
 
 class RumahController extends Controller
 {
@@ -80,9 +82,12 @@ class RumahController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, RiwayatDataTable $dataTable)
     {
-       //
+       $data = Rumah::with('dokumen')->findOrFail($id);
+       return $dataTable->render('pages.admin.rumah.show', [
+        'data' => $data
+        ]);
     }
 
     /**

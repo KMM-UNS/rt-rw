@@ -48,6 +48,9 @@ class RumahForm extends FormRequest
     {
         $rules = [
             'foto_rumah' => [
+                Rule::requiredIf(function () {
+                    return request()->method() != "PUT";
+                }),
                 'mimes:pdf,jpeg,jpg,png|max:2048'
             ]
         ];

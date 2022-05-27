@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Support\Arr;
+use Illuminate\Validation\Rule;
 use App\Constants\RequestRuleConstant;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -47,6 +48,9 @@ class WargaForm extends FormRequest
     {
         $rules = [
             'foto' => [
+                Rule::requiredIf(function () {
+                    return request()->method() != "PUT";
+                }),
                 'mimes:png,jpeg,jpg|max:2048'
             ]
         ];

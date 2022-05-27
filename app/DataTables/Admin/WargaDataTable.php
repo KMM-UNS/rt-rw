@@ -43,7 +43,7 @@ class WargaDataTable extends DataTable
      */
     public function query(Warga $model)
     {
-        return $model->select('warga.*')->with(['agama', 'status_keluarga']);
+        return $model->select('warga.*')->with(['keluarga', 'agama', 'status_keluarga']);
     }
 
     /**
@@ -87,7 +87,6 @@ class WargaDataTable extends DataTable
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
-                  ->width(60)
                   ->addClass('text-center'),
         ];
     }

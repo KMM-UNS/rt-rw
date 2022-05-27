@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Agama;
 use App\Models\Warga;
+use App\Models\Keluarga;
 use App\Models\Pekerjaan;
 use App\Models\Pendidikan;
 use App\Helpers\DataHelper;
@@ -48,6 +49,7 @@ class WargaController extends Controller
         $status_keluarga = StatusKeluarga::pluck('nama', 'id');
         $status_kawin = StatusKawin::pluck('nama', 'id');
         $status_warga = StatusWarga::pluck('nama', 'id');
+        $keluarga = Keluarga::pluck('no_kk', 'id');
 
 
         return view('pages.admin.warga.add-edit', [
@@ -58,7 +60,8 @@ class WargaController extends Controller
             'pekerjaan' => $pekerjaan,
             'status_keluarga' => $status_keluarga,
             'status_kawin' => $status_kawin,
-            'status_warga' => $status_warga
+            'status_warga' => $status_warga,
+            'keluarga' => $keluarga
         ]);
     }
 
@@ -122,6 +125,7 @@ class WargaController extends Controller
         $status_keluarga = StatusKeluarga::pluck('nama', 'id');
         $status_kawin = StatusKawin::pluck('nama', 'id');
         $status_warga = StatusWarga::pluck('nama', 'id');
+        $keluarga = Keluarga::pluck('no_kk', 'id');
 
         return view('pages.admin.warga.add-edit', [
             'data' => $data,
@@ -132,7 +136,8 @@ class WargaController extends Controller
             'pekerjaan' => $pekerjaan,
             'status_keluarga' => $status_keluarga,
             'status_kawin' => $status_kawin,
-            'status_warga' => $status_warga
+            'status_warga' => $status_warga,
+            'keluarga' => $keluarga
         ]);
     }
 

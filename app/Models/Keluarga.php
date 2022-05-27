@@ -29,6 +29,16 @@ class Keluarga extends Model
         return $this->belongsTo(Rumah::class);
     }
 
+    public function status_tinggal()
+    {
+        return $this->belongsTo(StatusTinggal::class, 'status_tinggal');
+    }
+
+    public function riwayat_rumah()
+    {
+        return $this->hasMany(RiwayatRumah::class);
+    }
+
     public function createable()
     {
         return $this->morphTo();
