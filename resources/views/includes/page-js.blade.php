@@ -4,5 +4,6 @@
 <!-- ================== END BASE JS ================== -->
 
 <script src="/assets/js/custom/select2.autofocus.fix.js"></script>
+<script src="{{ $cdn ?? asset('vendor/sweetalert/sweetalert.all.js')  }}"></script>
 @include('sweetalert::alert')
 @stack('scripts')
