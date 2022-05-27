@@ -12,7 +12,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
             return redirect(route('admin.dashboard'));
         });
 
-        Route::view('/dashboard', 'pages.admin.dashboard')->name('dashboard');
+        Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
         Route::resource('/admin', 'AdminController');
         Route::resource('/user', 'UserController');
@@ -20,7 +20,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
         Route::resource('rumah', 'RumahController');
         Route::resource('warga', 'WargaController');
-        Route::resource('keluarga', 'KeluargaController');
+        Route::group(['prefix' => '/keluarga', 'as' => 'keluarga.'], function () {
+            Route::resource('/', 'KeluargaController')->parameter('', 'gelombang');
+            Route::post('pindah/{id}', 'KeluargaController@pindah')->name('pindah');
+        });
 
         Route::group(['prefix' => '/master-data', 'as' => 'master-data.', 'namespace' => 'Master'], function () {
             Route::resource('agama', 'AgamaController');
@@ -32,6 +35,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
             Route::resource('status-warga', 'StatusWargaController');
             Route::resource('status-penggunaan-rumah', 'StatusPenggunaanRumahController');
             Route::resource('status-hunian', 'StatusHunianController');
+            Route::resource('status-tinggal', 'StatusTinggalController');
             Route::resource('warga-negara', 'WargaNegaraController');
         });
     });
