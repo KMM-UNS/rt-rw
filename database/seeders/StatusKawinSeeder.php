@@ -15,10 +15,10 @@ class StatusKawinSeeder extends Seeder
     public function run()
     {
         $status = [
-            'KAWIN',
-            'BELUM KAWIN',
-            'CERAI HIDUP',
-            'CERAI MATI'
+            'Kawin',
+            'Belum Kawin',
+            'Cerai Hidup',
+            'Cerai Mati'
         ];
 
         foreach ($status as $data) :
