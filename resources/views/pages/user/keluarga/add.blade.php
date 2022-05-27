@@ -39,7 +39,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="input-group">
-                                        <input type="text" id="kepala_keluarga" name="keluarga_kepala_keluarga" class="form-control" autofocus data-parsley-required="true" value="{{{ old('keluarga_kepala_keluarga') ?? ($data['kepala_keluarga'] ?? null) }}}">
+                                        <input type="text" id="kepala_keluarga" name="keluarga_kepala_keluarga" class="form-control" autofocus data-parsley-required="true" value="{{{ old('keluarga_kepala_keluarga') ?? ($data['kepala_keluarga'] ?? auth()->user()->name) }}}">
                                     </div>
                                 </div>
                             </div>
