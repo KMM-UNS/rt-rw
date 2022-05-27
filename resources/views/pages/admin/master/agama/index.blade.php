@@ -19,7 +19,7 @@
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Master Data<small> @yield('title')</small></h1>
+<h1 class="page-header"> @yield('title')<small> Master Data</small></h1>
 <!-- end page-header -->
 
 
@@ -27,7 +27,7 @@
 <div class="panel panel-inverse">
   <!-- begin panel-heading -->
   <div class="panel-heading">
-    <h4 class="panel-title">DataTable - @yield('title')</h4>
+    <h4 class="panel-title">Data @yield('title')</h4>
     <div class="panel-heading-btn">
       <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
       <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>

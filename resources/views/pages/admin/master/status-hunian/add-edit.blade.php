@@ -15,7 +15,7 @@
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">Master Data<small> @yield('title')</small></h1>
+<h1 class="page-header"> @yield('title')<small> Master Data</small></h1>
 <!-- end page-header -->
 
 
@@ -41,10 +41,6 @@
       <div class="form-group">
         <label for="name">Status Hunian</label>
         <input type="text" id="nama" name="nama" class="form-control" autofocus data-parsley-required="true" value="{{{ old('pendaftar_gender') ?? ($data['gender'] ?? null) }}}">
-      </div>
-      <div class="form-group">
-        <label for="name">Status Hunian</label>
-        <x-form.genderRadio name="pendaftar_gender" selected="{{{ old('pendaftar_gender') ?? ($data['gender'] ?? null) }}}" />
       </div>
     </div>
 
