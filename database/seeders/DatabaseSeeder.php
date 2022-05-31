@@ -34,6 +34,8 @@ class DatabaseSeeder extends Seeder
             SettingSeeder::class,
             RoleSeeder::class,
             GolonganDarahSeeder::class,
+            JenisSuratSeeder::class,
+            JenisSuratKeteranganSeeder::class,
             StatusKeluargaSeeder::class,
             StatusWargaSeeder::class,
             StatusPenggunaanRumahSeeder::class,

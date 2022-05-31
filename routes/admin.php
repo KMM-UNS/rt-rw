@@ -31,6 +31,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
             Route::resource('status-kawin', 'StatusKawinController');
             Route::resource('pendidikan', 'PendidikanController');
             Route::resource('golongan-darah', 'GolonganDarahController');
+            Route::resource('jenis-surat', 'JenisSuratController');
+            Route::resource('jenis-surat-keterangan', 'JenisSuratKeteranganController');
             Route::resource('status-keluarga', 'StatusKeluargaController');
             Route::resource('status-warga', 'StatusWargaController');
             Route::resource('status-penggunaan-rumah', 'StatusPenggunaanRumahController');

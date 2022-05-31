@@ -93,6 +93,21 @@ return [
                     'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Warga Negara'
                 ]
             ]
+        ],
+        [
+            'icon' => 'fa fa-cogs',
+            'title' => 'Master Surat',
+            'url' => 'javascript:;',
+            'caret' => true,
+            'sub_menu' => [
+                [
+                    'url' => '/admin/master-data/jenis-surat',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Jenis Surat'
+                ], [
+                    'url' => '/admin/master-data/jenis-surat-keterangan',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Jenis Surat Keterangan'
+                ],
+            ]
         ]
     ],
 
