@@ -21,6 +21,7 @@ class AdminDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
+            ->addIndexColumn()
             ->addColumn('action', function ($row) {
                 $btn = '<div class="btn-group">';
                 $btn = $btn . '<a href="' . route('admin.admin.edit', $row->id) . '" class="btn btn-dark buttons-edit"><i class="fas fa-edit"></i></a>';
@@ -54,6 +55,10 @@ class AdminDataTable extends DataTable
             ->minifiedAjax()
             ->dom('<"dataTables_wrapper dt-bootstrap"B<"row"<"col-xl-7 d-block d-sm-flex d-xl-block justify-content-center"<"d-block d-lg-inline-flex"l>><"col-xl-5 d-flex d-xl-block justify-content-center"fr>>t<"row"<"col-sm-5"i><"col-sm-7"p>>>')
             ->orderBy(1)
+            ->parameters([
+                'responsive' => true,
+                'autoWidth' => false
+            ])
             ->buttons(
                 Button::make('create'),
                 Button::make('export'),
@@ -71,16 +76,17 @@ class AdminDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::computed('action')
-                ->exportable(false)
-                ->printable(false)
-                ->width(60)
-                ->addClass('text-center'),
+            Column::make('DT_RowIndex')->title('No')->orderable(false)->searchable(false)->addClass('text-center'),
             Column::make('name')->title('Nama'),
             Column::make('email'),
             Column::make('pangkat'),
             Column::make('nrp')->title('NRP'),
             Column::make('department.nama')->title('Departemen'),
+            Column::computed('action')
+                ->exportable(false)
+                ->printable(false)
+                ->width(60)
+                ->addClass('text-center'),
         ];
     }
 
