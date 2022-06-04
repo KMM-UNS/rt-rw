@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\RekapIuran;
 
+use App\Datatables\Admin\RekapIuran\ActionDataTable;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\KasIuranAgenda;
@@ -19,10 +20,10 @@ class RekapIuranAgendaController extends Controller
         return view('pages.admin.rekap-kas.rekapiuranagenda.index', ['jenis_iuran' => $jenis_iuran, 'nama_bulans' => $nama_bulans, 'tahun' => $tahun]);
     }
 
-    public function create()
-    {
-        //
-    }
+    // public function coba(ActionDataTable $dataTable)
+    // {
+    //     return $dataTable->render('pages.admin.kas-rt.kasiuranwajib.detail');
+    // }
 
 
     public function store(Request $request)

@@ -47,7 +47,7 @@
             @endif
             <div class="panel-body">
                 {{-- {{ $rekap }} --}}
-
+                <a href="{{ url('admin/rekap-kas/export-rekapwajib') }}" class="btn btn-success"> Export To Excel</a>
                 <table border="1" cellpadding="2" class="table">
                     <thead>
                         <tr>

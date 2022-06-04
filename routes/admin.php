@@ -60,8 +60,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
             Route::resource('rekap-iurankondisional', 'RekapIuranKondisionalController');
             Route::resource('rekap-iuranagenda', 'RekapIuranAgendaController');
             Route::get('exportrekapiuranwajib', 'RekapIuranWajibController@rekapiuranwajibexport');
+            Route::get('export-rekapwajib', 'RekapIuranWajibController@export_rekapwajib');
+            Route::get('coba', 'RekapIuranAgendaController@coba');
         });
-
+        // Route::get('export-rekapwajib', 'RekapIuranWajibController@export_rekapwajib');
         // tambahan
         // Route::resource('/gelombang', 'GelombangController');
         // Route::resource('/pendaftar', 'PendaftarController');

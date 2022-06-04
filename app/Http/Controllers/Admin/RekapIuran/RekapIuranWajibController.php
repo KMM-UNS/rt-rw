@@ -9,12 +9,15 @@ use App\Models\IuranWajib;
 use App\Models\Tahun;
 use App\Models\Bulan;
 use App\Exports\RekapIuranWajibView;
-use Maatwebsite\Excel\Facades\Excel;
+// use Maatwebsite\Excel\Facades\Excel;
 use App\Models\IuranBulanan;
 use App\Datatables\Admin\RekapIuran\RekapIuranWajibDataTable;
 use App\Datatables\Admin\RekapIuran\ActionDataTable;
 use PhpParser\Builder\Function_;
 use PhpParser\Node\Expr\FuncCall;
+// use Excel;
+use Maatwebsite\Excel\Facades\Excel;
+// use Maatwebsite\Excel\Excel;
 
 class RekapIuranWajibController extends Controller
 {
@@ -46,9 +49,28 @@ class RekapIuranWajibController extends Controller
         return view('pages.admin.rekap-kas.rekapiuranwajib.detail', ['rekap' => $rekap, 'total' => $total]);
     }
 
-    public function rekapiuranwajibexport()
+    // public function rekapiuranwajibexport()
+    // {
+    //     return Excel::download(new RekapIuranWajibView(), 'rekapiuranwajib.xlsx');
+    // }
+
+    public function export_rekapwajib(Request $request)
     {
-        return Excel::download(new RekapIuranWajibView(), 'rekapiuranwajib.xlsx');
+        $title = 'Laporan Rekap Iuran Wajib';
+        $jenis_iuran = $request->jenis_iuran_id;
+        $bulan = $request->bulan;
+        $tahun = $request->tahun;
+
+        $total = KasIuranWajib::where('jenis_iuran_id', $jenis_iuran)->where('bulan', $bulan)->where('tahun', $tahun)->get()->sum('total_biaya');
+
+        $rekap = KasIuranWajib::with('iuranwajib', 'jenisiuranwajib', 'petugastagihan', 'namabulanss', 'tahuns')->where('jenis_iuran_id', $jenis_iuran)->where('bulan', $bulan)->where('tahun', $tahun)->get();
+
+        Excel::create($title, function ($excel) use ($rekap, $total) {
+            $excel->sheet('Sheetname', function ($sheet) use ($rekap, $total) {
+
+                $sheet->view('pages.admin.rekap-kas.rekapiuranwajib.laporan_rekap_excel')->with('rekap', $rekap)->with('total', $total);
+            });
+        })->export('xls');
     }
 
     public function show($id)

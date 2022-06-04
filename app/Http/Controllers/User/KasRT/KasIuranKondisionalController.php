@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Admin\KasRT;
+namespace App\Http\Controllers\User\KasRT;
 
-use App\Datatables\Admin\KasRT\KasIuranKondisionalDataTable;
+use App\Datatables\User\KasRT\KasIuranKondisionalDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\IuranKondisional;
 use App\Models\PetugasTagihan;
@@ -23,7 +23,7 @@ class KasIuranKondisionalController extends Controller
 {
     public function index(KasIuranKondisionalDataTable $dataTable)
     {
-        return $dataTable->render('pages.admin.kas-rt.kasiurankondisional.index');
+        return $dataTable->render('pages.user.kas-rt.kasiurankondisional.index');
     }
 
     public function create()
@@ -32,7 +32,7 @@ class KasIuranKondisionalController extends Controller
         $nama_petugas = PetugasTagihan::pluck('nama', 'id');
         $nama_bulan = Bulan::pluck('nama', 'id');
         $tahun = Tahun::pluck('nama', 'id');
-        return view('pages.admin.kas-rt.kasiurankondisional.add-edit', ['jenis_iurankondisional' => $jenis_iurankondisional,  'nama_petugas' => $nama_petugas, 'nama_bulan' => $nama_bulan, 'tahun' => $tahun]);
+        return view('pages.user.kas-rt.kasiurankondisional.add-edit', ['jenis_iurankondisional' => $jenis_iurankondisional,  'nama_petugas' => $nama_petugas, 'nama_bulan' => $nama_bulan, 'tahun' => $tahun]);
     }
 
     public function store(IuranKondisionalForm $request, FileUploaderHelper $fileUploaderHelper)
@@ -57,7 +57,7 @@ class KasIuranKondisionalController extends Controller
                 return back()->withInput()->withToastError('Something what happen');
             }
         });
-        return redirect(route('admin.kas-rt.kas-kondisional.index'))->withToastSuccess('Data tersimpan');
+        return redirect(route('user.kas-rt.kas-kondisional.index'))->withToastSuccess('Data tersimpan');
     }
 
     public function show($id)
@@ -73,7 +73,7 @@ class KasIuranKondisionalController extends Controller
         $nama_petugas = PetugasTagihan::pluck('nama', 'id');
         $nama_bulan = Bulan::pluck('nama', 'id');
         $tahun = Tahun::pluck('nama', 'id');
-        return view('pages.admin.kas-rt.kasiurankondisional.add-edit', [
+        return view('pages.user.kas-rt.kasiurankondisional.add-edit', [
             'data' => $data,
             'jenis_iurankondisional' => $jenis_iurankondisional,
             'nama_petugas' => $nama_petugas,
@@ -139,7 +139,7 @@ class KasIuranKondisionalController extends Controller
 
         // $foto->update($foto_data);
 
-        return redirect(route('admin.kas-rt.kas-iurankondisional.index'))->withToastSuccess('Data tersimpan');
+        return redirect(route('user.kas-rt.kas-iurankondisional.index'))->withToastSuccess('Data tersimpan');
     }
     public function destroy($id)
     {

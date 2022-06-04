@@ -62,9 +62,6 @@ return [
             'caret' => true,
             'sub_menu' => [
                 [
-                    'url' => '/admin/setting',
-                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;App'
-                ], [
                     'url' => '/admin/master-data/iuran-wajib',
                     'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Iuran Wajib'
                 ], [
@@ -92,23 +89,20 @@ return [
             'caret' => true,
             'sub_menu' => [
                 [
-                    'url' => '/admin/setting',
-                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;App'
-                ], [
                     'url' => '/admin/kas-rt/kas-iuranwajib',
-                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Iuran Wajib'
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Kas Iuran Wajib'
                 ], [
                     'url' => '/admin/kas-rt/kas-iuransukarela',
-                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Iuran Suka Rela'
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Kas Iuran Suka Rela'
                 ], [
                     'url' => '/admin/kas-rt/kas-iurankondisional',
-                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Iuran Kondisional'
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Kas Iuran Kondisional'
                 ], [
                     'url' => '/admin/kas-rt/kas-iuranagenda',
-                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Iuran Agenda'
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Kas Iuran Agenda'
                 ], [
                     'url' => '/admin/kas-rt/iuran-bulanan',
-                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Iuran Bulanan'
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Kas Iuran Bulanan'
                 ]
             ]
         ],
@@ -132,6 +126,23 @@ return [
                     'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Rekap Iuran Agenda'
                 ]
             ]
+        ],
+        [
+            'icon' => 'fa fa-cogs',
+            'title' => 'Manajemen Kuangan',
+            'url' => 'javascript:;',
+            'caret' => true,
+            'sub_menu' => [
+                [
+                    // 'url' => '/admin/manajemen-kas/pemasukan',
+                    'url' => '/admin/kas-rt/kas-iuranwajib',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Manage Pemasukan'
+                ], [
+                    // 'url' => '/admin/manajemen-kas/pengeluaran',
+                    'url' => '/admin/kas-rt/kas-iuranwajib',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Manage Pengeluaran'
+                ]
+            ]
         ]
 
     ],
@@ -142,7 +153,29 @@ return [
             'title' => 'Dashboard',
             'url' => '/',
             'caret' => false
-        ], [
+        ],
+        [
+            'icon' => 'fa fa-cogs',
+            'title' => 'Isi Data Kas RT',
+            'url' => 'javascript:;',
+            'caret' => true,
+            'sub_menu' => [
+                [
+                    'url' => '/kas-rt/kas-iuranwajib',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Iuran Wajib'
+                ], [
+                    'url' => '/kas-rt/kas-iuransukarela',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Iuran Suka Rela'
+                ], [
+                    'url' => '/kas-rt/kas-iurankondisional',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Iuran Kondisional'
+                ], [
+                    'url' => '/kas-rt/kas-iuranagenda',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Iuran Agenda'
+                ],
+            ]
+        ],
+        [
             'icon' => 'fa fa-cogs',
             'title' => 'Ganti Password',
             'url' => '#',

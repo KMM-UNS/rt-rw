@@ -1,16 +1,15 @@
 <?php
 
-namespace App\DataTables\Admin\RekapIuran;
+namespace App\DataTables\U\KasRT;
 
-use App\App\Models\Admin\RekapIuran\Action;
-use App\Models\KasIuranAgenda;
+use App\Models\IuranBulanan;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class ActionDataTable extends DataTable
+class IuranBulananDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -22,19 +21,18 @@ class ActionDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'admin\rekapiuran\action.action');
+            ->addColumn('action', 'admin\kasrt\iuranbulanan.action');
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\App\Models\Admin\RekapIuran\Action $model
+     * @param \App\App\Models\Admin\KasRT\IuranBulanan $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-
-    public function query(KasIuranAgenda $model)
+    public function query(IuranBulanan $model)
     {
-        return $model->newQuery('rekap_iuran_agendas.*')->with(['jenis_iuranagenda', 'nama_petugas']);
+        return $model->select('iuran_bulanans.*')->with(['nama_bulans']);
     }
 
     /**
@@ -45,8 +43,8 @@ class ActionDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('admin\rekapiuran\action-table')
-
+            ->setTableId('iuranbulanan-table')
+            ->columns($this->getColumns())
             ->minifiedAjax()
             ->dom('<"dataTables_wrapper dt-bootstrap"B<"row"<"col-xl-7 d-block d-sm-flex d-xl-block justify-content-center"<"d-block d-lg-inline-flex"l>><"col-xl-5 d-flex d-xl-block justify-content-center"fr>>t<"row"<"col-sm-5"i><"col-sm-7"p>>>')
             ->orderBy(1)
@@ -72,13 +70,8 @@ class ActionDataTable extends DataTable
                 ->printable(false)
                 ->width(60)
                 ->addClass('text-center'),
-            // Column::make('id'),
-            Column::make('jenis_iuran_id')->data('iuranagenda.nama'),
-            Column::make('nama_petugas_id')->data('petugastagihan.nama'),
-            Column::make('pemberi')->data('petugastagihan.nama'),
-            Column::computed('image'),
-            Column::make('total_biaya'),
-
+            Column::make('bulan')->data('namabulanss.nama'),
+            Column::make('tahun')->data('tahun.nama')
         ];
     }
 
@@ -89,6 +82,6 @@ class ActionDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Action_' . date('YmdHis');
+        return 'IuranBulanan_' . date('YmdHis');
     }
 }
