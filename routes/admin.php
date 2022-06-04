@@ -63,6 +63,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
             Route::get('export-rekapwajib', 'RekapIuranWajibController@export_rekapwajib');
             Route::get('coba', 'RekapIuranAgendaController@coba');
         });
+
+        Route::group(['prefix' => '/manajemen-keuangan', 'as' => 'manajemen-keuangan.', 'namespace' => 'ManajemenKeuangan'], function () {
+            Route::resource('manajemen-pemasukan', 'ManajemenPemasukanController');
+            Route::resource('manajemen-pengeluaran', 'ManajemenPengeluaranController');
+        });
+
         // Route::get('export-rekapwajib', 'RekapIuranWajibController@export_rekapwajib');
         // tambahan
         // Route::resource('/gelombang', 'GelombangController');

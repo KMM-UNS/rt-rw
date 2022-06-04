@@ -135,11 +135,11 @@ return [
             'sub_menu' => [
                 [
                     // 'url' => '/admin/manajemen-kas/pemasukan',
-                    'url' => '/admin/kas-rt/kas-iuranwajib',
+                    'url' => '/admin/manajemen-keuangan/manajemen-pemasukan',
                     'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Manage Pemasukan'
                 ], [
-                    // 'url' => '/admin/manajemen-kas/pengeluaran',
-                    'url' => '/admin/kas-rt/kas-iuranwajib',
+                    // 'url' => '/admin/manajemen-manajemen/pengeluaran',
+                    'url' => '/admin/manajemen-keuangan/manajemen-pengeluaran',
                     'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Manage Pengeluaran'
                 ]
             ]
