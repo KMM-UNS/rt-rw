@@ -42,6 +42,7 @@
         {{-- <div class="panel-body">
             {{ $dataTable->table() }}
         </div> --}}
+        <a href="{{ url('admin/manajemen-keuangan/manajemen-pemasukan/create') }}" class="btn btn-outline-info">CREATE</a>
         <form action="{{ route('admin.manajemen-keuangan.manajemen-pemasukan.store') }}" id="form" name="form"
             method="POST" data-parsley-validate="true" enctype="multipart/form-data">
             @csrf
@@ -59,8 +60,8 @@
 
                         </tr>
                     </thead>
+
                     <tbody>
-                        {{-- @foreach ($rekap as $item) --}}
                         <tr>
                             <td>Kas Iuran Wajib</td>
                             <td>Rp.{{ $total_wajib }}</td>
@@ -77,10 +78,19 @@
                             <td>Kas Iuran Agenda</td>
                             <td>Rp.{{ $total_agenda }}</td>
                         </tr>
-                        <td><b>Total</b></td>
-                        <td colspan="1">Rp. {{ $pemasukan }}</td>
+                        @foreach ($pemasukann as $item)
+                            <tr>
+                                <td>{{ $item->keterangan }}</td>
+                                <td>Rp.{{ $item->nominal }}</td>
+                            </tr>
+                        @endforeach
 
                     </tbody>
+
+                    <td><b>Total</b></td>
+                    <td colspan="1">Rp. {{ $pemasukan }}</td>
+
+
 
                 </table>
 
@@ -92,17 +102,3 @@
 
     <!-- end panel -->
 @endsection
-
-@push('scripts')
-    {{-- <!-- datatables -->
-    <script src="{{ asset('assets/js/custom/datatable-assets.js') }}"></script>
-    {{ $dataTable->scripts() }}
-    <!-- end datatables --> --}}
-
-    <script src="{{ asset('assets/js/custom/delete-with-confirmation.js') }}"></script>
-    <script>
-        $(document).on('delete-with-confirmation.success', function() {
-            $('.buttons-reload').trigger('click')
-        })
-    </script>
-@endpush
