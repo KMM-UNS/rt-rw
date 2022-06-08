@@ -30,7 +30,7 @@ class WargaController extends Controller
 
     public function index()
     {
-        $keluarga = Keluarga::select('id')->where('createable_id', auth()->user()->id)->first();
+        $keluarga = Keluarga::select('id')->where('createable_id', auth()->user()->id)->where('createable_type', 'App\Models\User')->first();
         if ($keluarga == null)
         {
             return view('pages.user.warga.index', [
@@ -75,7 +75,7 @@ class WargaController extends Controller
     {
         DB::transaction(function () use ($request, $fileUploaderHelper) {
             try {
-                $keluarga_id = Keluarga::select('id')->where('createable_id', auth()->user()->id)->first();
+                $keluarga_id = Keluarga::select('id')->where('createable_id', auth()->user()->id)->where('createable_type', 'App\Models\User')->first();
                 $warga = Warga::createFromRequest($request);
                 $warga->keluarga_id = $keluarga_id->id;
                 $warga->save();

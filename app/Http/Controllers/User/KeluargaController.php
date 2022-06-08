@@ -22,7 +22,7 @@ class KeluargaController extends Controller
 
     public function index()
     {
-        $keluarga = Keluarga::where('createable_id', auth()->user()->id)->with('rumah')->first();
+        $keluarga = Keluarga::where('createable_id', auth()->user()->id)->where('createable_type', 'App\Models\User')->with('rumah')->first();
         // dd($keluarga);
         return view('pages.user.keluarga.index', [
             'keluarga' => $keluarga

@@ -17,7 +17,7 @@ class KeluargaMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        $keluarga = Keluarga::where('createable_id', auth()->user()->id)->with('rumah')->first();
+        $keluarga = Keluarga::where('createable_id', auth()->user()->id)->where('createable_type', 'Admin\Models\User')->with('rumah')->first();
         if(!empty($keluarga)) {
             return redirect(route('user.keluarga.index'));
         }
