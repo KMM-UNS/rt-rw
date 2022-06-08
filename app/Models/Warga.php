@@ -88,4 +88,9 @@ class Warga extends Model
     {
         return $this->morphTo();
     }
+
+    public function surat()
+    {
+        return $this->hasMany(Surat::class);
+    }
 }

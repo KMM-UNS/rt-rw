@@ -70,4 +70,12 @@ class RequestRuleConstant
             'keluarga_telp' => 'required'
         ];
     }
+
+    public static function suratTable()
+    {
+        return [
+            'surat_keperluan_surat_id' => 'required',
+            'surat_warga_id' => 'required'
+        ];
+    }
 }

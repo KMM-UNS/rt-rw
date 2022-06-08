@@ -1,6 +1,6 @@
 @extends('layouts.default', ['topMenu' => true, 'sidebarHide' => true])
 
-@section('title', 'Jenis Surat Keterangan')
+@section('title', 'Surat')
 
 @push('css')
 <!-- datatables -->
@@ -19,7 +19,7 @@
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header"> @yield('title')<small> Master Data</small></h1>
+<h1 class="page-header"> @yield('title')<small> Data</small></h1>
 <!-- end page-header -->
 
 

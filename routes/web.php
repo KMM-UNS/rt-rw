@@ -26,6 +26,7 @@ Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
     Route::group(['namespace' => 'User', 'middleware' => 'auth:web'], function () {
         Route::get('', 'DashboardController@index');
         Route::resource('/keluarga', 'KeluargaController');
+        Route::resource('/surat', 'SuratController');
         Route::resource('/warga', 'WargaController');
 
     });

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateJenisSuratTable extends Migration
+class CreateKeperluanSuratTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateJenisSuratTable extends Migration
      */
     public function up()
     {
-        Schema::create('jenis_surat', function (Blueprint $table) {
+        Schema::create('keperluan_surat', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
             $table->enum('status', ['aktif', 'non-aktif'])->default('aktif');
@@ -29,6 +29,6 @@ class CreateJenisSuratTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jenis_surat');
+        Schema::dropIfExists('keperluan_surat');
     }
 }

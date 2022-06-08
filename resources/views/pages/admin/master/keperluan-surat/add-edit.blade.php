@@ -1,6 +1,6 @@
 @extends('layouts.default', ['topMenu' => true, 'sidebarHide' => true])
 
-@section('title', isset($data) ? 'Edit Jenis Surat Keterangan' : 'Create Jenis Surat Keterangan' )
+@section('title', isset($data) ? 'Edit Keperluan Surat' : 'Create Keperluan Surat' )
 
 @push('css')
 <link href="{{ asset('/assets/plugins/smartwizard/dist/css/smart_wizard.css') }}" rel="stylesheet" />
@@ -20,7 +20,7 @@
 
 
 <!-- begin panel -->
-<form action="{{ isset($data) ? route('admin.master-data.jenis-surat-keterangan.update', $data->id) : route('admin.master-data.jenis-surat-keterangan.store') }}" id="form" name="form" method="POST" data-parsley-validate="true">
+<form action="{{ isset($data) ? route('admin.master-data.jenis-surat.update', $data->id) : route('admin.master-data.jenis-surat.store') }}" id="form" name="form" method="POST" data-parsley-validate="true">
   @csrf
   @if(isset($data))
   {{ method_field('PUT') }}

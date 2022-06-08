@@ -38,6 +38,12 @@ return [
             'caret' => false,
         ],
         [
+            'icon' => 'fa fa-envelope',
+            'title' => 'Surat',
+            'url' => '/admin/surat',
+            'caret' => false
+        ],
+        [
             'icon' => 'fa fa-users',
             'title' => 'Pengguna',
             'url' => '/admin/user',
@@ -101,11 +107,8 @@ return [
             'caret' => true,
             'sub_menu' => [
                 [
-                    'url' => '/admin/master-data/jenis-surat',
-                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Jenis Surat'
-                ], [
-                    'url' => '/admin/master-data/jenis-surat-keterangan',
-                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Jenis Surat Keterangan'
+                    'url' => '/admin/master-data/keperluan-surat',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Keperluan Surat'
                 ],
             ]
         ]
@@ -126,6 +129,11 @@ return [
             'icon' => 'fa fa-user',
             'title' => 'Warga',
             'url' => '/user/warga',
+            'caret' => false
+        ], [
+            'icon' => 'fa fa-envelope',
+            'title' => 'Surat',
+            'url' => '/user/surat',
             'caret' => false
         ], [
             'icon' => 'fa fa-sign-out-alt',

@@ -17,11 +17,15 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::resource('/admin', 'AdminController');
         Route::resource('/user', 'UserController');
 
-
+        Route::group(['prefix' => '/surat', 'as' => 'surat.'], function () {
+            Route::get('/cetak/{id}', 'SuratController@cetak')->name('cetak');
+            Route::resource('/', 'SuratController');
+            Route::post('verifikasi/{id}', 'SuratController@verifikasi')->name('verifikasi');
+        });
         Route::resource('rumah', 'RumahController');
         Route::resource('warga', 'WargaController');
         Route::group(['prefix' => '/keluarga', 'as' => 'keluarga.'], function () {
-            Route::resource('/', 'KeluargaController')->parameter('', 'gelombang');
+            Route::resource('/', 'KeluargaController');
             Route::post('pindah/{id}', 'KeluargaController@pindah')->name('pindah');
         });
 
@@ -31,7 +35,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
             Route::resource('status-kawin', 'StatusKawinController');
             Route::resource('pendidikan', 'PendidikanController');
             Route::resource('golongan-darah', 'GolonganDarahController');
-            Route::resource('jenis-surat', 'JenisSuratController');
+            Route::resource('keperluan-surat', 'KeperluanSuratController');
             Route::resource('jenis-surat-keterangan', 'JenisSuratKeteranganController');
             Route::resource('status-keluarga', 'StatusKeluargaController');
             Route::resource('status-warga', 'StatusWargaController');

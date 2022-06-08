@@ -2,57 +2,57 @@
 
 namespace App\Http\Controllers\Admin\Master;
 
-use App\Models\JenisSurat;
+use App\Models\KeperluanSurat;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\MasterForm;
-use App\DataTables\Admin\Master\JenisSuratDataTable;
+use App\DataTables\Admin\Master\KeperluanSuratDataTable;
 
-class JenisSuratController extends Controller
+class KeperluanSuratController extends Controller
 {
-    public function index(JenisSuratDataTable $dataTable)
+    public function index(KeperluanSuratDataTable $dataTable)
     {
-        return $dataTable->render('pages.admin.master.jenis-surat.index');
+        return $dataTable->render('pages.admin.master.keperluan-surat.index');
     }
 
     public function create()
     {
-        return view('pages.admin.master.jenis-surat.add-edit');
+        return view('pages.admin.master.keperluan-surat.add-edit');
     }
 
     public function store(MasterForm $request)
     {
         try {
-            JenisSurat::create($request->all());
+            KeperluanSurat::create($request->all());
         } catch (\Throwable $th) {
             return back()->withInput()->withToastError('Something went wrong');
         }
 
-        return redirect(route('admin.master-data.jenis-surat.index'))->withToastSuccess('Data tersimpan');
+        return redirect(route('admin.master-data.keperluan-surat.index'))->withToastSuccess('Data tersimpan');
     }
 
     public function edit($id)
     {
-        $data = JenisSurat::findOrFail($id);
-        return view('pages.admin.master.jenis-surat.add-edit', ['data' => $data]);
+        $data = KeperluanSurat::findOrFail($id);
+        return view('pages.admin.master.keperluan-surat.add-edit', ['data' => $data]);
     }
 
     public function update(MasterForm $request, $id)
     {
         try {
-            $data = JenisSurat::findOrFail($id);
+            $data = KeperluanSurat::findOrFail($id);
             $data->update($request->all());
         } catch (\Throwable $th) {
             return back()->withInput()->withToastError('Something went wrong');
         }
 
-        return redirect(route('admin.master-data.jenis-surat.index'))->withToastSuccess('Data tersimpan');
+        return redirect(route('admin.master-data.keperluan-surat.index'))->withToastSuccess('Data tersimpan');
     }
 
     public function destroy($id)
     {
         try {
-            JenisSurat::find($id)->delete();
+            KeperluanSurat::find($id)->delete();
         } catch (\Throwable $th) {
             return response(['error' => 'Something went wrong']);
         }
