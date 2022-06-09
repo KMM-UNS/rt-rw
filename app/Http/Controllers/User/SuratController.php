@@ -16,6 +16,7 @@ use App\Http\Controllers\Controller;
 use App\Models\JenisSuratKeterangan;
 use App\Http\Requests\Admin\SuratForm;
 use HnhDigital\LaravelNumberConverter\Facade as NumConvert;
+use Barryvdh\DomPDF\Facade\Pdf as PDFCetak;
 
 class SuratController extends Controller
 {
@@ -28,10 +29,13 @@ class SuratController extends Controller
     {
         // mengambil data keluarga yang login
         $keluarga = Keluarga::where('createable_id', auth()->user()->id)->where('createable_type', 'App\Models\User')->with('rumah')->first();
-        $warga = Warga::where('keluarga_id', $keluarga->id)->pluck('nama', 'id');
+        $warga = Warga::where('keluarga_id', $keluarga->id)->get();
+        // dd($warga);
+        $data = Surat::where('createable_id', auth()->user()->id)->where('createable_type', 'App\Models\User')->get();
         return view('pages.user.surat.index', [
             'keluarga' => $keluarga,
             'warga' => $warga,
+            'data' => $data,
         ]);
     }
 
@@ -79,6 +83,7 @@ class SuratController extends Controller
 
 
                 $surat = Surat::createFromRequest($request);
+                $surat->createable()->associate($request->user());
                 $surat->nomor_surat = $nomor_surat;
                 $surat->tanggal_pengajuan = Carbon::now()->format('Y-m-d');
                 $surat->save();
@@ -89,5 +94,14 @@ class SuratController extends Controller
             }
         });
         return redirect(route('user.surat.index'))->withInput()->withToastSuccess('Data tersimpan');
+    }
+
+    public function cetak($id)
+    {
+        $surat = Surat::where('createable_id', auth()->user()->id)->where('createable_type', 'App\Models\User')->findOrFail($id);
+        $pdf = PDFCetak::loadview('pages.admin.surat.cetak', [
+            'surat' => $surat
+        ]);
+        return $pdf->download('cetak_' . $surat->nomor_surat . '.pdf');
     }
 }

@@ -34,7 +34,7 @@ class Surat extends Model
 
     public function setTanggalPengajuanAttribute($value)
     {
-        $this->attributes['tanggal_pengajuan'] = Carbon::createFromFormat('d-m-Y', $value);
+        $this->attributes['tanggal_pengajuan'] = Carbon::createFromFormat('Y-m-d', $value);
     }
 
     public function warga()
@@ -50,5 +50,10 @@ class Surat extends Model
     public function status_surat()
     {
         return $this->belongsTo(StatusSurat::class, 'status');
+    }
+
+    public function createable()
+    {
+        return $this->morphTo();
     }
 }

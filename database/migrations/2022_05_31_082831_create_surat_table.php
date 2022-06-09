@@ -21,7 +21,9 @@ class CreateSuratTable extends Migration
             $table->date('tanggal_pengajuan');
             $table->date('tanggal_disetujui')->nullable();
             $table->string('keterangan')->nullable();
-            $table->string('status_id');
+            $table->string('status');
+            $table->bigInteger('createable_id');
+            $table->text('createable_type');
             $table->timestamps();
             $table->softDeletes();
         });

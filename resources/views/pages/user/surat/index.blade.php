@@ -28,13 +28,26 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th class="text-center">Foto</th>
-                        <th>NIK</th>
-                        <th>Nama</th>
-                        <th>Status dalam Keluarga</th>
+                        <th class="text-center">No</th>
+                        <th>Kode Surat</th>
+                        <th>Keperluan</th>
+                        <th>Tanggal Pengajuan</th>
+                        <th>Status</th>
                         <th class="text-center">Action</th>
                     </tr>
                 </thead>
+                @foreach ($data as $surat)
+                <tbody>
+                    <tr>
+                        <td class="text-center">{{ $loop->count }}</td>
+                        <td>{{ $surat->nomor_surat }}</td>
+                        <td>{{ ($surat->keperluan_surat != "9999") ? $surat->keperluan_surat->nama : $surat->keterangan }}</td>
+                        <td>{{ $surat->tanggal_pengajuan->isoFormat('DD MMMM YYYY') }}</td>
+                        <td>{{ $surat->status_surat->nama }}</td>
+                        <td class="text-center"><a href="{{ route('user.surat.cetak', $surat->id) }}" class=" {{ ($surat->status != 4) ? 'btn btn-default disabled' : 'btn btn-aqua' }}"><i class="fas fa-download"></i></a></td>
+                    </tr>
+                </tbody>
+                @endforeach
               </table>
         </div>
     </div>

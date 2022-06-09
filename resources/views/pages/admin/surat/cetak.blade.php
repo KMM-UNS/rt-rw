@@ -1,74 +1,150 @@
-<!DOCTYPE HTML">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<link rel="stylesheet" type="text/css" href="style.css"/>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            font-size: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            }
+
+
+        .column-image {
+            float: left;
+            width: 70%;
+            padding: 10px;
+            height: 4cm;
+            }
+
+        .column {
+            float: left;
+            width: 30%;
+            padding: 10px;
+            height: 4cm;
+            }
+
+            /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+            }
+
+        table {
+            table-layout: auto;
+            width: 100%;
+            }
+
+        .float-right {
+            float: right;
+        }
+
+        /* Create two equal columns that floats next to each other */
+        .column {
+        float: left;
+        width: 50%;
+        padding: 10px;
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+        content: "";
+        display: table;
+        clear: both;
+        }
+    </style>
 </head>
 <body>
-<div style="position:absolute;top:0.65in;left:3.65in;width:1.78in;line-height:0.17in;">
-    <span style="font-style:normal;font-weight:bold;font-size:12pt;font-family:Arial-BoldMT;color:#000000">RUKUN TETANGGA</span>
-    <span style="font-style:normal;font-weight:bold;font-size:12pt;font-family:Arial-BoldMT;color:#000000"> </span><br/></SPAN>
-</div>
-<div style="position:absolute;top:0.96in;left:2.53in;width:4.00in;line-height:0.17in;">
-    <span style="font-style:normal;font-weight:bold;font-size:12pt;font-family:Arial-BoldMT;color:#000000">KELURAHAN KIBING KECAMATAN BATU AJI</span><span style="font-style:normal;font-weight:bold;font-size:12pt;font-family:Arial-BoldMT;color:#000000"> </span><br/></SPAN></div>
-<div style="position:absolute;top:1.28in;left:3.90in;width:1.27in;line-height:0.17in;"><span style="font-style:normal;font-weight:bold;font-size:12pt;font-family:Arial-BoldMT;color:#000000">KOTA BATAM</span><span style="font-style:normal;font-weight:bold;font-size:12pt;font-family:Arial-BoldMT;color:#000000"> </span><br/></SPAN></div>
-<div style="position:absolute;top:1.59in;left:1.56in;width:5.95in;line-height:0.17in;"><span style="font-style:normal;font-weight:normal;font-size:12pt;font-family:ArialMT;color:#000000">Ruko Bumi Agung Permai Blok B No. </span><span style="font-style:normal;font-weight:normal;font-size:12pt;font-family:ArialMT;color:#000000">3A</span><span style="font-style:normal;font-weight:normal;font-size:12pt;font-family:ArialMT;color:#000000">, Nomor HP : +62813 7264 4481</span><span style="font-style:normal;font-weight:normal;font-size:12pt;font-family:ArialMT;color:#000000"> </span><br/></SPAN></div>
-<div style="position:absolute;top:1.80in;left:1.66in;width:5.75in;line-height:0.17in;"><span style="font-style:normal;font-weight:normal;font-size:12pt;font-family:ArialMT;color:#000000">Email Address : rt001rw021rukobap@gmail.com       Kode Pos : 29422</span><span style="font-style:normal;font-weight:normal;font-size:12pt;font-family:ArialMT;color:#000000"> </span><br/></SPAN></div>
-<a href="mailto:rt001rw021rukobap@gmail.com">
-</a><div style="position:absolute;top:2.43in;left:3.60in;width:1.88in;line-height:0.17in;"><span style="font-style:normal;font-weight:bold;font-size:12pt;font-family:Arial-BoldMT;color:#000000">SURAT PENGANTAR</span><span style="font-style:normal;font-weight:bold;font-size:12pt;font-family:Arial-BoldMT;color:#000000"> </span><br/></SPAN></div>
-<div style="position:absolute;top:2.74in;left:4.36in;width:0.35in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">No :</span><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000"> </span><br/></SPAN></div>
-<div style="position:absolute;top:3.24in;left:0.86in;width:7.35in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">Ketua RT-</span><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">001</span><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000"> / RW-XXI Perumahan Bumi Agung Permai Kelurahan Kibing Kecamatan Batu Aji</span><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000"> </span><br/></SPAN></div>
-<div style="position:absolute;top:3.53in;left:0.86in;width:2.66in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">Kota Batam, menerangkan bahwa ;</span><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000"> </span><br/></SPAN></div>
-<div style="position:absolute;top:4.10in;left:0.86in;width:1.18in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">Nama Lengkap</span><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000"> </span><br/></SPAN></div>
-<div style="position:absolute;top:4.10in;left:3.45in;width:0.09in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">:</span><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000"> </span><br/></SPAN></div>
-<div style="position:absolute;top:4.39in;left:0.86in;width:1.08in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">Jenis Kelamin</span><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000"> </span><br/></SPAN></div>
-<div style="position:absolute;top:4.39in;left:3.45in;width:0.18in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">: </span></SPAN><br/></div>
-<div style="position:absolute;top:4.39in;left:3.45in;width:0.18in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000"> </span><br/></SPAN></div>
-<div style="position:absolute;top:4.67in;left:0.86in;width:1.77in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">Tempat / Tanggal Lahir</span><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000"> </span><br/></SPAN></div>
-<div style="position:absolute;top:4.67in;left:3.45in;width:0.18in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">: </span></SPAN><br/></div>
-<div style="position:absolute;top:4.67in;left:3.45in;width:0.18in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000"> </span><br/></SPAN></div>
-<div style="position:absolute;top:4.96in;left:0.86in;width:1.41in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">Kewarganegaraan</span><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000"> </span><br/></SPAN></div>
-<div style="position:absolute;top:4.96in;left:3.45in;width:0.18in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">: </span></SPAN><br/></div>
-<div style="position:absolute;top:4.96in;left:3.45in;width:0.18in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000"> </span><br/></SPAN></div>
-<div style="position:absolute;top:5.25in;left:0.86in;width:0.57in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">Agama</span><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000"> </span><br/></SPAN></div>
-<div style="position:absolute;top:5.25in;left:3.45in;width:0.18in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">: </span></SPAN><br/></div>
-<div style="position:absolute;top:5.25in;left:3.45in;width:0.18in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000"> </span><br/></SPAN></div>
-<div style="position:absolute;top:5.54in;left:0.86in;width:0.80in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">Pekerjaan</span><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000"> </span><br/></SPAN></div>
-<div style="position:absolute;top:5.54in;left:3.45in;width:0.18in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">: </span></SPAN><br/></div>
-<div style="position:absolute;top:5.54in;left:3.45in;width:0.18in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000"> </span><br/></SPAN></div>
-<div style="position:absolute;top:5.83in;left:0.86in;width:1.04in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">No. KTP / KK</span><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000"> </span><br/></SPAN></div>
-<div style="position:absolute;top:5.83in;left:3.45in;width:0.18in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">: </span></SPAN><br/></div>
-<div style="position:absolute;top:5.83in;left:3.45in;width:0.18in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000"> </span><br/></SPAN></div>
-<div style="position:absolute;top:6.11in;left:0.86in;width:0.57in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">Alamat</span><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000"> </span><br/></SPAN></div>
-<div style="position:absolute;top:6.11in;left:3.45in;width:0.18in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">: </span></SPAN><br/></div>
-<div style="position:absolute;top:6.11in;left:3.45in;width:0.18in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000"> </span><br/></SPAN></div>
-<div style="position:absolute;top:6.69in;left:0.86in;width:7.35in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">Bahwa benar nama tersebut diatas adalah penduduk / warga yang berdomisili diwilayah RT-</span><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">00</span><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">1 </span><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">/</span><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000"> </span><br/></SPAN></div>
-<div style="position:absolute;top:6.98in;left:0.86in;width:7.35in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">RW</span><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">-XXI Perumahan Bumi Agung Permai Kelurahan Kibing Kecamatan Batu Aji Kota Batam, Surat</span><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000"> </span><br/></SPAN></div>
-<div style="position:absolute;top:7.26in;left:0.86in;width:3.06in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">pengantar ini diberikan untuk keperluan :</span><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000"> </span><br/></SPAN></div>
-<div style="position:absolute;top:7.55in;left:0.86in;width:0.75in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">Halo halo</span><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000"> </span><br/></SPAN></div>
-<div style="position:absolute;top:8.03in;left:0.86in;width:0.74in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">Demikian</span><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000"> </span><br/></SPAN></div>
-<div style="position:absolute;top:8.03in;left:1.71in;width:0.45in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">Surat</span><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000"> </span><br/></SPAN></div>
-<div style="position:absolute;top:8.03in;left:2.27in;width:0.91in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">Keterangan</span><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000"> </span><br/></SPAN></div>
-<div style="position:absolute;top:8.03in;left:3.29in;width:0.21in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">ini</span><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000"> </span><br/></SPAN></div>
-<div style="position:absolute;top:8.03in;left:3.61in;width:0.40in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">kami</span><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000"> </span><br/></SPAN></div>
-<div style="position:absolute;top:8.03in;left:4.12in;width:0.37in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">buat</span><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000"> </span><br/></SPAN></div>
-<div style="position:absolute;top:8.03in;left:4.60in;width:2.68in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">dengan </span></SPAN><br/></div>
-<div style="position:absolute;top:8.03in;left:4.60in;width:2.68in;line-height:0.16in;"><DIV style="position:relative; left:0.71in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">sebenar-benarnya </span></SPAN></DIV><br/></div>
-<div style="position:absolute;top:8.03in;left:4.60in;width:2.68in;line-height:0.16in;"><DIV style="position:relative; left:2.23in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">untuk</span><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000"> </span><br/></SPAN></DIV></div>
-<div style="position:absolute;top:8.03in;left:7.40in;width:0.81in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">digunakan</span><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000"> </span><br/></SPAN></div>
-<div style="position:absolute;top:8.32in;left:0.86in;width:1.81in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">sebagaimana mestiny</span><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">a.</span><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000"> </span><br/></SPAN></div>
-<div style="position:absolute;top:8.60in;left:5.77in;width:0.62in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">Batam, </span><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000"> </span><br/></SPAN></div>
-<div style="position:absolute;top:8.89in;left:0.86in;width:0.96in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">Mengetahui,</span><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000"> </span><br/></SPAN></div>
-<div style="position:absolute;top:9.75in;left:0.86in;width:0.59in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">Jabhari</span><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000"> </span><br/></SPAN></div>
-<div style="position:absolute;top:9.75in;left:5.77in;width:1.58in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">            Zainul Efendi</span><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000"> </span><br/></SPAN></div>
-
-<div style="position:absolute;top:9.95in;left:0.86in;width:1.13in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">Ketua </span><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">RW</span><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">-</span><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">XXI</span><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000"> </span><br/></SPAN></div>
-<div style="position:absolute;top:9.95in;left:5.77in;width:1.59in;line-height:0.16in;"><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">           Ketua RT-</span><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000">001</span><span style="font-style:normal;font-weight:normal;font-size:11pt;font-family:ArialMT;color:#000000"> </span><br/></SPAN></div>
-<div style="position:absolute;top:10.28in;left:0.86in;width:0.69in;line-height:0.14in;"><span style="font-style:italic;font-weight:bold;font-size:10pt;font-family:Arial-BoldItalicMT;color:#000000">Catatan :</span><span style="font-style:normal;font-weight:normal;font-size:10pt;font-family:ArialMT;color:#000000"> </span><br/></SPAN></div>
-<div style="position:absolute;top:10.54in;left:1.54in;width:6.66in;line-height:0.14in;"><span style="font-style:normal;font-weight:normal;font-size:10pt;font-family:ArialMT;color:#000000">Surat Keterangan ini untuk 1 (satu) kali pengurusan </span></SPAN><br/></div>
-<div style="position:absolute;top:10.54in;left:1.54in;width:6.66in;line-height:0.14in;"><DIV style="position:relative; left:3.67in;"><span style="font-style:normal;font-weight:normal;font-size:10pt;font-family:ArialMT;color:#000000">dan </span></SPAN></DIV><br/></div>
-<div style="position:absolute;top:10.54in;left:1.54in;width:6.66in;line-height:0.14in;"><DIV style="position:relative; left:3.98in;"><span style="font-style:normal;font-weight:normal;font-size:10pt;font-family:ArialMT;color:#000000">berlaku 1 (satu) </span></SPAN></DIV><br/></div>
-<div style="position:absolute;top:10.54in;left:1.54in;width:6.66in;line-height:0.14in;"><DIV style="position:relative; left:5.13in;"><span style="font-style:normal;font-weight:normal;font-size:10pt;font-family:ArialMT;color:#000000">bulan setelah </span></SPAN></DIV><br/></div>
-<div style="position:absolute;top:10.54in;left:1.54in;width:6.66in;line-height:0.14in;"><DIV style="position:relative; left:6.12in;"><span style="font-style:normal;font-weight:normal;font-size:10pt;font-family:ArialMT;color:#000000">tanggal</span><span style="font-style:normal;font-weight:normal;font-size:10pt;font-family:ArialMT;color:#000000"> </span><br/></SPAN></DIV></div>
-<div style="position:absolute;top:10.80in;left:1.54in;width:1.68in;line-height:0.14in;"><span style="font-style:normal;font-weight:normal;font-size:10pt;font-family:ArialMT;color:#000000">dikeluarkannya surat ini.</span><span style="font-style:normal;font-weight:normal;font-size:10pt;font-family:ArialMT;color:#000000"> </span><br/></SPAN></div>
+        <h1 style="font-size: 16px; text-align: center;">
+            RUKUN TETANGGA 001 RUKUN WARGA XXI
+        </h1>
+        <h1 style="font-size: 16px; text-align: center;">
+            KELURAHAN JEBRES KECAMATAN JEBRES
+        </h1>
+        <h1 style="font-size: 16px; text-align: center;">
+            KOTA SURAKARTA
+        </h1>
+        <h4 style="text-align: center; font-weight: normal; margin-bottom: 0;">
+            Jl. Ir. Sutami No.36, Kentingan, Kec. Jebres, Kota Surakarta, Jawa Tengah
+        </h4>
+        <h4 style="text-align: center; font-weight: normal; margin: 0;">
+            Telepon: (0271) 646994 Surel : campus@mail.uns.ac.id       Kode Pos : 57126
+        </h4>
+        <hr style="border: 3px solid; margin-bottom: 1px;">
+        <hr style="margin-top: 0;">
+        <h1 style="font-size: 16px; text-align: center;">
+            SURAT PENGANTAR
+        </h1>
+        <h4 style="text-align: center; font-weight: normal;">
+            No : {{ $surat->nomor_surat }}
+        </h4>
+        <p>
+            Ketua RT-001 / RW-XXI Kelurahan Jebres Kecamatan Jebres Kota Surakarta, menerangkan bahwa ;
+        </p>
+        <table>
+            <tr>
+                <td>Nama Lengkap </td>
+                <td>: {{$surat->warga->nama}}</td>
+            </tr>
+            <tr>
+                <td>Jenis Kelamin</td>
+                <td>: {{ Str::ucfirst($surat->warga->jenis_kelamin)}}</td>
+            </tr>
+            <tr>
+                <td>Tempat/Tanggal Lahir</td>
+                <td>: {{$surat->warga->tempat_lahir}}, {{$surat->warga->tanggal_lahir->isoFormat('DD MMMM YYYY')}}</td>
+            </tr>
+            <tr>
+                <td>Agama</td>
+                <td>: {{$surat->warga->agama->nama }}</td>
+            </tr>
+            <tr>
+                <td>Kewarganegaraan</td>
+                <td>: {{$surat->warga->warga_negara->nama }}</td>
+            </tr>
+            <tr>
+                <td>Pekerjaan</td>
+                <td>: {{$surat->warga->pekerjaan->nama}}</td>
+            </tr>
+            <tr>
+                <td>No. KTP / KK</td>
+                <td>: {{ $surat->warga->nik }} / {{ $surat->warga->keluarga->no_kk }}</td>
+            </tr>
+            <tr>
+                <td>Alamat</td>
+                <td>: {{$surat->warga->keluarga->rumah->alamat }} No.{{$surat->warga->keluarga->rumah->nomor_rumah }} RT-001/RW-XXI Kelurahan Jebres Kecamatan Jebres Kota Surakarta</td>
+            </tr>
+        </table>
+        <p>
+            Bahwa benar nama tersebut diatas adalah penduduk / warga yang berdomisili diwilayah Ketua RT-001 / RW-XXI Kelurahan Jebres Kecamatan Jebres Kota Surakarta, Surat pengantar ini diberikan untuk keperluan :
+        </p>
+        <p>
+            <strong>
+                {{ $surat->keperluan_surat->nama }}
+            </strong>
+        </p>
+        <p>
+            Demikian Surat Keterangan ini kami buat dengan sebenar-benarnya untuk digunakan sebagaimana mestinya.
+        </p>
+        <div class="row">
+            <div class="column">
+                <p style="justify-self: center;margin: 0.5cm 0 0 0;">Mengetahui,</p>
+                <p style="justify-self: center;margin: 2.5cm 0 0 0;"> <u>Nama</u></p>
+                <p style="justify-self: center;margin-top: 0;">Ketua RW XXI</p>
+            </div>
+            <div class="column">
+                <p style="justify-self: center;">Surakarta, {{ $surat->tanggal_pengajuan->isoFormat('DD MMMM YYYY') }} </p>
+                <p style="justify-self: center;"></p>
+                <p style="justify-self: center;margin: 2.5cm 0 0 0;"> <u>Nama</u></p>
+                <p style="justify-self: center;margin-top: 0;">Ketua RT 01</p>
+            </div>
+        </div>
 </body>
 </html>

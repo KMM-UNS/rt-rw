@@ -26,7 +26,10 @@ Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
     Route::group(['namespace' => 'User', 'middleware' => 'auth:web'], function () {
         Route::get('', 'DashboardController@index');
         Route::resource('/keluarga', 'KeluargaController');
-        Route::resource('/surat', 'SuratController');
+        Route::group(['prefix' => '/surat', 'as' => 'surat.'], function () {
+            Route::get('/cetak/{id}', 'SuratController@cetak')->name('cetak');
+            Route::resource('/', 'SuratController');
+        });
         Route::resource('/warga', 'WargaController');
 
     });
