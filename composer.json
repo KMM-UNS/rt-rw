@@ -2,9 +2,14 @@
     "name": "laravel/laravel",
     "type": "project",
     "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
     "license": "MIT",
     "require": {
+        "php": "^7.3|^8.0",
+        "barryvdh/laravel-dompdf": "^0.9.0",
         "php": "^7.3|^8.0",
         "arielmejiadev/larapex-charts": "^4.0",
         "azishapidin/indoregion": "^3.0",
@@ -18,6 +23,10 @@
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
+        "realrashid/sweet-alert": "^4.0",
+        "shanmuga/laravel-entrust": "^2.2",
+        "yajra/laravel-datatables": "^1.5",
+        "yajra/laravel-datatables-buttons": "^4.0"
         "phpoffice/phpword": "^0.18.2",
         "realrashid/sweet-alert": "^4.0",
         "riskihajar/terbilang": "^1.2",

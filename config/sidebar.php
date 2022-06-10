@@ -44,9 +44,25 @@ return [
             'caret' => false
         ],
         [
+            'icon' => 'fa fa-cogs',
+            'title' => 'Ronda',
+            'url' => 'javascript:;',
+            'caret' => true,
+            'sub_menu' => [
+                [
+                    'url' => '/admin/ronda/jadwal',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Jadwal Ronda'
+                ],
+                [
+                    'url' => '/admin/ronda/presensi',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Presensi Ronda'
+                ],
+            ]
+        ],
+        [
             'icon' => 'fa fa-users',
             'title' => 'Pengguna',
-            'url' => '/admin/user',
+            'url' => '/admin/users',
             'caret' => false,
         ],
         [

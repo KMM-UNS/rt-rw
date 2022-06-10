@@ -26,6 +26,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
+            // SettingSeeder::class,
+            LaravelEntrustSeeder::class,
             IndoRegionSeeder::class,
             AgamaSeeder::class,
             PekerjaanSeeder::class,
@@ -41,7 +43,8 @@ class DatabaseSeeder extends Seeder
             StatusPenggunaanRumahSeeder::class,
             StatusHunianSeeder::class,
             StatusTinggalSeeder::class,
-            WargaNegaraSeeder::class
+            WargaNegaraSeeder::class,
+            HariSeeder::class
         ]);
     }
 }

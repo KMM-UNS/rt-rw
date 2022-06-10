@@ -15,6 +15,7 @@ require('laravel-mix-dload');
 /*  end pages resources */
 
 /*  custom resources */
+mix.copy('resources/js/', 'public/assets/js/custom/');
 mix.js('resources/js/ajax-form-handler.js', 'public/assets/js/custom/');
 mix.js('resources/js/delete-with-confirmation.js', 'public/assets/js/custom/');
 mix.js('resources/js/string-helper.js', 'public/assets/js/custom/');

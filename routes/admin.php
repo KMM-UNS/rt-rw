@@ -3,15 +3,17 @@
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
-    require base_path('vendor/laravel/fortify/routes/routes.php');
-    Route::resource('/setting', 'SettingController');
+    // require base_path('vendor/laravel/fortify/routes/routes.php');
 
-
-    Route::group(['namespace' => 'Admin', 'middleware' => 'auth:admin'], function () {
+    Route::group(['namespace' => 'Admin', 'middleware' => ['role:admin|manager']], function () {
         Route::get('/', function () {
             return redirect(route('admin.dashboard'));
         });
 
+        Route::view('/dashboard', 'pages.admin.dashboard')->name('dashboard');
+
+        Route::resource('/users', 'UserController');
+        Route::resource('/settings', 'SettingController');
         Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
         Route::resource('/admin', 'AdminController');
@@ -29,6 +31,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
             Route::post('pindah/{id}', 'KeluargaController@pindah')->name('pindah');
         });
 
+        Route::group(['prefix' => '/ronda', 'as' => 'ronda.'], function () {
+            Route::resource('/jadwal', 'JadwalRondaController');
+            Route::resource('/presensi', 'PresensiRondaController');
+        });
+
         Route::group(['prefix' => '/master-data', 'as' => 'master-data.', 'namespace' => 'Master'], function () {
             Route::resource('agama', 'AgamaController');
             Route::resource('pekerjaan', 'PekerjaanController');
@@ -36,7 +43,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
             Route::resource('pendidikan', 'PendidikanController');
             Route::resource('golongan-darah', 'GolonganDarahController');
             Route::resource('keperluan-surat', 'KeperluanSuratController');
-            Route::resource('jenis-surat-keterangan', 'JenisSuratKeteranganController');
             Route::resource('status-keluarga', 'StatusKeluargaController');
             Route::resource('status-warga', 'StatusWargaController');
             Route::resource('status-penggunaan-rumah', 'StatusPenggunaanRumahController');

@@ -1,6 +1,6 @@
 @extends('layouts.empty', ['paceTop' => true, 'bodyExtraClass' => 'bg-white'])
 
-@section('title', 'Login')
+@section('title', 'Polres')
 
 @section('content')
 <!-- begin login -->
@@ -9,9 +9,9 @@
 	<div class="news-feed">
 		<div class="news-image" style="background-image: url(/assets/img/login-bg/front.png)"></div>
 		<div class="news-caption">
-			<h4 class="caption-title">RT-RW</h4>
+			<h4 class="caption-title"><b>e</b>Layanan</h4>
 			<p>
-				RT-RW Online
+				Sistem Informasi Layanan
 			</p>
 		</div>
 	</div>
@@ -30,7 +30,7 @@
 				{{ session('status') }}
 			</div>
 			@endif
-			<form action="{{ request()->routeIs('admin*') ? route('admin.login') : route('login') }}" method="POST" class="margin-bottom-0">
+			<form action="{{ route('login') }}" method="POST" class="margin-bottom-0">
 				@csrf
 				<div class="form-group m-b-15">
 					<input id="email" type="email" class="form-control form-control-lg @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Email" autofocus />
