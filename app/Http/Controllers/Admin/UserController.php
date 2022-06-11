@@ -25,6 +25,7 @@ class UserController extends Controller
 
     public function store(UserForm $request)
     {
+        // dd($request->all());
         return DB::transaction(function () use ($request) {
             $msg = "Data Tersimpan";
             try {

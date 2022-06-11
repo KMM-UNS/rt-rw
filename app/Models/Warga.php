@@ -93,4 +93,14 @@ class Warga extends Model
     {
         return $this->hasMany(Surat::class);
     }
+
+    public function jadwal_ronda()
+    {
+        return $this->hasOne(JadwalRonda::class);
+    }
+
+    public function presensi_ronda()
+    {
+        return $this->hasMany(PresensiRonda::class);
+    }
 }
