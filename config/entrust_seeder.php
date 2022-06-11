@@ -7,7 +7,7 @@ return [
             'profile' => 'c,r,u,d'
         ],
         'manager' => [
-            'users' => 'c,r,u',
+            'users' => 'c,r',
             'profile' => 'r,u'
         ],
         'regular_user' => [
