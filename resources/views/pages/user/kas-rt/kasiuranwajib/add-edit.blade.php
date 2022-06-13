@@ -71,7 +71,7 @@
                 }
                 @endphp
                 <div class="row">
-                    <x-form.ImageUploader :imageSrc="isset($imageSrc) ? asset(DataHelper::filterDokumenData($imageSrc, 'nama', 'foto_iuranwajib')->first()['public_url']) : null" name="foto_iuranwajib" title="Foto Kondisional" value="{{{ $data->dokumen  ?? old('foto_iuranwajib') }}}" />
+                    <x-form.ImageUploader :imageSrc="isset($imageSrc) ? asset(DataHelper::filterDokumenData($imageSrc, 'nama', 'foto_iuranwajib')->first()['public_url']) : null" name="foto_iuranwajib" title="Foto Wajib" value="{{{ $data->dokumen  ?? old('foto_iuranwajib') }}}" />
                 </div>
       </div>
     </div>

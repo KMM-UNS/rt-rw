@@ -1,6 +1,6 @@
 @extends('layouts.default', ['topMenu' => true, 'sidebarHide' => true])
 
-@section('title', 'Agama')
+@section('title', 'Kondisional')
 
 @push('css')
     <!-- datatables -->

@@ -100,10 +100,11 @@ return [
                 ], [
                     'url' => '/admin/kas-rt/kas-iuranagenda',
                     'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Kas Iuran Agenda'
-                ], [
-                    'url' => '/admin/kas-rt/iuran-bulanan',
-                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Kas Iuran Bulanan'
-                ]
+                ],
+                // [
+                //     'url' => '/admin/kas-rt/iuran-bulanan',
+                //     'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Kas Iuran Bulanan'
+                // ]
             ]
         ],
         [

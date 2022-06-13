@@ -57,7 +57,7 @@ class KasIuranKondisionalController extends Controller
                 return back()->withInput()->withToastError('Something what happen');
             }
         });
-        return redirect(route('admin.kas-rt.kas-kondisional.index'))->withToastSuccess('Data tersimpan');
+        return redirect(route('admin.kas-rt.kas-iurankondisional.index'))->withToastSuccess('Data tersimpan');
     }
 
     public function show($id)

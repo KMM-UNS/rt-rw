@@ -69,7 +69,7 @@ class PetugasTagihanDataTable extends DataTable
                 ->printable(false)
                 ->width(60)
                 ->addClass('text-center'),
-            Column::make('id'),
+            // Column::make('id'),
             Column::make('nama'),
             Column::make('ttgl'),
             Column::make('no_telp'),

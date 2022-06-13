@@ -1,6 +1,6 @@
 @extends('layouts.default', ['topMenu' => true, 'sidebarHide' => true])
 
-@section('title', 'Agama')
+@section('title', 'Sukarela')
 
 @push('css')
     <!-- datatables -->
@@ -45,7 +45,6 @@
             {{ method_field('PUT') }}
             @endif
         <div class="panel-body">
-            <h1>haiii</h1>
             <div class="form-group">
                 <div class="row">
                     <div class="col-md-1 my-auto">

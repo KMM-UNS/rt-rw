@@ -1,6 +1,6 @@
 @extends('layouts.default', ['topMenu' => true, 'sidebarHide' => true])
 
-@section('title', 'Rekap Iuran')
+@section('title', 'Agenda')
 
 @push('css')
     <!-- datatables -->
