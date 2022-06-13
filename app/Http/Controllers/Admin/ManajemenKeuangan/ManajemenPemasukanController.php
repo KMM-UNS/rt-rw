@@ -10,9 +10,6 @@ use Illuminate\Http\Request;
 use App\Models\KasIuranWajib;
 use App\Models\ManajemenPemasukan;
 use Barryvdh\DomPDF\Facade\Pdf;
-// use PhpOffice\PhpWord\Writer\PDF;
-// use PDF;
-// use PhpOffice\PhpWord\Writer\PDF as WriterPDF;
 
 class ManajemenPemasukanController extends Controller
 {
@@ -62,10 +59,11 @@ class ManajemenPemasukanController extends Controller
         // $pemasukann->keterangan = $request->input('keterangan');
         // $pemasukann->nominal = $request->input('nominal');
         // $pemasukann->save();
-        return view('pages.admin.manajemen-keuangan.manajemen-pemasukan.index', ['total_wajib' => $total_wajib, 'total_agenda' => $total_agenda, 'pemasukan' => $pemasukan, 'pemasukann' => $pemasukann, 'pemasukannn' => $pemasukannn, 'total_kondisional' => $total_kondisional, 'total_sukarela' => $total_sukarela, 'keterangan' => $keterangan, 'nominal' => $nominal]);
+        // return view('pages.admin.manajemen-keuangan.manajemen-pemasukan.index', ['total_wajib' => $total_wajib, 'total_agenda' => $total_agenda, 'pemasukan' => $pemasukan, 'pemasukann' => $pemasukann, 'pemasukannn' => $pemasukannn, 'total_kondisional' => $total_kondisional, 'total_sukarela' => $total_sukarela, 'keterangan' => $keterangan, 'nominal' => $nominal]);
+        return redirect(route('admin.manajemen-keuangan.manajemen-pemasukan.index'))->withToastSuccess('Data tersimpan');
     }
 
-    public function cetak_pdff()
+    public function cetak_pdf()
     {
         $total_wajib = KasIuranWajib::sum('total_biaya');
         $total_agenda = KasIuranAgenda::sum('total_biaya');

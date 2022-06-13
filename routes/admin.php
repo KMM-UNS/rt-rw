@@ -65,9 +65,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         });
 
         Route::group(['prefix' => '/manajemen-keuangan', 'as' => 'manajemen-keuangan.', 'namespace' => 'ManajemenKeuangan'], function () {
-            Route::get('/manajemen-pemasukan/cetak_pdf', 'ManajemenPemasukanController@cetak_pdff');
+            Route::get('/manajemen-pemasukan/cetak_pdf', 'ManajemenPemasukanController@cetak_pdf');
+            Route::get('/manajemen-pengeluaran/cetak_pdf', 'ManajemenPengeluaranController@cetak_pdf');
             Route::resource('manajemen-pemasukan', 'ManajemenPemasukanController');
-
             Route::resource('manajemen-pengeluaran', 'ManajemenPengeluaranController');
         });
 

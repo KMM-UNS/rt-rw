@@ -53,6 +53,9 @@
             <div class="panel-body">
                 {{-- {{ $rekap }} --}}
                 <a href="{{ url('admin/rekap-kas/export-rekapwajib') }}" class="btn btn-success"> Export To Excel</a>
+                <a href="{{ url('admin/manajemen-keuangan/manajemen-pengeluaran/cetak_pdf') }}" class="btn btn-primary"
+                    target="_blank">CETAK
+                    PDF</a>
                 <table border="1" cellpadding="2" class="table">
                     <thead>
                         <tr>
@@ -63,7 +66,7 @@
                     </thead>
 
                     <tbody>
-                        <tr>
+                        {{-- <tr>
                             <td>Kas Iuran Wajib</td>
                             <td>Rp.</td>
 
@@ -79,18 +82,18 @@
                         <tr>
                             <td>Kas Iuran Agenda</td>
                             <td>Rp.</td>
-                        </tr>
-                        {{-- @foreach ($pengeluarann as $item)
+                        </tr> --}}
+                        @foreach ($pengeluarann as $item)
                             <tr>
                                 <td>{{ $item->keterangan }}</td>
                                 <td>Rp.{{ $item->nominal }}</td>
                             </tr>
-                        @endforeach --}}
+                        @endforeach
 
                     </tbody>
 
                     <td><b>Total</b></td>
-                    <td colspan="1"><b>Rp.</b></td>
+                    <td colspan="1"><b>Rp. {{ $pengeluarannn }}</b></td>
 
 
 
