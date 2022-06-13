@@ -12,8 +12,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
             return redirect(route('admin.dashboard'));
         });
 
-        Route::view('/dashboard', 'pages.admin.dashboard')->name('dashboard');
-
+        // Route::view('/dashboard', 'pages.admin.dashboard')->name('dashboard');
+        Route::resource('/dashboard', 'DashboardController');
 
         // Route::resource('/mahasiswa', 'MahasiswaController');
         // Route::get('/pages/user/mahasiswa/edit/{mahasiswa}', 'MahasiswaController@edit');

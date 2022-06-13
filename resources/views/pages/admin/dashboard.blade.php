@@ -53,7 +53,8 @@
                             <!-- end title -->
                             <!-- begin total-sales -->
                             <div class="d-flex mb-1">
-                                <h2 class="mb-0">$<span data-animation="number" data-value="64559.25">0.00</span>
+                                <h2 class="mb-0">Rp. <span data-animation="number"
+                                        data-value={{ $saldo }}>888888888888888</span>
                                 </h2>
                                 <div class="ml-auto mt-n1 mb-n1">
                                     <div id="total-sales-sparkline"></div>
@@ -129,7 +130,8 @@
                             <!-- end title -->
                             <!-- begin conversion-rate -->
                             <div class="d-flex align-items-center mb-1">
-                                <h2 class="text-white mb-0"><span data-animation="number" data-value="2.19">0.00</span>%
+                                <h2 class="text-white mb-0">Rp. <span data-animation="number"
+                                        data-value={{ $pemasukan }}>0.00</span>
                                 </h2>
                                 <div class="ml-auto">
                                     <div id="conversion-rate-sparkline"></div>
