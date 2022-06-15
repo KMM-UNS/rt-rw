@@ -41,7 +41,7 @@
                     <tr>
                         <td class="text-center">{{ $loop->count }}</td>
                         <td>{{ $surat->nomor_surat }}</td>
-                        <td>{{ ($surat->keperluan_surat != "9999") ? $surat->keperluan_surat->nama : $surat->keterangan }}</td>
+                        <td>{{ ($surat->keperluan_surat_id == "7") ?  $surat->keterangan : $surat->keperluan_surat->nama }}</td>
                         <td>{{ $surat->tanggal_pengajuan->isoFormat('DD MMMM YYYY') }}</td>
                         <td>{{ $surat->status_surat->nama }}</td>
                         <td class="text-center"><a href="{{ route('user.surat.cetak', $surat->id) }}" class=" {{ ($surat->status != 4) ? 'btn btn-default disabled' : 'btn btn-aqua' }}"><i class="fas fa-download"></i></a></td>

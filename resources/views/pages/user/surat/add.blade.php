@@ -95,30 +95,12 @@
     var keterangan = document.getElementById("keterangan");
 
         // if lainnya dipilih
-        if (keperluanSurat.value == "9999"){
+        if (keperluanSurat.value == "7"){
             keterangan.style.display = "block";
         }
         else {
             keterangan.style.display = "none";
         }
     }
-// function suratKeteranganChange() {
-//     var jenisSuratKeterangan = document.getElementById("surat_jenis_surat_keterangan_id");
-//     var keterangan = document.getElementById("keterangan");
-//     var suratKeterangan = document.getElementById("surat_keterangan");
-//     var inputKeterangan = document.getElementById("input_keterangan");
-
-//     if(jenisSuratKeterangan.value == "2" ) {
-//             keterangan.style.display = "block";
-//             inputKeterangan.placeholder = "Tuliskan nama usaha dan alamat lengkap..";
-//     }
-//     else if (jenisSuratKeterangan.value == "5"){
-//         keterangan.style.display = "block";
-//         inputKeterangan.placeholder = "Tuliskan barang yang hilang..";
-//     }
-//     else {
-//         keterangan.style.display = "none";
-//     }
-// }
 </script>
 @endpush

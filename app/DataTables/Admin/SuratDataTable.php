@@ -24,12 +24,9 @@ class SuratDataTable extends DataTable
         ->addIndexColumn()
         ->addColumn('action', function ($row) {
             $btn = '<div class="btn-group">';
-            $btn = $btn . '<a class="btn btn-info"><i class="fas fa-info-circle text-white"></i></a>';
+            $btn = $btn . '<a class="info btn btn-info"><i class="fas fa-info-circle text-white"></i></a>';
             $btn = $btn . '<a href="' . route('admin.surat.edit', $row->id) . '" class="btn btn-dark buttons-edit"><i class="fas fa-edit"></i></a>';
             $btn = $btn . '<a href="' . route('admin.surat.destroy', $row->id) . '" class="btn btn-danger buttons-delete"><i class="fas fa-trash fa-fw"></i></a>';
-            // $btn = $btn . '<form action="' . route('admin.surat.verifikasi', $row->id) .'" method="POST" name="form-wizard" class="form-control-with-bg"  data-parsley-validate="true" enctype="multipart/form-data">
-            // '.@csrf_field();
-            // $btn = $btn . '<button type="submit" class="btn btn-warning buttons-info"><i class="fas fa-check fa-fw"></i></buttton>';
             $btn = $btn . '</div>';
             return $btn;
         })
@@ -38,6 +35,12 @@ class SuratDataTable extends DataTable
         })
         ->editColumn('tanggal_pengajuan', function($row){
             return $row->tanggal_pengajuan->isoFormat('DD MMMM YYYY');
+        })
+        ->editColumn('keperluan_surat_id', function($row){
+            if($row->keperluan_surat_id == '7'){
+                return $row->keterangan;
+            }
+            return $row->keperluan_surat->nama;
         });
     }
 
@@ -84,7 +87,7 @@ class SuratDataTable extends DataTable
                         // 1. Dapatkan instance datatable di javascript
                         let table = this.api();
 
-                        $("#surat-table").on("click", "td.details-control", function(){
+                        $("#surat-table").on("click", ".info", function(){
 
                         // 2. dapatkan elemen `tr` yang mewakili baris dari ikon yang diklik
                         let tr = $(this).closest("tr");
@@ -121,7 +124,7 @@ class SuratDataTable extends DataTable
             Column::make('DT_RowIndex')->title('No')->orderable(false)->searchable(false)->addClass('text-center'),
             Column::make('nomor_surat'),
             Column::make('warga_id')->data('warga.nama')->title('Warga'),
-            Column::make('keperluan_surat_id')->data('keperluan_surat.nama')->title('Jenis Surat'),
+            Column::make('keperluan_surat_id')->title('Keperluan'),
             Column::make('tanggal_pengajuan'),
             Column::make('status')->data('status_surat.nama'),
             Column::computed('action')

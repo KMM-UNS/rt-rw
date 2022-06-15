@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Models\App;
 use App\Models\Surat;
 use App\Models\Warga;
 use App\Models\Keluarga;
@@ -15,8 +16,8 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\JenisSuratKeterangan;
 use App\Http\Requests\Admin\SuratForm;
-use HnhDigital\LaravelNumberConverter\Facade as NumConvert;
 use Barryvdh\DomPDF\Facade\Pdf as PDFCetak;
+use HnhDigital\LaravelNumberConverter\Facade as NumConvert;
 
 class SuratController extends Controller
 {
@@ -27,16 +28,25 @@ class SuratController extends Controller
 
     public function index()
     {
+
         // mengambil data keluarga yang login
         $keluarga = Keluarga::where('createable_id', auth()->user()->id)->where('createable_type', 'App\Models\User')->with('rumah')->first();
-        $warga = Warga::where('keluarga_id', $keluarga->id)->get();
-        // dd($warga);
-        $data = Surat::where('createable_id', auth()->user()->id)->where('createable_type', 'App\Models\User')->get();
-        return view('pages.user.surat.index', [
-            'keluarga' => $keluarga,
-            'warga' => $warga,
-            'data' => $data,
-        ]);
+        if ($keluarga == null)
+        {
+            return view('pages.user.surat.index', [
+                'keluarga' => $keluarga,
+            ]);
+        }
+        else {
+            $warga = Warga::where('keluarga_id', $keluarga->id)->get();
+            // dd($warga);
+            $data = Surat::where('createable_id', auth()->user()->id)->where('createable_type', 'App\Models\User')->get();
+            return view('pages.user.surat.index', [
+                'keluarga' => $keluarga,
+                'warga' => $warga,
+                'data' => $data,
+            ]);
+        }
     }
 
     public function create()
@@ -99,8 +109,13 @@ class SuratController extends Controller
     public function cetak($id)
     {
         $surat = Surat::where('createable_id', auth()->user()->id)->where('createable_type', 'App\Models\User')->findOrFail($id);
+        $app = App::first();
+        // dd($app->dokumen->where('nama', 'ttd_rw'));
         $pdf = PDFCetak::loadview('pages.admin.surat.cetak', [
-            'surat' => $surat
+            'surat' => $surat,
+            'app' => $app,
+            'ttd_rt'=> $app->dokumen->where('nama', 'ttd_rt'),
+            'ttd_rw'=> $app->dokumen->where('nama', 'ttd_rw')
         ]);
         return $pdf->download('cetak_' . $surat->nomor_surat . '.pdf');
     }

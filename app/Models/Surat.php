@@ -30,11 +30,17 @@ class Surat extends Model
 
     protected $dates = [
         'tanggal_pengajuan',
+        'tanggal_disetujui'
     ];
 
     public function setTanggalPengajuanAttribute($value)
     {
         $this->attributes['tanggal_pengajuan'] = Carbon::createFromFormat('Y-m-d', $value);
+    }
+
+    public function setTanggalDisetujuiAttribute($value)
+    {
+        $this->attributes['tanggal_disetujui'] = Carbon::createFromFormat('Y-m-d', $value);
     }
 
     public function warga()
