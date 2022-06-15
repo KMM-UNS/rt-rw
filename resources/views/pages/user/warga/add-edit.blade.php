@@ -80,7 +80,7 @@
                                       </div>
                                   </div>
                                   <div class="col-md-2 my-auto">
-                                      <label for="alamat"><strong>Alamat</strong></label>
+                                      <label for="alamat"><strong>Alamat</strong><sup> sesuai KTP</sup></label>
                                   </div>
                                   <div class="col-md-4">
                                       <div class="input-group mb-2">

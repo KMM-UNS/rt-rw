@@ -2,6 +2,8 @@
 
 namespace App\Constants;
 
+use Illuminate\Validation\Rule;
+
 class RequestRuleConstant
 {
     public static function userTable()
@@ -70,14 +72,7 @@ class RequestRuleConstant
             'shipper_address' => 'nullable',
             ];
     }
-    
-    public static function settingTable()
-    {
-        return [
-            'name' => 'required|unique:settings,name,' . request()->route('setting') . 'id',
-            'value' => 'required'
-        ];
-    }
+
 
     public static function adminTable()
     {
@@ -111,7 +106,7 @@ class RequestRuleConstant
     public static function wargaTable()
     {
         return [
-            'warga_nik' => 'required|unique:warga,nik|max:16',
+            'warga_nik' => 'required|min:16|max:16',
             'warga_nama' => 'required',
             'warga_jenis_kelamin' => 'required',
             'warga_agama_id' => 'required',
@@ -131,7 +126,7 @@ class RequestRuleConstant
     public static function keluargaTable()
     {
         return [
-            'keluarga_no_kk' => 'required|unique:keluarga,no_kk|max:16',
+            'keluarga_no_kk' => 'required|min:16|max:16',
             'keluarga_kepala_keluarga' => 'required',
             'keluarga_rumah_id' => 'required',
             'keluarga_telp' => 'required'
@@ -145,6 +140,6 @@ class RequestRuleConstant
             'surat_warga_id' => 'required'
         ];
     }
-    
-    
+
+
 }
