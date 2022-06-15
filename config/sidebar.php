@@ -15,7 +15,7 @@ return [
     'menu' => [
         [
             'icon' => 'fa fa-th-large',
-            'title' => 'Dashboard',
+            'title' => 'Dasbor',
             'url' => '/admin/dashboard',
             'caret' => false
         ],
@@ -44,7 +44,7 @@ return [
             'caret' => false
         ],
         [
-            'icon' => 'fa fa-cogs',
+            'icon' => 'fa fa-shield-alt',
             'title' => 'Ronda',
             'url' => 'javascript:;',
             'caret' => true,
@@ -60,15 +60,15 @@ return [
             ]
         ],
         [
-            'icon' => 'fa fa-users',
-            'title' => 'Pengguna',
-            'url' => '/admin/users',
+            'icon' => 'fa fa-pencil-alt',
+            'title' => 'Kritik Saran',
+            'url' => '/admin/kritik-saran',
             'caret' => false,
         ],
         [
             'icon' => 'fa fa-users',
-            'title' => 'Admin',
-            'url' => '/admin/admin',
+            'title' => 'Pengguna',
+            'url' => '/admin/users',
             'caret' => false,
         ],
         [
@@ -87,6 +87,9 @@ return [
                     'url' => '/admin/master-data/golongan-darah',
                     'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Golongan Darah'
                 ], [
+                    'url' => '/admin/master-data/keperluan-surat',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Keperluan Surat'
+                ],[
                     'url' => '/admin/master-data/pekerjaan',
                     'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Pekerjaan'
                 ], [
@@ -117,23 +120,17 @@ return [
             ]
         ],
         [
-            'icon' => 'fa fa-cogs',
-            'title' => 'Master Surat',
-            'url' => 'javascript:;',
-            'caret' => true,
-            'sub_menu' => [
-                [
-                    'url' => '/admin/master-data/keperluan-surat',
-                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Keperluan Surat'
-                ],
-            ]
-        ]
+            'icon' => 'fa fa-server',
+            'title' => 'Aplikasi',
+            'url' => '/admin/master-data/aplikasi',
+            'caret' => false,
+        ],
     ],
 
     'menu_user' => [
         [
             'icon' => 'fa fa-th-large',
-            'title' => 'Dashboard',
+            'title' => 'Dasbor',
             'url' => '/user',
             'caret' => false
         ], [
@@ -150,11 +147,6 @@ return [
             'icon' => 'fa fa-envelope',
             'title' => 'Surat',
             'url' => '/user/surat',
-            'caret' => false
-        ], [
-            'icon' => 'fa fa-sign-out-alt',
-            'title' => 'Logout',
-            'url' => '#',
             'caret' => false
         ]
     ],

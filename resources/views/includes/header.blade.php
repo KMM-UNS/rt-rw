@@ -149,18 +149,17 @@ $headerTopMenu = !empty($headerTopMenu) ? $headerTopMenu : '';
         @endisset
         <li class="dropdown navbar-user">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="/assets/img/user/user-13.jpg" alt="" />
+                <img src="/assets/img/user/user-12.jpg" alt="" />
                 @auth
                 <span class="d-none d-md-inline">{{ Auth::user()->name }}</span> <b class="caret"></b>
                 @endauth
             </a>
             <div class="dropdown-menu dropdown-menu-right">
-                <a href="javascript:;" class="dropdown-item">Edit Profile</a>
-                <a href="javascript:;" class="dropdown-item">Change Password</a>
+                <a href="{{ url('/edit-profile') }}" class="dropdown-item">Ubah Profil</a>
                 <div class="dropdown-divider"></div>
                 <form action="{{ route('logout') }}" method="post" redirect="/">
                     @csrf
-                    <button type="submit" class="dropdown-item">Log Out</button>
+                    <button type="submit" class="dropdown-item">Keluar</button>
                 </form>
             </div>
         </li>

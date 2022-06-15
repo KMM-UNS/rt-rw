@@ -33,7 +33,7 @@
 			<form action="{{ route('login') }}" method="POST" class="margin-bottom-0">
 				@csrf
 				<div class="form-group m-b-15">
-					<input id="email" type="email" class="form-control form-control-lg @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Email" autofocus />
+					<input id="email" type="email" class="form-control form-control-lg @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Surel" autofocus />
 
 					@error('email')
 					<span class="invalid-feedback" role="alert">
@@ -42,7 +42,7 @@
 					@enderror
 				</div>
 				<div class="form-group m-b-15">
-					<input id="password" type="password" class="form-control form-control-lg @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password" />
+					<input id="password" type="password" class="form-control form-control-lg @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Kata Sandi" />
 
 					@error('password')
 					<span class="invalid-feedback" role="alert">
@@ -54,11 +54,11 @@
 				<div class="checkbox checkbox-css m-b-30">
 					<input type="checkbox" id="remember_me_checkbox" value="" />
 					<label for="remember_me_checkbox">
-						Remember Me
+						Ingat Saya
 					</label>
 				</div>
 				<div class="login-buttons">
-					<button type="submit" class="btn btn-success btn-block btn-lg">Login</button>
+					<button type="submit" class="btn btn-success btn-block btn-lg">Masuk</button>
 				</div>
 				@if(!request()->routeIs('admin*'))
 				<p>

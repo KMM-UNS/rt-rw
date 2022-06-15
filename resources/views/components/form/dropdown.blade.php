@@ -9,9 +9,6 @@
     <option value="{{ $key }}" {{ (isset($selected) && $selected == $key) ? 'selected' : null }}>{{ $option }}</option>
     @endif
     @endforeach
-    @if($name == "surat_keperluan_surat_id")
-    <option value="9999" {{ (isset($selected) && $selected == $key) ? 'selected' : null }}>Lainnya. . .</option>
-    @endif
 </select>
 
 @push('css')
