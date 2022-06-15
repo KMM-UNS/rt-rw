@@ -6,6 +6,8 @@ use App\Charts\Admin\GenderChart;
 use App\Charts\Admin\PekerjaanChart;
 use App\Charts\Admin\PendidikanChart;
 use App\Http\Controllers\Controller;
+use App\Models\App;
+use App\Models\JadwalRonda;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -17,7 +19,24 @@ class DashboardController extends Controller
      */
     public function index(GenderChart $genderChart, PendidikanChart $pendidikanChart, PekerjaanChart $pekerjaanChart)
     {
+        $minggu = JadwalRonda::with(['warga'])->where('hari_id', '1')->get();
+        $senin = JadwalRonda::with(['warga'])->where('hari_id', '2')->get();
+        $selasa = JadwalRonda::with(['warga'])->where('hari_id', '3')->get();
+        $rabu = JadwalRonda::with(['warga'])->where('hari_id', '4')->get();
+        $kamis = JadwalRonda::with(['warga'])->where('hari_id', '5')->get();
+        $jumat = JadwalRonda::with(['warga'])->where('hari_id', '6')->get();
+        $sabtu = JadwalRonda::with(['warga'])->where('hari_id', '7')->get();
+        // dd($jadwal);
+        $app = App::first();
         return view('pages.admin.dashboard', [
+            'minggu' => $minggu,
+            'senin' => $senin,
+            'selasa' => $selasa,
+            'rabu' => $rabu,
+            'kamis' => $kamis,
+            'jumat' => $jumat,
+            'sabtu' => $sabtu,
+            'app' => $app,
             'genderChart' => $genderChart->build(),
             'pendidikanChart' => $pendidikanChart->build(),
             'pekerjaanChart' => $pekerjaanChart->build()

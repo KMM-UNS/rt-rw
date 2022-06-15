@@ -8,13 +8,77 @@
 @endpush
 
 @section('content')
-<h1 class="page-header mb-3 text-center">Statistik Warga</h1>
+<h1 class="page-header mb-1 text-center">{{ isset($app) ? $app->nama : 'Perumahan'}}</h1>
+<p class="text-center fw-normal m-0" style="font-size: 16px;">{{ isset($app) ? "RT {$app->rt} RW {$app->rw} Kelurahan {$app->kelurahan} Kecamatan {$app->kecamatan}" : 'RT RW Kelurahan Kecamatan'}}</p>
+<p class="text-center fw-normal m-0" style="font-size: 16px;">
+    {{ isset($app) ? "Kabupaten/Kota {$app->kabupaten} Provinsi {$app->provinsi}" : ' Kabupaten/Kota Provinsi'}}
+</p>
 
-<div class="row">
+<div class="row mt-3">
     <div class="col-xl-8">
-        <div class="card border-0 bg-white text-white mb-3 overflow-hidden">
+        <div class="card border-0 bg-white mb-3 overflow-hidden">
+            <div class="card-title mt-3 mb-1 text-center">
+                <h4>Jadwal Ronda</h4>
+            </div>
             <div class="card-body">
-
+                <table class="table table-bordered w-100">
+                    <tr>
+                        <th class="text-center">Minggu</th>
+                        @foreach ($minggu as $jadwal)
+                        <td>
+                            {{ $jadwal->warga->nama }}
+                        </td>
+                        @endforeach
+                    </tr>
+                    <tr>
+                        <th class="text-center">Senin</th>
+                        @foreach ($senin as $jadwal)
+                        <td>
+                            {{ $jadwal->warga->nama }}
+                        </td>
+                        @endforeach
+                    </tr>
+                    <tr>
+                        <th class="text-center">Selasa</th>
+                        @foreach ($selasa as $jadwal)
+                        <td>
+                            {{ $jadwal->warga->nama }}
+                        </td>
+                        @endforeach
+                    </tr>
+                    <tr>
+                        <th class="text-center">Rabu</th>
+                        @foreach ($rabu as $jadwal)
+                        <td>
+                            {{ $jadwal->warga->nama }}
+                        </td>
+                        @endforeach
+                    </tr>
+                    <tr>
+                        <th class="text-center">Kamis</th>
+                        @foreach ($kamis as $jadwal)
+                        <td>
+                            {{ $jadwal->warga->nama }}
+                        </td>
+                        @endforeach
+                    </tr>
+                    <tr>
+                        <th class="text-center">Jumat</th>
+                        @foreach ($jumat as $jadwal)
+                        <td>
+                            {{ $jadwal->warga->nama }}
+                        </td>
+                        @endforeach
+                    </tr>
+                    <tr>
+                        <th class="text-center">Sabtu</th>
+                        @foreach ($sabtu as $jadwal)
+                        <td>
+                            {{ $jadwal->warga->nama }}
+                        </td>
+                        @endforeach
+                    </tr>
+                </table>
             </div>
         </div>
     </div>

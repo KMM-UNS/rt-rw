@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\BerandaController;
 use App\Http\Controllers\User\KeluargaController;
 use App\Models\Keluarga;
 use Illuminate\Support\Facades\Route;
@@ -16,18 +16,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return redirect('/admin');
-})->middleware('auth');
+
+Route::get('', function () {
+    return redirect(route('beranda.index'));
+});
+
+Route::get('admin', function () {
+    return redirect(route('admin.dashboard'));
+});
 
 Route::get('/token', function () {
     return csrf_token();
 });
 
+Route::resource('beranda', 'BerandaController');
 Route::get('/edit-profile', 'ProfileController@edit')->name('edit-profile');
 
-Route::group(['middleware' => 'auth:web', 'as' => 'user.'], function () {
-});
 
 Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
     require base_path('vendor/laravel/fortify/routes/routes.php');
@@ -38,7 +42,7 @@ Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
         Route::resource('/keluarga', 'KeluargaController');
         Route::group(['prefix' => '/surat', 'as' => 'surat.'], function () {
             Route::get('/cetak/{id}', 'SuratController@cetak')->name('cetak');
-            Route::resource('/', 'SuratController');
+            Route::resource('/', 'SuratController')->parameter('','surat');
         });
         Route::resource('/warga', 'WargaController');
 

@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     // require base_path('vendor/laravel/fortify/routes/routes.php');
 
-    Route::group(['namespace' => 'Admin', 'middleware' => ['role:admin|manager']], function () {
+    Route::group(['namespace' => 'Admin', 'middleware' => ['role:admin|ketua_rt|ketua_rw|sekretaris_rt']], function () {
         Route::get('/', function () {
             return redirect(route('admin.dashboard'));
         });
@@ -18,16 +18,17 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
         Route::resource('/admin', 'AdminController');
         Route::resource('/user', 'UserController');
+        Route::resource('/kritik-saran', 'KritikSaranController');
 
         Route::group(['prefix' => '/surat', 'as' => 'surat.'], function () {
             Route::get('/cetak/{id}', 'SuratController@cetak')->name('cetak');
-            Route::resource('/', 'SuratController');
+            Route::resource('/', 'SuratController')->parameter('', 'surat');
             Route::post('verifikasi/{id}', 'SuratController@verifikasi')->name('verifikasi');
         });
         Route::resource('rumah', 'RumahController');
         Route::resource('warga', 'WargaController');
         Route::group(['prefix' => '/keluarga', 'as' => 'keluarga.'], function () {
-            Route::resource('/', 'KeluargaController');
+            Route::resource('/', 'KeluargaController')->parameter('','keluarga');
             Route::post('pindah/{id}', 'KeluargaController@pindah')->name('pindah');
         });
 
@@ -36,8 +37,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
             Route::resource('/presensi', 'PresensiRondaController');
         });
 
-        Route::group(['prefix' => '/master-data', 'as' => 'master-data.', 'namespace' => 'Master'], function () {
+        Route::group(['prefix' => '/master-data', 'as' => 'master-data.', 'namespace' => 'Master', ], function () {
             Route::resource('agama', 'AgamaController');
+            Route::resource('aplikasi', 'AppController');
             Route::resource('pekerjaan', 'PekerjaanController');
             Route::resource('status-kawin', 'StatusKawinController');
             Route::resource('pendidikan', 'PendidikanController');
