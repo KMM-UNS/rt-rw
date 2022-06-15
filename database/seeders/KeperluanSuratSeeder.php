@@ -20,6 +20,9 @@ class KeperluanSuratSeeder extends Seeder
             'Surat Keterangan Kelakuan Baik',
         	'Surat Pengantar Nikah',
             'Surat Keterangan Tidak Mampu',
+            'Persyaratan Pembuatan SKCK',
+            'Surat Keterangan Domisili',
+            'Lainnya. . .',
         ];
 
         foreach ($keperluan_surats as $keperluan_surat) :
