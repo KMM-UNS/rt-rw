@@ -6,8 +6,16 @@ return [
             'users' => 'c,r,u,d',
             'profile' => 'c,r,u,d'
         ],
-        'manager' => [
-            'users' => 'c,r',
+        'ketua_rt' => [
+            'users' => 'c,r,u,d',
+            'profile' => 'r,u'
+        ],
+        'ketua_rw' => [
+            'users' => 'c,r,u,d',
+            'profile' => 'r,u'
+        ],
+        'sekretaris_rt' => [
+            'users' => 'c,r,u,d',
             'profile' => 'r,u'
         ],
         'regular_user' => [
