@@ -24,9 +24,8 @@ class PresensiRondaDataTable extends DataTable
         ->addIndexColumn()
         ->addColumn('action', function ($row) {
             $btn = '<div class="btn-group">';
-            $btn = $btn . '<a href="' . route('admin.keluarga.show', $row->id) . '" class="btn btn-primary buttons-info"><i class="fas fa-info fa-fw"></i></a>';
-            $btn = $btn . '<a href="' . route('admin.keluarga.edit', $row->id) . '" class="btn btn-dark buttons-edit"><i class="fas fa-edit"></i></a>';
-            $btn = $btn . '<a href="' . route('admin.keluarga.destroy', $row->id) . '" class="btn btn-danger buttons-delete"><i class="fas fa-trash fa-fw"></i></a>';
+            $btn = $btn . '<a href="' . route('admin.ronda.presensi.edit', $row->id) . '" class="btn btn-dark buttons-edit"><i class="fas fa-edit"></i></a>';
+            $btn = $btn . '<a href="' . route('admin.ronda.presensi.destroy', $row->id) . '" class="btn btn-danger buttons-delete"><i class="fas fa-trash fa-fw"></i></a>';
             $btn = $btn . '</div>';
             return $btn;
         })
@@ -43,7 +42,7 @@ class PresensiRondaDataTable extends DataTable
      */
     public function query(PresensiRonda $model)
     {
-        return $model->newQuery()->with(['hari', 'warga']);
+        return $model->newQuery()->with(['hari', 'jadwal.warga']);
     }
 
     /**
@@ -83,7 +82,7 @@ class PresensiRondaDataTable extends DataTable
             Column::make('DT_RowIndex')->title('No')->orderable(false)->searchable(false)->addClass('text-center'),
             Column::make('hari_id')->data('hari.nama')->title('Hari'),
             Column::make('tanggal'),
-            Column::make('warga_id')->data('warga.nama')->title('Nama Warga'),
+            Column::make('warga_id')->data('jadwal.warga.nama')->title('Nama Warga'),
             Column::make('kehadiran'),
             Column::computed('action')
                   ->exportable(false)

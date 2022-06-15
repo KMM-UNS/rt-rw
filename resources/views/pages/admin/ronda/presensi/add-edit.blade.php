@@ -50,11 +50,11 @@
                             </div>
                         </div>
                         <div class="col-md-1 my-auto">
-                            <label for="warga_id"><strong>Warga</strong></label>
+                            <label for="jadwal_id"><strong>Warga</strong></label>
                         </div>
                         <div class="col-md-5">
                             <div class="input-group">
-                                <x-form.Dropdown name="presensi_ronda_warga_id" :options="$warga" selected="{{{ old('presensi_ronda_warga_id') ?? ($data['warga_id'] ?? null) }}}" required />
+                                <x-form.Dropdown name="presensi_ronda_jadwal_id" :options="$jadwal" selected="{{{ old('presensi_ronda_jadwal_id') ?? ($data['jadwal_id'] ?? null) }}}" required />
                             </div>
                         </div>
                     </div>

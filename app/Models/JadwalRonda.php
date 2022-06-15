@@ -26,6 +26,11 @@ class JadwalRonda extends Model
         return $this->belongsTo(Hari::class);
     }
 
+    public function presensi()
+    {
+        return $this->hasMany(PresensiRonda::class);
+    }
+
     public function warga()
     {
         return $this->belongsTo(Warga::class);

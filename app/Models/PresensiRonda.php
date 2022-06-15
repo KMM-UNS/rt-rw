@@ -16,7 +16,7 @@ class PresensiRonda extends Model
 
     protected $table = 'presensi_ronda';
     protected $fillable = [
-        'warga_id',
+        'jadwal_id',
         'hari_id',
         'tanggal',
         'kehadiran'
@@ -31,9 +31,9 @@ class PresensiRonda extends Model
         return $this->belongsTo(Hari::class);
     }
 
-    public function warga()
+    public function jadwal()
     {
-        return $this->belongsTo(Warga::class);
+        return $this->belongsTo(JadwalRonda::class);
     }
 
     public function setTanggalAttribute($value)

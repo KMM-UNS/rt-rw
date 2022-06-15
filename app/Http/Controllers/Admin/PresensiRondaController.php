@@ -9,20 +9,22 @@ use App\Models\PresensiRonda;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\DataTables\Admin\PresensiRondaDataTable;
+use App\Models\JadwalRonda;
 
 class PresensiRondaController extends Controller
 {
     public function index(PresensiRondaDataTable $dataTable)
     {
-        return $dataTable->render('pages.admin.ronda.jadwal.index');
+        return $dataTable->render('pages.admin.ronda.presensi.index');
     }
 
     public function create()
     {
-        $warga = Warga::where('status_keluarga_id', "1")->pluck('nama', 'id');
+        $jadwal = JadwalRonda::with('warga:id,nama')->get()->pluck('warga.nama', 'id');
+        // dd($jadwal);
         $hari = Hari::pluck('nama', 'id');
         return view('pages.admin.ronda.presensi.add-edit', [
-            'warga' => $warga,
+            'jadwal' => $jadwal,
             'hari' => $hari,
         ]);
     }

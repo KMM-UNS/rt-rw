@@ -15,7 +15,7 @@ class CreatePresensiRondaTable extends Migration
     {
         Schema::create('presensi_ronda', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('warga_id');
+            $table->bigInteger('jadwal_id');
             $table->bigInteger('hari_id');
             $table->date('tanggal');
             $table->string('kehadiran');

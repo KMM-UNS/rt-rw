@@ -24,9 +24,8 @@ class JadwalRondaDataTable extends DataTable
             ->addIndexColumn()
             ->addColumn('action', function ($row) {
                 $btn = '<div class="btn-group">';
-                $btn = $btn . '<a href="' . route('admin.keluarga.show', $row->id) . '" class="btn btn-primary buttons-info"><i class="fas fa-info fa-fw"></i></a>';
-                $btn = $btn . '<a href="' . route('admin.keluarga.edit', $row->id) . '" class="btn btn-dark buttons-edit"><i class="fas fa-edit"></i></a>';
-                $btn = $btn . '<a href="' . route('admin.keluarga.destroy', $row->id) . '" class="btn btn-danger buttons-delete"><i class="fas fa-trash fa-fw"></i></a>';
+                $btn = $btn . '<a href="' . route('admin.ronda.jadwal.edit', $row->id) . '" class="btn btn-dark buttons-edit"><i class="fas fa-edit"></i></a>';
+                $btn = $btn . '<a href="' . route('admin.ronda.jadwal.destroy', $row->id) . '" class="btn btn-danger buttons-delete"><i class="fas fa-trash fa-fw"></i></a>';
                 $btn = $btn . '</div>';
                 return $btn;
             });
