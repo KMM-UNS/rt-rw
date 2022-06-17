@@ -9,6 +9,7 @@ use App\Models\KasIuranSukaRela;
 use Illuminate\Http\Request;
 use App\Models\KasIuranWajib;
 use App\Models\ManajemenPemasukan;
+use App\Models\ManajemenPengeluaran;
 use App\Models\Saldo;
 
 class DashboardController extends Controller
@@ -25,12 +26,15 @@ class DashboardController extends Controller
         $total_kondisional = KasIuranKondisional::sum('total_biaya');
         $total_sukarela = KasIuranSukaRela::sum('total_biaya');
         $pemasukannn = ManajemenPemasukan::sum('nominal');
+        $pengeluarannn = ManajemenPengeluaran::sum('nominal');
         $pemasukann = ManajemenPemasukan::all();
+        $pengeluarann = ManajemenPengeluaran::all();
         $saldoo = Saldo::all();
         $saldooo = Saldo::sum('saldo');
+        $pengeluaran = 0 + $pengeluarannn;
         $pemasukan = $total_agenda + $total_wajib + $total_kondisional + $total_sukarela + $pemasukannn;
-        $saldo =  $saldooo + $total_agenda + $total_wajib + $total_kondisional + $total_sukarela + $pemasukannn;
-        return view('pages.admin.dashboard', ['total_wajib' => $total_wajib, 'total_agenda' => $total_agenda, 'pemasukan' => $pemasukan, 'saldo' => $saldo, 'saldoo' => $saldoo, 'saldooo' => $saldooo, 'total_kondisional' => $total_kondisional, 'total_sukarela' => $total_sukarela, 'pemasukann' => $pemasukann, 'pemasukannn' => $pemasukannn]);
+        $saldo =  $saldooo + $total_agenda + $total_wajib + $total_kondisional + $total_sukarela + $pemasukannn - $pengeluarannn;
+        return view('pages.admin.dashboard', ['total_wajib' => $total_wajib, 'total_agenda' => $total_agenda, 'pemasukan' => $pemasukan, 'saldo' => $saldo, 'saldoo' => $saldoo, 'saldooo' => $saldooo, 'total_kondisional' => $total_kondisional, 'total_sukarela' => $total_sukarela, 'pemasukann' => $pemasukann, 'pemasukannn' => $pemasukannn, 'pengeluarann' => $pengeluarann, 'pengeluaran' => $pengeluaran, 'pengeluarannn' => $pengeluarannn]);
     }
 
     /**

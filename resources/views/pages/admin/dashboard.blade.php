@@ -30,6 +30,8 @@
     </div>
     <!-- end daterange-filter -->
     <!-- begin row -->
+
+
     <div class="row">
         <!-- begin col-6 -->
         <div class="col-xl-6">
@@ -209,7 +211,8 @@
                             <!-- end title -->
                             <!-- begin store-session -->
                             <div class="d-flex align-items-center mb-1">
-                                <h2 class="text-white mb-0"><span data-animation="number" data-value="70719">0</span></h2>
+                                <h2 class="text-white mb-0">Rp. <span data-animation="number"
+                                        data-value="{{ $pengeluarannn }}">0</span></h2>
                                 <div class="ml-auto">
                                     <div id="store-session-sparkline"></div>
                                 </div>
@@ -272,8 +275,13 @@
             </div>
             <!-- end row -->
         </div>
+
+
+
         <!-- end col-6 -->
     </div>
+
+
     <!-- end row -->
     <!-- begin row -->
     {{-- <div class="row">

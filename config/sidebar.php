@@ -157,6 +157,28 @@ return [
         ],
         [
             'icon' => 'fa fa-cogs',
+            'title' => 'Data Warga',
+            'url' => 'javascript:;',
+            'caret' => true,
+            'sub_menu' => [
+                [
+                    'url' => '/kepala-keluarga/bayar-iuranwajib',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Data Iuran Wajib'
+                ], [
+                    'url' => '/kas-rt/kas-iuransukarela',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Iuran Suka Rela'
+                ], [
+                    'url' => '/kas-rt/kas-iurankondisional',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Iuran Kondisional'
+                ], [
+                    'url' => '/kas-rt/kas-iuranagenda',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Iuran Agenda'
+                ],
+            ]
+        ],
+
+        [
+            'icon' => 'fa fa-cogs',
             'title' => 'Isi Data Kas RT',
             'url' => 'javascript:;',
             'caret' => true,

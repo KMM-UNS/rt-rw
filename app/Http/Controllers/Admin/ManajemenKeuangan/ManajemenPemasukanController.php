@@ -72,6 +72,7 @@ class ManajemenPemasukanController extends Controller
         $pemasukannn = ManajemenPemasukan::sum('nominal');
         $pemasukan = $total_agenda + $total_wajib + $total_kondisional + $total_sukarela + $pemasukannn;
         $pemasukann = ManajemenPemasukan::all();
+
         $pdf = PDF::loadView('pages.admin.manajemen-keuangan.manajemen-pemasukan.pemasukan_pdf', ['total_wajib' => $total_wajib, 'total_agenda' => $total_agenda, 'pemasukan' => $pemasukan, 'pemasukann' => $pemasukann, 'pemasukannn' => $pemasukannn, 'total_kondisional' => $total_kondisional, 'total_sukarela' => $total_sukarela,]);
         return $pdf->download('laporan-pemasukan.pdf');
     }

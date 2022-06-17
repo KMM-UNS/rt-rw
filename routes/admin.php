@@ -9,7 +9,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
     Route::group(['namespace' => 'Admin', 'middleware' => 'auth:admin'], function () {
         Route::get('/', function () {
-            return redirect(route('admin.dashboard'));
+            return redirect(route('admin.dashboard.index'));
         });
 
         // Route::view('/dashboard', 'pages.admin.dashboard')->name('dashboard');
@@ -69,6 +69,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
             Route::get('/manajemen-pengeluaran/cetak_pdf', 'ManajemenPengeluaranController@cetak_pdf');
             Route::resource('manajemen-pemasukan', 'ManajemenPemasukanController');
             Route::resource('manajemen-pengeluaran', 'ManajemenPengeluaranController');
+            Route::get('/manajemen-pengeluaran/{id}', 'ManajemenPengeluaranController@destroy');
         });
 
         // Route::get('export-rekapwajib', 'RekapIuranWajibController@export_rekapwajib');

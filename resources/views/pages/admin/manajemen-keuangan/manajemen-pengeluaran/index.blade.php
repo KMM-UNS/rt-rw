@@ -10,6 +10,7 @@
     <link href="{{ asset('/assets/plugins/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') }}"
         rel="stylesheet" />
     <!-- end datatables -->
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 @endpush
 
 @section('content')
@@ -59,6 +60,8 @@
                 <table border="1" cellpadding="2" class="table">
                     <thead>
                         <tr>
+                            <th scope="col">Action</th>
+                            <th scope="col">Tanggal</th>
                             <th scope="col">Nominal</th>
                             <th scope="col">Keterangan</th>
 
@@ -66,25 +69,26 @@
                     </thead>
 
                     <tbody>
-                        {{-- <tr>
-                            <td>Kas Iuran Wajib</td>
-                            <td>Rp.</td>
 
-                        </tr>
-                        <tr>
-                            <td>Kas Iuran Kondisional</td>
-                            <td>Rp.</td>
-                        </tr>
-                        <tr>
-                            <td>Kas Iuran Sukarela</td>
-                            <td>Rp.</td>
-                        </tr>
-                        <tr>
-                            <td>Kas Iuran Agenda</td>
-                            <td>Rp.</td>
-                        </tr> --}}
                         @foreach ($pengeluarann as $item)
                             <tr>
+                                <td>
+                                    <div class="btn-group">
+                                        <a class="btn btn-primary"
+                                            href="{{ route('admin.manajemen-keuangan.manajemen-pengeluaran.edit', $item->id) }}">Edit</a>
+                                        <form
+                                            action="{{ route('admin.manajemen-keuangan.manajemen-pengeluaran.destroy', $item->id) }}"
+                                            method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-warning btn-sm"
+                                                onclick="return confirm('are you sure you want to delete this post')">
+                                                Delete
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                                <td>{{ $item->tanggal }}</td>
                                 <td>{{ $item->keterangan }}</td>
                                 <td>Rp.{{ $item->nominal }}</td>
                             </tr>
@@ -93,7 +97,9 @@
                     </tbody>
 
                     <td><b>Total</b></td>
-                    <td colspan="1"><b>Rp. {{ $pengeluarannn }}</b></td>
+                    <td></td>
+                    <td></td>
+                    <td colspan=""><b>Rp. {{ $pengeluarannn }}</b></td>
 
 
 
@@ -107,3 +113,7 @@
 
     <!-- end panel -->
 @endsection
+
+@push('scripts')
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+@endpush

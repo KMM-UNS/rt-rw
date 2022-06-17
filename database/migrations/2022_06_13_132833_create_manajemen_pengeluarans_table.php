@@ -15,6 +15,7 @@ class CreateManajemenPengeluaransTable extends Migration
     {
         Schema::create('manajemen_pengeluarans', function (Blueprint $table) {
             $table->id();
+            $table->date('tanggal');
             $table->string('keterangan');
             $table->string('nominal');
             $table->softDeletes();

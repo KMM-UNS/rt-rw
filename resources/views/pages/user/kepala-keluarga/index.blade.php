@@ -1,0 +1,121 @@
+@extends('layouts.user')
+
+@section('content')
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-11">
+                <div class="card">
+                    <div class="card-header">{{ __('Data Pembayaran') }}</div>
+
+                    <div class="card-body">
+                        @if (session('status'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('status') }}
+                            </div>
+                        @endif
+
+                        {{ __('Data Warga!') }}
+                        {{-- <h1>Data Warga</h1> --}}
+                        <table border="1" cellpadding="2" class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">No KK</th>
+                                    <th scope="col">Kepala Keluarga</th>
+                                    <th scope="col">Pos Tagihan</th>
+                                    <th scope="col">Telp</th>
+                                    <th scope="col">Status</th>
+
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                @foreach ($warga as $item)
+                                    <tr>
+                                        <td>{{ $item->no_kk }}</td>
+                                        <td>{{ $item->kepala_keluarga }}</td>
+                                        <td>{{ $item->pos->nama }}</td>
+                                        <td>{{ $item->telp }}</td>
+                                        <td>
+                                            {{-- <input data-id="{{ $item->id }}" class="toggle-class" type="checkbox"
+                                                data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
+                                                data-on="Active" data-off="Inactive" {{ $item->status ? 'checked' : '' }}> --}}
+
+                                            <input data-id="{{ $item->id }}" class="toggle-class" type="checkbox"
+                                                data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
+                                                data-on="Sudah Bayar" data-off="Belum Bayar"
+                                                {{ $item->status ? 'checked' : '' }}>
+                                        </td>
+
+                                        {{-- <td>
+                                            @if ($event->status == 0)
+                                                                <a
+                                                                    href="{{ route('update.status.event', [$event->id]) }}"><button
+                                                                        class="btn btn-danger"> Inactive</button></a>
+                                                            @else
+                                                                <a
+                                                                    href="{{ route('update.status.event', [$event->id]) }}"><button
+                                                                        class="btn btn-warning"> Active</button></a>
+                                                            @endif
+                                        </td> --}}
+                                    </tr>
+                                @endforeach
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@push('scripts')
+    <script>
+        // $(function() {
+        //     $('.toggle-class').change(function() {
+        //         var status = $(this).prop('checked') == true ? 1 : 0;
+        //         var id = $(this).data('id');
+
+        //         $.ajax({
+
+        //             type: "GET",
+        //             dataType: "json",
+        //             url: '/changeStatus',
+        //             data: {
+        //                 'status': status,
+        //                 'product_id': product_id
+        //             },
+        //             success: function(data) {
+        //                 console.log(data.success)
+        //             }
+        //         });
+
+
+        //     });
+        // })
+
+
+        $(function() {
+            $('.toggle-class').change(function() {
+                var status = $(this).prop('checked') == true ? 1 : 0;
+                var id = $(this).data('id');
+
+                $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    url: "admin/manajemen-keuangan/manajemen-pengeluaran/changeMemberStatus",
+                    data: {
+                        'status': status,
+                        'id': id
+                    },
+                    success: function(data) {
+                        console.log(data.success)
+                    }
+                });
+            })
+        });
+    </script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> --}}
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+@endpush

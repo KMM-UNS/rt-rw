@@ -15,6 +15,6 @@ class ManajemenPengeluaran extends Model
     public const ACTIVE = "aktif";
 
     protected $table = 'manajemen_pengeluarans';
-    protected $fillable = ['keterangan', 'nominal'];
+    protected $fillable = ['tanggal', 'keterangan', 'nominal'];
     public $timestamps = false;
 }

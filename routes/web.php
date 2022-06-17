@@ -20,9 +20,26 @@ Route::get('/token', function () {
 Route::group(['middleware' => 'auth:web', 'as' => 'user.'], function () {
     Route::view('/', 'home')->name('home');
 
+    // Route::get('/', function () {
+    //     return redirect(route('user.keluarga.index'));
+    // });
+    // // Route::resource('/', 'KeluargaController');
+
+
+    // Route::resource('/userdashboard', 'KeluargaController');
+
     Route::group(['namespace' => 'User'], function () {
         Route::group(['prefix' => '/petugas', 'as' => 'petugas', 'namespace' => 'PetugasIuran'], function () {
             Route::resource('petugas', 'PetugasController');
+        });
+
+        Route::group(['prefix' => '/kepala-keluarga', 'as' => 'kepala-keluarga.', 'namespace' => 'KepalaKeluarga'], function () {
+            // Route::get('bayar-iuranwajib', 'KeluargaaController');
+            Route::get('bayar-iuranwajib', 'KeluargaaController@changeMemberStatus');
+            Route::resource('bayar-iuranwajib', 'KeluargaaController');
+            // Route::resource('kas-iuransukarela', 'KasIuranSukaRelaController');
+            // Route::resource('kas-iurankondisional', 'KasIuranKondisionalController');
+            // Route::resource('kas-iuranagenda', 'KasIuranAgendaController');
         });
 
         Route::group(['prefix' => '/kas-rt', 'as' => 'kas-rt.', 'namespace' => 'KasRT'], function () {

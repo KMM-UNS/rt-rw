@@ -14,7 +14,7 @@ class PetugasController extends Controller
      */
     public function index()
     {
-        return view('pages.user.petugas.form');
+        return view('/', 'home')->name('home');
     }
 
     /**

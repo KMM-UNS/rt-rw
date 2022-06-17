@@ -22,4 +22,9 @@ class Pos extends Model
     {
         return $this->hasMany(Pos::class);
     }
+
+    public function keluarga()
+    {
+        return $this->hasMany(Keluarga::class);
+    }
 }

@@ -1,6 +1,6 @@
 @extends('layouts.default', ['topMenu' => true, 'sidebarHide' => true])
 
-@section('title', isset($data) ? 'Edit Kas Iuran Wajib' : 'Create Kas Iuran Wajib')
+@section('title', isset($data) ? 'Edit Manajemen Pengeluaran' : 'Create Manajemen Pengeluaran')
 
 @push('css')
     <link href="{{ asset('/assets/plugins/smartwizard/dist/css/smart_wizard.css') }}" rel="stylesheet" />
@@ -43,14 +43,19 @@
             <!-- begin panel-body -->
             <div class="panel-body">
                 <div class="form-group">
+                    <label for="tanggal">Keterangan</label>
+                    <input type="date" id="tanggal" name="tanggal" class="form-control" autofocus
+                        data-parsley-required="true" value="{{{ $data->tanggal ?? old('tanggal') }}}">
+                </div>
+                <div class="form-group">
                     <label for="keterangan">Keterangan</label>
                     <input type="text" id="keterangan" name="keterangan" class="form-control" autofocus
-                        data-parsley-required="true" value="keterangan">
+                        data-parsley-required="true" value="{{{ $data->keterangan ?? old('keterangan') }}}">
                 </div>
                 <div class="form-group">
                     <label for="nominal">Nominal</label>
                     <input type="text" id="nominal" name="nominal" class="form-control" autofocus
-                        data-parsley-required="true" value="keterangan">
+                        data-parsley-required="true" value="{{{ $data->nominal ?? old('nominal') }}}">
                 </div>
 
 
