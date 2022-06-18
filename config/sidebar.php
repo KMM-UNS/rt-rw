@@ -60,6 +60,12 @@ return [
             ]
         ],
         [
+            'icon' => 'fa fa-address-book',
+            'title' => 'Tamu',
+            'url' => '/admin/tamu',
+            'caret' => false
+        ],
+        [
             'icon' => 'fa fa-pencil-alt',
             'title' => 'Kritik Saran',
             'url' => '/admin/kritik-saran',
@@ -147,6 +153,11 @@ return [
             'icon' => 'fa fa-envelope',
             'title' => 'Surat',
             'url' => '/user/surat',
+            'caret' => false
+        ], [
+            'icon' => 'fa fa-address-book',
+            'title' => 'Tamu',
+            'url' => '/user/tamu',
             'caret' => false
         ]
     ],

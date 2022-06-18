@@ -43,4 +43,9 @@ class Keluarga extends Model
     {
         return $this->morphTo();
     }
+
+    public function tamu()
+    {
+        return $this->hasMany(Tamu::class);
+    }
 }

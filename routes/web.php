@@ -44,6 +44,7 @@ Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
             Route::get('/cetak/{id}', 'SuratController@cetak')->name('cetak');
             Route::resource('/', 'SuratController')->parameter('','surat');
         });
+        Route::resource('/tamu', 'TamuController');
         Route::resource('/warga', 'WargaController');
 
     });

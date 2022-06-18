@@ -26,6 +26,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
             Route::post('verifikasi/{id}', 'SuratController@verifikasi')->name('verifikasi');
         });
         Route::resource('rumah', 'RumahController');
+        Route::resource('tamu', 'TamuController');
         Route::resource('warga', 'WargaController');
         Route::group(['prefix' => '/keluarga', 'as' => 'keluarga.'], function () {
             Route::resource('/', 'KeluargaController')->parameter('','keluarga');

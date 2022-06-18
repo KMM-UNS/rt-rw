@@ -141,5 +141,17 @@ class RequestRuleConstant
         ];
     }
 
+    public static function tamuTable()
+    {
+        return [
+            'tamu_jumlah' => 'required|integer',
+            'tamu_nama' => 'required',
+            'tamu_alamat' => 'required',
+            'tamu_hubungan' => 'required',
+            'tamu_tanggal_tiba' => 'required',
+            'tamu_lama_menetap' => 'required|integer',
+            'tamu_keluarga_id' => 'required',
+        ];
+    }
 
 }
