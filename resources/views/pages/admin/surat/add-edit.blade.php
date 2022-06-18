@@ -100,7 +100,7 @@
     var keterangan = document.getElementById("keterangan");
 
         // if lainnya dipilih
-        if (keperluanSurat.value == "9999"){
+        if (keperluanSurat.value == "7"){
             keterangan.style.display = "block";
         }
         else {

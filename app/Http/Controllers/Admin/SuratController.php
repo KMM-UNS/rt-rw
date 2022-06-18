@@ -17,6 +17,7 @@ use Barryvdh\DomPDF\Facade\PDF;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\DataTables\Admin\SuratDataTable;
+use App\Http\Requests\Admin\SuratForm;
 use Barryvdh\DomPDF\Facade\Pdf as PDFCetak;
 use HnhDigital\LaravelNumberConverter\Facade as NumConvert;
 
@@ -142,9 +143,20 @@ class SuratController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(SuratForm $request, $id)
     {
-        //
+        $surat = Surat::findOrFail($id);
+        DB::transaction(function () use ($request, $surat) {
+            try {
+                $surat->updateFromRequest($request);
+                $surat->save();
+            } catch (\Throwable $th) {
+                dd($th);
+                DB::rollback();
+                return back()->withInput()->withToastError('Something what happen');
+            }
+        });
+        return redirect(route('admin.surat.index'))->withInput()->withToastSuccess('Data tersimpan');
     }
 
     /**
