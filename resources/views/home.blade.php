@@ -60,13 +60,6 @@
                         <li class="active dropdown">
                             <a href="#home" data-click="scroll-to-target" data-toggle="dropdown">Beranda</a>
                         </li>
-                        {{-- <li><a href="#about" data-click="scroll-to-target">ABOUT</a></li>
-                        <li><a href="#team" data-click="scroll-to-target">TEAM</a></li>
-                        <li><a href="#service" data-click="scroll-to-target">SERVICES</a></li>
-                        <li><a href="#work" data-click="scroll-to-target">WORK</a></li>
-                        <li><a href="#client" data-click="scroll-to-target">CLIENT</a></li>
-                        <li><a href="#pricing" data-click="scroll-to-target">PRICING</a></li>
-                        <li><a href="#contact" data-click="scroll-to-target">CONTACT</a></li> --}}
                         <li><a href='{{ route('user.') }}' class="scrollto">
                             @if (Auth::check())
                             Dashboard
@@ -94,12 +87,6 @@
                 <h1>Selamat Datang</h1>
                 <h3 class="mb-1">{{ isset($app) ? $app->nama : "Perumahan"  }}</h3>
                 <p class="text-center fw-normal" style="font-size: 16px;">{{ isset($app) ? "RT {$app->rt} RW {$app->rw}, Kelurahan {$app->kelurahan}, Kecamatan {$app->kecamatan}, Kabupaten/Kota {$app->kabupaten} Provinsi {$app->provinsi}" : 'RT RW Kelurahan Kecamatan Kabupaten/Kota Provinsi'}}</p>
-                {{-- <p class="text-center fw-normal" style="font-size: 16px;">
-                    {{ isset($app) ? "Kabupaten/Kota {$app->kabupaten} Provinsi {$app->provinsi}" : ' Kabupaten/Kota Provinsi'}}
-                </p> --}}
-                {{-- <a href="#" class="btn btn-theme">Explore More</a> <a href="#" class="btn btn-outline">Purchase Now</a><br />
-                <br />
-                or <a href="#">subscribe</a> newsletter --}}
             </div>
             <!-- end container -->
         </div>
@@ -115,7 +102,7 @@
                     <!-- begin col-3 -->
                     <div class="col-md-3 col-sm-3 milestone-col">
                         <div class="milestone">
-                            <div class="number" style="color:black;" data-animation="true" data-animation-type="number" data-final-number="{{ isset($warga) ? $warga : 0 }}">{{ isset($warga) ? $warga : 0 }}</div>
+                            <div class="number" style="color:black;"  data-animation-type="number" data-final-number="{{ isset($warga) ? $warga : 0 }}">{{ isset($warga) ? $warga : 0 }}</div>
                             <div class="title">Warga</div>
                         </div>
                     </div>
@@ -123,7 +110,7 @@
                     <!-- begin col-3 -->
                     <div class="col-md-3 col-sm-3 milestone-col">
                         <div class="milestone">
-                            <div class="number" style="color:black;" data-animation="true" data-animation-type="number" data-final-number="{{ isset($keluarga) ? $keluarga : 0 }}">{{ isset($keluarga) ? $keluarga : 0 }}</div>
+                            <div class="number" style="color:black;"  data-animation-type="number" data-final-number="{{ isset($keluarga) ? $keluarga : 0 }}">{{ isset($keluarga) ? $keluarga : 0 }}</div>
                             <div class="title">Keluarga</div>
                         </div>
                     </div>
@@ -131,7 +118,7 @@
                     <!-- begin col-3 -->
                     <div class="col-md-3 col-sm-3 milestone-col">
                         <div class="milestone">
-                            <div class="number" style="color:black;" data-animation="true" data-animation-type="number" data-final-number="{{ isset($rumah) ? $rumah : 0 }}">{{ isset($rumah) ? $rumah : 0 }}</div>
+                            <div class="number" style="color:black;"  data-animation-type="number" data-final-number="{{ isset($rumah) ? $rumah : 0 }}">{{ isset($rumah) ? $rumah : 0 }}</div>
                             <div class="title">Rumah</div>
                         </div>
                     </div>
@@ -139,7 +126,7 @@
                     <!-- begin col-3 -->
                     <div class="col-md-3 col-sm-3 milestone-col">
                         <div class="milestone">
-                            <div class="number" style="color:black;" data-animation="true" data-animation-type="number" data-final-number="{{ isset($surat) ? $surat : 0 }}">{{ isset($surat) ? $surat : 0 }}</div>
+                            <div class="number" style="color:black;"  data-animation-type="number" data-final-number="{{ isset($surat) ? $surat : 0 }}">{{ isset($surat) ? $surat : 0 }}</div>
                             <div class="title">Surat yang dikeluarkan</div>
                         </div>
                     </div>
@@ -162,9 +149,9 @@
                         <div class="div-title">
                             <h2>Contact Us</h2>
                         </div>
-                  
+
                         <div class="row mt-1 d-flex justify-content-start" data-aos="fade-right" data-aos-delay="100">
-                  
+
                             <div class="col-lg">
                               <div class="info">
                                 <div class="address">
@@ -172,21 +159,21 @@
                                   <h4>Alamat:</h4>
                                   <p>{{ isset($app) ? "RT {$app->rt} RW {$app->rw}, Kelurahan {$app->kelurahan}, Kecamatan {$app->kecamatan}, Kabupaten/Kota {$app->kabupaten} Provinsi {$app->provinsi}" : 'RT RW Kelurahan Kecamatan Kabupaten/Kota Provinsi'}}</p>
                                 </div>
-                  
+
                                 <div class="email">
                                   <i class="bi bi-envelope"></i>
                                   <h4>Email:</h4>
                                   <p>{{ isset($app) ? $app->email : 'mail@mail.com' }}</p>
                                 </div>
-                  
+
                                 <div class="phone">
                                   <i class="bi bi-phone"></i>
                                   <h4>Telefon :</h4>
                                   <p>{{ isset($app) ? $app->telepon : '08192829281' }}</p>
                                 </div>
-                  
+
                               </div>
-                  
+
                             </div>
                         </div>
                     </div>
@@ -198,7 +185,7 @@
                         <div class="card-body">
                             <form action="{{ route('beranda.store') }}" method="POST" style="font-size: 16px">
                                 @csrf
-                                <input type="text" id="tanggal" name="nama" class="form-control my-5" style="margin: 2rem 0 2rem 0; font-size: 14px;" autofocus data-parsley-required="true" value="{{{ old('nama') ??  null }}}" placeholder="Nama"> 
+                                <input type="text" id="tanggal" name="nama" class="form-control my-5" style="margin: 2rem 0 2rem 0; font-size: 14px;" autofocus data-parsley-required="true" value="{{{ old('nama') ??  null }}}" placeholder="Nama">
                                 <textarea class="form-control my-5" style="margin: 2rem 0 2rem 0; resize: none;font-size: 14px;" name="saran" id="saran" cols="30" rows="5" placeholder="Kritik/Saran"></textarea>
                                 <div class="mt-2 mb-2" style="float: right;">
                                     <button class="btn btn-success btn-sm" type="submit">Kirim</button>
