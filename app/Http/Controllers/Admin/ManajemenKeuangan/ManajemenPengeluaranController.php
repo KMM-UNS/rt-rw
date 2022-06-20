@@ -123,13 +123,7 @@ class ManajemenPengeluaranController extends Controller
         return redirect(route('admin.manajemen-keuangan.manajemen-pengeluaran.index'))->withToastSuccess('Data tersimpan');
     }
 
-    public function changeMemberStatus(Request $request)
-    {
-        $data = ManajemenPengeluaran::find($request->id);
-        $data->status = $request->status;
-        $data->save();
-        return response()->json(['success' => 'User status change successfully.']);
-    }
+
 
 
     /**

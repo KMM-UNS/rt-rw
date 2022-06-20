@@ -35,8 +35,12 @@ Route::group(['middleware' => 'auth:web', 'as' => 'user.'], function () {
 
         Route::group(['prefix' => '/kepala-keluarga', 'as' => 'kepala-keluarga.', 'namespace' => 'KepalaKeluarga'], function () {
             // Route::get('bayar-iuranwajib', 'KeluargaaController');
-            Route::get('bayar-iuranwajib', 'KeluargaaController@changeMemberStatus');
+
+            // Route::get('bayar-iuranwajib/status', 'KeluargaaController@changeMemberStatus');
+            Route::get('/update/status/{id}', 'KeluargaaController@status')->name('bayar-iuranwajib.status');
             Route::resource('bayar-iuranwajib', 'KeluargaaController');
+            Route::resource('warga', 'WargaController');
+
             // Route::resource('kas-iuransukarela', 'KasIuranSukaRelaController');
             // Route::resource('kas-iurankondisional', 'KasIuranKondisionalController');
             // Route::resource('kas-iuranagenda', 'KasIuranAgendaController');

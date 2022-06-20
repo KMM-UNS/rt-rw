@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\User\Warga;
+namespace App\Http\Controllers\User\KepalaKeluarga;
 
 use App\Http\Controllers\Controller;
 use App\Models\Keluarga;
 use App\Models\Pos;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class KeluargaController extends Controller
+class KepalaKeluargaController extends Controller
 {
 
     public function index()
@@ -21,7 +20,9 @@ class KeluargaController extends Controller
 
     public function create()
     {
-        //
+        $warga = Keluarga::all();
+        $pos_tagihan = Pos::pluck('nama', 'id');
+        return view('pages.user.kepala-keluarga.index', ['warga' => $warga, 'pos_tagihan' => $pos_tagihan]);
     }
 
 
@@ -37,7 +38,6 @@ class KeluargaController extends Controller
         // DB::table('keluargas')->where('id', $request->id)->update(['status' => $request->status]);
 
         $warga = Keluarga::find($request->id);
-
         $warga->status = $request->status;
         $warga->save();
         // return response()->json(['success' => 'User status change successfully.']);

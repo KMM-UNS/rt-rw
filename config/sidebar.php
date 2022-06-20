@@ -165,8 +165,8 @@ return [
                     'url' => '/kepala-keluarga/bayar-iuranwajib',
                     'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Data Iuran Wajib'
                 ], [
-                    'url' => '/kas-rt/kas-iuransukarela',
-                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Iuran Suka Rela'
+                    'url' => '/kepala-keluarga/warga',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;penampilan warga'
                 ], [
                     'url' => '/kas-rt/kas-iurankondisional',
                     'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Iuran Kondisional'

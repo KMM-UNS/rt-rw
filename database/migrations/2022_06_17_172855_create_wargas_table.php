@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKeluargasTable extends Migration
+class CreateWargasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,9 @@ class CreateKeluargasTable extends Migration
      */
     public function up()
     {
-        Schema::create('keluargas', function (Blueprint $table) {
+        Schema::create('wargas', function (Blueprint $table) {
             $table->id();
-            $table->string('no_kk');
-            $table->string('kepala_keluarga');
-            $table->string('pos_tagihan');
-            $table->string('telp');
-            $table->string('status');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -32,6 +26,6 @@ class CreateKeluargasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('keluargas');
+        Schema::dropIfExists('wargas');
     }
 }

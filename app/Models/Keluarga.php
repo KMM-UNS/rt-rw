@@ -16,7 +16,8 @@ class Keluarga extends Model
         'no_kk',
         'kepala_keluarga',
         'pos_tagihan',
-        'telp'
+        'telp',
+        'status'
     ];
 
     public function pos()

@@ -4,10 +4,9 @@ namespace App\Http\Controllers\User\KepalaKeluarga;
 
 use App\Http\Controllers\Controller;
 use App\Models\Keluarga;
-use App\Models\Pos;
 use Illuminate\Http\Request;
 
-class KeluargaaController extends Controller
+class WargaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +15,8 @@ class KeluargaaController extends Controller
      */
     public function index()
     {
-        $pos_tagihan = Pos::pluck('nama', 'id');
         $warga = Keluarga::all();
-        return view('pages.user.kepala-keluarga.index', ['pos_tagihan' => $pos_tagihan, 'warga' => $warga]);
+        return view('pages.user.kepala-keluarga.warga.index', ['warga' => $warga]);
     }
 
     /**
@@ -40,29 +38,15 @@ class KeluargaaController extends Controller
     public function store(Request $request)
     {
         $warga = Keluarga::all();
-        return redirect(route('user.kepala-keluarga.bayar-iuranwajib.index'))->withToastSuccess('Data tersimpan', ['warga' => $warga]);
+        return view('pages.user.home', ['keluarga' => $warga]);
     }
 
-    public function status($id)
-    {
-        // $warga = Keluarga::where('id', $id)->first();
-        // $status_sekarang = $warga->status;
-
-        // if ($status_sekarang == 1) {
-        //     Keluarga::where('id', $id)->update(['status' => 0]);
-        // } else {
-        //     Keluarga::where('id', $id)->update(['status' => 1]);
-        // }
-        // //   Session::flash('sukses','status berhasil di ubah');
-        // return redirect(route('user.kepala-keluarga.bayar-iuranwajib.index'));
-
-        $warga = Keluarga::find($id);
-        $warga->status = !$warga->status;
-        $warga->save();
-        return redirect()->back();
-        // return redirect(route('user.kepala-keluarga.bayar-iuranwajib.index'));
-    }
-
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function show($id)
     {
         //

@@ -24,6 +24,7 @@
                                     <th scope="col">Pos Tagihan</th>
                                     <th scope="col">Telp</th>
                                     <th scope="col">Status</th>
+                                    <th scope="col">Tanda</th>
 
                                 </tr>
                             </thead>
@@ -37,26 +38,24 @@
                                         <td>{{ $item->pos->nama }}</td>
                                         <td>{{ $item->telp }}</td>
                                         <td>
-                                            {{-- <input data-id="{{ $item->id }}" class="toggle-class" type="checkbox"
-                                                data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
-                                                data-on="Active" data-off="Inactive" {{ $item->status ? 'checked' : '' }}> --}}
-
+                                            @if ($item->status == 0)
+                                                <a
+                                                    href="{{ route('user.kepala-keluarga.bayar-iuranwajib.status', $item->id) }}">
+                                                    <button class="btn btn-danger">Belum Bayar</button></a>
+                                            @else
+                                                <a
+                                                    href="{{ route('user.kepala-keluarga.bayar-iuranwajib.status', $item->id) }}">
+                                                    <button class="btn btn-success">Sudah Bayar</button></a>
+                                            @endif
+                                        </td>
+                                        <td><label for=""
+                                                class="label {{ $item->status == 1 ? 'label-success' : 'label-danger' }}">{{ $item->status == 1 ? 'Aktif' : 'Tidak Aktif' }}</label>
+                                        </td>
+                                        {{-- <td>
                                             <input data-id="{{ $item->id }}" class="toggle-class" type="checkbox"
                                                 data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
                                                 data-on="Sudah Bayar" data-off="Belum Bayar"
                                                 {{ $item->status ? 'checked' : '' }}>
-                                        </td>
-
-                                        {{-- <td>
-                                            @if ($event->status == 0)
-                                                                <a
-                                                                    href="{{ route('update.status.event', [$event->id]) }}"><button
-                                                                        class="btn btn-danger"> Inactive</button></a>
-                                                            @else
-                                                                <a
-                                                                    href="{{ route('update.status.event', [$event->id]) }}"><button
-                                                                        class="btn btn-warning"> Active</button></a>
-                                                            @endif
                                         </td> --}}
                                     </tr>
                                 @endforeach
@@ -71,31 +70,7 @@
 @endsection
 
 @push('scripts')
-    <script>
-        // $(function() {
-        //     $('.toggle-class').change(function() {
-        //         var status = $(this).prop('checked') == true ? 1 : 0;
-        //         var id = $(this).data('id');
-
-        //         $.ajax({
-
-        //             type: "GET",
-        //             dataType: "json",
-        //             url: '/changeStatus',
-        //             data: {
-        //                 'status': status,
-        //                 'product_id': product_id
-        //             },
-        //             success: function(data) {
-        //                 console.log(data.success)
-        //             }
-        //         });
-
-
-        //     });
-        // })
-
-
+    {{-- <script>
         $(function() {
             $('.toggle-class').change(function() {
                 var status = $(this).prop('checked') == true ? 1 : 0;
@@ -115,7 +90,8 @@
                 });
             })
         });
-    </script>
+    </script> --}}
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> --}}
+
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 @endpush
