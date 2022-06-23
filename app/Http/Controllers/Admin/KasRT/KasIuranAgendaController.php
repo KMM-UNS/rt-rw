@@ -14,6 +14,8 @@ use App\Helpers\DataHelper;
 use App\Helpers\TrashHelper;
 use App\Helpers\FileUploaderHelper;
 use App\Http\Requests\Admin\IuranAgendaForm;
+use App\Models\Keluarga;
+use App\Models\Pos;
 use Illuminate\Support\Facades\DB;
 
 
@@ -30,7 +32,12 @@ class KasIuranAgendaController extends Controller
         $nama_petugas = PetugasTagihan::pluck('nama', 'id');
         $nama_bulan = Bulan::pluck('nama', 'id');
         $tahun = Tahun::pluck('nama', 'id');
-        return view('pages.admin.kas-rt.kasiuranagenda.add-edit', ['jenis_iuranagenda' => $jenis_iuranagenda,  'nama_petugas' => $nama_petugas, 'nama_bulan' => $nama_bulan, 'tahun' => $tahun]);
+        $pemberi = Keluarga::pluck('pemberi', 'id');
+        // $agenda->pos = $request->petugas;
+        // $pos = PetugasTagihan::where('petugas', $nama_petugas);
+        // $nama_pos->pos = $request->petugas;
+
+        return view('pages.admin.kas-rt.kasiuranagenda.add-edit', ['jenis_iuranagenda' => $jenis_iuranagenda,  'nama_petugas' => $nama_petugas, 'nama_bulan' => $nama_bulan, 'tahun' => $tahun, 'pemberi' => $pemberi]);
     }
 
     public function store(IuranAgendaForm $request, FileUploaderHelper $fileUploaderHelper)
@@ -38,6 +45,12 @@ class KasIuranAgendaController extends Controller
         DB::transaction(function () use ($request, $fileUploaderHelper) {
             try {
                 $agenda = KasIuranAgenda::createFromRequest($request);
+
+                $petugas = PetugasTagihan::select('pos')->where('id', $agenda->petugas)->first()->pos;
+
+                $pos = Pos::where('id', $petugas)->first()->nama;
+                // dd($pos);
+                $agenda->pos = $pos;
                 $agenda->save();
                 if ($request->file()) {
 
@@ -71,10 +84,12 @@ class KasIuranAgendaController extends Controller
         $nama_petugas = PetugasTagihan::pluck('nama', 'id');
         $nama_bulan = Bulan::pluck('nama', 'id');
         $tahun = Tahun::pluck('nama', 'id');
+        $pemberi = Keluarga::pluck('pemberi', 'id');
         return view('pages.admin.kas-rt.kasiuranagenda.add-edit', [
             'data' => $data,
             'jenis_iuranagenda' => $jenis_iuranagenda,
             'nama_petugas' => $nama_petugas,
+            'pemberi' => $pemberi,
             'nama_bulan' => $nama_bulan,
             'tahun' => $tahun,
             'dataHelper' => $dataHelper

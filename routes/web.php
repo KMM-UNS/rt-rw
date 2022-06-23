@@ -1,6 +1,8 @@
 <?php
 
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Warga\WargaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,33 +19,23 @@ Route::get('/token', function () {
     return csrf_token();
 });
 
+//versi asli
+
 Route::group(['middleware' => 'auth:web', 'as' => 'user.'], function () {
     Route::view('/', 'home')->name('home');
 
-    // Route::get('/', function () {
-    //     return redirect(route('user.keluarga.index'));
-    // });
-    // // Route::resource('/', 'KeluargaController');
-
-
-    // Route::resource('/userdashboard', 'KeluargaController');
-
     Route::group(['namespace' => 'User'], function () {
-        Route::group(['prefix' => '/petugas', 'as' => 'petugas', 'namespace' => 'PetugasIuran'], function () {
+        Route::group([
+            'prefix' => '/petugas', 'as' => 'petugas', 'namespace' => 'PetugasIuran',
+            'middleware' => ['auth', 'petugas']
+        ], function () {
             Route::resource('petugas', 'PetugasController');
         });
 
         Route::group(['prefix' => '/kepala-keluarga', 'as' => 'kepala-keluarga.', 'namespace' => 'KepalaKeluarga'], function () {
-            // Route::get('bayar-iuranwajib', 'KeluargaaController');
-
-            // Route::get('bayar-iuranwajib/status', 'KeluargaaController@changeMemberStatus');
             Route::get('/update/status/{id}', 'KeluargaaController@status')->name('bayar-iuranwajib.status');
             Route::resource('bayar-iuranwajib', 'KeluargaaController');
             Route::resource('warga', 'WargaController');
-
-            // Route::resource('kas-iuransukarela', 'KasIuranSukaRelaController');
-            // Route::resource('kas-iurankondisional', 'KasIuranKondisionalController');
-            // Route::resource('kas-iuranagenda', 'KasIuranAgendaController');
         });
 
         Route::group(['prefix' => '/kas-rt', 'as' => 'kas-rt.', 'namespace' => 'KasRT'], function () {
@@ -53,7 +45,68 @@ Route::group(['middleware' => 'auth:web', 'as' => 'user.'], function () {
             Route::resource('kas-iuranagenda', 'KasIuranAgendaController');
         });
     });
+
+    Route::group(['namespace' => 'Warga'], function () {
+        Route::group([
+            'prefix' => '/warga', 'as' => 'warga', 'namespace' => 'Warga',
+            'middleware' => ['auth', 'warga']
+        ], function () {
+            Route::resource('warga', 'WargaController');
+            Route::get('/hj', [WargaController::class, 'hj']);
+        });
+    });
 });
+
+
+
+//coba
+
+// Route::group(['namespace' => 'User'], function () {
+
+
+// Route::group([
+//     'prefix' => '/petugas', 'as' => 'petugas', 'namespace' => 'PetugasIuran',
+//     'middleware' => ['auth', 'petugas']
+// ], function () {
+//     Route::resource('petugas', 'PetugasController');
+// });
+
+// Route::group(['prefix' => '/kepala-keluarga', 'as' => 'kepala-keluarga.', 'namespace' => 'KepalaKeluarga'], function () {
+//     Route::get('/update/status/{id}', 'KeluargaaController@status')->name('bayar-iuranwajib.status');
+//     Route::resource('bayar-iuranwajib', 'KeluargaaController');
+//     Route::resource('warga', 'WargaController');
+// });
+
+// Route::group(['prefix' => '/kas-rt', 'as' => 'kas-rt.', 'namespace' => 'KasRT'], function () {
+//     Route::resource('kas-iuranwajib', 'KasIuranWajibController');
+//     Route::resource('kas-iuransukarela', 'KasIuranSukaRelaController');
+//     Route::resource('kas-iurankondisional', 'KasIuranKondisionalController');
+//     Route::resource('kas-iuranagenda', 'KasIuranAgendaController');
+// });
+
+
+// Route::group([
+//     'prefix' => '/warga', 'as' => 'warga', 'namespace' => 'Warga',
+//     'middleware' => ['auth', 'warga']
+// ], function () {
+//     Route::resource('warga', 'WargaController');
+// });
+
+// Route::group(['prefix' => '/kepala-keluarga', 'as' => 'kepala-keluarga.', 'namespace' => 'KepalaKeluarga'], function () {
+//     Route::get('/update/status/{id}', 'KeluargaaController@status')->name('bayar-iuranwajib.status');
+//     Route::resource('bayar-iuranwajib', 'KeluargaaController');
+//     Route::resource('warga', 'WargaController');
+// });
+
+// Route::group(['prefix' => '/kas-rt', 'as' => 'kas-rt.', 'namespace' => 'KasRT'], function () {
+//     Route::resource('kas-iuranwajib', 'KasIuranWajibController');
+//     Route::resource('kas-iuransukarela', 'KasIuranSukaRelaController');
+//     Route::resource('kas-iurankondisional', 'KasIuranKondisionalController');
+//     Route::resource('kas-iuranagenda', 'KasIuranAgendaController');
+// });
+
+// });
+// });
 
 
 require __DIR__ . '/demo.php';

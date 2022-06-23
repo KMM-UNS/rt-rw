@@ -16,9 +16,13 @@ class CreateKeluargasTable extends Migration
         Schema::create('keluargas', function (Blueprint $table) {
             $table->id();
             $table->string('no_kk');
-            $table->string('kepala_keluarga');
-            $table->string('pos_tagihan');
+            $table->string('pemberi');
+            $table->string('rumah_id')->nullable();
             $table->string('telp');
+            $table->bigInteger('status_tinggal')->nullable();
+            $table->bigInteger('createable_id')->nullable();
+            $table->text('createable_type')->nullable();
+            $table->string('pos_tagihan');
             $table->string('status');
             $table->timestamps();
             $table->softDeletes();

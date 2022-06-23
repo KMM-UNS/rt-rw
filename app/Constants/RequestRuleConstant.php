@@ -63,11 +63,12 @@ class RequestRuleConstant
     {
         return [
             'kas_iuran_agendas_jenis_iuran_id' => 'required',
-            'kas_iuran_agendas_bulan' => 'required',
-            'kas_iuran_agendas_tahun' => 'required',
+            'kas_iuran_agendas_tanggal' => 'required',
+            // 'kas_iuran_agendas_tahun' => 'required',
             'kas_iuran_agendas_petugas' => 'required',
             'kas_iuran_agendas_pemberi' => 'required',
-            'kas_iuran_agendas_total_biaya' => 'required'
+            'kas_iuran_agendas_total_biaya' => 'required',
+            'kas_iuran_agendas_status' => 'required'
         ];
     }
     public static function PetugasTagihanTable()

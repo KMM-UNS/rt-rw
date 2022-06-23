@@ -57,9 +57,9 @@
             <tbody>
                 @foreach ($pengeluarann as $item)
                     <tr>
-                        <td>{{ $item->tanggal }}</td>
+                        <td>{{ date('d M Y', strtotime($item->tanggal)) }}</td>
                         <td>{{ $item->keterangan }}</td>
-                        <td>Rp.{{ $item->nominal }}</td>
+                        <td>Rp.{{ number_format($item->nominal, 0) }}</td>
                     </tr>
                 @endforeach
 
@@ -67,7 +67,7 @@
 
             <td><b>Total</b></td>
             <td></td>
-            <td colspan="1"><b>Rp. {{ $pengeluarannn }}</b></td>
+            <td colspan="1"><b>Rp. {{ number_format($pengeluarannn, 0) }}</b></td>
 
 
 

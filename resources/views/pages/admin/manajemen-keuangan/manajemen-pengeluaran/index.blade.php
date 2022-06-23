@@ -88,9 +88,9 @@
                                         </form>
                                     </div>
                                 </td>
-                                <td>{{ $item->tanggal }}</td>
+                                <td>{{ date('d M Y', strtotime($item->tanggal)) }}</td>
                                 <td>{{ $item->keterangan }}</td>
-                                <td>Rp.{{ $item->nominal }}</td>
+                                <td>Rp.{{ number_format($item->nominal, 0) }}</td>
                             </tr>
                         @endforeach
 
@@ -99,7 +99,7 @@
                     <td><b>Total</b></td>
                     <td></td>
                     <td></td>
-                    <td colspan=""><b>Rp. {{ $pengeluarannn }}</b></td>
+                    <td colspan=""><b>Rp. {{ number_format($pengeluarannn, 0) }}</b></td>
 
 
 

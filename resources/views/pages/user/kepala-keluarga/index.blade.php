@@ -34,7 +34,7 @@
                                 @foreach ($warga as $item)
                                     <tr>
                                         <td>{{ $item->no_kk }}</td>
-                                        <td>{{ $item->kepala_keluarga }}</td>
+                                        <td>{{ $item->pemberi }}</td>
                                         <td>{{ $item->pos->nama }}</td>
                                         <td>{{ $item->telp }}</td>
                                         <td>

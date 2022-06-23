@@ -25,6 +25,9 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        //tambahan
+        Gate::define('role', function ($user, ...$role) {
+            return in_array($user->role, $role);
+        });
     }
 }

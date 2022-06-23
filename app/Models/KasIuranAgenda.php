@@ -16,7 +16,7 @@ class KasIuranAgenda extends Model
     public const ACTIVE = "aktif";
 
     protected $table = 'kas_iuran_agendas';
-    protected $fillable = ['jenis_iuran_id', 'bulan', 'tahun', 'petugas', 'pemberi', 'total_biaya', 'bukti_pembayaran'];
+    protected $fillable = ['jenis_iuran_id', 'tanggal', 'petugas', 'pemberi', 'total_biaya', 'status'];
     protected $dates = [
         'created_at'
     ];
@@ -45,5 +45,10 @@ class KasIuranAgenda extends Model
     public function dokumen()
     {
         return $this->morphToMany(Dokumen::class, 'dokumenable');
+    }
+    //tamabahan dropdown pemberi
+    public function pemberii()
+    {
+        return $this->belongsTo(Keluarga::class, 'pemberi');
     }
 }

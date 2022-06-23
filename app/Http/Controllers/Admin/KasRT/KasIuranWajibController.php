@@ -16,6 +16,7 @@ use App\Helpers\DataHelper;
 use App\Helpers\TrashHelper;
 use App\Helpers\FileUploaderHelper;
 use App\Http\Requests\Admin\IuranWajibForm;
+use App\Models\Keluarga;
 
 class KasIuranWajibController extends Controller
 {
@@ -30,6 +31,7 @@ class KasIuranWajibController extends Controller
         $nama_petugas = PetugasTagihan::pluck('nama', 'id');
         $nama_bulan = Bulan::pluck('nama', 'id');
         $tahun = Tahun::pluck('nama', 'id');
+
         return view('pages.admin.kas-rt.kasiuranwajib.add-edit', ['jenis_iuranwajib' => $jenis_iuranwajib, 'nama_petugas' => $nama_petugas, 'nama_bulan' => $nama_bulan, 'tahun' => $tahun]);
     }
 

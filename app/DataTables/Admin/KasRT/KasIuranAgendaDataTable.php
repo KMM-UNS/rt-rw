@@ -3,6 +3,7 @@
 namespace App\DataTables\Admin\KasRT;
 
 use App\Models\KasIuranAgenda;
+use App\Models\PetugasTagihan;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -26,19 +27,26 @@ class KasIuranAgendaDataTable extends DataTable
                 $btn = $btn . '</div>';
 
                 return $btn;
-            })
+            });
 
-            ->addColumn('image', function ($row) {
-                $img = '<img src="' . asset($row->dokumen[0]['public_url']) . '" class="img-rounded height-80" >';
-                return $img;
-            })
-            // raw column berfungsi untuk menjalankan tag html
-            ->rawColumns(['image', 'action']);
+        // ->filterColumn('tanggal', function ($query) {
+        //     $query->whereRaw(date('d M Y', strtotime('tanggal')));
+        // })
+
+        // ->addColumn('image', function ($row) {
+        //     $img = '<img src="' . asset($row->dokumen[0]['public_url']) . '" class="img-rounded height-80" >';
+        //     return $img;
+        // })
+        // // raw column berfungsi untuk menjalankan tag html
+        // ->rawColumns(['image', 'action']);
     }
 
     public function query(KasIuranAgenda $model)
     {
-        return $model->select('kas_iuran_agendas.*')->with(['iuranagenda', 'petugastagihan', 'namabulanss', 'tahuns']);
+        // $pos =
+        //         $poss = PetugasTagihan::where('pos',$pos);
+
+        return $model->select('kas_iuran_agendas.*')->with(['iuranagenda', 'petugastagihan', 'namabulanss', 'tahuns', 'pemberii']);
     }
 
     public function html()
@@ -68,13 +76,16 @@ class KasIuranAgendaDataTable extends DataTable
                 ->addClass('text-center'),
             // Column::make('id'),
             Column::make('jenis_iuran_id')->data('iuranagenda.nama'),
-            Column::make('bulan')->data('namabulanss.nama'),
-            Column::make('tahun')->data('tahuns.nama'),
-            Column::make('nama_petugas_id')->data('petugastagihan.nama'),
-            Column::make('pemberi'),
+            // Column::make('bulan')->data('namabulanss.nama'),
+            // Column::make('tahun')->data('tahuns.nama'),
+            Column::make('tanggal'),
+            Column::make('nama_petugas')->data('petugastagihan.nama'),
+            Column::make('pemberi')->data('pemberii.pemberi'),
+            Column::make('pos'),
             Column::make('total_biaya'),
-            Column::computed('image'),
-            // Column::make('created_at'),
+            Column::make('status'),
+            // Column::computed('image'),
+            // Column::make('tanggal'),
             // Column::make('updated_at'),
         ];
     }

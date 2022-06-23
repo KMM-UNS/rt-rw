@@ -61,4 +61,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->morphMany(SPKT::class, 'createable');
     }
+    //tambahan
+    public function role()
+    {
+        return $this->belongsTo(AdminRole::class, 'role_id');
+    }
 }

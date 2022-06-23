@@ -14,14 +14,22 @@ class Keluarga extends Model
     protected $table = 'keluargas';
     protected $fillable = [
         'no_kk',
-        'kepala_keluarga',
-        'pos_tagihan',
+        'pemberi',
+        'rumah_id',
         'telp',
+        'status_tinggal',
+        'createable_id',
+        'createable_type',
+        'pos_tagihan',
         'status'
     ];
 
     public function pos()
     {
         return $this->belongsTo(Pos::class, 'pos_tagihan');
+    }
+    public function pemberii()
+    {
+        return $this->hasMany(KasIuranAgenda::class);
     }
 }

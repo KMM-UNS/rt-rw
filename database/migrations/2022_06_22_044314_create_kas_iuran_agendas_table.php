@@ -11,12 +11,14 @@ class CreateKasIuranAgendasTable extends Migration
         Schema::create('kas_iuran_agendas', function (Blueprint $table) {
             $table->id();
             $table->string('jenis_iuran_id');
-            $table->string('bulan');
-            $table->string('tahun');
+            // $table->string('bulan');
+            // $table->string('tahun');
+            $table->date('tanggal');
             $table->string('petugas');
             $table->string('pemberi');
+            $table->string('pos');
             $table->integer('total_biaya');
-            // $table->string('bukti_pembayaran');
+            $table->string('status');
             $table->timestamps();
             $table->softDeletes();
         });

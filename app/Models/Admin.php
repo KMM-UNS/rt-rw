@@ -16,6 +16,7 @@ class Admin extends Authenticatable
         'name',
         'email',
         'password',
+        'admin_role',
         'department_id',
         'pangkat',
         'nrp'

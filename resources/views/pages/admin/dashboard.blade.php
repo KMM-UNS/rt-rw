@@ -124,8 +124,8 @@
                             <!-- begin title -->
                             <div class="mb-3 text-grey">
                                 <b class="mb-3">PEMASUKAN</b>
-                                <span class="ml-2"><i class="fa fa-info-circle" data-toggle="popover"
-                                        data-trigger="hover" data-title="Conversion Rate" data-placement="top"
+                                <span class="ml-2"><i class="fa fa-info-circle" data-toggle="popover" data-trigger="hover"
+                                        data-title="Conversion Rate" data-placement="top"
                                         data-content="Percentage of sessions that resulted in orders from total number of sessions."
                                         data-original-title="" title=""></i></span>
                             </div>
@@ -220,7 +220,8 @@
                             <!-- end store-session -->
                             <!-- begin percentage -->
                             <div class="mb-4 text-grey">
-                                <i class="fa fa-caret-up"></i> <span data-animation="number" data-value="9.5">0.00</span>%
+                                <i class="fa fa-caret-up"></i> <span data-animation="number"
+                                    data-value="9.5">0.00</span>%
                                 compare to last week
                             </div>
                             <!-- end percentage -->
@@ -277,7 +278,18 @@
         </div>
 
 
+        {{-- tempat grafik --}}
 
+        <div class="container px-1 mx-auto">
+
+            <div class="p-6 m-20 bg-white rounded shadow">
+                {!! $chart->container() !!}
+            </div>
+
+        </div>
+        <script src="{{ $chart->cdn() }}"></script>
+
+        {{ $chart->script() }}
         <!-- end col-6 -->
     </div>
 
@@ -694,4 +706,6 @@
     <script src="/assets/plugins/moment/moment.js"></script>
     <script src="/assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
     <script src="/assets/js/demo/dashboard-v3.js"></script>
+    {{-- <script src="{{ $chart->cdn() }}"></script>
+    {{ $chart->script() }} --}}
 @endpush

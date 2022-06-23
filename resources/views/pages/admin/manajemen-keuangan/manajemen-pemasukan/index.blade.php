@@ -67,31 +67,31 @@
                     <tbody>
                         <tr>
                             <td>Kas Iuran Wajib</td>
-                            <td>Rp.{{ $total_wajib }}</td>
+                            <td>Rp.{{ number_format($total_wajib, 0) }}</td>
                         </tr>
                         <tr>
                             <td>Kas Iuran Kondisional</td>
-                            <td>Rp.{{ $total_kondisional }}</td>
+                            <td>Rp.{{ number_format($total_kondisional, 0) }}</td>
                         </tr>
                         <tr>
                             <td>Kas Iuran Sukarela</td>
-                            <td>Rp.{{ $total_sukarela }}</td>
+                            <td>Rp.{{ number_format($total_sukarela, 0) }}</td>
                         </tr>
                         <tr>
                             <td>Kas Iuran Agenda</td>
-                            <td>Rp.{{ $total_agenda }}</td>
+                            <td>Rp.{{ number_format($total_agenda, 0) }}</td>
                         </tr>
                         @foreach ($pemasukann as $item)
                             <tr>
                                 <td>{{ $item->keterangan }}</td>
-                                <td>Rp.{{ $item->nominal }}</td>
+                                <td>Rp.{{ number_format($item->nominal, 0) }}</td>
                             </tr>
                         @endforeach
 
                     </tbody>
 
                     <td><b>Total</b></td>
-                    <td colspan="1"><b>Rp. {{ $pemasukan }}</b></td>
+                    <td colspan="1"><b>Rp. {{ number_format($pemasukan, 0) }}</b></td>
 
 
 
