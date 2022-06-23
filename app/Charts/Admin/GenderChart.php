@@ -18,7 +18,6 @@ class GenderChart
     public function build()
     {
         return $this->chart->pieChart()
-            ->setTitle('Grafik Jenis Kelamin')
             ->addData([
                 Warga::where('jenis_kelamin', 'laki-laki')->count(),
                 Warga::where('jenis_kelamin', 'perempuan')->count(),

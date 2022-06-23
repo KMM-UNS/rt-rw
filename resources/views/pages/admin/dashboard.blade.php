@@ -81,19 +81,36 @@
                 </table>
             </div>
         </div>
+        <div class="card border-0 bg-white mb-3 overflow-hidden">
+            <div class="card-title mt-3 mb-1 text-center">
+                <h4>Statistik Pengajuan Surat</h4>
+            </div>
+            <div class="card-body">
+                {!! $suratChart->container() !!}
+            </div>
+        </div>
     </div>
     <div class="col-xl-4">
         <div class="card border-0 bg-white mb-3 overflow-hidden">
+            <div class="card-title mt-3 mb-1 text-center">
+                <h4>Grafik Jenis Kelamin Warga</h4>
+            </div>
             <div class="card-body">
                 {!! $genderChart->container() !!}
             </div>
         </div>
         <div class="card border-0 bg-white mb-3 overflow-hidden">
+            <div class="card-title mt-3 mb-1 text-center">
+                <h4>Grafik Pendidikan Warga</h4>
+            </div>
             <div class="card-body">
                 {!! $pendidikanChart->container() !!}
             </div>
         </div>
         <div class="card border-0 bg-white mb-3 overflow-hidden">
+            <div class="card-title mt-3 mb-1 text-center">
+                <h4>Grafik Pekerjaan Warga</h4>
+            </div>
             <div class="card-body">
                 {!! $pekerjaanChart->container() !!}
             </div>
@@ -116,6 +133,10 @@
 <!-- pekerjaanChart script -->
 <script src="{{ $pekerjaanChart->cdn() }}"></script>
 {{ $pekerjaanChart->script() }}
+
+<!-- suratChart script -->
+<script src="{{ $suratChart->cdn() }}"></script>
+{{ $suratChart->script() }}
 
 <script src="/assets/plugins/d3/d3.min.js"></script>
 <script src="/assets/plugins/nvd3/build/nv.d3.js"></script>

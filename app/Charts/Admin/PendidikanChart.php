@@ -27,7 +27,6 @@ class PendidikanChart
         }
         $result = array_values($data);
         return $this->chart->pieChart()
-            ->setTitle('Grafik Pendidikan')
             ->addData($result)
             ->setFontFamily('Open Sans')
             ->setLabels($pendidikanLabel);

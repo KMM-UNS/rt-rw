@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Charts\Admin\GenderChart;
 use App\Charts\Admin\PekerjaanChart;
 use App\Charts\Admin\PendidikanChart;
+use App\Charts\Admin\SuratChart;
 use App\Http\Controllers\Controller;
 use App\Models\App;
 use App\Models\JadwalRonda;
@@ -17,7 +18,7 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(GenderChart $genderChart, PendidikanChart $pendidikanChart, PekerjaanChart $pekerjaanChart)
+    public function index(GenderChart $genderChart, PendidikanChart $pendidikanChart, PekerjaanChart $pekerjaanChart, SuratChart $suratChart)
     {
         $minggu = JadwalRonda::with(['warga'])->where('hari_id', '1')->get();
         $senin = JadwalRonda::with(['warga'])->where('hari_id', '2')->get();
@@ -39,7 +40,8 @@ class DashboardController extends Controller
             'app' => $app,
             'genderChart' => $genderChart->build(),
             'pendidikanChart' => $pendidikanChart->build(),
-            'pekerjaanChart' => $pekerjaanChart->build()
+            'pekerjaanChart' => $pekerjaanChart->build(),
+            'suratChart' => $suratChart->build()
         ]);
     }
 
