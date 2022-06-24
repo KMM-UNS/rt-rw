@@ -85,8 +85,8 @@
             <!-- begin container -->
             <div class="container home-content">
                 <h1>Selamat Datang</h1>
-                <h3 class="mb-1">{{ isset($app) ? $app->nama : "Perumahan"  }}</h3>
-                <p class="text-center fw-normal" style="font-size: 16px;">{{ isset($app) ? "RT {$app->rt} RW {$app->rw}, Kelurahan {$app->kelurahan}, Kecamatan {$app->kecamatan}, Kabupaten/Kota {$app->kabupaten} Provinsi {$app->provinsi}" : 'RT RW Kelurahan Kecamatan Kabupaten/Kota Provinsi'}}</p>
+                <h3 class="mb-1">{{ isset($app) ? strtoupper($app->nama) : "Perumahan"  }}</h3>
+                <p class="text-center fw-normal" style="font-size: 16px;">{{ isset($app) ? "RT {$app->rt} RW {$app->rw}, KELURAHAN {$app->kelurahan->name}, KECAMATAN {$app->kecamatan->name}, {$app->kabupaten->name}, PROVINSI {$app->provinsi->name}" : 'RT RW Kelurahan Kecamatan Kabupaten/Kota Provinsi'}}</p>
             </div>
             <!-- end container -->
         </div>
@@ -157,7 +157,7 @@
                                 <div class="address">
                                   <i class="bi bi-geo-alt"></i>
                                   <h4>Alamat:</h4>
-                                  <p>{{ isset($app) ? "RT {$app->rt} RW {$app->rw}, Kelurahan {$app->kelurahan}, Kecamatan {$app->kecamatan}, Kabupaten/Kota {$app->kabupaten} Provinsi {$app->provinsi}" : 'RT RW Kelurahan Kecamatan Kabupaten/Kota Provinsi'}}</p>
+                                  <p>{{ isset($app) ? "RT {$app->rt} RW {$app->rw}, KELURAHAN {$app->kelurahan->name}, KECAMATAN {$app->kecamatan->name}, {$app->kabupaten->name} PROVINSI {$app->provinsi->name}" : 'RT RW Kelurahan Kecamatan Kabupaten/Kota Provinsi'}}</p>
                                 </div>
 
                                 <div class="email">

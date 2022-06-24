@@ -80,19 +80,19 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-1 my-auto">
-                            <label for="kelurahan"><strong>Kelurahan</strong></label>
+                            <label for="provinsi_id"><strong>Provinsi</strong></label>
                         </div>
                         <div class="col-md-5">
                             <div class="input-group">
-                                <input type="text" id="kelurahan" name="apps_kelurahan" class="form-control" autofocus data-parsley-required="true" value="{{{ old('apps_kelurahan') ?? ($data['kelurahan'] ?? null) }}}">
+                                <x-form.Dropdown name="apps_provinsi_id" :options="$provinsi" selected="{{{ old('apps_provinsi_id') ?? ($data->provinsi_id ?? null) }}}" required data-parsley-required="true" />
                             </div>
                         </div>
                         <div class="col-md-1 my-auto">
-                            <label for="kecamatan"><strong>Kecamatan</strong></label>
+                            <label for="kabupaten_id"><strong>Kabupaten / Kota</strong></label>
                         </div>
                         <div class="col-md-5">
                             <div class="input-group">
-                                <input type="text" id="kecamatan" name="apps_kecamatan" class="form-control" autofocus data-parsley-required="true" value="{{{ old('apps_kecamatan') ?? ($data['kecamatan'] ?? null) }}}">
+                                <x-form.Dropdown name="apps_kabupaten_id" :options="$kabupaten" placeholder="Pilih" selected="{{{ old('apps_kabupaten_id') ?? ($data->kabupaten_id ?? null) }}}" required data-parsley-required="true" />
                             </div>
                         </div>
                     </div>
@@ -100,20 +100,20 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-1 my-auto">
-                            <label for="kabupaten"><strong>Kabupaten / Kota</strong></label>
+                            <label for="kecamatan_id"><strong>Kecamatan</strong></label>
                         </div>
                         <div class="col-md-5">
                             <div class="input-group">
-                                <input type="text" id="kabupaten" name="apps_kabupaten" class="form-control" autofocus data-parsley-required="true" value="{{{ old('apps_kabupaten') ?? ($data['kabupaten'] ?? null) }}}">
+                                <x-form.Dropdown name="apps_kecamatan_id" :options="$kecamatan" selected="{{{ old('apps_kecamatan_id') ?? ($data->kecamatan_id ?? null) }}}" required data-parsley-required="true" />
                             </div>
                         </div>
                         <div class="col-md-1 my-auto">
-                            <label for="provinsi"><strong>Provinsi</strong></label>
+                            <label for="kelurahan_id"><strong>Kelurahan</strong></label>
                         </div>
                         <div class="col-md-5">
                             <div class="input-group">
-                                <input type="text" id="provinsi" name="apps_provinsi" class="form-control" autofocus data-parsley-required="true" value="{{{ old('apps_provinsi') ?? ($data['provinsi'] ?? null) }}}">
-                            </div>
+                                <x-form.Dropdown name="apps_kelurahan_id" :options="$kelurahan" selected="{{{ old('apps_kelurahan_id') ?? ($data->kelurahan_id ?? null) }}}" required data-parsley-required="true" />
+                                </div>
                         </div>
                     </div>
                 </div>
@@ -140,7 +140,7 @@
                         </div>
                         <div class="col-md-3">
                             <div class="input-group">
-                                <input type="text" id="email" name="apps_email" class="form-control" autofocus data-parsley-required="true" value="{{{ old('apps_email') ?? ($data['telepon'] ?? null) }}}">
+                                <input type="text" id="email" name="apps_email" class="form-control" autofocus data-parsley-required="true" value="{{{ old('apps_email') ?? ($data['email'] ?? null) }}}">
                             </div>
                         </div>
                     </div>
@@ -248,10 +248,20 @@
 @endsection
 
 @push('scripts')
-<script src="{{ asset('assets/js/custom/delete-with-confirmation.js') }}"></script>
+<script src="{{ asset('/assets/plugins/parsleyjs/dist/parsley.js') }}"></script>
+<script src="{{ asset('/assets/plugins/select2/dist/js/select2.min.js') }}"></script>
+<script src="{{ asset('/assets/js/custom/string-helper.js') }}"></script>
+<script src="{{ asset('/assets/js/custom/wilayah-dropdown.js') }}"></script>
 <script>
   $(document).on('delete-with-confirmation.success', function() {
     $('.buttons-reload').trigger('click')
   })
 </script>
+<script>
+
+    $(function() {
+                handleWilayahSelectEvent('#apps_provinsi_id', '#apps_kabupaten_id', '#apps_kecamatan_id', '#apps_kelurahan_id');
+            })
+
+    </script>
 @endpush

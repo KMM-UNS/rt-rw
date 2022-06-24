@@ -66,16 +66,16 @@
             RUKUN TETANGGA {{ strtoupper($app->rt) }} RUKUN WARGA {{ strtoupper($app->rw) }}
         </h1>
         <h1 style="font-size: 16px; text-align: center;">
-            KELURAHAN {{ strtoupper($app->kelurahan) }} KECAMATAN {{ strtoupper($app->kecamatan) }}
+            KELURAHAN {{ strtoupper($app->kelurahan->name) }} KECAMATAN {{ strtoupper($app->kecamatan->name) }}
         </h1>
         <h1 style="font-size: 16px; text-align: center;">
-            KOTA {{ strtoupper($app->kabupaten) }}
+            {{ strtoupper($app->kabupaten->name) }}
         </h1>
         <h4 style="text-align: center; font-weight: normal; margin-bottom: 0;">
-            {{ $app->nama }}, {{ $app->kelurahan }}, Kec. {{ $app->kecamatan }}, Kota {{ $app->kabupaten }}, {{ $app->provinsi }}
+            {{ strtoupper($app->nama) }}, {{ $app->kelurahan->name }}, KEC. {{ $app->kecamatan->name }}, {{ $app->kabupaten->name }}, {{ $app->provinsi->name }}
         </h4>
         <h4 style="text-align: center; font-weight: normal; margin: 0;">
-            Telepon: {{ $app->telepon }} Surel : {{ $app->email }}      Kode Pos : {{ $app->kode_pos }}
+            TELEPON: {{ $app->telepon }} SUREL: {{ $app->email }}     KODE POS: {{ $app->kode_pos }}
         </h4>
         <hr style="border: 3px solid; margin-bottom: 1px;">
         <hr style="margin-top: 0;">
@@ -86,7 +86,7 @@
             No : {{ $surat->nomor_surat }}
         </h4>
         <p>
-            Ketua RT-{{ $app->rt }} / RW-{{ $app->rw }} Kelurahan {{ $app->kelurahan }} Kecamatan {{ $app->kecamatan }} Kota {{ $app->kabupaten }}, menerangkan bahwa ;
+            Ketua RT-{{ $app->rt }} / RW-{{ $app->rw }}, Kelurahan {{ ucwords(strtolower($app->kelurahan->name)) }}, Kecamatan {{ ucwords(strtolower($app->kecamatan->name)) }}, {{ ucwords(strtolower($app->kabupaten->name)) }}, menerangkan bahwa
         </p>
         <table>
             <tr>
@@ -123,7 +123,7 @@
             </tr>
         </table>
         <p>
-            Bahwa benar nama tersebut diatas adalah penduduk / warga yang berdomisili diwilayah Ketua RT-{{ $app->rt }} / RW-{{ $app->rw }} Kelurahan {{ $app->kelurahan }} Kecamatan {{ $app->kecamatan }} Kota {{ $app->kabupaten }}, Surat pengantar ini diberikan untuk keperluan :
+            Bahwa benar nama tersebut diatas adalah penduduk / warga yang berdomisili diwilayah RT-{{ $app->rt }} / RW-{{ $app->rw }}, Kelurahan {{ ucwords(strtolower($app->kelurahan->name)) }}, Kecamatan {{ ucwords(strtolower($app->kecamatan->name)) }}, {{ ucwords(strtolower($app->kabupaten->name)) }}, Surat pengantar ini diberikan untuk keperluan :
         </p>
         <p>
             <strong>
@@ -136,17 +136,13 @@
         <div class="row">
             <div class="column" style="text-align:center;">
                 <p style="justify-self: center;margin: 1cm 0 0 0;">Mengetahui,</p>
-                @foreach($ttd_rw as $ttd_rw)
-                <img src="{{ asset($ttd_rw['public_url']) }}" alt="ttd_rw" style= "width: 50%; height: 2.5cm;">
-                @endforeach
+                <img src="{{ asset($ttd_rw->first()['public_url']) }}" alt="ttd_rw" style= "width: 50%; height: 2.5cm;">
                 <p style="justify-self: center;margin: 0 0 0 0;"> <u>{{ $app->ketua_rw }}</u></p>
                 <p style="justify-self: center;margin-top: 0;">Ketua RW {{ $app->rw }}</p>
             </div>
             <div class="column" style="text-align:center;">
-                <p style="justify-self: center;">Surakarta, {{ $surat->tanggal_disetujui->isoFormat('DD MMMM YYYY') }} </p>
-                @foreach($ttd_rt as $ttd_rt)
-                    <img src="{{ asset($ttd_rt['public_url']) }}" alt="ttd_rw" style="width: 50%; height: 2.5cm;">
-                @endforeach
+                <p style="justify-self: center;">{{ str_replace("Kabupaten", "",ucwords(strtolower($app->kabupaten->name))) }}, {{ $surat->tanggal_disetujui->isoFormat('DD MMMM YYYY') }} </p>
+                    <img src="{{ asset($ttd_rt->first()['public_url']) }}" alt="ttd_rw" style="width: 50%; height: 2.5cm;">
                 <p style="justify-self: center;margin: 0 0 0 0;"> <u>{{ $app->ketua_rt }}</u></p>
                 <p style="justify-self: center;margin-top: 0;">Ketua RT {{ $app->rt }}</p>
             </div>

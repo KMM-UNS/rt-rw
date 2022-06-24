@@ -18,10 +18,10 @@ class CreateAppsTable extends Migration
             $table->string('nama');
             $table->string('rt');
             $table->string('rw');
-            $table->string('kelurahan');
-            $table->string('kecamatan');
-            $table->string('kabupaten');
-            $table->string('provinsi');
+            $table->bigInteger('kelurahan_id');
+            $table->bigInteger('kecamatan_id');
+            $table->bigInteger('kabupaten_id');
+            $table->bigInteger('provinsi_id');
             $table->integer('kode_pos');
             $table->string('telepon');
             $table->string('email');

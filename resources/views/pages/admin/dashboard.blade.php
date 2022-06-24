@@ -9,9 +9,9 @@
 
 @section('content')
 <h1 class="page-header mb-1 text-center">{{ isset($app) ? $app->nama : 'Perumahan'}}</h1>
-<p class="text-center fw-normal m-0" style="font-size: 16px;">{{ isset($app) ? "RT {$app->rt} RW {$app->rw} Kelurahan {$app->kelurahan} Kecamatan {$app->kecamatan}" : 'RT RW Kelurahan Kecamatan'}}</p>
+<p class="text-center fw-normal m-0" style="font-size: 16px;">{{ isset($app) ? "RT {$app->rt} RW {$app->rw} KELURAHAN {$app->kelurahan->name} KECAMATAN  {$app->kecamatan->name}"  : 'RT RW Kelurahan Kecamatan'}}</p>
 <p class="text-center fw-normal m-0" style="font-size: 16px;">
-    {{ isset($app) ? "Kabupaten/Kota {$app->kabupaten} Provinsi {$app->provinsi}" : ' Kabupaten/Kota Provinsi'}}
+    {{ isset($app) ?   "{$app->kabupaten->name} PROVINSI {$app->provinsi->name}"  : ' Kabupaten/Kota Provinsi' }}
 </p>
 
 <div class="row mt-3">

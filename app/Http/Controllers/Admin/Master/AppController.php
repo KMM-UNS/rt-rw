@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin\Master;
 
 use App\Models\App;
 use App\Models\Warga;
+use App\Models\Regency;
+use App\Models\District;
+use App\Models\Province;
 use App\Helpers\DataHelper;
 use App\Helpers\TrashHelper;
 use Illuminate\Http\Request;
@@ -15,17 +18,79 @@ use App\DataTables\Admin\Master\AppDataTable;
 
 class AppController extends Controller
 {
-    public function index(AppDataTable $dataTable)
+    public function index()
     {
         $data = App::orderBy('id', 'DESC')->first();
+        $provinsi = Province::pluck('name', 'id');
+        $kabupaten = [];
+        $kecamatan = [];
+        $kelurahan = [];
+
+        if(isset($data)) {
+            if (old('provinsi_id') || $data->provinsi_id) {
+                $dt = old('provinsi_id') ?? $data->provinsi_id;
+                $kabupaten = Province::find($dt)->regencies->pluck('name', 'id');
+            }
+
+            if (old('kabupaten_id') || $data->kabupaten_id) {
+                $dt = old('kabupaten_id') ?? $data->kabupaten_id;
+                $kecamatan = Regency::find($dt)->districts->pluck('name', 'id');
+            }
+
+            if (old('kecamatan_id') || $data->kecamatan_id) {
+                $dt = old('kecamatan_id') ?? $data->kecamatan_id;
+                //$dt=$data->asal_kecamatan;
+                $kelurahan = District::find($dt)->villages->pluck('name', 'id');
+            }
+        }
+        else
+        {
+            if (old('provinsi_id')) {
+                $kabupaten = Province::find(old('provinsi_id'))->regencies->pluck('name', 'id');
+            }
+
+            if (old('kabupaten_id')) {
+                $kecamatan = Regency::find(old('kabupaten_id'))->districts->pluck('name', 'id');
+            }
+
+            if (old('kecamatan_id')) {
+                $kelurahan = District::find(old('kecamatan_id'))->villages->pluck('name', 'id');
+            }
+        }
+
         return view('pages.admin.master.app.index', [
-            'data' => $data
+            'data' => $data,
+            'provinsi' => $provinsi,
+            'kabupaten' => $kabupaten,
+            'kecamatan' => $kecamatan,
+            'kelurahan' => $kelurahan,
         ]);
     }
 
     public function create()
     {
-        return view('pages.admin.master.app.add-edit');
+        $provinsi = Province::pluck('name', 'id');
+        $kabupaten = [];
+        $kecamatan = [];
+        $kelurahan = [];
+
+        if (old('apps_provinsi')) {
+            $kabupaten = Province::find(old('apps_provinsi'))->regencies->pluck('name', 'id');
+        }
+
+        if (old('apps_kabupaten')) {
+            $kecamatan = Regency::find(old('apps_kabupaten'))->districts->pluck('name', 'id');
+        }
+
+        if (old('apps_kecamatan')) {
+            $kelurahan = District::find(old('apps_kecamatan'))->villages->pluck('name', 'id');
+        }
+        return view('pages.admin.master.app.add-edit', [
+            'provinsi' => $provinsi,
+            'kabupaten' => $kabupaten,
+            'kecamatan' => $kecamatan,
+            'kelurahan' => $kelurahan,
+        ]);
     }
 
     public function store(Request $request, FileUploaderHelper $fileUploaderHelper)

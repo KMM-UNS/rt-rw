@@ -18,10 +18,10 @@ class App extends Model
         'nama',
         'rt',
         'rw',
-        'kelurahan',
-        'kecamatan',
-        'kabupaten',
-        'provinsi',
+        'kelurahan_id',
+        'kecamatan_id',
+        'kabupaten_id',
+        'provinsi_id',
         'kode_pos',
         'telepon',
         'email',
@@ -32,5 +32,25 @@ class App extends Model
     public function dokumen()
     {
         return $this->morphToMany(Dokumen::class, 'dokumenable');
+    }
+
+    public function provinsi()
+    {
+        return $this->belongsTo(Province::class);
+    }
+
+    public function kabupaten()
+    {
+        return $this->belongsTo(Regency::class);
+    }
+
+    public function kecamatan()
+    {
+        return $this->belongsTo(District::class);
+    }
+
+    public function kelurahan()
+    {
+        return $this->belongsTo(Village::class);
     }
 }
