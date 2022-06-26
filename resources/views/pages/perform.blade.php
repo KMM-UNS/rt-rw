@@ -1,4 +1,4 @@
-@extends('layouts.default', ['topMenu' => true, 'sidebarHide' => true])
+{{-- @extends('layouts.default', ['topMenu' => true, 'sidebarHide' => true])
 @section('title', 'Perform')
 
     @push('css')
@@ -160,4 +160,4 @@
     <script src="/assets/plugins/bootstrap-calendar/js/bootstrap_calendar.min.js"></script>
     <script src="/assets/plugins/gritter/js/jquery.gritter.js"></script>
     <script src="/assets/js/demo/dashboard-v2.js"></script>
-@endpush
+@endpush --}}

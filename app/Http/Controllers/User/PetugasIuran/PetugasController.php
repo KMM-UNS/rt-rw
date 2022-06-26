@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User\PetugasIuran;
 
 use App\Http\Controllers\Controller;
+use App\Models\Keluarga;
 use Illuminate\Http\Request;
 
 class PetugasController extends Controller
@@ -14,7 +15,8 @@ class PetugasController extends Controller
      */
     public function index()
     {
-        return view('/', 'home')->name('home');
+        $data = Keluarga::all();
+        return view('pages.user.petugas.index', ['data', $data]);
     }
 
     /**
@@ -24,8 +26,10 @@ class PetugasController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.user.petugas.add-edit');
     }
+    // return view('pages.user.petugas.add-edit');
+
 
     /**
      * Store a newly created resource in storage.

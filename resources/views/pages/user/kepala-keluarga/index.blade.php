@@ -14,21 +14,24 @@
                             </div>
                         @endif
 
-                        {{ __('Data Warga!') }}
+                        {{-- {{ __('Data Warga!') }} --}}
                         {{-- <h1>Data Warga</h1> --}}
-                        <table border="1" cellpadding="2" class="table">
+
+                        <table border="1" cellpadding="2" class="table table-hover">
                             <thead>
                                 <tr>
                                     <th scope="col">No KK</th>
                                     <th scope="col">Kepala Keluarga</th>
                                     <th scope="col">Pos Tagihan</th>
                                     <th scope="col">Telp</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Tanda</th>
+                                    @foreach ($iuran_wajib as $itemm)
+                                        <th>{{ $itemm->nama }}</th>
+                                    @endforeach
+
+                                    {{-- <th scope="col">Tanda</th> --}}
 
                                 </tr>
                             </thead>
-
                             <tbody>
 
                                 @foreach ($warga as $item)
@@ -48,9 +51,31 @@
                                                     <button class="btn btn-success">Sudah Bayar</button></a>
                                             @endif
                                         </td>
-                                        <td><label for=""
-                                                class="label {{ $item->status == 1 ? 'label-success' : 'label-danger' }}">{{ $item->status == 1 ? 'Aktif' : 'Tidak Aktif' }}</label>
+                                        <td>
+                                            @if ($item->status == 0)
+                                                <a
+                                                    href="{{ route('user.kepala-keluarga.bayar-iuranwajib.status', $item->id) }}">
+                                                    <button class="btn btn-danger">Belum Bayar</button></a>
+                                            @else
+                                                <a
+                                                    href="{{ route('user.kepala-keluarga.bayar-iuranwajib.status', $item->id) }}">
+                                                    <button class="btn btn-success">Sudah Bayar</button></a>
+                                            @endif
                                         </td>
+                                        <td>
+                                            @if ($item->status == 0)
+                                                <a
+                                                    href="{{ route('user.kepala-keluarga.bayar-iuranwajib.status', $item->id) }}">
+                                                    <button class="btn btn-danger">Belum Bayar</button></a>
+                                            @else
+                                                <a
+                                                    href="{{ route('user.kepala-keluarga.bayar-iuranwajib.status', $item->id) }}">
+                                                    <button class="btn btn-success">Sudah Bayar</button></a>
+                                            @endif
+                                        </td>
+                                        {{-- <td><label for=""
+                                                class="label {{ $item->status == 1 ? 'label-success' : 'label-danger' }}">{{ $item->status == 1 ? 'Aktif' : 'Tidak Aktif' }}</label>
+                                        </td> --}}
                                         {{-- <td>
                                             <input data-id="{{ $item->id }}" class="toggle-class" type="checkbox"
                                                 data-onstyle="success" data-offstyle="danger" data-toggle="toggle"

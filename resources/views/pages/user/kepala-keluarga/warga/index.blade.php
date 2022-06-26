@@ -16,7 +16,8 @@
 
                         {{ __('Data Warga!') }}
                         {{-- <h1>Data Warga</h1> --}}
-                        <table border="1" cellpadding="2" class="table">
+
+                        <table border="1" cellpadding="2" class="table table-hover">
                             <thead>
                                 <tr>
                                     <th scope="col">No KK</th>
@@ -33,10 +34,10 @@
                                 @foreach ($warga as $item)
                                     <tr>
                                         <td>{{ $item->no_kk }}</td>
-                                        <td>{{ $item->kepala_keluarga }}</td>
+                                        <td>{{ $item->pemberi }}</td>
                                         <td>
                                             <label for=""
-                                                class="label {{ $item->status == 1 ? 'label-success' : 'label-danger' }}">{{ $item->status == 1 ? 'Sudah Bayar' : 'Belum Bayar' }}</label>
+                                                class="label {{ $item->status == 1 ? 'label-success' : 'label-danger center' }}">{{ $item->status == 1 ? 'Sudah Bayar' : 'Belum Bayar' }}</label>
                                             {{-- @if ($warga->status == 0)
                                                 <a href="#" class="text-success">Success link</a>
                                             @else

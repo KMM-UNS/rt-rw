@@ -19,6 +19,12 @@ class WargaController extends Controller
         return view('pages.user.kepala-keluarga.warga.index', ['warga' => $warga]);
     }
 
+    public function wargah()
+    {
+        $warga = Keluarga::all();
+        return view('wargaa', ['warga' => $warga]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

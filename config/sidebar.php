@@ -148,11 +148,18 @@ return [
 
     ],
 
+
     'menu_user' => [
         [
             'icon' => 'fa fa-th-large',
-            'title' => 'Dashboard',
+            'title' => 'Dashboard Petugas',
             'url' => '/',
+            'caret' => false
+        ],
+        [
+            'icon' => 'fa fa-th-large',
+            'title' => 'Isi Data Diri',
+            'url' => '/petugas/data-petugas',
             'caret' => false
         ],
         [
@@ -164,15 +171,18 @@ return [
                 [
                     'url' => '/kepala-keluarga/bayar-iuranwajib',
                     'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Data Iuran Wajib'
+                ],  [
+                    'url' => '/kepala-keluarga/bayar-iuransukarela',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Data Iuran Suka Rela'
+                ], [
+                    'url' => '/kepala-keluarga/bayar-iurankondisional',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Data Iuran Kondisional'
+                ], [
+                    'url' => '/kepala-keluarga/bayar-iuranagenda',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Data Iuran Agenda'
                 ], [
                     'url' => '/kepala-keluarga/warga',
                     'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;penampilan warga'
-                ], [
-                    'url' => '/kas-rt/kas-iurankondisional',
-                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Iuran Kondisional'
-                ], [
-                    'url' => '/kas-rt/kas-iuranagenda',
-                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Iuran Agenda'
                 ],
             ]
         ],
@@ -209,6 +219,23 @@ return [
             'url' => '#',
             'caret' => false
         ]
+    ],
+
+
+    'menu_warga' => [
+        [
+            'icon' => 'fa fa-th-large',
+            'title' => 'Dashboard Warga',
+            'url' => '/warga',
+            'caret' => false
+        ],
+        [
+            'icon' => 'fa fa-th-large',
+            'title' => 'Warga',
+            'url' => '/petugas/data-petugas',
+            'caret' => false
+
+        ],
     ],
 
 
