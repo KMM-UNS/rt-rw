@@ -20,7 +20,7 @@ class Pos extends Model
 
     public function petugastagihan()
     {
-        return $this->hasMany(Pos::class);
+        return $this->hasOne(PetugasTagihan::class, 'pos');
     }
 
     public function keluarga()

@@ -16,7 +16,7 @@ class KasIuranAgenda extends Model
     public const ACTIVE = "aktif";
 
     protected $table = 'kas_iuran_agendas';
-    protected $fillable = ['jenis_iuran_id', 'tanggal', 'petugas', 'pemberi', 'total_biaya', 'status'];
+    protected $fillable = ['jenis_iuran_id', 'tanggal', 'pemberi', 'total_biaya', 'status'];
     protected $dates = [
         'created_at'
     ];

@@ -39,16 +39,17 @@
         </div>
 
         <!-- begin panel-body -->
-        <form action="{{ route('admin.rekap-kas.rekap-iuranagenda.store') }}" id="form" name="form" method="POST" data-parsley-validate="true"  enctype="multipart/form-data">
+        <form action="{{ route('admin.rekap-kas.rekap-iuranagenda.store') }}" id="form" name="form" method="POST"
+            data-parsley-validate="true" enctype="multipart/form-data">
             @csrf
             @if (isset($datas))
-            {{ method_field('PUT') }}
+                {{ method_field('PUT') }}
             @endif
             <div class="panel-body">
 
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-md-1 my-auto">
+                        {{-- <div class="col-md-1 my-auto">
                             <label for="jenis_iuran_id"><strong>Jenis Iuran</strong></label>
                         </div>
                         <div class="col-md-3">
@@ -71,11 +72,27 @@
                             <div class="input-group">
                                 <x-form.Dropdown name="tahun" :options="$tahun" selected="{{{ old('tahun') ?? ($data['tahun'] ?? null) }}}" required />
                             </div>
+                        </div> --}}
+
+                        {{-- baru --}}
+                        <div class="panel-body">
+                            <div class="input-group mb-3">
+                                <label for="label"> Tanggal Awal</label>
+                                <input type="date" name="tglawal" id="tglawal" class="form-control" />
+                            </div>
+                            <div class="input-group mb-3">
+                                <label for="label"> Tanggal Akhir</label>
+                                <input type="date" name="tglakhir" id="tglakhir" class="form-control" />
+                            </div>
+                            <div class="input-group mb-3">
+                                <a href=""
+                                    onclick="this.href='/admin/rekap-kas/rekap-iuranagenda/cetak-data-pertanggal/'+ document.getElementById('tglawal').value + '/' + document.getElementById('tglakhir').value"
+                                    target="_blank" class="btn btn-primary col-md-12">Cetak Laporan Pertanggal<i
+                                        class="fas fa-print"></i></a>
+                            </div>
+                            {{-- <button type="submit" class="btn btn-primary">Submit</button> --}}
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </div>
         </form>
         <!-- end panel-body -->
     </div>

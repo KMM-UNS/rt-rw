@@ -12,8 +12,9 @@ class BayarAgendaController extends Controller
 {
     public function index()
     {
+        // return 'berhasil';
         $pos_tagihan = Pos::pluck('nama', 'id');
-        $warga = Keluarga::all();
+        $warga = Keluarga::with(['pemberii'])->get();
         $iuran_agenda = IuranAgenda::all();
 
         return view('pages.user.kepala-keluarga.index_agenda', ['pos_tagihan' => $pos_tagihan, 'warga' => $warga, 'iuran_agenda' => $iuran_agenda]);

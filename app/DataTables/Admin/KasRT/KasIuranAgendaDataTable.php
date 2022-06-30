@@ -27,11 +27,22 @@ class KasIuranAgendaDataTable extends DataTable
                 $btn = $btn . '</div>';
 
                 return $btn;
-            });
+            })
 
-        // ->filterColumn('tanggal', function ($query) {
-        //     $query->whereRaw(date('d M Y', strtotime('tanggal')));
-        // })
+            ->editColumn('status', function ($row) {
+                if ($row->status == '1') {
+                    $label = '<label for="" class="label label-success">Sudah Bayar</label>';
+                    return  $label;
+                }
+                $label = '<label for="" class="label label-danger">Belum Bayar</label>';
+                return  $label;
+            })
+            ->rawColumns(['status', 'action']);
+
+
+        // ->editColumn('tanggal', function ($row) {
+        //     return $row->tanggal->isoFormat('DD MMMM YYYY');
+        // });
 
         // ->addColumn('image', function ($row) {
         //     $img = '<img src="' . asset($row->dokumen[0]['public_url']) . '" class="img-rounded height-80" >';
@@ -79,7 +90,7 @@ class KasIuranAgendaDataTable extends DataTable
             // Column::make('bulan')->data('namabulanss.nama'),
             // Column::make('tahun')->data('tahuns.nama'),
             Column::make('tanggal'),
-            Column::make('nama_petugas')->data('petugastagihan.nama'),
+            Column::make('petugas'),
             Column::make('pemberi')->data('pemberii.pemberi'),
             Column::make('pos'),
             Column::make('total_biaya'),

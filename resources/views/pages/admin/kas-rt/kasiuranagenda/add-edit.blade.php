@@ -50,10 +50,10 @@
             <label for="tahun">Tahun</label>
             <x-form.Dropdown name="kas_iuran_agendas_tahun" :options="$tahun" selected="{{{ old('kas_iuran_agendas_tahun') ?? ($data['tahun'] ?? null) }}}" required />
         </div> --}}
-        <div class="form-group">
+        {{-- <div class="form-group">
             <label for="petugas">Penerima</label>
             <x-form.Dropdown name="kas_iuran_agendas_petugas" :options="$nama_petugas" selected="{{{ old('kas_iuran_agendas_petugas') ?? ($data['petugas'] ?? null) }}}" required />
-        </div>
+        </div> --}}
         <div class="form-group">
           <label for="pemberi">Pemberi</label>
           <x-form.Dropdown name="kas_iuran_agendas_pemberi" :options="$pemberi" selected="{{{ old('kas_iuran_agendas_pemberi') ?? ($data['pemberi'] ?? null) }}}" required />
@@ -66,9 +66,31 @@
           <label for="total_biaya">Total Biaya</label>
           <input type="text" id="total_biaya" name="kas_iuran_agendas_total_biaya" class="form-control" autofocus data-parsley-required="true" value="{{{ $data->total_biaya ?? old('kas_iuran_agendas_total_biaya') }}}">
         </div>
-        <div class="form-group">
+        {{-- <div class="form-group">
             <label for="status">Status</label>
             <input type="text" id="status" name="kas_iuran_agendas_status" class="form-control" autofocus data-parsley-required="true" value="{{{ $data->status ?? old('kas_iuran_agendas_status') }}}">
+        </div> --}}
+        <div class="form-group">
+        <label for="status">Status</label>
+        <div class="col-md-8 col-sm-8">
+            <div class="form-check">
+                <input type="radio" class="form-check-input" name="kas_iuran_agendas_status" value="1" id="radio-required" data-parsley-required="true" />
+                <label class="form-check-label">Sudah Bayar</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" class="form-check-input" name="kas_iuran_agendas_status" id="radio-required2" value="2" />
+                <label class="form-check-label">Belum Bayar</label>
+            </div>
+        </div>
+            {{-- @if ($agenda->status == 0)
+            <a
+                href="{{ route('admin.kas-rt.kas-iuranagenda.status', $id) }}">
+                <button class="btn btn-danger">Belum Bayar</button></a>
+        @else
+            <a
+                href="{{ route('admin.kas-rt.kas-iuranagenda.status', $id) }}">
+                <button class="btn btn-success">Sudah Bayar</button></a>
+        @endif --}}
         </div>
       {{-- <div class="form-group">
         <label for="foto_iuranagenda">Bukti Pembayaran</label>

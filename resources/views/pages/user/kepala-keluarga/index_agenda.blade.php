@@ -24,11 +24,11 @@
                                     <th scope="col">Kepala Keluarga</th>
                                     <th scope="col">Pos Tagihan</th>
                                     <th scope="col">Telp</th>
-                                    @foreach ($iuran_agenda as $itemm)
+                                    {{-- @foreach ($iuran_agenda as $itemm)
                                         <th>{{ $itemm->nama }}</th>
-                                    @endforeach
-                                    {{-- <th scope="col">Status Iuran Pendidikan</th>
-                                    <th scope="col">Status Arisan</th> --}}
+                                    @endforeach --}}
+                                    <th scope="col">Halal Bi Halal</th>
+                                    <th scope="col">Peringatan HUT RI</th>
                                     {{-- <th scope="col">Tanda</th> --}}
 
                                 </tr>
@@ -42,8 +42,30 @@
                                         <td>{{ $item->pemberi }}</td>
                                         <td>{{ $item->pos->nama }}</td>
                                         <td>{{ $item->telp }}</td>
+                                        {{-- @foreach ($item->pemberii as $iuran)
+                                            <td>
+                                                {{ $iuran->jenis_iuran_id }}
+                                            </td>
+                                        @endforeach --}}
+                                        @php
+                                            $status1 = $item->pemberii->where('jenis_iuran_id', 1);
+                                            $status2 = $item->pemberii->where('jenis_iuran_id', 2);
+                                        @endphp
                                         <td>
-                                            @if ($item->status == 0)
+                                            <label for=""
+                                                class="label {{ count($status2) != 0 ? 'label-success' : 'label-danger center' }}">{{ count($status2) != 0 ? 'Sudah Bayar' : 'Belum Bayar' }}</label>
+                                        </td>
+                                        <td>
+                                            <label for=""
+                                                class="label {{ count($status1) != 0 ? 'label-success' : 'label-danger center' }}">{{ count($status1) != 0 ? 'Sudah Bayar' : 'Belum Bayar' }}</label>
+                                        </td>
+                                        {{-- <td> --}}
+                                        {{-- <label for=""
+                                                class="label {{ $item->pemberii->status == 1 ? 'label-success' : 'label-danger center' }}">{{ $item->pemberii->status == 1 ? 'Sudah Bayar' : 'Belum Bayar' }}</label> --}}
+                                        {{-- @if ($item->pemberii != null)
+                                                {{ $item->pemberii }}
+                                            @endif --}}
+                                        {{-- @if ($item->pemberii->status == 0)
                                                 <a
                                                     href="{{ route('user.kepala-keluarga.bayar-iuranagenda.status', $item->id) }}">
                                                     <button class="btn btn-danger">Belum Bayar</button></a>
@@ -51,19 +73,19 @@
                                                 <a
                                                     href="{{ route('user.kepala-keluarga.bayar-iuranagenda.status', $item->id) }}">
                                                     <button class="btn btn-success">Sudah Bayar</button></a>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            @if ($item->status == 0)
-                                                <a
-                                                    href="{{ route('user.kepala-keluarga.bayar-iuranagenda.status', $item->id) }}">
-                                                    <button class="btn btn-danger">Belum Bayar</button></a>
-                                            @else
-                                                <a
-                                                    href="{{ route('user.kepala-keluarga.bayar-iuranagenda.status', $item->id) }}">
-                                                    <button class="btn btn-success">Sudah Bayar</button></a>
-                                            @endif
-                                        </td>
+                                            @endif --}}
+                                        {{-- </td>
+                                        <td> --}}
+                                        {{-- <label for=""
+                                                class="label {{ $item->pemberii->status == 1 ? 'label-success' : 'label-danger center' }}">{{ $item->status_bayar->status == 1 ? 'Sudah Bayar' : 'Belum Bayar' }}</label> --}}
+                                        {{-- @if ($item->status2 == 0)
+                                        <a href="{{ route('user.kepala-keluarga.bayar-iuranagenda.status', $item->id) }}">
+                                            <button class="btn btn-danger">Belum Bayar</button></a>
+                                    @else
+                                        <a href="{{ route('user.kepala-keluarga.bayar-iuranagenda.status', $item->id) }}">
+                                            <button class="btn btn-success">Sudah Bayar</button></a>
+                                    @endif --}}
+                                        {{-- </td> --}}
 
                                         {{-- <td><label for=""
                                                 class="label {{ $item->status == 1 ? 'label-success' : 'label-danger' }}">{{ $item->status == 1 ? 'Aktif' : 'Tidak Aktif' }}</label>

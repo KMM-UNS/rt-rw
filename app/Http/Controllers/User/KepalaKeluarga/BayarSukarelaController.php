@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User\KepalaKeluarga;
 
 use App\Http\Controllers\Controller;
 use App\Models\IuranSukarela;
+use App\Models\KasIuranAgenda;
 use App\Models\Keluarga;
 use App\Models\Pos;
 use Illuminate\Http\Request;
@@ -26,8 +27,11 @@ class BayarSukarelaController extends Controller
 
     public function store(Request $request)
     {
+        $jenis_iuran = $request->jenis_iuran_id;
+        $status_bayar = KasIuranAgenda::with('iuranagenda')->where('jenis_iuran_id', $jenis_iuran)->get();
         $warga = Keluarga::all();
-        return redirect(route('user.kepala-keluarga.bayar-iuransukarela.index_sukarela'))->withToastSuccess('Data tersimpan', ['warga' => $warga]);
+        // $warga = Keluarga::with();
+        return redirect(route('user.kepala-keluarga.bayar-iuransukarela.index_sukarela'))->withToastSuccess('Data tersimpan', ['warga' => $warga, 'status_bayar' => $status_bayar]);
     }
 
     public function status($id)

@@ -30,6 +30,6 @@ class Keluarga extends Model
     }
     public function pemberii()
     {
-        return $this->hasMany(KasIuranAgenda::class);
+        return $this->hasMany(KasIuranAgenda::class, 'pemberi');
     }
 }

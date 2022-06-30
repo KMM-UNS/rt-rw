@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\User\KasRT;
 
-use App\Datatables\User\KasRT\KasIuranAgendaDataTable;
+use App\Datatables\Admin\KasRT\KasIuranAgendaDataTable;
+// use App\Datatables\User\KasRT\KasIuranAgendaDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\IuranAgenda;
 use App\Models\PetugasTagihan;
@@ -31,6 +32,14 @@ class KasIuranAgendaController extends Controller
         $nama_bulan = Bulan::pluck('nama', 'id');
         $tahun = Tahun::pluck('nama', 'id');
         return view('pages.user.kas-rt.kasiuranagenda.add-edit', ['jenis_iuranagenda' => $jenis_iuranagenda,  'nama_petugas' => $nama_petugas, 'nama_bulan' => $nama_bulan, 'tahun' => $tahun]);
+    }
+
+    public function status($id)
+    {
+        $agenda = KasIuranAgenda::find($id);
+        $agenda->status = !$agenda->status;
+        $agenda->save();
+        return redirect()->back();
     }
 
     public function store(IuranAgendaForm $request, FileUploaderHelper $fileUploaderHelper)

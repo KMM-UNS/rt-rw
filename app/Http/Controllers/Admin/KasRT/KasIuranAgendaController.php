@@ -23,6 +23,7 @@ class KasIuranAgendaController extends Controller
 {
     public function index(KasIuranAgendaDataTable $dataTable)
     {
+
         return $dataTable->render('pages.admin.kas-rt.kasiuranagenda.index');
     }
 
@@ -33,11 +34,20 @@ class KasIuranAgendaController extends Controller
         $nama_bulan = Bulan::pluck('nama', 'id');
         $tahun = Tahun::pluck('nama', 'id');
         $pemberi = Keluarga::pluck('pemberi', 'id');
+        $warga = KasIuranAgenda::all();
         // $agenda->pos = $request->petugas;
         // $pos = PetugasTagihan::where('petugas', $nama_petugas);
         // $nama_pos->pos = $request->petugas;
 
-        return view('pages.admin.kas-rt.kasiuranagenda.add-edit', ['jenis_iuranagenda' => $jenis_iuranagenda,  'nama_petugas' => $nama_petugas, 'nama_bulan' => $nama_bulan, 'tahun' => $tahun, 'pemberi' => $pemberi]);
+        return view('pages.admin.kas-rt.kasiuranagenda.add-edit', ['warga' => $warga, 'jenis_iuranagenda' => $jenis_iuranagenda,  'nama_petugas' => $nama_petugas, 'nama_bulan' => $nama_bulan, 'tahun' => $tahun, 'pemberi' => $pemberi]);
+    }
+
+    public function status($id)
+    {
+        $agenda = KasIuranAgenda::find($id);
+        $agenda->status = !$agenda->status;
+        $agenda->save();
+        return redirect()->back();
     }
 
     public function store(IuranAgendaForm $request, FileUploaderHelper $fileUploaderHelper)
@@ -45,12 +55,16 @@ class KasIuranAgendaController extends Controller
         DB::transaction(function () use ($request, $fileUploaderHelper) {
             try {
                 $agenda = KasIuranAgenda::createFromRequest($request);
+                $pos = Keluarga::where('id', $agenda->pemberi)->first()->pos;
 
-                $petugas = PetugasTagihan::select('pos')->where('id', $agenda->petugas)->first()->pos;
+                // dd($pos->petugastagihan->nama);
+                // $petugas = PetugasTagihan::select('pos')->where('id', $agenda->petugas)->first()->pos;
 
-                $pos = Pos::where('id', $petugas)->first()->nama;
-                // dd($pos);
-                $agenda->pos = $pos;
+                // $pos = Pos::where('id', $petugas)->first()->nama;
+                // // dd($pos);
+                $agenda->pos = $pos->nama;
+                $agenda->petugas = $pos->petugastagihan->nama;
+                // $agenda->pemberi = $pos->pemberi->nama;
                 $agenda->save();
                 if ($request->file()) {
 

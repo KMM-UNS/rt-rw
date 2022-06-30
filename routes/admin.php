@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\RekapIuran\RekapIuranAgendaController;
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     require base_path('vendor/laravel/fortify/routes/routes.php');
@@ -50,15 +51,20 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
             Route::resource('kas-iuranwajib', 'KasIuranWajibController');
             Route::resource('kas-iuransukarela', 'KasIuranSukaRelaController');
             Route::resource('kas-iurankondisional', 'KasIuranKondisionalController');
+            // Route::get('/updateagenda/status/{id}', 'KasIuranAgendaController@status')->name('kas-iuranagenda.status');
             Route::resource('kas-iuranagenda', 'KasIuranAgendaController');
             Route::resource('iuran-bulanan', 'IuranBulananController');
         });
 
         Route::group(['prefix' => '/rekap-kas', 'as' => 'rekap-kas.', 'namespace' => 'RekapIuran'], function () {
+            // Route::get('/rekap-iuranagenda/cetak-data-pertanggal/{tglawal}/{tglakhir}/cetak_pdf', 'RekapIuranAgendaController@cetak_pdf')->name('cetak-rekapagenda_pdf');
+            Route::get('/rekap-iuranagenda/cetak-data-pertanggal/{tglawal}/{tglakhir}', 'RekapIuranAgendaController@cetakRekapAgendaPertanggal')->name('cetak-data-pertanggal');
+
             Route::resource('rekap-iuranwajib', 'RekapIuranWajibController');
             Route::resource('rekap-iuransukarela', 'RekapIuranSukaRelaController');
             Route::resource('rekap-iurankondisional', 'RekapIuranKondisionalController');
             Route::resource('rekap-iuranagenda', 'RekapIuranAgendaController');
+
             Route::get('exportrekapiuranwajib', 'RekapIuranWajibController@rekapiuranwajibexport');
             Route::get('export-rekapwajib', 'RekapIuranWajibController@export_rekapwajib');
             Route::get('coba', 'RekapIuranAgendaController@coba');
