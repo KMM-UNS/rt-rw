@@ -22,6 +22,10 @@ class RiwayatRumah extends Model
         'tanggal_masuk',
         'tanggal_keluar',
     ];
+    protected $dates = [
+        'tanggal_masuk',
+        'tanggal_keluar',
+    ];
 
     public function keluarga()
     {
