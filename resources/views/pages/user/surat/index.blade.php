@@ -13,7 +13,7 @@
         <!-- begin panel -->
         <div class="panel panel-inverse">
             <div class="panel-body mx-3 text-center">
-                <h3>Data Keluarga</h3>
+                <h3>Data Pengajuan Surat</h3>
                 <hr>
                 <p style="font-size: 14px">Anda belum mengisi data keluarga.</p>
                 <a href="{{ route('user.keluarga.create') }}" class="btn btn-primary"><i class="fas fa-pencil-alt fa-fw mr-2"></i>Isi Data Keluarga</a>
