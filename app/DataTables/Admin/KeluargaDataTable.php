@@ -58,7 +58,10 @@ class KeluargaDataTable extends DataTable
                     ->orderBy(1)
                     ->parameters([
                         'responsive' => true,
-                        'autoWidth' => false
+                        'autoWidth' => false,
+                        'language' => [
+                            'url' => url(asset('assets/datatables/lang/indonesia.json'))
+                        ]
                     ])
                     ->buttons(
                         Button::make('create'),
@@ -83,10 +86,11 @@ class KeluargaDataTable extends DataTable
             Column::make('status_tinggal')->title('Status')->data('status_tinggal.nama'),
             // Column::make('rumah_id')->title('Nomor Rumah')->data('rumah.nomor_rumah'),
             Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center')
+            ->title('Aksi')
+            ->exportable(false)
+            ->printable(false)
+            ->width(60)
+            ->addClass('text-center')
         ];
     }
 

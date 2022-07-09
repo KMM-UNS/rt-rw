@@ -21,7 +21,16 @@ class RiwayatDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addIndexColumn();
+            ->addIndexColumn()
+            ->editColumn('tanggal_masuk', function($row){
+                return $row->tanggal_masuk->isoFormat('DD MMMM YYYY');
+            })
+            ->editColumn('tanggal_keluar', function($row){
+                if($row->tanggal_keluar != null){
+                    return $row->tanggal_keluar->isoFormat('DD MMMM YYYY');
+                }
+            });
+
     }
 
     /**

@@ -60,7 +60,10 @@ class PresensiRondaDataTable extends DataTable
                     ->orderBy(1)
                     ->parameters([
                         'responsive' => true,
-                        'autoWidth' => false
+                        'autoWidth' => false,
+                        'language' => [
+                            'url' => url(asset('assets/datatables/lang/indonesia.json'))
+                        ]
                     ])
                     ->buttons(
                         Button::make('create'),
@@ -86,6 +89,7 @@ class PresensiRondaDataTable extends DataTable
             Column::make('kehadiran'),
             Column::computed('action')
                   ->exportable(false)
+                  ->title('Aksi')
                   ->printable(false)
                   ->width(60)
                   ->addClass('text-center')

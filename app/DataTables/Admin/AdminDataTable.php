@@ -57,7 +57,10 @@ class AdminDataTable extends DataTable
             ->orderBy(1)
             ->parameters([
                 'responsive' => true,
-                'autoWidth' => false
+                'autoWidth' => false,
+                'language' => [
+                    'url' => url(asset('assets/datatables/lang/indonesia.json'))
+                ]
             ])
             ->buttons(
                 Button::make('create'),
@@ -83,6 +86,7 @@ class AdminDataTable extends DataTable
             Column::make('nrp')->title('NRP'),
             Column::make('department.nama')->title('Departemen'),
             Column::computed('action')
+                ->title('Aksi')
                 ->exportable(false)
                 ->printable(false)
                 ->width(60)

@@ -60,7 +60,10 @@ class TamuDataTable extends DataTable
                     ->orderBy(1)
                     ->parameters([
                         'responsive' => true,
-                        'autoWidth' => false
+                        'autoWidth' => false,
+                        'language' => [
+                            'url' => url(asset('assets/datatables/lang/indonesia.json'))
+                        ]
                     ])
                     ->buttons(
                         Button::make('create'),
@@ -87,6 +90,7 @@ class TamuDataTable extends DataTable
             Column::make('tanggal_tiba'),
             Column::make('lama_menetap'),
             Column::computed('action')
+                  ->title('Aksi')
                   ->addClass('details-control')
                   ->exportable(false)
                   ->printable(false)

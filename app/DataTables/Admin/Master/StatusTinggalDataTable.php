@@ -61,7 +61,10 @@ class StatusTinggalDataTable extends DataTable
                     ->orderBy(1)
                     ->parameters([
                         'responsive' => true,
-                        'autoWidth' => false
+                        'autoWidth' => false,
+                        'language' => [
+                            'url' => url(asset('assets/datatables/lang/indonesia.json'))
+                        ]
                     ])
                     ->buttons(
                         Button::make('create'),
@@ -83,6 +86,7 @@ class StatusTinggalDataTable extends DataTable
             Column::make('DT_RowIndex')->title('No')->orderable(false)->searchable(false)->addClass('text-center'),
             Column::make('nama'),
             Column::computed('action')
+                ->title('Aksi')
                 ->exportable(false)
                 ->printable(false)
                 ->addClass('text-center'),

@@ -72,7 +72,10 @@ class SuratDataTable extends DataTable
                     ->orderBy(1)
                     ->parameters([
                         'responsive' => true,
-                        'autoWidth' => false
+                        'autoWidth' => false,
+                        'language' => [
+                            'url' => url(asset('assets/datatables/lang/indonesia.json'))
+                        ]
                     ])
                     ->buttons(
                         Button::make('create'),
@@ -129,6 +132,7 @@ class SuratDataTable extends DataTable
             Column::make('status')->data('status_surat.nama'),
             Column::computed('action')
                   ->addClass('details-control')
+                  ->title('Aksi')
                   ->exportable(false)
                   ->printable(false)
                   ->width(60)

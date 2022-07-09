@@ -69,7 +69,10 @@ class UserDataTable extends DataTable
             ->orderBy(1)
             ->parameters([
                 'responsive' => true,
-                'autoWidth' => false
+                'autoWidth' => false,
+                'language' => [
+                    'url' => url(asset('assets/datatables/lang/indonesia.json'))
+                ]
             ])
             ->buttons(
                 Button::make('create'),
@@ -94,6 +97,7 @@ class UserDataTable extends DataTable
             Column::make('email'),
             Column::make('created_at')->title('Ditambahkan pada'),
             Column::computed('action')
+                ->title('Aksi')
                 ->exportable(false)
                 ->printable(false)
                 ->width(60)

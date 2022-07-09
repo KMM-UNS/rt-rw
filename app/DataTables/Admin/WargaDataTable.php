@@ -61,7 +61,10 @@ class WargaDataTable extends DataTable
                     ->orderBy(1)
                     ->parameters([
                         'responsive' => true,
-                        'autoWidth' => false
+                        'autoWidth' => false,
+                        'language' => [
+                            'url' => url(asset('assets/datatables/lang/indonesia.json'))
+                        ]
                     ])
                     ->buttons(
                         Button::make('create'),
@@ -90,6 +93,7 @@ class WargaDataTable extends DataTable
             Column::make('status_keluarga_id')->title('Status dalam Keluarga')->data('status_keluarga.nama'),
             Column::computed('action')
                   ->exportable(false)
+                  ->title('Aksi')
                   ->printable(false)
                   ->addClass('text-center'),
         ];

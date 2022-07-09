@@ -57,7 +57,10 @@ class JadwalRondaDataTable extends DataTable
                     ->orderBy(1)
                     ->parameters([
                         'responsive' => true,
-                        'autoWidth' => false
+                        'autoWidth' => false,
+                        'language' => [
+                            'url' => url(asset('assets/datatables/lang/indonesia.json'))
+                        ]
                     ])
                     ->buttons(
                         Button::make('create'),
@@ -80,6 +83,7 @@ class JadwalRondaDataTable extends DataTable
             Column::make('warga_id')->data('warga.nama')->title('Nama Warga'),
             Column::computed('action')
                   ->exportable(false)
+                  ->title('Aksi')
                   ->printable(false)
                   ->width(60)
                   ->addClass('text-center')

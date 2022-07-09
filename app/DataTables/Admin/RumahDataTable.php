@@ -67,7 +67,10 @@ class RumahDataTable extends DataTable
                     ->orderBy(1)
                     ->parameters([
                         'responsive' => true,
-                        'autoWidth' => false
+                        'autoWidth' => false,
+                        'language' => [
+                            'url' => url(asset('assets/datatables/lang/indonesia.json'))
+                        ]
                     ])
                     ->buttons(
                         Button::make('create'),
@@ -95,6 +98,7 @@ class RumahDataTable extends DataTable
             Column::computed('image'),
             Column::computed('action')
                   ->exportable(false)
+                  ->title('Aksi')
                   ->printable(false)
                   ->addClass('text-center'),
         ];
