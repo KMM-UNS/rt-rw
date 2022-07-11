@@ -33,8 +33,6 @@ class DatabaseSeeder extends Seeder
             PekerjaanSeeder::class,
             PendidikanSeeder::class,
             StatusKawinSeeder::class,
-            SettingSeeder::class,
-            RoleSeeder::class,
             GolonganDarahSeeder::class,
             KeperluanSuratSeeder::class,
             StatusKeluargaSeeder::class,
