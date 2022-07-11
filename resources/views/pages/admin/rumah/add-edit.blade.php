@@ -62,11 +62,11 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-1 my-auto">
-                            <label for="status_penggunaan_id"><strong>Status Penggunaan</strong></label>
+                            <label for="status_penggunaan_rumah_id"><strong>Status Penggunaan Rumah</strong></label>
                         </div>
                         <div class="col-md-5">
                             <div class="input-group">
-                                <x-form.Dropdown name="rumah_status_penggunaan_id" :options="$status_penggunaan" selected="{{{ old('rumah_status_penggunaan_id') ?? ($data['status_penggunaan_id'] ?? null) }}}" required />
+                                <x-form.Dropdown name="rumah_status_penggunaan_rumah_id" :options="$status_penggunaan_rumah" selected="{{{ old('rumah_status_penggunaan_rumah_id') ?? ($data['status_penggunaan_rumah_id'] ?? null) }}}" required />
                             </div>
                         </div>
                         <div class="col-md-1 my-auto">

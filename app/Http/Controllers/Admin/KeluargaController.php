@@ -53,7 +53,7 @@ class KeluargaController extends Controller
             try {
                 $status_tinggal = StatusTinggal::select('id')->where('nama', 'Warga Tinggal')->first();
                 $keluarga = Keluarga::createFromRequest($request);
-                $keluarga->status_tinggal = $status_tinggal->id;
+                $keluarga->status_tinggal_id = $status_tinggal->id;
                 $keluarga->createable()->associate($request->user());
                 $keluarga->save();
 
@@ -181,7 +181,7 @@ class KeluargaController extends Controller
                     {
                         // update ke rumah yang dipilih
                         $keluarga->updateFromRequest($request);
-                        $keluarga->status_tinggal = 1;
+                        $keluarga->status_tinggal_id = 1;
                         // dd($keluarga);
                         $keluarga->save();
 
@@ -208,7 +208,7 @@ class KeluargaController extends Controller
 
                         // update ke rumah yang dipilih
                         $keluarga->updateFromRequest($request);
-                        $keluarga->status_tinggal = 2;
+                        $keluarga->status_tinggal_id = 2;
                         $keluarga->rumah_id = "";
                         $keluarga->save();
 

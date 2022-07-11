@@ -18,10 +18,10 @@ class CreateAppsTable extends Migration
             $table->string('nama');
             $table->string('rt');
             $table->string('rw');
-            $table->bigInteger('kelurahan_id');
-            $table->bigInteger('kecamatan_id');
-            $table->bigInteger('kabupaten_id');
-            $table->bigInteger('provinsi_id');
+            $table->char('kelurahan_id', 10);
+            $table->char('kecamatan_id', 7);
+            $table->char('kabupaten_id', 4);
+            $table->char('provinsi_id', 2);
             $table->integer('kode_pos');
             $table->string('telepon');
             $table->string('email');
@@ -29,6 +29,11 @@ class CreateAppsTable extends Migration
             $table->string('ketua_rw');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('provinsi_id')->references('id')->on('provinces')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('kabupaten_id')->references('id')->on('regencies')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('kecamatan_id')->references('id')->on('districts')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('kelurahan_id')->references('id')->on('villages')->onUpdate('cascade')->onDelete('restrict');
         });
     }
 

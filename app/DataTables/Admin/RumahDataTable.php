@@ -29,16 +29,16 @@ class RumahDataTable extends DataTable
                 $btn = $btn . '<a href="' . route('admin.rumah.destroy', $row->id) . '" class="btn btn-danger buttons-delete"><i class="fas fa-trash fa-fw"></i></a>';
                 $btn = $btn . '</div>';
                 return $btn;
-            })
+            });
             // membuat img tag dan memanggil relasi dokumen
             // dokumen[0]['public_url'] berarti mengambil isi dari dokumen index ke-0 kolom public url yang mana isinya adalah link ke dokumen yang diupload
             // tag img dapat diubah sesuai keinginan
-            ->addColumn('image', function($row){
-                $img = '<img src="'.asset(empty($row->dokumen) ? $row->dokumen->first()['public_url'] : '') .'" class="img-rounded height-80" >';
-                return $img;
-            })
+            // ->addColumn('image', function($row){
+            //     $img = '<img src="'.asset(empty($row->dokumen) ? $row->dokumen->first()['public_url'] : '') .'" class="img-rounded height-80" >';
+            //     return $img;
+            // })
             // raw column berfungsi untuk menjalankan tag html
-            ->rawColumns(['image', 'action']);
+            // ->rawColumns(['image', 'action']);
     }
 
     /**
@@ -49,7 +49,7 @@ class RumahDataTable extends DataTable
      */
     public function query(Rumah $model)
     {
-        return $model->select('rumah.*')->with(['status_penggunaan', 'status_hunian']);
+        return $model->select('rumah.*')->with(['status_penggunaan_rumah', 'status_hunian']);
     }
 
     /**
@@ -92,10 +92,10 @@ class RumahDataTable extends DataTable
             Column::make('DT_RowIndex')->title('No')->orderable(false)->searchable(false)->addClass('text-center'),
             Column::make('alamat'),
             Column::make('nomor_rumah'),
-            Column::make('status_penggunaan_id')->title('Status Penggunaan')->data('status_penggunaan.nama'),
+            Column::make('status_penggunaan_rumah_id')->title('Status Penggunaan')->data('status_penggunaan_rumah.nama'),
             Column::make('status_hunian_id')->title('Status Hunian')->data('status_hunian.nama'),
             // memanggil column yang sudah dibuat di atas
-            Column::computed('image'),
+            // Column::computed('image'),
             Column::computed('action')
                   ->exportable(false)
                   ->title('Aksi')

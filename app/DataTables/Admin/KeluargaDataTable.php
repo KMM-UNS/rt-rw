@@ -83,7 +83,7 @@ class KeluargaDataTable extends DataTable
             Column::make('DT_RowIndex')->title('No')->orderable(false)->searchable(false)->addClass('text-center'),
             Column::make('no_kk'),
             Column::make('kepala_keluarga'),
-            Column::make('status_tinggal')->title('Status')->data('status_tinggal.nama'),
+            Column::make('status_tinggal_id')->title('Status')->data('status_tinggal.nama'),
             // Column::make('rumah_id')->title('Nomor Rumah')->data('rumah.nomor_rumah'),
             Column::computed('action')
             ->title('Aksi')
@@ -101,6 +101,6 @@ class KeluargaDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Admin\Keluarga_' . date('YmdHis');
+        return 'Keluarga_' . date('YmdHis');
     }
 }

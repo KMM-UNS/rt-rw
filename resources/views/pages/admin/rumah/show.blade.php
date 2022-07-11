@@ -49,7 +49,7 @@
             <div class="col-md-6">
                 <div>
                     <label>Status Penggunaan</label>
-                    <p class="font-weight-bold">{{ $data->status_penggunaan->nama }}</p>
+                    <p class="font-weight-bold">{{ $data->status_penggunaan_rumah->nama }}</p>
                 </div>
                 <div>
                     <label>Status Hunian</label>

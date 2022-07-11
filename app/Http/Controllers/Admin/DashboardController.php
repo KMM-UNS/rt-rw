@@ -2,14 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Charts\Admin\GenderChart;
-use App\Charts\Admin\PekerjaanChart;
-use App\Charts\Admin\PendidikanChart;
-use App\Charts\Admin\SuratChart;
-use App\Http\Controllers\Controller;
 use App\Models\App;
+use App\Models\Rumah;
+use App\Models\Surat;
+use App\Models\Warga;
+use App\Models\Keluarga;
 use App\Models\JadwalRonda;
 use Illuminate\Http\Request;
+use App\Models\GolonganDarah;
+use App\Charts\Admin\SuratChart;
+use App\Charts\Admin\GenderChart;
+use App\Charts\Admin\PekerjaanChart;
+use App\Http\Controllers\Controller;
+use App\Charts\Admin\PendidikanChart;
 
 class DashboardController extends Controller
 {
@@ -29,6 +34,10 @@ class DashboardController extends Controller
         $sabtu = JadwalRonda::with(['warga'])->where('hari_id', '7')->get();
         // dd($jadwal);
         $app = App::first();
+        $warga = Warga::count();
+        $keluarga = Keluarga::count();
+        $surat = Surat::where('status_surat_id', '!=', '1')->count();
+        $rumah = Rumah::count();
         return view('pages.admin.dashboard', [
             'minggu' => $minggu,
             'senin' => $senin,
@@ -38,6 +47,10 @@ class DashboardController extends Controller
             'jumat' => $jumat,
             'sabtu' => $sabtu,
             'app' => $app,
+            'warga' => $warga,
+            'keluarga' => $keluarga,
+            'surat' => $surat,
+            'rumah' => $rumah,
             'genderChart' => $genderChart->build(),
             'pendidikanChart' => $pendidikanChart->build(),
             'pekerjaanChart' => $pekerjaanChart->build(),

@@ -17,10 +17,13 @@ class CreateRumahTable extends Migration
             $table->id();
             $table->string('alamat',);
             $table->string('nomor_rumah');
-            $table->bigInteger('status_penggunaan_id');
-            $table->bigInteger('status_hunian_id');
+            $table->unsignedBigInteger('status_penggunaan_rumah_id');
+            $table->unsignedBigInteger('status_hunian_id');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('status_penggunaan_rumah_id')->references('id')->on('status_penggunaan_rumah')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('status_hunian_id')->references('id')->on('status_hunian')->onUpdate('cascade')->onDelete('restrict');
         });
     }
 

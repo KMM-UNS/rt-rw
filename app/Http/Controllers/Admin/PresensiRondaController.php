@@ -20,11 +20,11 @@ class PresensiRondaController extends Controller
 
     public function create()
     {
-        $jadwal = JadwalRonda::with('warga:id,nama')->get()->pluck('warga.nama', 'id');
-        // dd($jadwal);
+        $jadwal_ronda = JadwalRonda::with('warga:id,nama')->get()->pluck('warga.nama', 'id');
+        // dd($jadwal_ronda);
         $hari = Hari::pluck('nama', 'id');
         return view('pages.admin.ronda.presensi.add-edit', [
-            'jadwal' => $jadwal,
+            'jadwal_ronda' => $jadwal_ronda,
             'hari' => $hari,
         ]);
     }

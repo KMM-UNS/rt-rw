@@ -46,25 +46,11 @@ class SoftdeleteMasterData extends Migration
         Schema::table('status_kawin', function ($table) {
             $table->dropSoftDeletes();
         });
-        Schema::table('jenis_permohonan_sim', function ($table) {
-            $table->dropSoftDeletes();
-        });
-        Schema::table('golongan_sim', function ($table) {
-            $table->dropSoftDeletes();
-        });
+
         Schema::table('pendidikan', function ($table) {
             $table->dropSoftDeletes();
         });
         Schema::table('golongan_darah', function ($table) {
-            $table->dropSoftDeletes();
-        });
-        Schema::table('status_keluarga', function ($table) {
-            $table->dropSoftDeletes();
-        });
-        Schema::table('jenis_visa', function ($table) {
-            $table->dropSoftDeletes();
-        });
-        Schema::table('maksud_kunjungan_wna', function ($table) {
             $table->dropSoftDeletes();
         });
     }

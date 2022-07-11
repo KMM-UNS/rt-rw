@@ -31,7 +31,7 @@ class Keluarga extends Model
 
     public function status_tinggal()
     {
-        return $this->belongsTo(StatusTinggal::class, 'status_tinggal');
+        return $this->belongsTo(StatusTinggal::class);
     }
 
     public function riwayat_rumah()

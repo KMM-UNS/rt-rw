@@ -17,7 +17,7 @@ class BerandaController extends Controller
         $app = App::first();
         $warga = Warga::count();
         $keluarga = Keluarga::count();
-        $surat = Surat::where('status', '!=', '1')->count();
+        $surat = Surat::where('status_surat_id', '!=', '1')->count();
         $rumah = Rumah::count();
         // dd($keluarga);
         return view('home',[

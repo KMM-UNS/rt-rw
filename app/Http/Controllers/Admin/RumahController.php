@@ -35,11 +35,11 @@ class RumahController extends Controller
      */
     public function create()
     {
-        $status_penggunaan = StatusPenggunaanRumah::pluck('nama', 'id');
+        $status_penggunaan_rumah = StatusPenggunaanRumah::pluck('nama', 'id');
         $status_hunian = StatusHunian::pluck('nama', 'id');
 
         return view('pages.admin.rumah.add-edit', [
-            'status_penggunaan' => $status_penggunaan,
+            'status_penggunaan_rumah' => $status_penggunaan_rumah,
             'status_hunian' => $status_hunian
         ]);
     }
@@ -99,11 +99,11 @@ class RumahController extends Controller
     public function edit($id, DataHelper $dataHelper)
     {
         $data = Rumah::with('dokumen')->findOrFail($id);
-        $status_penggunaan = StatusPenggunaanRumah::pluck('nama', 'id');
+        $status_penggunaan_rumah = StatusPenggunaanRumah::pluck('nama', 'id');
         $status_hunian = StatusHunian::pluck('nama', 'id');
         return view('pages.admin.rumah.add-edit', [
             'data' => $data,
-            'status_penggunaan' => $status_penggunaan,
+            'status_penggunaan_rum$status_penggunaan_rumah' => $status_penggunaan_rumah,
             'status_hunian' => $status_hunian,
             'dataHelper' => $dataHelper
         ]);

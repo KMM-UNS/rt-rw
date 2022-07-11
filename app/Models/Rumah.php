@@ -15,7 +15,7 @@ class Rumah extends Model
     protected $fillable = [
         'alamat',
         'nomor_rumah',
-        'status_penggunaan_id',
+        'status_penggunaan_rumah_id',
         'status_hunian_id',
     ];
 
@@ -30,7 +30,7 @@ class Rumah extends Model
         return $this->hasMany(RiwayatRumah::class);
     }
 
-    public function status_penggunaan()
+    public function status_penggunaan_rumah()
     {
         return $this->belongsTo(StatusPenggunaanRumah::class);
     }

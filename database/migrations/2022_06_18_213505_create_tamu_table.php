@@ -21,11 +21,14 @@ class CreateTamuTable extends Migration
             $table->string('hubungan');
             $table->date('tanggal_tiba');
             $table->integer('lama_menetap');
-            $table->bigInteger('keluarga_id');
-            $table->bigInteger('createable_id');
+            $table->unsignedBigInteger('keluarga_id');
+            $table->unsignedBigInteger('createable_id');
             $table->text('createable_type');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('keluarga_id')->references('id')->on('keluarga')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('createable_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('restrict');
         });
     }
 

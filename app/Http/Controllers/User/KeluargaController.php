@@ -43,7 +43,7 @@ class KeluargaController extends Controller
             try {
                 $status_tinggal = StatusTinggal::select('id')->where('nama', 'Warga Tinggal')->first();
                 $keluarga = Keluarga::createFromRequest($request);
-                $keluarga->status_tinggal = $status_tinggal->id;
+                $keluarga->status_tinggal_id = $status_tinggal->id;
                 $keluarga->createable()->associate($request->user());
                 $keluarga->save();
 

@@ -15,12 +15,15 @@ class CreateRiwayatRumahTable extends Migration
     {
         Schema::create('riwayat_rumah', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('keluarga_id');
-            $table->bigInteger('rumah_id');
+            $table->unsignedBigInteger('keluarga_id');
+            $table->unsignedBigInteger('rumah_id');
             $table->date('tanggal_masuk');
             $table->date('tanggal_keluar')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('keluarga_id')->references('id')->on('keluarga')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('rumah_id')->references('id')->on('rumah')->onUpdate('cascade')->onDelete('restrict');
         });
     }
 

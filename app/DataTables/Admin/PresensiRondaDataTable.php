@@ -42,7 +42,7 @@ class PresensiRondaDataTable extends DataTable
      */
     public function query(PresensiRonda $model)
     {
-        return $model->newQuery()->with(['hari', 'jadwal.warga']);
+        return $model->newQuery()->with(['hari', 'jadwal_ronda.warga']);
     }
 
     /**
@@ -85,7 +85,7 @@ class PresensiRondaDataTable extends DataTable
             Column::make('DT_RowIndex')->title('No')->orderable(false)->searchable(false)->addClass('text-center'),
             Column::make('hari_id')->data('hari.nama')->title('Hari'),
             Column::make('tanggal'),
-            Column::make('warga_id')->data('jadwal.warga.nama')->title('Nama Warga'),
+            Column::make('jadwal_id')->data('jadwal_ronda.warga.nama')->title('Nama Warga'),
             Column::make('kehadiran'),
             Column::computed('action')
                   ->exportable(false)

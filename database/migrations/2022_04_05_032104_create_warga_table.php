@@ -15,23 +15,33 @@ class CreateWargaTable extends Migration
     {
         Schema::create('warga', function (Blueprint $table) {
             $table->id();
-            $table->string('keluarga_id');
+            $table->unsignedBigInteger('keluarga_id');
             $table->string('nik');
             $table->string('nama');
             $table->string('jenis_kelamin');
-            $table->bigInteger('agama_id');
-            $table->bigInteger('golongan_darah_id');
+            $table->unsignedBigInteger('agama_id');
+            $table->unsignedBigInteger('golongan_darah_id');
             $table->string('tempat_lahir');
             $table->date('tanggal_lahir');
-            $table->bigInteger('warga_negara_id');
-            $table->bigInteger('pendidikan_id');
-            $table->bigInteger('pekerjaan_id');
-            $table->bigInteger('status_keluarga_id');
-            $table->bigInteger('status_kawin_id');
+            $table->unsignedBigInteger('warga_negara_id');
+            $table->unsignedBigInteger('pendidikan_id');
+            $table->unsignedBigInteger('pekerjaan_id');
+            $table->unsignedBigInteger('status_keluarga_id');
+            $table->unsignedBigInteger('status_kawin_id');
             $table->text('alamat');
-            $table->bigInteger('status_warga_id');
+            $table->unsignedBigInteger('status_warga_id');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('keluarga_id')->references('id')->on('keluarga')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('agama_id')->references('id')->on('agama')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('golongan_darah_id')->references('id')->on('golongan_darah')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('warga_negara_id')->references('id')->on('warga_negara')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('pendidikan_id')->references('id')->on('pendidikan')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('pekerjaan_id')->references('id')->on('pekerjaan')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('status_keluarga_id')->references('id')->on('status_keluarga')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('status_kawin_id')->references('id')->on('status_kawin')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('status_warga_id')->references('id')->on('status_warga')->onUpdate('cascade')->onDelete('restrict');
         });
     }
 

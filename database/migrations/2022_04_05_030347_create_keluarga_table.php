@@ -17,13 +17,17 @@ class CreateKeluargaTable extends Migration
             $table->id();
             $table->string('no_kk');
             $table->string('kepala_keluarga');
-            $table->string('rumah_id')->nullable();
+            $table->unsignedBigInteger('rumah_id')->nullable();
             $table->string('telp');
-            $table->bigInteger('status_tinggal');
-            $table->bigInteger('createable_id');
+            $table->unsignedBigInteger('status_tinggal_id');
+            $table->unsignedBigInteger('createable_id');
             $table->text('createable_type');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('rumah_id')->references('id')->on('rumah')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('status_tinggal_id')->references('id')->on('status_tinggal')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('createable_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('restrict');
         });
     }
 

@@ -16,16 +16,21 @@ class CreateSuratTable extends Migration
         Schema::create('surat', function (Blueprint $table) {
             $table->id();
             $table->string('nomor_surat');
-            $table->bigInteger('warga_id');
-            $table->bigInteger('keperluan_surat_id');
+            $table->unsignedbigInteger('warga_id');
+            $table->unsignedbigInteger('keperluan_surat_id');
             $table->date('tanggal_pengajuan');
             $table->date('tanggal_disetujui')->nullable();
             $table->string('keterangan')->nullable();
-            $table->string('status');
-            $table->bigInteger('createable_id');
+            $table->unsignedBigInteger('status_surat_id');
+            $table->unsignedbigInteger('createable_id');
             $table->text('createable_type');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('warga_id')->references('id')->on('warga')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('keperluan_surat_id')->references('id')->on('keperluan_surat')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('status_surat_id')->references('id')->on('status_surat')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('createable_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('restrict');
         });
     }
 
