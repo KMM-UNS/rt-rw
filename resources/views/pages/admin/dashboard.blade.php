@@ -8,15 +8,87 @@
 @endpush
 
 @section('content')
-<h1 class="page-header mb-1 text-center">{{ isset($app) ? $app->nama : 'Perumahan'}}</h1>
-<p class="text-center fw-normal m-0" style="font-size: 16px;">{{ isset($app) ? "RT {$app->rt} RW {$app->rw} KELURAHAN {$app->kelurahan->name} KECAMATAN  {$app->kecamatan->name}"  : 'RT RW Kelurahan Kecamatan'}}</p>
-<p class="text-center fw-normal m-0" style="font-size: 16px;">
+<h1 class="page-header mb-1 font-weight-bold text-center">{{ isset($app) ? $app->nama : 'Perumahan'}}</h1>
+<p class="text-center font-weight-600 m-0" style="font-size: 16px;">{{ isset($app) ? "RT {$app->rt} RW {$app->rw} KELURAHAN {$app->kelurahan->name} KECAMATAN  {$app->kecamatan->name}"  : 'RT RW Kelurahan Kecamatan'}}</p>
+<p class="text-center font-weight-600 m-0" style="font-size: 16px;">
     {{ isset($app) ?   "{$app->kabupaten->name} PROVINSI {$app->provinsi->name}"  : ' Kabupaten/Kota Provinsi' }}
 </p>
 
 <div class="row mt-3">
+    <div class="col-md-3">
+        <div class="card border-0 bg-white text-dark text-truncate mb-3">
+            <!-- begin card-body -->
+            <div class="card-body">
+                <!-- begin title -->
+                <div class="mb-3 text-black">
+                    <b class="mb-3" style="font-size: 16px;">WARGA</b>
+                </div>
+                <!-- end title -->
+                <!-- begin conversion-rate -->
+                <div class="d-flex align-items-center mb-1">
+                    <h2 class="text-black mb-0"><span data-animation="number" data-value="{{ $warga }}">0</h2>
+                </div>
+            </div>
+            <!-- end card-body -->
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-0 bg-white text-dark text-truncate mb-3">
+            <!-- begin card-body -->
+            <div class="card-body">
+                <!-- begin title -->
+                <div class="mb-3 text-black">
+                    <b class="mb-3" style="font-size: 16px;">KELUARGA</b>
+                </div>
+                <!-- end title -->
+                <!-- begin conversion-rate -->
+                <div class="d-flex align-items-center mb-1">
+                    <h2 class="text-black mb-0"><span data-animation="number" data-value="{{ $keluarga }}">0</h2>
+                </div>
+            </div>
+            <!-- end card-body -->
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-0 bg-white text-dark text-truncate mb-3">
+            <!-- begin card-body -->
+            <div class="card-body">
+                <!-- begin title -->
+                <div class="mb-3 text-black">
+                    <b class="mb-3" style="font-size: 16px;">RUMAH</b>
+                </div>
+                <!-- end title -->
+                <!-- begin conversion-rate -->
+                <div class="d-flex align-items-center mb-1">
+                    <h2 class="text-black mb-0"><span data-animation="number" data-value="{{ $rumah }}">0</h2>
+                </div>
+            </div>
+            <!-- end card-body -->
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-0 bg-white text-dark text-truncate mb-3">
+            <!-- begin card-body -->
+            <div class="card-body">
+                <!-- begin title -->
+                <div class="mb-3 text-black">
+                    <b class="mb-3" style="font-size: 16px;">SURAT KELUAR</b>
+                </div>
+                <!-- end title -->
+                <!-- begin conversion-rate -->
+                <div class="d-flex align-items-center mb-1">
+                    <h2 class="text-black mb-0"><span data-animation="number" data-value="{{ $surat }}">0</h2>
+                </div>
+            </div>
+            <!-- end card-body -->
+        </div>
+    </div>
+</div>
+
+
+<div class="row mt-3">
     <div class="col-xl-8">
-        <div class="card border-0 bg-white mb-3 overflow-hidden">
+        <div class="card border-0 bg-white  text-truncate mb-3">
             <div class="card-title mt-3 mb-1 text-center">
                 <h4>Jadwal Ronda</h4>
             </div>
