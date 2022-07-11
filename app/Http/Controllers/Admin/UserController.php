@@ -42,7 +42,7 @@ class UserController extends Controller
                 $profile->save();
             } catch (\Throwable $th) {
                 DB::rollBack();
-                $msg = "Error saving data";
+                $msg = "Terdapat kesalahan saat menyimpan data";
 
                 if ($request->wantsJson()) {
                     $request->flash();
