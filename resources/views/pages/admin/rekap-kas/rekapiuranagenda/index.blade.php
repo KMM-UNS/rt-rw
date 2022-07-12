@@ -29,7 +29,7 @@
     <div class="panel panel-inverse">
         <!-- begin panel-heading -->
         <div class="panel-heading">
-            <h4 class="panel-title">DataTable - @yield('title')</h4>
+            <h4 class="panel-title">Rekap Kas Iuran - @yield('title')</h4>
             <div class="panel-heading-btn">
                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i
                         class="fa fa-expand"></i></a>
@@ -39,7 +39,7 @@
         </div>
 
         <!-- begin panel-body -->
-        <form action="{{ route('admin.rekap-kas.rekap-iuranagenda.store') }}" id="form" name="form" method="POST"
+        <form action="{{ route('admin.rekap-kas.rekap-iuranagenda.store') }}" id="form" name="form" method="post"
             data-parsley-validate="true" enctype="multipart/form-data">
             @csrf
             @if (isset($datas))
@@ -49,50 +49,29 @@
 
                 <div class="form-group">
                     <div class="row">
-                        {{-- <div class="col-md-1 my-auto">
+                        <div class="col-md-1 my-auto">
                             <label for="jenis_iuran_id"><strong>Jenis Iuran</strong></label>
                         </div>
-                        <div class="col-md-3">
-                            <div class="input-group">
-                                <x-form.Dropdown name="jenis_iuran_id" :options="$jenis_iuran" selected="{{{ old('jenis_iuran_id') ?? ($data['jenis_iuran_id'] ?? null) }}}" required />
-                            </div>
+                        <div class="col-md-3 ">
+                            <x-form.Dropdown name="jenis_iuran_id" :options="$jenis_iuran" selected="{{{ old('jenis_iuran_id') ?? ($data['jenis_iuran_id'] ?? null) }}}" required />
                         </div>
                         <div class="col-md-1 my-auto">
-                            <label for="bulan"><strong>Bulan</strong></label>
+                            <label for="tglawal"><strong>Tanggal Awal</strong></label>
                         </div>
-                        <div class="col-md-3">
-                            <div class="input-group">
-                                <x-form.Dropdown name="bulan" :options="$nama_bulans" selected="{{{ old('bulan') ?? ($data['bulan'] ?? null) }}}" required />
-                            </div>
+                        <div class="col-md-3 ">
+                            <input type="date" name="tglawal" id="tglawal" class="form-control datepicker" autocomplete="off" value="{{ date('Y-m-d') }}"/>
                         </div>
                         <div class="col-md-1 my-auto">
-                            <label for="status_hunian_id"><strong>Tahun</strong></label>
+                            <label for="tglakhir"><strong>Tanggal Akhir</strong></label>
                         </div>
-                        <div class="col-md-3">
-                            <div class="input-group">
-                                <x-form.Dropdown name="tahun" :options="$tahun" selected="{{{ old('tahun') ?? ($data['tahun'] ?? null) }}}" required />
-                            </div>
-                        </div> --}}
-
-                        {{-- baru --}}
-                        <div class="panel-body">
-                            <div class="input-group mb-3">
-                                <label for="label"> Tanggal Awal</label>
-                                <input type="date" name="tglawal" id="tglawal" class="form-control" />
-                            </div>
-                            <div class="input-group mb-3">
-                                <label for="label"> Tanggal Akhir</label>
-                                <input type="date" name="tglakhir" id="tglakhir" class="form-control" />
-                            </div>
-                            <div class="input-group mb-3">
-                                <a href=""
-                                    onclick="this.href='/admin/rekap-kas/rekap-iuranagenda/cetak-data-pertanggal/'+ document.getElementById('tglawal').value + '/' + document.getElementById('tglakhir').value"
-                                    target="_blank" class="btn btn-primary col-md-12">Cetak Laporan Pertanggal<i
-                                        class="fas fa-print"></i></a>
-                            </div>
-                            {{-- <button type="submit" class="btn btn-primary">Submit</button> --}}
+                        <div class="col-md-3 ">
+                            <input type="date" name="tglakhir" id="tglakhir" class="form-control datepicker" autocomplete="off" value="{{ date('Y-m-d') }}"/>
                         </div>
                     </div>
+                    <div class="">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+
         </form>
         <!-- end panel-body -->
     </div>

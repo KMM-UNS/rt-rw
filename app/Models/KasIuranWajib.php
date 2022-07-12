@@ -17,7 +17,7 @@ class KasIuranWajib extends Model
     public const ACTIVE = "aktif";
 
     protected $table = 'kas_iuran_wajibs';
-    protected $fillable = ['jenis_iuran_id', 'bulan', 'tahun', 'petugas', 'pemberi', 'total_biaya'];
+    protected $fillable = ['jenis_iuran_id', 'tanggal', 'warga', 'total_biaya', 'status'];
     protected $dates = [
         'created_at'
     ];
@@ -30,14 +30,14 @@ class KasIuranWajib extends Model
     {
         return $this->belongsTo(PetugasTagihan::class, 'petugas');
     }
-    public function namabulanss()
-    {
-        return $this->belongsTo(Bulan::class, 'bulan');
-    }
-    public function tahuns()
-    {
-        return $this->belongsTo(Tahun::class, 'tahun');
-    }
+    // public function namabulanss()
+    // {
+    //     return $this->belongsTo(Bulan::class, 'bulan');
+    // }
+    // public function tahuns()
+    // {
+    //     return $this->belongsTo(Tahun::class, 'tahun');
+    // }
 
     //membuat dropdown jenis iuran
     public function jenisiuranwajib()
@@ -47,5 +47,10 @@ class KasIuranWajib extends Model
     public function dokumen()
     {
         return $this->morphToMany(Dokumen::class, 'dokumenable');
+    }
+    //tamabahan dropdown pemberi
+    public function warga_wajib()
+    {
+        return $this->belongsTo(Keluarga::class, 'warga');
     }
 }

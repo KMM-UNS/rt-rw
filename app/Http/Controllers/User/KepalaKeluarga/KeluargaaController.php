@@ -13,28 +13,28 @@ class KeluargaaController extends Controller
     public function index()
     {
         $pos_tagihan = Pos::pluck('nama', 'id');
-        $warga = Keluarga::all();
+        $wargaa = Keluarga::with(['pemberii'])->get();
         $iuran_wajib = IuranWajib::all();
 
-        return view('pages.user.kepala-keluarga.index', ['pos_tagihan' => $pos_tagihan, 'warga' => $warga, 'iuran_wajib' => $iuran_wajib]);
+        return view('pages.user.kepala-keluarga.index_wajib', ['pos_tagihan' => $pos_tagihan, 'wargaa' => $wargaa, 'iuran_wajib' => $iuran_wajib]);
     }
 
     public function create()
     {
-        return view('pages.user.petugas.add-edit');
+        // return view('pages.user.petugas.add-edit');
     }
 
     public function store(Request $request)
     {
-        $warga = Keluarga::all();
-        return redirect(route('user.kepala-keluarga.bayar-iuranwajib.index'))->withToastSuccess('Data tersimpan', ['warga' => $warga]);
+        $wargaa = Keluarga::all();
+        return redirect(route('user.kepala-keluarga.bayar-iuranwajib.index'))->withToastSuccess('Data tersimpan', ['wargaa' => $wargaa]);
     }
 
     public function status($id)
     {
-        $warga = Keluarga::find($id);
-        $warga->status = !$warga->status;
-        $warga->save();
+        $wargaa = Keluarga::find($id);
+        $wargaa->status = !$wargaa->status;
+        $wargaa->save();
         return redirect()->back();
     }
 

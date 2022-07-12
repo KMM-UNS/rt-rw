@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\User\KepalaKeluarga;
 
 use App\Http\Controllers\Controller;
+use App\Models\KasIuranAgenda;
+use App\Models\KasIuranKondisional;
+use App\Models\KasIuranSukaRela;
+use App\Models\KasIuranWajib;
 use App\Models\Keluarga;
 use Illuminate\Http\Request;
 
@@ -15,14 +19,18 @@ class WargaController extends Controller
      */
     public function index()
     {
-        $warga = Keluarga::all();
-        return view('pages.user.kepala-keluarga.warga.index', ['warga' => $warga]);
+        $wargaa = Keluarga::all();
+        $total_wajib = KasIuranWajib::sum('total_biaya');
+        $total_agenda = KasIuranAgenda::sum('total_biaya');
+        $total_kondisional = KasIuranKondisional::sum('total_biaya');
+        $total_sukarela = KasIuranSukaRela::sum('total_biaya');
+        return view('pages.user.kepala-keluarga.warga.index', ['wargaa' => $wargaa, 'total_wajib' => $total_wajib, 'total_agenda' => $total_agenda, 'total_kondisional' => $total_kondisional, 'total_sukarela' => $total_sukarela]);
     }
 
     public function wargah()
     {
-        $warga = Keluarga::all();
-        return view('wargaa', ['warga' => $warga]);
+        $wargaa = Keluarga::all();
+        return view('wargaa', ['wargaa' => $wargaa]);
     }
 
     /**

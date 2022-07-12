@@ -36,10 +36,10 @@
 
                             <tbody>
 
-                                @foreach ($warga as $item)
+                                @foreach ($wargaa as $item)
                                     <tr>
                                         <td>{{ $item->no_kk }}</td>
-                                        <td>{{ $item->pemberi }}</td>
+                                        <td>{{ $item->warga }}</td>
                                         <td>{{ $item->pos->nama }}</td>
                                         <td>{{ $item->telp }}</td>
                                         {{-- @foreach ($item->pemberii as $iuran)
@@ -48,8 +48,8 @@
                                             </td>
                                         @endforeach --}}
                                         @php
-                                            $status1 = $item->pemberii->where('jenis_iuran_id', 1);
-                                            $status2 = $item->pemberii->where('jenis_iuran_id', 2);
+                                            $status1 = $item->warga_agenda->where('jenis_iuran_id', 1);
+                                            $status2 = $item->warga_agenda->where('jenis_iuran_id', 2);
                                         @endphp
                                         <td>
                                             <label for=""
@@ -61,11 +61,11 @@
                                         </td>
                                         {{-- <td> --}}
                                         {{-- <label for=""
-                                                class="label {{ $item->pemberii->status == 1 ? 'label-success' : 'label-danger center' }}">{{ $item->pemberii->status == 1 ? 'Sudah Bayar' : 'Belum Bayar' }}</label> --}}
-                                        {{-- @if ($item->pemberii != null)
-                                                {{ $item->pemberii }}
+                                                class="label {{ $item->warga_agenda->status == 1 ? 'label-success' : 'label-danger center' }}">{{ $item->warga_agenda->status == 1 ? 'Sudah Bayar' : 'Belum Bayar' }}</label> --}}
+                                        {{-- @if ($item->warga_agenda != null)
+                                                {{ $item->warga_agenda }}
                                             @endif --}}
-                                        {{-- @if ($item->pemberii->status == 0)
+                                        {{-- @if ($item->warga_agenda->status == 0)
                                                 <a
                                                     href="{{ route('user.kepala-keluarga.bayar-iuranagenda.status', $item->id) }}">
                                                     <button class="btn btn-danger">Belum Bayar</button></a>
@@ -77,7 +77,7 @@
                                         {{-- </td>
                                         <td> --}}
                                         {{-- <label for=""
-                                                class="label {{ $item->pemberii->status == 1 ? 'label-success' : 'label-danger center' }}">{{ $item->status_bayar->status == 1 ? 'Sudah Bayar' : 'Belum Bayar' }}</label> --}}
+                                                class="label {{ $item->warga_agenda->status == 1 ? 'label-success' : 'label-danger center' }}">{{ $item->status_bayar->status == 1 ? 'Sudah Bayar' : 'Belum Bayar' }}</label> --}}
                                         {{-- @if ($item->status2 == 0)
                                         <a href="{{ route('user.kepala-keluarga.bayar-iuranagenda.status', $item->id) }}">
                                             <button class="btn btn-danger">Belum Bayar</button></a>

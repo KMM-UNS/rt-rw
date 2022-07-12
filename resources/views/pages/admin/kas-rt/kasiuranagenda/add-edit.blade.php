@@ -37,60 +37,35 @@
       </div>
       <!-- end panel-heading -->
       <!-- begin panel-body -->
-      <div class="panel-body">
-        <div class="form-group">
-          <label for="name">jenis Iuran</label>
-          <x-form.Dropdown name="kas_iuran_agendas_jenis_iuran_id" :options="$jenis_iuranagenda" selected="{{{ old('kas_iuran_agendas_jenis_iuran_id') ?? ($data['jenis_iuran_id'] ?? null) }}}" required />
-        </div>
-        <div class="form-group">
-            <label for="tanggal">Tanggal</label>
-            <input type="date" id="tanggal" name="kas_iuran_agendas_tanggal" class="form-control" autofocus data-parsley-required="true" value="{{{ $data->tanggal ?? old('kas_iuran_agendas_tanggal') }}}">
-        </div>
-          {{-- <div class="form-group">
-            <label for="tahun">Tahun</label>
-            <x-form.Dropdown name="kas_iuran_agendas_tahun" :options="$tahun" selected="{{{ old('kas_iuran_agendas_tahun') ?? ($data['tahun'] ?? null) }}}" required />
-        </div> --}}
-        {{-- <div class="form-group">
-            <label for="petugas">Penerima</label>
-            <x-form.Dropdown name="kas_iuran_agendas_petugas" :options="$nama_petugas" selected="{{{ old('kas_iuran_agendas_petugas') ?? ($data['petugas'] ?? null) }}}" required />
-        </div> --}}
-        <div class="form-group">
-          <label for="pemberi">Pemberi</label>
-          <x-form.Dropdown name="kas_iuran_agendas_pemberi" :options="$pemberi" selected="{{{ old('kas_iuran_agendas_pemberi') ?? ($data['pemberi'] ?? null) }}}" required />
-        </div>
-        {{-- <div class="form-group">
-            <label for="pos">Pos</label>
-            <input type="hidden" id="kas_iuran_agendas_pos" name="kas_iuran_agendas_pos" class="form-control" autofocus data-parsley-required="true" value="{{{ $data->kas_iuran_agendas_pos ?? old('kas_iuran_agendas_pos') }}}">
-          </div> --}}
-        <div class="form-group">
-          <label for="total_biaya">Total Biaya</label>
-          <input type="text" id="total_biaya" name="kas_iuran_agendas_total_biaya" class="form-control" autofocus data-parsley-required="true" value="{{{ $data->total_biaya ?? old('kas_iuran_agendas_total_biaya') }}}">
-        </div>
-        {{-- <div class="form-group">
+        <div class="panel-body">
+            <div class="form-group">
+            <label for="name">jenis Iuran</label>
+            <x-form.Dropdown name="kas_iuran_agendas_jenis_iuran_id" :options="$jenis_iuranagenda" selected="{{{ old('kas_iuran_agendas_jenis_iuran_id') ?? ($data['jenis_iuran_id'] ?? null) }}}" required />
+            </div>
+            <div class="form-group">
+                <label for="tanggal">Tanggal</label>
+                <input type="date" id="tanggal" name="kas_iuran_agendas_tanggal" class="form-control" autofocus data-parsley-required="true" value="{{{ $data->tanggal ?? old('kas_iuran_agendas_tanggal') }}}">
+            </div>
+            <div class="form-group">
+            <label for="warga">Warga</label>
+            <x-form.Dropdown name="kas_iuran_agendas_warga" :options="$warga" selected="{{{ old('kas_iuran_agendas_warga') ?? ($data['warga'] ?? null) }}}" required />
+            </div>
+            <div class="form-group">
+            <label for="total_biaya">Total Biaya</label>
+            <input type="text" id="total_biaya" name="kas_iuran_agendas_total_biaya" class="form-control" autofocus data-parsley-required="true" value="{{{ $data->total_biaya ?? old('kas_iuran_agendas_total_biaya') }}}">
+            </div>
+            <div class="form-group">
             <label for="status">Status</label>
-            <input type="text" id="status" name="kas_iuran_agendas_status" class="form-control" autofocus data-parsley-required="true" value="{{{ $data->status ?? old('kas_iuran_agendas_status') }}}">
-        </div> --}}
-        <div class="form-group">
-        <label for="status">Status</label>
-        <div class="col-md-8 col-sm-8">
-            <div class="form-check">
-                <input type="radio" class="form-check-input" name="kas_iuran_agendas_status" value="1" id="radio-required" data-parsley-required="true" />
-                <label class="form-check-label">Sudah Bayar</label>
-            </div>
-            <div class="form-check">
-                <input type="radio" class="form-check-input" name="kas_iuran_agendas_status" id="radio-required2" value="2" />
-                <label class="form-check-label">Belum Bayar</label>
-            </div>
-        </div>
-            {{-- @if ($agenda->status == 0)
-            <a
-                href="{{ route('admin.kas-rt.kas-iuranagenda.status', $id) }}">
-                <button class="btn btn-danger">Belum Bayar</button></a>
-        @else
-            <a
-                href="{{ route('admin.kas-rt.kas-iuranagenda.status', $id) }}">
-                <button class="btn btn-success">Sudah Bayar</button></a>
-        @endif --}}
+                <div class="col-md-8 col-sm-8">
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" name="kas_iuran_agendas_status" value="1" id="radio-required" data-parsley-required="true" />
+                        <label class="form-check-label">Sudah Bayar</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" name="kas_iuran_agendas_status" id="radio-required2" value="2" />
+                        <label class="form-check-label">Belum Bayar</label>
+                    </div>
+                </div>
         </div>
       {{-- <div class="form-group">
         <label for="foto_iuranagenda">Bukti Pembayaran</label>

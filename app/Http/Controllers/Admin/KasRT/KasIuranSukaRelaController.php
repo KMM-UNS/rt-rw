@@ -15,29 +15,43 @@ use App\Helpers\DataHelper;
 use App\Helpers\TrashHelper;
 use App\Helpers\FileUploaderHelper;
 use App\Http\Requests\Admin\IuranSukarelaForm;
+use App\Models\Keluarga;
 use Illuminate\Support\Facades\DB;
 
 class KasIuranSukaRelaController extends Controller
 {
     public function index(KasIuranSukaRelaDataTable $dataTable)
     {
-        $sukarela = KasIuranSukaRela::all();
-        return $dataTable->render('pages.admin.kas-rt.kasiuransukarela.index', compact('sukarela'));
+        // $sukarela = KasIuranSukaRela::all();
+        return $dataTable->render('pages.admin.kas-rt.kasiuransukarela.index');
     }
 
     public function create()
     {
         $jenis_iuransukarela = IuranSukarela::pluck('nama', 'id');
         $nama_petugas = PetugasTagihan::pluck('nama', 'id');
-        $nama_bulan = Bulan::pluck('nama', 'id');
-        $tahun = Tahun::pluck('nama', 'id');
-        return view('pages.admin.kas-rt.kasiuransukarela.add-edit', ['jenis_iuransukarela' => $jenis_iuransukarela, 'nama_petugas' => $nama_petugas, 'nama_bulan' => $nama_bulan, 'tahun' => $tahun]);
+        $warga = Keluarga::pluck('warga', 'id');
+        $wargaa = KasIuranSukarela::all();
+        return view('pages.admin.kas-rt.kasiuransukarela.add-edit', ['jenis_iuransukarela' => $jenis_iuransukarela, 'nama_petugas' => $nama_petugas, 'warga' => $warga, 'wargaa' => $wargaa]);
     }
+
+    public function status($id)
+    {
+        $sukarela = KasIuranSukaRela::find($id);
+        $sukarela->status = !$sukarela->status;
+        $sukarela->save();
+        return redirect()->back();
+    }
+
     public function store(IuranSukarelaForm $request, FileUploaderHelper $fileUploaderHelper)
     {
         DB::transaction(function () use ($request, $fileUploaderHelper) {
             try {
-                $sukarela = KasIuranSukarela::createFromRequest($request);
+                $sukarela = KasIuranSukaRela::createFromRequest($request);
+                $pos = Keluarga::where('id', $sukarela->warga)->first()->pos;
+                $sukarela->pos = $pos->nama;
+                $sukarela->petugas = $pos->petugastagihan->nama;
+
                 $sukarela->save();
                 if ($request->file()) {
 
@@ -90,16 +104,14 @@ class KasIuranSukaRelaController extends Controller
         $data = KasIuranSukaRela::findOrFail($id);
         $jenis_iuransukarela = IuranSukarela::pluck('nama', 'id');
         $nama_petugas = PetugasTagihan::pluck('nama', 'id');
-        $nama_bulan = Bulan::pluck('nama', 'id');
-        $tahun = Tahun::pluck('nama', 'id');
+        $warga = Keluarga::pluck('warga', 'id');
         return view(
             'pages.admin.kas-rt.kasiuransukarela.add-edit',
             [
                 'data' => $data,
                 'jenis_iuransukarela' => $jenis_iuransukarela,
                 'nama_petugas' => $nama_petugas,
-                'nama_bulan' => $nama_bulan,
-                'tahun' => $tahun,
+                'warga' => $warga,
                 'dataHelper' => $dataHelper
             ]
         );

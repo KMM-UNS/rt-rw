@@ -23,17 +23,28 @@ class KasIuranWajibDataTable extends DataTable
 
                 return $btn;
             })
-            ->addColumn('image', function ($row) {
-                $img = '<img src="' . asset($row->dokumen[0]['public_url']) . '" class="img-rounded height-80" >';
-                return $img;
+
+            ->editColumn('status', function ($row) {
+                if ($row->status == '1') {
+                    $label = '<label for="" class="label label-success">Sudah Bayar</label>';
+                    return  $label;
+                }
+                $label = '<label for="" class="label label-danger">Belum Bayar</label>';
+                return  $label;
             })
-            // raw column berfungsi untuk menjalankan tag html
-            ->rawColumns(['image', 'action']);
+            ->rawColumns(['status', 'action']);
+
+        // ->addColumn('image', function ($row) {
+        //     $img = '<img src="' . asset($row->dokumen[0]['public_url']) . '" class="img-rounded height-80" >';
+        //     return $img;
+        // })
+        // // raw column berfungsi untuk menjalankan tag html
+        // ->rawColumns(['image', 'action']);
     }
 
     public function query(KasIuranWajib $model)
     {
-        return $model->select('kas_iuran_wajibs.*')->with(['iuranwajib', 'petugastagihan', 'namabulanss', 'tahuns']);
+        return $model->select('kas_iuran_wajibs.*')->with(['iuranwajib', 'petugastagihan', 'warga_wajib']);
     }
 
     public function html()
@@ -63,14 +74,12 @@ class KasIuranWajibDataTable extends DataTable
                 ->addClass('text-center'),
             // Column::make('id'),
             Column::make('jenis_iuran_id')->data('iuranwajib.nama'),
-            Column::make('bulan')->data('namabulanss.nama'),
-            Column::make('tahun')->data('tahuns.nama'),
-            Column::make('petugas')->data('petugastagihan.nama'),
-            Column::make('pemberi'),
+            Column::make('tanggal'),
+            Column::make('petugas'),
+            Column::make('warga')->data('warga_wajib.warga'),
+            Column::make('pos'),
             Column::make('total_biaya'),
-            Column::computed('image'),
-            // Column::make('created_at'),
-            // Column::make('updated_at'),
+            Column::make('status'),
         ];
     }
 

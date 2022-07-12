@@ -37,6 +37,10 @@ class PetugasTagihan extends Model
     {
         return $this->belongsTo(Pos::class, 'pos');
     }
+    public function poss()
+    {
+        return $this->belongsTo(Pos::class, 'pos');
+    }
     public function dokumen()
     {
         return $this->morphToMany(Dokumen::class, 'dokumenable');

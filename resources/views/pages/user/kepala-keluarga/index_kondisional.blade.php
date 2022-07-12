@@ -24,56 +24,31 @@
                                     <th scope="col">Kepala Keluarga</th>
                                     <th scope="col">Pos Tagihan</th>
                                     <th scope="col">Telp</th>
-                                    @foreach ($iuran_kondisional as $itemm)
+                                    {{-- @foreach ($iuran_kondisional as $itemm)
                                         <th>{{ $itemm->nama }}</th>
-                                    @endforeach
-                                    {{-- <th scope="col">Status Iuran Pendidikan</th>
-                                    <th scope="col">Status Arisan</th> --}}
-                                    {{-- <th scope="col">Tanda</th> --}}
+                                    @endforeach --}}
+
+                                    <th scope="col">Denda Ronda</th>
+
 
                                 </tr>
                             </thead>
 
                             <tbody>
 
-                                @foreach ($warga as $item)
+                                @foreach ($wargaa as $item)
                                     <tr>
                                         <td>{{ $item->no_kk }}</td>
-                                        <td>{{ $item->pemberi }}</td>
+                                        <td>{{ $item->warga }}</td>
                                         <td>{{ $item->pos->nama }}</td>
                                         <td>{{ $item->telp }}</td>
-                                        {{-- <td>
-                                            @if ($item->status == 0)
-                                                <a
-                                                    href="{{ route('user.kepala-keluarga.bayar-iurankondisonal.status', $item->id) }}">
-                                                    <button class="btn btn-danger">Belum Bayar</button></a>
-                                            @else
-                                                <a
-                                                    href="{{ route('user.kepala-keluarga.bayar-iurankondisonal.status', $item->id) }}">
-                                                    <button class="btn btn-success">Sudah Bayar</button></a>
-                                            @endif
-                                        </td>
+                                        @php
+                                            $status1 = $item->warga_kondisional->where('jenis_iuran_id', 1);
+                                        @endphp
                                         <td>
-                                            @if ($item->status == 0)
-                                                <a
-                                                    href="{{ route('user.kepala-keluarga.bayar-iurankondisonal.status', $item->id) }}">
-                                                    <button class="btn btn-danger">Belum Bayar</button></a>
-                                            @else
-                                                <a
-                                                    href="{{ route('user.kepala-keluarga.bayar-iurankondisonal.status', $item->id) }}">
-                                                    <button class="btn btn-success">Sudah Bayar</button></a>
-                                            @endif
-                                        </td> --}}
-
-                                        {{-- <td><label for=""
-                                                class="label {{ $item->status == 1 ? 'label-success' : 'label-danger' }}">{{ $item->status == 1 ? 'Aktif' : 'Tidak Aktif' }}</label>
-                                        </td> --}}
-                                        {{-- <td>
-                                            <input data-id="{{ $item->id }}" class="toggle-class" type="checkbox"
-                                                data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
-                                                data-on="Sudah Bayar" data-off="Belum Bayar"
-                                                {{ $item->status ? 'checked' : '' }}>
-                                        </td> --}}
+                                            <label for=""
+                                                class="label {{ count($status1) != 0 ? 'label-success' : 'label-danger center' }}">{{ count($status1) != 0 ? 'Sudah Bayar' : 'Belum Bayar' }}</label>
+                                        </td>
                                     </tr>
                                 @endforeach
 

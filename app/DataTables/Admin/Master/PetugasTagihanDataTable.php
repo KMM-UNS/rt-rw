@@ -76,8 +76,8 @@ class PetugasTagihanDataTable extends DataTable
             Column::make('alamat'),
             Column::make('pos')->data('pos.nama'),
             Column::computed('image'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            // Column::make('created_at'),
+            // Column::make('updated_at'),
         ];
     }
 

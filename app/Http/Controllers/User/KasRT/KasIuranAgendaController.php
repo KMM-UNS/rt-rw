@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\User\KasRT;
 
-use App\Datatables\Admin\KasRT\KasIuranAgendaDataTable;
-// use App\Datatables\User\KasRT\KasIuranAgendaDataTable;
+use App\Datatables\User\KasRT\KasIuranAgendaDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\IuranAgenda;
 use App\Models\PetugasTagihan;
@@ -15,6 +14,7 @@ use App\Helpers\DataHelper;
 use App\Helpers\TrashHelper;
 use App\Helpers\FileUploaderHelper;
 use App\Http\Requests\Admin\IuranAgendaForm;
+use App\Models\Keluarga;
 use Illuminate\Support\Facades\DB;
 
 
@@ -27,26 +27,31 @@ class KasIuranAgendaController extends Controller
 
     public function create()
     {
-        $jenis_iuranagenda = Iuranagenda::pluck('nama', 'id');
+        $jenis_iuranagenda = IuranAgenda::pluck('nama', 'id');
         $nama_petugas = PetugasTagihan::pluck('nama', 'id');
-        $nama_bulan = Bulan::pluck('nama', 'id');
-        $tahun = Tahun::pluck('nama', 'id');
-        return view('pages.user.kas-rt.kasiuranagenda.add-edit', ['jenis_iuranagenda' => $jenis_iuranagenda,  'nama_petugas' => $nama_petugas, 'nama_bulan' => $nama_bulan, 'tahun' => $tahun]);
+        $warga = Keluarga::pluck('warga', 'id');
+        $wargaa = KasIuranAgenda::all();
+
+        return view('pages.user.kas-rt.kasiuranagenda.add-edit',  ['jenis_iuranagenda' => $jenis_iuranagenda, 'nama_petugas' => $nama_petugas, 'wargaa' => $wargaa, 'warga' => $warga]);
     }
 
-    public function status($id)
-    {
-        $agenda = KasIuranAgenda::find($id);
-        $agenda->status = !$agenda->status;
-        $agenda->save();
-        return redirect()->back();
-    }
+    // public function status($id)
+    // {
+    //     $agenda = KasIuranAgenda::find($id);
+    //     $agenda->status = !$agenda->status;
+    //     $agenda->save();
+    //     return redirect()->back();
+    // }
 
     public function store(IuranAgendaForm $request, FileUploaderHelper $fileUploaderHelper)
     {
         DB::transaction(function () use ($request, $fileUploaderHelper) {
             try {
                 $agenda = KasIuranAgenda::createFromRequest($request);
+                $pos = Keluarga::where('id', $agenda->warga)->first()->pos;
+                $agenda->pos = $pos->nama;
+                $agenda->petugas = $pos->petugastagihan->nama;
+
                 $agenda->save();
                 if ($request->file()) {
 
@@ -69,26 +74,24 @@ class KasIuranAgendaController extends Controller
 
     public function show($id)
     {
-        // $image = KasIuranAgenda::find($id);
-        // return view('pages.user.kas-rt.kasiuranagenda.show', compact('image'));
-        // return view('pages.user.kas-rt.kasiuranagenda.show', ['$bukti_pembayaran' => $bukti_pembayaran]);
+        //
     }
+
     public function edit($id, DataHelper $dataHelper)
     {
         $data = KasIuranAgenda::findOrFail($id);
         $jenis_iuranagenda = IuranAgenda::pluck('nama', 'id');
         $nama_petugas = PetugasTagihan::pluck('nama', 'id');
-        $nama_bulan = Bulan::pluck('nama', 'id');
-        $tahun = Tahun::pluck('nama', 'id');
+        $warga = Keluarga::pluck('warga', 'id');
         return view('pages.user.kas-rt.kasiuranagenda.add-edit', [
             'data' => $data,
             'jenis_iuranagenda' => $jenis_iuranagenda,
             'nama_petugas' => $nama_petugas,
-            'nama_bulan' => $nama_bulan,
-            'tahun' => $tahun,
+            'warga' => $warga,
             'dataHelper' => $dataHelper
         ]);
     }
+
 
     public function update(IuranAgendaForm $request, FileUploaderHelper $fileUploaderHelper, $id)
     {

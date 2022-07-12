@@ -37,73 +37,86 @@
                         class="fa fa-minus"></i></a>
             </div>
         </div>
-        <!-- end panel-heading -->
         <!-- begin panel-body -->
-        <form action="{{ route('admin.rekap-kas.rekap-iuranwajib.store') }}" id="form" name="form" method="POST"
-            data-parsley-validate="true" enctype="multipart/form-data">
-            @csrf
-            @if (isset($data))
-                {{ method_field('PUT') }}
-            @endif
-            <div class="panel-body">
-                {{-- {{ $rekap }} --}}
-                <a href="{{ url('admin/rekap-kas/export-rekapwajib') }}" class="btn btn-success"> Export To Excel</a>
-                <table border="1" cellpadding="2" class="table">
-                    <thead>
+        <div class="panel-body">
+            <a href="{{ url('admin/rekap-kas/rekap-iuranwajib/cetak_pdf ') }}" class="btn btn-primary"
+                target="_blank">CETAK
+                PDF woii</a>
+
+            {{-- <form action="{{ route('admin.rekap-kas.rekap-iuranwajib.cetak') }}" id="form" name="form"
+                method="POST" data-parsley-validate="true" enctype="multipart/form-data">
+                @csrf
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-1 my-auto">
+                            <label for="bulan"><strong>Jenis Iuran</strong></label>
+                        </div>
+                        <div class="col-md-3 ">
+                            <input type="text" name="jenis_iuran_id" value="{{ $jenis_iuran }}" />
+                        </div>
+                        <div class="col-md-1 my-auto">
+                            <label for="bulan"><strong>Tanggal Awal</strong></label>
+                        </div>
+                        <div class="col-md-3 ">
+                            <input type="date" name="tglawal" id="tglawal" class="form-control"
+                                value="{{ $tglawal }}" />
+                        </div>
+                        <div class="col-md-1 my-auto">
+                            <label for="bulan"><strong>Tanggal Akhir</strong></label>
+                        </div>
+                        <div class="col-md-3 ">
+                            <input type="date" name="tglakhir" id="tglakhir" class="form-control"
+                                value="{{ $tglakhir }}" />
+                        </div>
+                    </div>
+                    <div class="">
+                        <button type="submit" class="btn btn-primary">Cetak</button>
+                    </div>
+
+            </form> --}}
+            <table border="1" cellpadding="2" class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Tanggal</th>
+                        <th scope="col">Jenis Iuran</th>
+                        <th scope="col">Petugas</th>
+                        <th scope="col">Pos</th>
+                        <th scope="col">Warga</th>
+                        <th scope="col">Total Biaya</th>
+                    </tr>
+                </thead>
+                @foreach ($cetakrekapwajib as $item)
+                    @php
+                        $total_biaya = number_format($item->total_biaya, 2, ',', '.');
+                    @endphp
+                    <tbody>
                         <tr>
-                            <th scope="col">Jenis Iuran</th>
-                            <th scope="col">Penerima</th>
-                            <th scope="col">Pemberi</th>
-                            <th scope="col">Image</th>
-                            <th scope="col">Total Biaya</th>
+                            <td>{{ date('d M Y', strtotime($item->tanggal)) }}</td>
+                            <td>{{ $item->iuranwajib->nama }}</td>
+                            <td>{{ $item->petugas }}</td>
+                            <td>{{ $item->pos }}</td>
+                            <td>{{ $item->warga_wajib->warga }}</td>
+                            <td>Rp.{{ $item->total_biaya }}</td>
                         </tr>
-                    </thead>
-                    @foreach ($rekap as $item)
-                        @php
-                            $total_biaya = number_format($item->total_biaya, 2, ',', '.');
-                        @endphp
-                        <tbody>
-                            <tr>
-                                <td>{{ $item->iuranwajib->nama }}</td>
-                                <td>{{ $item->petugastagihan->nama }}</td>
-                                <td>{{ $item->pemberi }}</td>
-                                <td> <img src="{{ asset($item->dokumen[0]['public_url']) }}" alt=""
-                                        class="img-rounded height-80"></td>
-                                <td>Rp.{{ $item->total_biaya }}</td>
-                            </tr>
-                        </tbody>
-                    @endforeach
-                    <td colspan="4">TOTAL</td>
-                    <td>Rp.{{ $total }}</td>
+                    </tbody>
+                @endforeach
+                <td colspan="5">TOTAL</td>
+                <td>Rp.{{ $total }}</td>
 
-                </table>
+            </table>
 
-            </div>
-            <!-- end panel-body -->
-        </form>
-    </div>
-    <!-- end panel -->
-@endsection
+        </div>
+        <!-- end panel-body -->
+    @endsection
 
-@push('scripts')
-    <!-- datatables -->
-    <script src="{{ asset('assets/js/custom/datatable-assets.js') }}"></script>
-    {{-- {{ $dataTable->scripts() }} --}}
-    <!-- end datatables -->
+    @push('scripts')
+        <!-- datatables -->
+        <script src="{{ asset('assets/js/custom/datatable-assets.js') }}"></script>
 
-    <script src="{{ asset('assets/js/custom/delete-with-confirmation.js') }}"></script>
-    <script>
-        $(document).on('delete-with-confirmation.success', function() {
-            $('.buttons-reload').trigger('click')
-        })
-    </script>
-    <script>
-        function hitung() {
-            var txtFirstNumberValue = document.getElementById('total_biaya').value;
-            var result = (txtFirstNumberValue) ++;
-            if (!isNaN(result)) {
-                document.getElementById('total').value = result;
-            }
-        }
-    </script>
-@endpush
+        <script src="{{ asset('assets/js/custom/delete-with-confirmation.js') }}"></script>
+        <script>
+            $(document).on('delete-with-confirmation.success', function() {
+                $('.buttons-reload').trigger('click')
+            })
+        </script>
+    @endpush

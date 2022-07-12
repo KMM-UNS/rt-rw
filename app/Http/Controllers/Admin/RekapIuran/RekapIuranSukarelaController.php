@@ -6,97 +6,108 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\KasIuranSukaRela;
 use App\Models\IuranSukaRela;
-use App\Models\Bulan;
-use App\Models\Tahun;
-use App\Models\IuranBulanan;
-use App\Datatables\Admin\KasRT\KasIuranSukaRelaDataTable;
-use App\Models\KasIuranWajib;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Str;
 
 class RekapIuranSukarelaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $jenis_iuran = IuranSukaRela::pluck('nama', 'id');
-        $nama_bulans = Bulan::pluck('nama', 'id');
-        $tahun = Tahun::pluck('nama', 'id');
-        return view('pages.admin.rekap-kas.rekapiuransukarela.index', ['jenis_iuran' => $jenis_iuran, 'nama_bulans' => $nama_bulans, 'tahun' => $tahun]);
+
+        return view('pages.admin.rekap-kas.rekapiuransukarela.index', ['jenis_iuran' => $jenis_iuran]);
+        // return view('pages.admin.rekap-kas.rekapiuransukarela.laporankematian', ['jenis_iuran' => $jenis_iuran]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $jenis_iuran = $request->jenis_iuran_id;
-        $bulan = $request->bulan;
-        $tahun = $request->tahun;
-
-        $total = KasIuranSukarela::where('jenis_iuran_id', $jenis_iuran)->where('bulan', $bulan)->where('tahun', $tahun)->get()->sum('total_biaya');
-
-        $rekap = KasIuranSukaRela::with('iuransukarela', 'jenisiuransukarela', 'petugastagihan', 'namabulanss', 'tahuns')->where('jenis_iuran_id', $jenis_iuran)->where('bulan', $bulan)->where('tahun', $tahun)->get();
-        return view('pages.admin.rekap-kas.rekapiuransukarela.detail', ['rekap' => $rekap, 'total' => $total]);
+        $tglawal = $request->tglawal;
+        $tglakhir = $request->tglakhir;
+        $total = KasIuranSukaRela::where('jenis_iuran_id', $jenis_iuran)->get()->sum('total_biaya');
+        $cetakrekapsukarela = KasIuranSukaRela::with('iuransukarela', 'jenisiuransukarela', 'petugastagihan', 'warga_sukarela')->where('jenis_iuran_id', $jenis_iuran)->whereBetween('tanggal', [$tglawal, $tglakhir])->get();
+        return view('pages.admin.rekap-kas.rekapiuransukarela.detail', ['cetakrekapsukarela' => $cetakrekapsukarela, 'total' => $total]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // public function store(Request $request)
+    // {
+    //     $jenis_iuran = $request->jenis_iuran_id;
+    //     $tglawal = $request->tglawal;
+    //     $tglakhir = $request->tglakhir;
+    //     // $total = KasIuranAgenda::where('jenis_iuran_id', $jenis_iuran)->get()->sum('total_biaya');
+    //     $total = KasIuranSukaRela::where('jenis_iuran_id', $jenis_iuran)->whereDate('tanggal', '>=', $tglawal)->whereDate('tanggal', '<=', $tglakhir)->orderBy('tanggal')->sum('total_biaya');
+    //     $cetakrekapsukarela = KasIuranSukaRela::with('iuransukarela', 'jenisiuransukarela', 'petugastagihan', 'warga_sukarela')->where('jenis_iuran_id', $jenis_iuran)->whereDate('tanggal', '>=', '$tglawal')->whereDate('tanggal', '<=', $tglakhir)->orderBy('tanggal')->get();
+
+    //     return view('pages.admin.rekap-kas.rekapiuransukarela.detail', ['cetakrekapsukarela' => $cetakrekapsukarela, 'total' => $total]);
+    // }
+
+    // public function cetak_pdf(Request $request)
+    // {
+    //     $jenis_iuran = $request->jenis_iuran_id;
+    //     $tglawal = $request->tglawal;
+    //     $tglakhir = $request->tglakhir;
+
+    //     $total = KasIuranSukaRela::where('jenis_iuran_id', $jenis_iuran)->get()->sum('total_biaya');
+    //     $cetakrekapsukarela = KasIuranSukaRela::with('iuransukarela', 'jenisiuransukarela', 'petugastagihan', 'warga_sukarela')->where('jenis_iuran_id', $jenis_iuran)->whereBetween('tanggal', [$tglawal, $tglakhir])->get();
+    //     $pdf = PDF::loadView('pages.admin.rekap-kas.rekapiuransukarela.cetak', ['cetakrekapsukarela' => $cetakrekapsukarela, 'total' => $total]);
+    //     return $pdf->download('laporan-rekapsukarela.pdf');
+    // }
+
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //
     }
+
+    // public function laporankematian()
+    // {
+    //     $jenis_iuran = IuranSukaRela::pluck('nama', 'id');
+    //     return view('pages.admin.rekap-kas.rekapiuransukarela.laporankematian', ['jenis_iuran' => $jenis_iuran]);
+    // }
+    // public function sortir(Request $request)
+    // {
+
+    //     $startDate = Str::before($request->tglawal, ' -');
+    //     $endDate = Str::after($request->tglakhir, '- ');
+    //     switch ($request->submit) {
+    //         case 'table':
+
+    //             $data = KasIuranSukaRela::all()
+    //                 ->whereBetween('created_at', [$startDate, $endDate]);
+
+    //             return view('pages.admin.rekap-kas.rekapiuransukarela.laporankematian', compact('data', 'startDate', 'endDate'));
+    //             break;
+    //     }
+    // }
+    // public function cetakLaporanKematian($start, $end)
+    // {
+
+    //     $startDate = $start;
+    //     $endDate = $end;
+    //     $data = KasIuranSukaRela::get()
+    //         ->whereBetween('created_at', [$startDate, $endDate]);
+
+    //     $pdf = PDF::loadview('pages.admin.rekap-kas.rekapiuransukarela.cetaklaporankematian', ['data' => $data]);
+    //     return $pdf->download('Laporan Kematian Lansia.pdf');
+    // }
 }

@@ -4,26 +4,31 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKasIuranSukaRelasTable extends Migration
+class CreateKasIuranWajibssTable extends Migration
 {
     public function up()
     {
-        Schema::create('kas_iuran_suka_relas', function (Blueprint $table) {
+        Schema::create('kas_iuran_wajibss', function (Blueprint $table) {
             $table->id();
             $table->string('jenis_iuran_id');
-            $table->string('bulan');
-            $table->string('tahun');
+            $table->date('tanggal');
             $table->string('petugas');
-            $table->string('pemberi');
+            $table->string('warga');
+            $table->string('pos');
             $table->integer('total_biaya');
-            // $table->string('bukti_pembayaran');
+            $table->string('status');
             $table->timestamps();
             $table->softDeletes();
         });
     }
 
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
     public function down()
     {
-        Schema::dropIfExists('kas_iuran_suka_relas');
+        Schema::dropIfExists('kas_iuran_wajibs');
     }
 }

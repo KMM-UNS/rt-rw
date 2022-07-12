@@ -42,34 +42,40 @@
       </div>
       <!-- end panel-heading -->
       <!-- begin panel-body -->
-      <div class="panel-body">
+    <div class="panel-body">
         <div class="form-group">
-          <label for="name">jenis Iuran</label>
-          <x-form.Dropdown name="kas_iuran_suka_relas_jenis_iuran_id" :options="$jenis_iuransukarela" selected="{{{ old('kas_iuran_suka_relas_jenis_iuran_id') ?? ($data['jenis_iuran_id'] ?? null) }}}" required />
-        </div>
-        <div class="form-group">
-            <label for="bulan">Bulan</label>
-            <x-form.Dropdown name="kas_iuran_suka_relas_bulan" :options="$nama_bulan" selected="{{{ old('kas_iuran_suka_relas_bulan') ?? ($data['bulan'] ?? null) }}}" required />
-        </div>
-          <div class="form-group">
-            <label for="tahun">Tahun</label>
-            <x-form.Dropdown name="kas_iuran_suka_relas_tahun" :options="$tahun" selected="{{{ old('kas_iuran_suka_relas_tahun') ?? ($data['tahun'] ?? null) }}}" required />
+        <label for="name">jenis Iuran</label>
+        <x-form.Dropdown name="kas_iuran_suka_relas_jenis_iuran_id" :options="$jenis_iuransukarela" selected="{{{ old('kas_iuran_suka_relas_jenis_iuran_id') ?? ($data['jenis_iuran_id'] ?? null) }}}" required />
         </div>
         <div class="form-group">
-            <label for="petugas">Penerima</label>
-            <x-form.Dropdown name="kas_iuran_suka_relas_petugas" :options="$nama_petugas" selected="{{{ old('kas_iuran_suka_relas_petugas') ?? ($data['petugas'] ?? null) }}}" required />
+            <label for="tanggal">Tanggal</label>
+            <input type="date" id="tanggal" name="kas_iuran_suka_relas_tanggal" class="form-control" autofocus data-parsley-required="true" value="{{{ $data->tanggal ?? old('kas_iuran_suka_relas_tanggal') }}}">
         </div>
         <div class="form-group">
-          <label for="pemberi">Pemberi</label>
-          <input type="text" id="pemberi" name="kas_iuran_suka_relas_pemberi" class="form-control" autofocus data-parsley-required="true" value="{{{ $data->pemberi ?? old('kas_iuran_suka_relas_pemberi') }}}">
+        <label for="warga">Warga</label>
+        <x-form.Dropdown name="kas_iuran_suka_relas_warga" :options="$warga" selected="{{{ old('kas_iuran_suka_relas_warga') ?? ($data['warga'] ?? null) }}}" required />
         </div>
         <div class="form-group">
-          <label for="total_biaya">Total Biaya</label>
-          <input type="text" id="total_biaya" name="kas_iuran_suka_relas_total_biaya" class="form-control" autofocus data-parsley-required="true" value="{{{ $data->total_biaya ?? old('kas_iuran_suka_relas_total_biaya') }}}">
+        <label for="total_biaya">Total Biaya</label>
+        <input type="text" id="total_biaya" name="kas_iuran_suka_relas_total_biaya" class="form-control" autofocus data-parsley-required="true" value="{{{ $data->total_biaya ?? old('kas_iuran_suka_relas_total_biaya') }}}">
         </div>
-      <div class="form-group">
+        <div class="form-group">
+        <label for="status">Status</label>
+            <div class="col-md-8 col-sm-8">
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" name="kas_iuran_suka_relas_status" value="1" id="radio-required" data-parsley-required="true" />
+                    <label class="form-check-label">Sudah Bayar</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" name="kas_iuran_suka_relas_status" id="radio-required2" value="2" />
+                    <label class="form-check-label">Belum Bayar</label>
+                </div>
+            </div>
+    </div>
+
+      {{-- <div class="form-group">
         <label for="foto_iuransukarela">Bukti Pembayaran</label>
-        {{-- <input type="file" id="foto_iuransukarela" name="foto_iuransukarela" class="form-control @error('image') is-invalid @enderror" autofocus data-parsley-required="true"> --}}
+        <input type="file" id="foto_iuransukarela" name="foto_iuransukarela" class="form-control @error('image') is-invalid @enderror" autofocus data-parsley-required="true">
         @php
                 $imageSrc = null;
                 if(isset($data->dokumen)){
@@ -79,8 +85,8 @@
                 <div class="row">
                     <x-form.ImageUploader :imageSrc="isset($imageSrc) ? asset(DataHelper::filterDokumenData($imageSrc, 'nama', 'foto_iuransukarela')->first()['public_url']) : null" name="foto_iuransukarela" title="Foto Sukarela" value="{{{ $data->dokumen  ?? old('foto_iuransukarela') }}}" />
                 </div>
-      </div>
-    </div>
+      </div> --}}
+
     <!-- end panel-body -->
     <!-- begin panel-footer -->
     <div class="panel-footer">

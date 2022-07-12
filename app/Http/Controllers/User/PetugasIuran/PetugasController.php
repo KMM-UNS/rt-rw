@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User\PetugasIuran;
 
 use App\Http\Controllers\Controller;
 use App\Models\Keluarga;
+use App\Models\PetugasTagihan;
 use Illuminate\Http\Request;
 
 class PetugasController extends Controller
@@ -15,8 +16,13 @@ class PetugasController extends Controller
      */
     public function index()
     {
-        $data = Keluarga::all();
-        return view('pages.user.petugas.index', ['data', $data]);
+        $data = PetugasTagihan::where('petugas_id', auth()->user()->id)->first()->id;
+        $data1 = PetugasTagihan::where('id', $data)->with('poss')->get();
+        // $data1 = PetugasTagihan::where('petugas_id', auth()->user()->id)->first()->id;
+
+        // $data1 = KasIuranWajib::where('warga', $id_petugas)->get();
+        // return view('pages.user.petugas.index', ['data' => $data, 'data1' => $data1]);
+        return view('pages.user.petugas.index', ['data' => $data, 'data1' => $data1]);
     }
 
     /**
@@ -59,9 +65,15 @@ class PetugasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function edit($id)
     {
-        //
+        $data1 = PetugasTagihan::findOrFail($id);
+        // $pengeluarannn = ManajemenPengeluaran::sum('nominal');
+
+        return view('pages.user.petugas.add-edit', [
+            'data1' => $data1,
+        ]);
     }
 
     /**

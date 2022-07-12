@@ -45,7 +45,7 @@
                     <tr>
                         <th scope="col">Jenis Iuran</th>
                         <th scope="col">Penerima</th>
-                        <th scope="col">Pemberi</th>
+                        <th scope="col">Warga</th>
                         <th scope="col">Image</th>
                         <th scope="col">Total Biaya</th>
                     </tr>
@@ -58,7 +58,7 @@
                         <tr>
                             <td>{{ $item->iuranagenda->nama }}</td>
                             <td>{{ $item->petugastagihan->nama }}</td>
-                            <td>{{ $item->pemberi }}</td>
+                            <td>{{ $item->warga }}</td>
                             <td> <img src="{{ asset($item->dokumen[0]['public_url']) }}" alt=""
                                     class="img-rounded height-80"></td>
                             <td>Rp.{{ $item->total_biaya }}</td>

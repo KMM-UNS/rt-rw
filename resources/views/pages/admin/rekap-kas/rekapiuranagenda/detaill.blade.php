@@ -1,6 +1,6 @@
 @extends('layouts.default', ['topMenu' => true, 'sidebarHide' => true])
 
-@section('title', 'Kas Iuran Wajib')
+@section('title', 'Rekap Iuran Agenda')
 
 @push('css')
     <!-- datatables -->
@@ -37,52 +37,54 @@
                         class="fa fa-minus"></i></a>
             </div>
         </div>
-        <!-- end panel-heading -->
         <!-- begin panel-body -->
         <div class="panel-body">
-            {{-- {{ $kas }} --}}
-
-            <table border="1" cellpadding="2">
+            <a href="{{ url('admin/rekap-kas/rekap-iuranagenda/cetak_pdf ') }}" class="btn btn-primary"
+                target="_blank">CETAK
+                PDF woii</a>
+            <table border="1" cellpadding="2" class="table">
                 <thead>
                     <tr>
-                        <th>Jenis Iuran</th>
-                        <th>Penerima</th>
-                        <th>Pemberi</th>
-                        <th>Total Biaya</th>
-                        <th>Image</th>
+                        <th scope="col">Tanggal</th>
+                        <th scope="col">Jenis Iuran</th>
+                        <th scope="col">Petugas</th>
+                        <th scope="col">Pos</th>
+                        <th scope="col">Warga</th>
+                        <th scope="col">Total Biaya</th>
                     </tr>
                 </thead>
-                @foreach ($kas as $item)
+                @foreach ($cetakrekapagenda as $item)
+                    @php
+                        $total_biaya = number_format($item->total_biaya, 2, ',', '.');
+                    @endphp
                     <tbody>
                         <tr>
-                            <td>{{ $item->iuranwajib->nama }}</td>
-                            <td>{{ $item->petugastagihan->nama }}</td>
-                            <td>{{ $item->pemberi }}</td>
-                            <td>{{ $item->total_biaya }}</td>
-                            <td> <img src="{{ asset($item->dokumen[0]['public_url']) }}" alt=""></td>
+                            <td>{{ date('d M Y', strtotime($item->tanggal)) }}</td>
+                            <td>{{ $item->iuranagenda->nama }}</td>
+                            <td>{{ $item->petugas }}</td>
+                            <td>{{ $item->pos }}</td>
+                            <td>{{ $item->warga_agenda->warga }}</td>
+                            <td>Rp.{{ $item->total_biaya }}</td>
                         </tr>
-
                     </tbody>
                 @endforeach
+                <td colspan="5">TOTAL</td>
+                <td>Rp.{{ $total }}</td>
 
             </table>
 
         </div>
         <!-- end panel-body -->
-    </div>
-    <!-- end panel -->
-@endsection
+    @endsection
 
-@push('scripts')
-    <!-- datatables -->
-    <script src="{{ asset('assets/js/custom/datatable-assets.js') }}"></script>
-    {{-- {{ $dataTable->scripts() }} --}}
-    <!-- end datatables -->
+    @push('scripts')
+        <!-- datatables -->
+        <script src="{{ asset('assets/js/custom/datatable-assets.js') }}"></script>
 
-    <script src="{{ asset('assets/js/custom/delete-with-confirmation.js') }}"></script>
-    <script>
-        $(document).on('delete-with-confirmation.success', function() {
-            $('.buttons-reload').trigger('click')
-        })
-    </script>
-@endpush
+        <script src="{{ asset('assets/js/custom/delete-with-confirmation.js') }}"></script>
+        <script>
+            $(document).on('delete-with-confirmation.success', function() {
+                $('.buttons-reload').trigger('click')
+            })
+        </script>
+    @endpush

@@ -58,16 +58,27 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
         Route::group(['prefix' => '/rekap-kas', 'as' => 'rekap-kas.', 'namespace' => 'RekapIuran'], function () {
             // Route::get('/rekap-iuranagenda/cetak-data-pertanggal/{tglawal}/{tglakhir}/cetak_pdf', 'RekapIuranAgendaController@cetak_pdf')->name('cetak-rekapagenda_pdf');
-            Route::get('/rekap-iuranagenda/cetak-data-pertanggal/{tglawal}/{tglakhir}', 'RekapIuranAgendaController@cetakRekapAgendaPertanggal')->name('cetak-data-pertanggal');
-
+            // Route::get('/rekap-iuranagenda/cetak-data-pertanggal/{tglawal}/{tglakhir}', 'RekapIuranAgendaController@cetakRekapAgendaPertanggal')->name('cetak-data-pertanggal');
+            //tambahan
+            // Route::get('/laporankematian', 'RekapIuranSukaRelaController@laporankematian')->name('laporankematian');
+            // Route::post('/laporankematian', 'RekapIuranSukaRelaController@sortir');
+            // Route::get('/cetaklaporankematian/{start}/{end}', 'RekapIuranSukaRelaController@cetakLaporanKematian');
+            // Route::get('/laporankematian', 'RekapIuranAgendaController@laporankematian')->name('laporankematian');
+            // Route::post('/laporankematian', 'RekapIuranAgendaController@sortir');
+            // Route::get('/rekap-iuranagenda/periode', 'RekapIuranAgendaController@periode');
+            // Route::get('/rekap-iuranagenda/{tglawal}/{tglakhir}', 'RekapIuranAgendaController@cetak_pdf');
+            Route::get('/rekap-iuranagenda/cetak_pdf', 'RekapIuranAgendaController@cetak_pdf');
+            // Route::get('/rekap-iuranagenda/cetak_pdf', 'RekapIuranAgendaController@cetak_pdf');
+            //end tambahan
             Route::resource('rekap-iuranwajib', 'RekapIuranWajibController');
             Route::resource('rekap-iuransukarela', 'RekapIuranSukaRelaController');
             Route::resource('rekap-iurankondisional', 'RekapIuranKondisionalController');
             Route::resource('rekap-iuranagenda', 'RekapIuranAgendaController');
+            Route::post('/rekap-iuranwajib/cetak_pdf', 'RekapIuranWajibController@cetak_pdf')->name('rekap-iuranwajib.cetak');
 
-            Route::get('exportrekapiuranwajib', 'RekapIuranWajibController@rekapiuranwajibexport');
-            Route::get('export-rekapwajib', 'RekapIuranWajibController@export_rekapwajib');
-            Route::get('coba', 'RekapIuranAgendaController@coba');
+            // Route::get('exportrekapiuranwajib', 'RekapIuranWajibController@rekapiuranwajibexport');
+            // Route::get('export-rekapwajib', 'RekapIuranWajibController@export_rekapwajib');
+            // Route::get('coba', 'RekapIuranAgendaController@coba');
         });
 
         Route::group(['prefix' => '/manajemen-keuangan', 'as' => 'manajemen-keuangan.', 'namespace' => 'ManajemenKeuangan'], function () {

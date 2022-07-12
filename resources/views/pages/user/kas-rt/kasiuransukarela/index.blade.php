@@ -1,5 +1,5 @@
 @extends('layouts.user')
-@section('title', 'Kas Iuran Wajib')
+@section('title', 'Kas Iuran Sukarela')
 
 @push('css')
     <!-- datatables -->
