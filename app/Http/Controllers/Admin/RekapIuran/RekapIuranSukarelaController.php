@@ -9,6 +9,7 @@ use App\Models\IuranSukaRela;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 
+
 class RekapIuranSukarelaController extends Controller
 {
 
@@ -60,6 +61,7 @@ class RekapIuranSukarelaController extends Controller
         $pdf = PDF::loadview('pages.admin.rekap-kas.rekapiuransukarela.cetak_sukarela', ['data' => $data, 'dataa' => $dataa, 'total' => $total, 'jenis_iuran_id' => $jenis_iuran_id, 'tglawal' => $tglawal, 'tglakhir' => $tglakhir]);
         return $pdf->download('laporan-rekapsukarela.pdf');
     }
+
 
     // public function store(Request $request)
     // {

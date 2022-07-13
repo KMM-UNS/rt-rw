@@ -55,6 +55,7 @@
                         <div class="col-md-3 ">
                             <x-form.Dropdown name="jenis_iuran_id" :options="$jenis_iuran" value="{{ $jenis_iuran }}"
                                 required />
+
                         </div>
                         <div class="col-md-1 my-auto">
                             <label for="bulan"><strong>Tanggal Awal</strong></label>

@@ -9,6 +9,7 @@ use App\Models\IuranWajib;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 
+
 class RekapIuranWajibController extends Controller
 {
     public function index()
@@ -59,6 +60,7 @@ class RekapIuranWajibController extends Controller
         $pdf = PDF::loadview('pages.admin.rekap-kas.rekapiuranwajib.cetak_wajib', ['data' => $data, 'dataa' => $dataa, 'total' => $total, 'jenis_iuran_id' => $jenis_iuran_id, 'tglawal' => $tglawal, 'tglakhir' => $tglakhir]);
         return $pdf->download('laporan-rekapwajib.pdf');
     }
+
 
 
     public function show($id)

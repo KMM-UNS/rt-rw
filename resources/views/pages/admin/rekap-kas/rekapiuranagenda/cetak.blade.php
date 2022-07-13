@@ -41,11 +41,8 @@
     <hr style="border: 3px solid; margin-bottom: 1px;">
     <hr style="margin-top: 0;">
 
-    <h3 style="font-size: 16px; text-align: center;">LAPORAN IURAN WAJIB</h1>
-        <br>
-        <h4 style="text-align: left;"> Jenis Iuran : {{ $dataa->iuranwajib->nama }}</h4>
-        <h4 style="text-align: left;">Periode : {{ date('d M Y', strtotime($tglawal)) }} -
-            {{ date('d M Y', strtotime($tglakhir)) }}</h4>
+    <h3 style="font-size: 16px; text-align: center;">Rekap Kas Iuran </h1>
+
 
         <table style="width:100%" border="1" cellpadding="2" class="table">
             <thead>
@@ -54,26 +51,35 @@
                     <th scope="col">Jenis Iuran</th>
                     <th scope="col">Petugas</th>
                     <th scope="col">Pos</th>
-                    <th scope="col">Nama Warga</th>
+                    <th scope="col">Warga</th>
                     <th scope="col">Total Biaya</th>
                 </tr>
             </thead>
-            @foreach ($data as $item)
+            @foreach ($cetakrekapagenda as $item)
+                @php
+                    $total_biaya = number_format($item->total_biaya, 2, ',', '.');
+                @endphp
                 <tbody>
                     <tr>
-                        <td>{{ date('d M Y', strtotime($item->tanggal)) }}</td>
-                        <td>{{ $item->iuranwajib->nama }}</td>
+                        {{-- <td>{{ date('d M Y', strtotime($item->tanggal)) }}</td>
+                        <td>{{ $item->iuranagenda->nama }}</td>
                         <td>{{ $item->petugas }}</td>
                         <td>{{ $item->pos }}</td>
-                        <td>{{ $item->warga_wajib->warga }}</td>
-                        <td>Rp. {{ number_format($item->total_biaya, 0) }}</td>
+                        <td>{{ $item->warga_agenda->warga }}</td>
+                        <td>Rp.{{ $item->total_biaya }}</td> --}}
+                        <td>banyak</td>
+                        <td>banyak</td>
+                        <td>banyak</td>
+                        <td>banyak</td>
+                        <td>banyak</td>
                     </tr>
                 </tbody>
             @endforeach
             <td colspan="5">TOTAL</td>
-            <td>Rp. {{ number_format($total, 0) }}</td>
+            {{-- <td>Rp.{{ $total }}</td> --}}
 
         </table>
+
 
 </body>
 

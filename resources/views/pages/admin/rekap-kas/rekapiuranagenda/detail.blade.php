@@ -62,6 +62,7 @@
                             <td>{{ $item->pos }}</td>
                             <td>{{ $item->warga_agenda->warga }}</td>
                             <td>Rp. {{ number_format($item->total_biaya, 0) }}</td>
+
                         </tr>
                     </tbody>
                 @endforeach

@@ -42,6 +42,7 @@
             <a href="/admin/rekap-kas/rekap-iurankondisional/cetak_pdf/{{ $jenis_iuran }}/{{ $tglawal }}/{{ $tglakhir }}"
                 class="btn btn-primary" target="_blank">CETAK
                 PDF</a>
+
             <table border="1" cellpadding="2" class="table">
                 <thead>
                     <tr>

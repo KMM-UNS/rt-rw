@@ -1,6 +1,6 @@
 @extends('layouts.default', ['topMenu' => true, 'sidebarHide' => true])
 
-@section('title', 'Rekap Iuran Sukarela')
+@section('title', 'Rekap Iuran Agenda')
 
 @push('css')
     <!-- datatables -->
@@ -39,10 +39,9 @@
         </div>
         <!-- begin panel-body -->
         <div class="panel-body">
-            <a href="/admin/rekap-kas/rekap-iuransukarela/cetak_pdf/{{ $jenis_iuran }}/{{ $tglawal }}/{{ $tglakhir }}"
-                class="btn btn-primary" target="_blank">CETAK
-                PDF</a>
-
+            <a href="{{ url('admin/rekap-kas/rekap-iuranagenda/cetak_pdf ') }}" class="btn btn-primary"
+                target="_blank">CETAK
+                PDF woii</a>
             <table border="1" cellpadding="2" class="table">
                 <thead>
                     <tr>
@@ -54,21 +53,24 @@
                         <th scope="col">Total Biaya</th>
                     </tr>
                 </thead>
-                @foreach ($cetakrekapsukarela as $item)
+                @foreach ($cetakrekapagenda as $item)
+                    @php
+                        $total_biaya = number_format($item->total_biaya, 2, ',', '.');
+                    @endphp
                     <tbody>
                         <tr>
                             <td>{{ date('d M Y', strtotime($item->tanggal)) }}</td>
-                            <td>{{ $item->iuransukarela->nama }}</td>
+                            <td>{{ $item->iuranagenda->nama }}</td>
                             <td>{{ $item->petugas }}</td>
                             <td>{{ $item->pos }}</td>
-                            <td>{{ $item->warga_sukarela->warga }}</td>
-                            <td>Rp. {{ number_format($item->total_biaya, 0) }}</td>
-
+                            <td>{{ $item->warga_agenda->warga }}</td>
+                            <td>Rp.{{ $item->total_biaya }}</td>
                         </tr>
                     </tbody>
                 @endforeach
                 <td colspan="5">TOTAL</td>
-                <td>Rp. {{ number_format($total, 0) }}</td>
+                <td>Rp.{{ $total }}</td>
+
             </table>
 
         </div>
