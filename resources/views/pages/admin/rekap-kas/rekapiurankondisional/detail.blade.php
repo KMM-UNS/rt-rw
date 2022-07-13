@@ -39,34 +39,34 @@
         </div>
         <!-- begin panel-body -->
         <div class="panel-body">
-            {{-- {{ $kas }} --}}
+            <a href="/admin/rekap-kas/rekap-iurankondisional/cetak_pdf/{{ $jenis_iuran }}/{{ $tglawal }}/{{ $tglakhir }}"
+                class="btn btn-primary" target="_blank">CETAK
+                PDF</a>
             <table border="1" cellpadding="2" class="table">
                 <thead>
                     <tr>
+                        <th scope="col">Tanggal</th>
                         <th scope="col">Jenis Iuran</th>
-                        <th scope="col">Penerima</th>
-                        <th scope="col">Pemberi</th>
-                        <th scope="col">Image</th>
+                        <th scope="col">Petugas</th>
+                        <th scope="col">Pos</th>
+                        <th scope="col">Warga</th>
                         <th scope="col">Total Biaya</th>
                     </tr>
                 </thead>
-                @foreach ($rekap as $item)
-                    @php
-                        $total_biaya = number_format($item->total_biaya, 2, ',', '.');
-                    @endphp
+                @foreach ($cetakrekapkondisional as $item)
                     <tbody>
                         <tr>
+                            <td>{{ date('d M Y', strtotime($item->tanggal)) }}</td>
                             <td>{{ $item->iurankondisional->nama }}</td>
-                            <td>{{ $item->petugastagihan->nama }}</td>
-                            <td>{{ $item->pemberi }}</td>
-                            <td> <img src="{{ asset($item->dokumen[0]['public_url']) }}" alt=""
-                                    class="img-rounded height-80"></td>
-                            <td>Rp.{{ $item->total_biaya }}</td>
+                            <td>{{ $item->petugas }}</td>
+                            <td>{{ $item->pos }}</td>
+                            <td>{{ $item->warga_kondisional->warga }}</td>
+                            <td>Rp. {{ number_format($item->total_biaya, 0) }}</td>
                         </tr>
                     </tbody>
                 @endforeach
-                <td colspan="4">TOTAL</td>
-                <td>Rp.{{ $total }}</td>
+                <td colspan="5">TOTAL</td>
+                <td>Rp. {{ number_format($total, 0) }}</td>
 
             </table>
 
@@ -77,8 +77,6 @@
     @push('scripts')
         <!-- datatables -->
         <script src="{{ asset('assets/js/custom/datatable-assets.js') }}"></script>
-        {{-- {{ $dataTable->scripts() }} --}}
-        <!-- end datatables -->
 
         <script src="{{ asset('assets/js/custom/delete-with-confirmation.js') }}"></script>
         <script>

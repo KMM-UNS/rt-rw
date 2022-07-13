@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Admin\KasRT;
 use App\Datatables\Admin\KasRT\KasIuranWajibDataTable;
 use App\Models\IuranWajib;
 use App\Models\PetugasTagihan;
-use App\Models\Bulan;
-use App\Models\Tahun;
 use App\Http\Controllers\Controller;
 use App\Models\KasIuranWajib;
 use Illuminate\Http\Request;
@@ -29,10 +27,10 @@ class KasIuranWajibController extends Controller
     {
         $jenis_iuranwajib = IuranWajib::pluck('nama', 'id');
         $nama_petugas = PetugasTagihan::pluck('nama', 'id');
-        $nama_bulan = Bulan::pluck('nama', 'id');
-        $tahun = Tahun::pluck('nama', 'id');
+        $warga = Keluarga::pluck('warga', 'id');
+        $wargaa = KasIuranWajib::all();
 
-        return view('pages.admin.kas-rt.kasiuranwajib.add-edit', ['jenis_iuranwajib' => $jenis_iuranwajib, 'nama_petugas' => $nama_petugas, 'nama_bulan' => $nama_bulan, 'tahun' => $tahun]);
+        return view('pages.admin.kas-rt.kasiuranwajib.add-edit', ['jenis_iuranwajib' => $jenis_iuranwajib, 'nama_petugas' => $nama_petugas, 'wargaa' => $wargaa, 'warga' => $warga]);
     }
 
     public function store(IuranWajibForm $request, FileUploaderHelper $fileUploaderHelper)
@@ -40,6 +38,10 @@ class KasIuranWajibController extends Controller
         DB::transaction(function () use ($request, $fileUploaderHelper) {
             try {
                 $wajib = KasIuranWajib::createFromRequest($request);
+                $pos = Keluarga::where('id', $wajib->warga)->first()->pos;
+                $wajib->pos = $pos->nama;
+                $wajib->petugas = $pos->petugastagihan->nama;
+
                 $wajib->save();
                 if ($request->file()) {
 
@@ -67,17 +69,16 @@ class KasIuranWajibController extends Controller
 
     public function edit($id, DataHelper $dataHelper)
     {
-        $data = KasIuranWajib::with('dokumen')->findOrFail($id);
+        // $data = KasIuranWajib::with('dokumen')->findOrFail($id);
+        $data = KasIuranWajib::findOrFail($id);
         $jenis_iuranwajib = IuranWajib::pluck('nama', 'id');
         $nama_petugas = PetugasTagihan::pluck('nama', 'id');
-        $nama_bulan = Bulan::pluck('nama', 'id');
-        $tahun = Tahun::pluck('nama', 'id');
+        $warga = Keluarga::pluck('warga', 'id');
         return view('pages.admin.kas-rt.kasiuranwajib.add-edit', [
             'data' => $data,
             'jenis_iuranwajib' => $jenis_iuranwajib,
             'nama_petugas' => $nama_petugas,
-            'nama_bulan' => $nama_bulan,
-            'tahun' => $tahun,
+            'warga' => $warga,
             'dataHelper' => $dataHelper
         ]);
     }

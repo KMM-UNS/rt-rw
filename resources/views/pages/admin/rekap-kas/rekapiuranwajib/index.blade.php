@@ -16,12 +16,12 @@
     <!-- begin breadcrumb -->
     <ol class="breadcrumb float-xl-right">
         <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
-        <li class="breadcrumb-item"><a href="javascript:;">Rekap Iuran</a></li>
+        <li class="breadcrumb-item"><a href="javascript:;">Rekap Iuran Wajib</a></li>
         <li class="breadcrumb-item active">@yield('title')</li>
     </ol>
     <!-- end breadcrumb -->
     <!-- begin page-header -->
-    <h1 class="page-header">Rekap Iuran<small> @yield('title')</small></h1>
+    <h1 class="page-header">Rekap Iuran Wajib<small> @yield('title')</small></h1>
     <!-- end page-header -->
 
 
@@ -29,7 +29,7 @@
     <div class="panel panel-inverse">
         <!-- begin panel-heading -->
         <div class="panel-heading">
-            <h4 class="panel-title">DataTable - @yield('title')</h4>
+            <h4 class="panel-title">Rekap Kas Iuran - @yield('title')</h4>
             <div class="panel-heading-btn">
                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i
                         class="fa fa-expand"></i></a>
@@ -37,50 +37,42 @@
                         class="fa fa-minus"></i></a>
             </div>
         </div>
-        <!-- end panel-heading -->
-
-        {{-- <div class="panel-body">
-            {{ $dataTable->table() }}
-        </div> --}}
 
         <!-- begin panel-body -->
-        <form action="{{ route('admin.rekap-kas.rekap-iuranwajib.store') }}" id="form" name="form" method="POST" data-parsley-validate="true"  enctype="multipart/form-data">
+        <form action="{{ route('admin.rekap-kas.rekap-iuranwajib.store') }}" id="form" name="form" method="POST"
+            data-parsley-validate="true" enctype="multipart/form-data">
             @csrf
-            @if (isset($data))
-            {{ method_field('PUT') }}
+            @if (isset($datas))
+                {{ method_field('PUT') }}
             @endif
             <div class="panel-body">
 
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-1 my-auto">
-                            <label for="jenis_iuran_id"><strong>Jenis Iuran</strong></label>
+                            <label for="bulan"><strong>Jenis Iuran</strong></label>
                         </div>
-                        <div class="col-md-3">
-                            <div class="input-group">
-                                <x-form.Dropdown name="jenis_iuran_id" :options="$jenis_iuran" selected="{{{ old('jenis_iuran_id') ?? ($data['jenis_iuran_id'] ?? null) }}}" required />
-                            </div>
-                        </div>
-                        <div class="col-md-1 my-auto">
-                            <label for="bulan"><strong>Bulan</strong></label>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="input-group">
-                                <x-form.Dropdown name="bulan" :options="$nama_bulans" selected="{{{ old('bulan') ?? ($data['bulan'] ?? null) }}}" required />
-                            </div>
+                        <div class="col-md-3 ">
+                            <x-form.Dropdown name="jenis_iuran_id" :options="$jenis_iuran" value="{{ $jenis_iuran }}"
+                                required />
                         </div>
                         <div class="col-md-1 my-auto">
-                            <label for="status_hunian_id"><strong>Tahun</strong></label>
+                            <label for="bulan"><strong>Tanggal Awal</strong></label>
                         </div>
-                        <div class="col-md-3">
-                            <div class="input-group">
-                                <x-form.Dropdown name="tahun" :options="$tahun" selected="{{{ old('tahun') ?? ($data['tahun'] ?? null) }}}" required />
-                            </div>
+                        <div class="col-md-3 ">
+                            <input type="date" name="tglawal" id="tglawal" class="form-control" />
+                        </div>
+                        <div class="col-md-1 my-auto">
+                            <label for="bulan"><strong>Tanggal Akhir</strong></label>
+                        </div>
+                        <div class="col-md-3 ">
+                            <input type="date" name="tglakhir" id="tglakhir" class="form-control" />
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </div>
+                    <div class="">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+
         </form>
         <!-- end panel-body -->
     </div>
@@ -104,16 +96,4 @@
             });
         });
     </script>
-
-        {{-- <!-- datatables -->
-        <script src="{{ asset('assets/js/custom/datatable-assets.js') }}"></script>
-        {{ $dataTable->scripts() }}
-        <!-- end datatables --> --}}
-
-        <script src="{{ asset('assets/js/custom/delete-with-confirmation.js') }}"></script>
-        <script>
-            $(document).on('delete-with-confirmation.success', function() {
-                $('.buttons-reload').trigger('click')
-            })
-        </script>
 @endpush

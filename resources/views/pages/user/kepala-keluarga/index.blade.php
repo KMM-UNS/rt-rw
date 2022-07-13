@@ -34,10 +34,10 @@
                             </thead>
                             <tbody>
 
-                                @foreach ($warga as $item)
+                                @foreach ($wargaa as $item)
                                     <tr>
                                         <td>{{ $item->no_kk }}</td>
-                                        <td>{{ $item->pemberi }}</td>
+                                        <td>{{ $item->warga }}</td>
                                         <td>{{ $item->pos->nama }}</td>
                                         <td>{{ $item->telp }}</td>
                                         <td>

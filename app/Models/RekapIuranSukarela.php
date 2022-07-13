@@ -19,14 +19,14 @@ class RekapIuranSukarela extends Model
         'created_at'
     ];
 
-    public function namabulanss()
-    {
-        return $this->belongsTo(Bulan::class, 'bulan');
-    }
-    public function tahuns()
-    {
-        return $this->belongsTo(Tahun::class, 'tahun');
-    }
+    // public function namabulanss()
+    // {
+    //     return $this->belongsTo(Bulan::class, 'bulan');
+    // }
+    // public function tahuns()
+    // {
+    //     return $this->belongsTo(Tahun::class, 'tahun');
+    // }
 
     //new
 }

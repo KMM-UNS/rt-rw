@@ -6,72 +6,60 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\KasIuranWajib;
 use App\Models\IuranWajib;
-use App\Models\Tahun;
-use App\Models\Bulan;
-use App\Exports\RekapIuranWajibView;
-// use Maatwebsite\Excel\Facades\Excel;
-use App\Models\IuranBulanan;
-use App\Datatables\Admin\RekapIuran\RekapIuranWajibDataTable;
-use App\Datatables\Admin\RekapIuran\ActionDataTable;
-use PhpParser\Builder\Function_;
-use PhpParser\Node\Expr\FuncCall;
-// use Excel;
-use Maatwebsite\Excel\Facades\Excel;
-// use Maatwebsite\Excel\Excel;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 
 class RekapIuranWajibController extends Controller
 {
     public function index()
     {
         $jenis_iuran = IuranWajib::pluck('nama', 'id');
-        $nama_bulans = Bulan::pluck('nama', 'id');
-        $tahun = Tahun::pluck('nama', 'id');
-        return view('pages.admin.rekap-kas.rekapiuranwajib.index', ['jenis_iuran' => $jenis_iuran, 'nama_bulans' => $nama_bulans, 'tahun' => $tahun]);
+
+        return view('pages.admin.rekap-kas.rekapiuranwajib.index', ['jenis_iuran' => $jenis_iuran]);
     }
 
 
 
-    public function create(ActionDataTable $dataTable)
+    public function create()
     {
-        return $dataTable->render('pages.admin.rekap-kas.rekapiuranwajib.detail');
     }
-
 
     public function store(Request $request)
     {
         $jenis_iuran = $request->jenis_iuran_id;
-        $bulan = $request->bulan;
-        $tahun = $request->tahun;
-
-        $total = KasIuranWajib::where('jenis_iuran_id', $jenis_iuran)->where('bulan', $bulan)->where('tahun', $tahun)->get()->sum('total_biaya');
-
-        $rekap = KasIuranWajib::with('iuranwajib', 'jenisiuranwajib', 'petugastagihan', 'namabulanss', 'tahuns')->where('jenis_iuran_id', $jenis_iuran)->where('bulan', $bulan)->where('tahun', $tahun)->get();
-        return view('pages.admin.rekap-kas.rekapiuranwajib.detail', ['rekap' => $rekap, 'total' => $total]);
+        $start = Carbon::parse($request->tglawal);
+        $end = Carbon::parse($request->tglakhir);
+        // $total = KasIuranAgenda::where('jenis_iuran_id', $jenis_iuran)->get()->sum('total_biaya');
+        $total = KasIuranWajib::where('jenis_iuran_id', $jenis_iuran)
+            ->whereDate('tanggal', '<=', $end)
+            ->whereDate('tanggal', '>=', $start)
+            ->get()->sum('total_biaya');
+        $cetakrekapwajib = KasIuranWajib::with('iuranwajib', 'jenisiuranwajib', 'petugastagihan', 'warga_wajib')->where('jenis_iuran_id', $jenis_iuran)->whereDate('tanggal', '<=', $end)
+            ->whereDate('tanggal', '>=', $start)->get();
+        // $totall = 0 + $total;
+        return view('pages.admin.rekap-kas.rekapiuranwajib.detail', ['cetakrekapwajib' => $cetakrekapwajib, 'total' => $total, 'jenis_iuran' => $jenis_iuran, 'tglawal' => $start, 'tglakhir' => $end]);
     }
 
-    // public function rekapiuranwajibexport()
-    // {
-    //     return Excel::download(new RekapIuranWajibView(), 'rekapiuranwajib.xlsx');
-    // }
-
-    public function export_rekapwajib(Request $request)
+    public function cetak_pdf($jenis_iuran, $start, $end)
     {
-        $title = 'Laporan Rekap Iuran Wajib';
-        $jenis_iuran = $request->jenis_iuran_id;
-        $bulan = $request->bulan;
-        $tahun = $request->tahun;
+        $jenis_iuran_id = $jenis_iuran;
+        $tglawal = $start;
+        $tglakhir = $end;
 
-        $total = KasIuranWajib::where('jenis_iuran_id', $jenis_iuran)->where('bulan', $bulan)->where('tahun', $tahun)->get()->sum('total_biaya');
-
-        $rekap = KasIuranWajib::with('iuranwajib', 'jenisiuranwajib', 'petugastagihan', 'namabulanss', 'tahuns')->where('jenis_iuran_id', $jenis_iuran)->where('bulan', $bulan)->where('tahun', $tahun)->get();
-
-        Excel::create($title, function ($excel) use ($rekap, $total) {
-            $excel->sheet('Sheetname', function ($sheet) use ($rekap, $total) {
-
-                $sheet->view('pages.admin.rekap-kas.rekapiuranwajib.laporan_rekap_excel')->with('rekap', $rekap)->with('total', $total);
-            });
-        })->export('xls');
+        $total = KasIuranWajib::where('jenis_iuran_id', $jenis_iuran_id)
+            ->where('tanggal', '>=', $tglawal)
+            ->where('tanggal', '<=', $tglakhir)->get()
+            ->sum('total_biaya');
+        $data = KasIuranWajib::where('jenis_iuran_id', $jenis_iuran_id)
+            ->where('tanggal', '>=', $tglawal)
+            ->where('tanggal', '<=', $tglakhir)->get();
+        $dataa = KasIuranWajib::where('jenis_iuran_id', $jenis_iuran_id)
+            ->where('tanggal', '>=', $tglawal)
+            ->where('tanggal', '<=', $tglakhir)->first();
+        $pdf = PDF::loadview('pages.admin.rekap-kas.rekapiuranwajib.cetak_wajib', ['data' => $data, 'dataa' => $dataa, 'total' => $total, 'jenis_iuran_id' => $jenis_iuran_id, 'tglawal' => $tglawal, 'tglakhir' => $tglakhir]);
+        return $pdf->download('laporan-rekapwajib.pdf');
     }
+
 
     public function show($id)
     {

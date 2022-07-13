@@ -14,10 +14,11 @@ class BayarAgendaController extends Controller
     {
         // return 'berhasil';
         $pos_tagihan = Pos::pluck('nama', 'id');
-        $warga = Keluarga::with(['pemberii'])->get();
+        // $wargaa = Keluarga::with(['pemberii'])->get();
+        $wargaa = Keluarga::with(['warga_agenda'])->get();
         $iuran_agenda = IuranAgenda::all();
 
-        return view('pages.user.kepala-keluarga.index_agenda', ['pos_tagihan' => $pos_tagihan, 'warga' => $warga, 'iuran_agenda' => $iuran_agenda]);
+        return view('pages.user.kepala-keluarga.index_agenda', ['pos_tagihan' => $pos_tagihan, 'wargaa' => $wargaa, 'iuran_agenda' => $iuran_agenda]);
     }
 
     public function create()
@@ -27,15 +28,15 @@ class BayarAgendaController extends Controller
 
     public function store(Request $request)
     {
-        $warga = Keluarga::all();
-        return redirect(route('user.kepala-keluarga.bayar-iuranagenda.index_agenda'))->withToastSuccess('Data tersimpan', ['warga' => $warga]);
+        $wargaa = Keluarga::all();
+        return redirect(route('user.kepala-keluarga.bayar-iuranagenda.index_agenda'))->withToastSuccess('Data tersimpan', ['wargaa' => $wargaa]);
     }
 
     public function status($id)
     {
-        $warga = Keluarga::find($id);
-        $warga->status = !$warga->status;
-        $warga->save();
+        $wargaa = Keluarga::find($id);
+        $wargaa->status = !$wargaa->status;
+        $wargaa->save();
         return redirect()->back();
     }
 

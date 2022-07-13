@@ -16,7 +16,7 @@ class KasIuranAgenda extends Model
     public const ACTIVE = "aktif";
 
     protected $table = 'kas_iuran_agendas';
-    protected $fillable = ['jenis_iuran_id', 'tanggal', 'pemberi', 'total_biaya', 'status'];
+    protected $fillable = ['jenis_iuran_id', 'tanggal', 'warga', 'total_biaya', 'status'];
     protected $dates = [
         'created_at'
     ];
@@ -29,14 +29,6 @@ class KasIuranAgenda extends Model
     {
         return $this->belongsTo(PetugasTagihan::class, 'petugas');
     }
-    public function namabulanss()
-    {
-        return $this->belongsTo(Bulan::class, 'bulan');
-    }
-    public function tahuns()
-    {
-        return $this->belongsTo(Tahun::class, 'tahun');
-    }
     //membuat dropdown jenis iuran
     public function jenisiuranagenda()
     {
@@ -47,8 +39,12 @@ class KasIuranAgenda extends Model
         return $this->morphToMany(Dokumen::class, 'dokumenable');
     }
     //tamabahan dropdown pemberi
-    public function pemberii()
+    // public function pemberii()
+    // {
+    //     return $this->belongsTo(Keluarga::class, 'warga');
+    // }
+    public function warga_agenda()
     {
-        return $this->belongsTo(Keluarga::class, 'pemberi');
+        return $this->belongsTo(Keluarga::class, 'warga');
     }
 }

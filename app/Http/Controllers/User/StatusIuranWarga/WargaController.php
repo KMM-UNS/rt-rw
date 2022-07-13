@@ -3,32 +3,42 @@
 namespace App\Http\Controllers\User\StatusIuranWarga;
 
 use App\Http\Controllers\Controller;
+use App\Models\IuranAgenda;
+use App\Models\IuranKondisional;
+use App\Models\IuranSukarela;
+use App\Models\IuranWajib;
+use App\Models\KasIuranAgenda;
+use App\Models\KasIuranKondisional;
+use App\Models\KasIuranSukaRela;
+use App\Models\KasIuranWajib;
 use App\Models\Keluarga;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class WargaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    // public function index()
-    // {
-    //     $warga = Keluarga::all();
-    //     return view('pages.user.kepala-keluarga.warga.index', ['warga' => $warga]);
-    // }
+
     public function index()
     {
-        $warga = Keluarga::all();
-        return view('wargaa', ['warga' => $warga]);
+        $id_keluarga = Keluarga::where('user_id', auth()->user()->id)->first()->id;
+
+        $data1 = KasIuranWajib::where('warga', $id_keluarga)->get();
+        $data2 = KasIuranSukaRela::where('warga', $id_keluarga)->get();
+        $data3 = KasIuranKondisional::where('warga', $id_keluarga)->get();
+        $data4 = KasIuranAgenda::where('warga', $id_keluarga)->get();
+
+
+        return view('wargaa', ['data1' => $data1, 'data2' => $data2, 'data3' => $data3, 'data4' => $data4]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function status($id)
+    {
+        $data = Keluarga::find($id);
+        $data->status = !$data->status;
+        $data->save();
+        return redirect()->back();
+    }
+
     public function create()
     {
         //

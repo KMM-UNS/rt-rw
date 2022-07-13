@@ -16,6 +16,7 @@ use App\Helpers\TrashHelper;
 use App\Helpers\FileUploaderHelper;
 use App\Http\Requests\Admin\IuranKondisionalForm;
 use App\Models\KasIuranAgenda;
+use App\Models\Keluarga;
 use Illuminate\Support\Facades\DB;
 
 
@@ -30,9 +31,17 @@ class KasIuranKondisionalController extends Controller
     {
         $jenis_iurankondisional = IuranKondisional::pluck('nama', 'id');
         $nama_petugas = PetugasTagihan::pluck('nama', 'id');
-        $nama_bulan = Bulan::pluck('nama', 'id');
-        $tahun = Tahun::pluck('nama', 'id');
-        return view('pages.admin.kas-rt.kasiurankondisional.add-edit', ['jenis_iurankondisional' => $jenis_iurankondisional,  'nama_petugas' => $nama_petugas, 'nama_bulan' => $nama_bulan, 'tahun' => $tahun]);
+        $warga = Keluarga::pluck('warga', 'id');
+        $wargaa = KasIuranKondisional::all();
+        return view('pages.admin.kas-rt.kasiurankondisional.add-edit', ['jenis_iurankondisional' => $jenis_iurankondisional,  'nama_petugas' => $nama_petugas, 'warga' => $warga, 'wargaa' => $wargaa]);
+    }
+
+    public function status($id)
+    {
+        $kondisional = KasIuranAgenda::find($id);
+        $kondisional->status = !$kondisional->status;
+        $kondisional->save();
+        return redirect()->back();
     }
 
     public function store(IuranKondisionalForm $request, FileUploaderHelper $fileUploaderHelper)
@@ -40,6 +49,10 @@ class KasIuranKondisionalController extends Controller
         DB::transaction(function () use ($request, $fileUploaderHelper) {
             try {
                 $kondisional = KasIuranKondisional::createFromRequest($request);
+                $pos = Keluarga::where('id', $kondisional->warga)->first()->pos;
+                $kondisional->pos = $pos->nama;
+                $kondisional->petugas = $pos->petugastagihan->nama;
+
                 $kondisional->save();
                 if ($request->file()) {
 
@@ -68,17 +81,15 @@ class KasIuranKondisionalController extends Controller
 
     public function edit($id, DataHelper $dataHelper)
     {
-        $data = KasIuranKondisional::with('dokumen')->findOrFail($id);
+        $data = KasIuranKondisional::findOrFail($id);
         $jenis_iurankondisional = IuranKondisional::pluck('nama', 'id');
         $nama_petugas = PetugasTagihan::pluck('nama', 'id');
-        $nama_bulan = Bulan::pluck('nama', 'id');
-        $tahun = Tahun::pluck('nama', 'id');
+        $warga = Keluarga::pluck('warga', 'id');
         return view('pages.admin.kas-rt.kasiurankondisional.add-edit', [
             'data' => $data,
             'jenis_iurankondisional' => $jenis_iurankondisional,
             'nama_petugas' => $nama_petugas,
-            'nama_bulan' => $nama_bulan,
-            'tahun' => $tahun,
+            'warga' => $warga,
             'dataHelper' => $dataHelper
         ]);
     }

@@ -11,7 +11,6 @@ use Yajra\DataTables\Services\DataTable;
 
 class KasIuranKondisionalDataTable extends DataTable
 {
-
     public function dataTable($query)
     {
         return datatables()
@@ -24,18 +23,28 @@ class KasIuranKondisionalDataTable extends DataTable
 
                 return $btn;
             })
-            ->addColumn('image', function ($row) {
-                $img = '<img src="' . asset($row->dokumen[0]['public_url']) . '" class="img-rounded height-80" >';
-                return $img;
-            })
-            // raw column berfungsi untuk menjalankan tag html
-            ->rawColumns(['image', 'action']);
-    }
 
+            ->editColumn('status', function ($row) {
+                if ($row->status == '1') {
+                    $label = '<label for="" class="label label-success">Sudah Bayar</label>';
+                    return  $label;
+                }
+                $label = '<label for="" class="label label-danger">Belum Bayar</label>';
+                return  $label;
+            })
+            ->rawColumns(['status', 'action']);
+
+        // ->addColumn('image', function ($row) {
+        //     $img = '<img src="' . asset($row->dokumen[0]['public_url']) . '" class="img-rounded height-80" >';
+        //     return $img;
+        // })
+        // // raw column berfungsi untuk menjalankan tag html
+        // ->rawColumns(['image', 'action']);
+    }
 
     public function query(KasIuranKondisional $model)
     {
-        return $model->select('kas_iuran_kondisionals.*')->with(['iurankondisional', 'petugastagihan', 'namabulanss', 'tahuns']);
+        return $model->select('kas_iuran_kondisionals.*')->with(['iurankondisional', 'petugastagihan', 'warga_kondisional']);
     }
 
     public function html()
@@ -63,22 +72,18 @@ class KasIuranKondisionalDataTable extends DataTable
                 ->printable(false)
                 ->width(60)
                 ->addClass('text-center'),
-            // Column::make('id'),
             Column::make('jenis_iuran_id')->data('iurankondisional.nama'),
-            Column::make('bulan')->data('namabulanss.nama'),
-            Column::make('tahun')->data('tahuns.nama'),
-            Column::make('penerima_id')->data('petugastagihan.nama'),
-            Column::make('pemberi'),
+            Column::make('tanggal'),
+            Column::make('petugas'),
+            Column::make('warga')->data('warga_kondisional.warga'),
+            Column::make('pos'),
             Column::make('total_biaya'),
-            Column::computed('image'),
-            // Column::make('created_at'),
-            // Column::make('updated_at'),
+            Column::make('status'),
         ];
     }
 
-
     protected function filename()
     {
-        return 'KasIuranKondisional_' . date('YmdHis');
+        return 'KasIuranWajib_' . date('YmdHis');
     }
 }

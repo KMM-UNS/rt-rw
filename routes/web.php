@@ -36,7 +36,8 @@ Route::group(['middleware' => 'auth:web', 'as' => 'user.'], function () {
             Route::get('/updatesukarela/status/{id}', 'BayarSukarelaController@status')->name('bayar-iuransukarela.status');
             Route::get('/updatekondisional/status/{id}', 'BayarKondisionalController@status')->name('bayar-iurankondisional.status');
             Route::get('/updateagenda/status/{id}', 'BayarAgendaController@status')->name('bayar-iuranagenda.status');
-            Route::resource('bayar-iuranwajib', 'KeluargaaController');
+            // Route::resource('bayar-iuranwajib', 'KeluargaaController');
+            Route::resource('bayar-iuranwajib', 'BayarWajibController');
             Route::resource('bayar-iuransukarela', 'BayarSukarelaController');
             Route::resource('bayar-iurankondisional', 'BayarKondisionalController');
             Route::resource('bayar-iuranagenda', 'BayarAgendaController');

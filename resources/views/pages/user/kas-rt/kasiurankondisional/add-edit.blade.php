@@ -38,6 +38,36 @@
       <!-- begin panel-body -->
       <div class="panel-body">
         <div class="form-group">
+        <label for="name">jenis Iuran</label>
+        <x-form.Dropdown name="kas_iuran_kondisionals_jenis_iuran_id" :options="$jenis_iurankondisional" selected="{{{ old('kas_iuran_kondisionals_jenis_iuran_id') ?? ($data['jenis_iuran_id'] ?? null) }}}" required />
+        </div>
+        <div class="form-group">
+            <label for="tanggal">Tanggal</label>
+            <input type="date" id="tanggal" name="kas_iuran_kondisionals_tanggal" class="form-control" autofocus data-parsley-required="true" value="{{{ $data->tanggal ?? old('kas_iuran_kondisionals_tanggal') }}}">
+        </div>
+        <div class="form-group">
+        <label for="warga">Warga</label>
+        <x-form.Dropdown name="kas_iuran_kondisionals_warga" :options="$warga" selected="{{{ old('kas_iuran_kondisionals_warga') ?? ($data['warga'] ?? null) }}}" required />
+        </div>
+        <div class="form-group">
+        <label for="total_biaya">Total Biaya</label>
+        <input type="text" id="total_biaya" name="kas_iuran_kondisionals_total_biaya" class="form-control" autofocus data-parsley-required="true" value="{{{ $data->total_biaya ?? old('kas_iuran_kondisionals_total_biaya') }}}">
+        </div>
+        <div class="form-group">
+        <label for="status">Status</label>
+            <div class="col-md-8 col-sm-8">
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" name="kas_iuran_kondisionals_status" value="1" id="radio-required" data-parsley-required="true" />
+                    <label class="form-check-label">Sudah Bayar</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" name="kas_iuran_kondisionals_status" id="radio-required2" value="2" />
+                    <label class="form-check-label">Belum Bayar</label>
+                </div>
+            </div>
+    </div>
+      {{-- <div class="panel-body">
+        <div class="form-group">
           <label for="name">jenis Iuran</label>
           <x-form.Dropdown name="kas_iuran_kondisionals_jenis_iuran_id" :options="$jenis_iurankondisional" selected="{{{ old('kas_iuran_kondisionals_jenis_iuran_id') ?? ($data['jenis_iuran_id'] ?? null) }}}" required />
         </div>
@@ -50,12 +80,12 @@
             <x-form.Dropdown name="kas_iuran_kondisionals_tahun" :options="$tahun" selected="{{{ old('kas_iuran_kondisionals_tahun') ?? ($data['tahun'] ?? null) }}}" required />
         </div>
         <div class="form-group">
-            <label for="penerima">Penerima</label>
+            <label for="petugas">Petugas</label>
             <x-form.Dropdown name="kas_iuran_kondisionals_petugas" :options="$nama_petugas" selected="{{{ old('kas_iuran_kondisionals_petugas') ?? ($data['petugas'] ?? null) }}}" required />
         </div>
         <div class="form-group">
-          <label for="pemberi">Pemberi</label>
-          <input type="text" id="pemberi" name="kas_iuran_kondisionals_pemberi" class="form-control" autofocus data-parsley-required="true" value="{{{ $data->pemberi ?? old('kas_iuran_kondisionals_pemberi') }}}">
+          <label for="warga">Warga</label>
+          <input type="text" id="warga" name="kas_iuran_kondisionals_warga" class="form-control" autofocus data-parsley-required="true" value="{{{ $data->warga ?? old('kas_iuran_kondisionals_warga') }}}">
         </div>
         <div class="form-group">
           <label for="total_biaya">Total Biaya</label>
@@ -63,7 +93,7 @@
         </div>
       <div class="form-group">
         <label for="foto_iurankondisional">Bukti Pembayaran</label>
-        {{-- <input type="file" id="foto_iurankondisional" name="foto_iurankondisional" class="form-control @error('image') is-invalid @enderror" autofocus data-parsley-required="true"> --}}
+
         @php
                 $imageSrc = null;
                 if(isset($data->dokumen)){
@@ -74,7 +104,7 @@
                     <x-form.ImageUploader :imageSrc="isset($imageSrc) ? asset(DataHelper::filterDokumenData($imageSrc, 'nama', 'foto_iurankondisional')->first()['public_url']) : null" name="foto_iurankondisional" title="Foto Kondisional" value="{{{ $data->dokumen  ?? old('foto_iurankondisional') }}}" />
                 </div>
       </div>
-    </div>
+    </div> --}}
     <!-- end panel-body -->
     <!-- begin panel-footer -->
     <div class="panel-footer">

@@ -14,10 +14,10 @@ class BayarSukarelaController extends Controller
     public function index()
     {
         $pos_tagihan = Pos::pluck('nama', 'id');
-        $warga = Keluarga::all();
+        $wargaa = Keluarga::with(['warga_sukarela'])->get();
         $iuran_sukarela = IuranSukarela::all();
 
-        return view('pages.user.kepala-keluarga.index_sukarela', ['pos_tagihan' => $pos_tagihan, 'warga' => $warga, 'iuran_sukarela' => $iuran_sukarela]);
+        return view('pages.user.kepala-keluarga.index_sukarela', ['pos_tagihan' => $pos_tagihan, 'wargaa' => $wargaa, 'iuran_sukarela' => $iuran_sukarela]);
     }
 
     public function create()
@@ -27,18 +27,15 @@ class BayarSukarelaController extends Controller
 
     public function store(Request $request)
     {
-        $jenis_iuran = $request->jenis_iuran_id;
-        $status_bayar = KasIuranAgenda::with('iuranagenda')->where('jenis_iuran_id', $jenis_iuran)->get();
-        $warga = Keluarga::all();
-        // $warga = Keluarga::with();
-        return redirect(route('user.kepala-keluarga.bayar-iuransukarela.index_sukarela'))->withToastSuccess('Data tersimpan', ['warga' => $warga, 'status_bayar' => $status_bayar]);
+        $wargaa = Keluarga::all();
+        return redirect(route('user.kepala-keluarga.bayar-iuransukarela.index_sukarela'))->withToastSuccess('Data tersimpan', ['wargaa' => $wargaa]);
     }
 
     public function status($id)
     {
-        $warga = Keluarga::find($id);
-        $warga->status = !$warga->status;
-        $warga->save();
+        $wargaa = Keluarga::find($id);
+        $wargaa->status = !$wargaa->status;
+        $wargaa->save();
         return redirect()->back();
     }
 

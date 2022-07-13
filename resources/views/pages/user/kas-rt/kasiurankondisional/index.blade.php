@@ -1,5 +1,5 @@
 @extends('layouts.user')
-@section('title', 'Kas Iuran dKondisional')
+@section('title', 'Kas Iuran Kondisional')
 
 @push('css')
     <!-- datatables -->

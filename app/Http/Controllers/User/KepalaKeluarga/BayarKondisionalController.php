@@ -13,10 +13,10 @@ class BayarKondisionalController extends Controller
     public function index()
     {
         $pos_tagihan = Pos::pluck('nama', 'id');
-        $warga = Keluarga::all();
+        $wargaa = Keluarga::with(['warga_kondisional'])->get();
         $iuran_kondisional = IuranKondisional::all();
 
-        return view('pages.user.kepala-keluarga.index_kondisional', ['pos_tagihan' => $pos_tagihan, 'warga' => $warga, 'iuran_kondisional' => $iuran_kondisional]);
+        return view('pages.user.kepala-keluarga.index_kondisional', ['pos_tagihan' => $pos_tagihan, 'wargaa' => $wargaa, 'iuran_kondisional' => $iuran_kondisional]);
     }
 
     public function create()
@@ -26,15 +26,15 @@ class BayarKondisionalController extends Controller
 
     public function store(Request $request)
     {
-        $warga = Keluarga::all();
-        return redirect(route('user.kepala-keluarga.bayar-iurankondisional.index_kondisional'))->withToastSuccess('Data tersimpan', ['warga' => $warga]);
+        $wargaa = Keluarga::all();
+        return redirect(route('user.kepala-keluarga.bayar-iurankondisional.index_kondisional'))->withToastSuccess('Data tersimpan', ['wargaa' => $wargaa]);
     }
 
     public function status($id)
     {
-        $warga = Keluarga::find($id);
-        $warga->status = !$warga->status;
-        $warga->save();
+        $wargaa = Keluarga::find($id);
+        $wargaa->status = !$wargaa->status;
+        $wargaa->save();
         return redirect()->back();
     }
 

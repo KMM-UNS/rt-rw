@@ -15,30 +15,36 @@ class KasIuranAgendaDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->setRowId(function ($row) {
-                return $row->id;
-            })
             ->addColumn('action', function ($row) {
                 $btn = '<div class="btn-group">';
                 $btn = $btn . '<a href="' . route('user.kas-rt.kas-iuranagenda.edit', $row->id) . '" class="btn btn-dark buttons-edit"><i class="fas fa-edit"></i></a>';
                 $btn = $btn . '<a href="' . route('user.kas-rt.kas-iuranagenda.destroy', $row->id) . '" class="btn btn-danger buttons-delete"><i class="fas fa-trash fa-fw"></i></a>';
-
                 $btn = $btn . '</div>';
 
                 return $btn;
             })
 
-            ->addColumn('image', function ($row) {
-                $img = '<img src="' . asset($row->dokumen[0]['public_url']) . '" class="img-rounded height-80" >';
-                return $img;
+            ->editColumn('status', function ($row) {
+                if ($row->status == '1') {
+                    $label = '<label for="" class="label label-success">Sudah Bayar</label>';
+                    return  $label;
+                }
+                $label = '<label for="" class="label label-danger">Belum Bayar</label>';
+                return  $label;
             })
-            // raw column berfungsi untuk menjalankan tag html
-            ->rawColumns(['image', 'action']);
+            ->rawColumns(['status', 'action']);
+
+        // ->addColumn('image', function ($row) {
+        //     $img = '<img src="' . asset($row->dokumen[0]['public_url']) . '" class="img-rounded height-80" >';
+        //     return $img;
+        // })
+        // // raw column berfungsi untuk menjalankan tag html
+        // ->rawColumns(['image', 'action']);
     }
 
     public function query(KasIuranAgenda $model)
     {
-        return $model->select('kas_iuran_agendas.*')->with(['iuranagenda', 'petugastagihan', 'namabulanss', 'tahuns']);
+        return $model->select('kas_iuran_agendas.*')->with(['iuranagenda', 'petugastagihan', 'warga_agenda']);
     }
 
     public function html()
@@ -66,23 +72,18 @@ class KasIuranAgendaDataTable extends DataTable
                 ->printable(false)
                 ->width(60)
                 ->addClass('text-center'),
-            // Column::make('id'),
             Column::make('jenis_iuran_id')->data('iuranagenda.nama'),
-            Column::make('bulan')->data('namabulanss.nama'),
-            Column::make('tahun')->data('tahuns.nama'),
-            Column::make('nama_petugas_id')->data('petugastagihan.nama'),
-            Column::make('pemberi'),
+            Column::make('tanggal'),
+            Column::make('petugas'),
+            Column::make('warga')->data('warga_agenda.warga'),
+            Column::make('pos'),
             Column::make('total_biaya'),
-            Column::computed('image'),
-            // Column::make('created_at'),
-            // Column::make('updated_at'),
+            Column::make('status'),
         ];
     }
 
-
-
     protected function filename()
     {
-        return 'KasIuranAgenda_' . date('YmdHis');
+        return 'KasIuranWajib_' . date('YmdHis');
     }
 }

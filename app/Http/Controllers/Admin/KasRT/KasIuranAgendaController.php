@@ -31,15 +31,10 @@ class KasIuranAgendaController extends Controller
     {
         $jenis_iuranagenda = Iuranagenda::pluck('nama', 'id');
         $nama_petugas = PetugasTagihan::pluck('nama', 'id');
-        $nama_bulan = Bulan::pluck('nama', 'id');
-        $tahun = Tahun::pluck('nama', 'id');
-        $pemberi = Keluarga::pluck('pemberi', 'id');
-        $warga = KasIuranAgenda::all();
-        // $agenda->pos = $request->petugas;
-        // $pos = PetugasTagihan::where('petugas', $nama_petugas);
-        // $nama_pos->pos = $request->petugas;
+        $warga = Keluarga::pluck('warga', 'id');
+        $wargaa = KasIuranAgenda::all();
 
-        return view('pages.admin.kas-rt.kasiuranagenda.add-edit', ['warga' => $warga, 'jenis_iuranagenda' => $jenis_iuranagenda,  'nama_petugas' => $nama_petugas, 'nama_bulan' => $nama_bulan, 'tahun' => $tahun, 'pemberi' => $pemberi]);
+        return view('pages.admin.kas-rt.kasiuranagenda.add-edit', ['wargaa' => $wargaa, 'jenis_iuranagenda' => $jenis_iuranagenda,  'nama_petugas' => $nama_petugas, 'warga' => $warga]);
     }
 
     public function status($id)
@@ -55,16 +50,16 @@ class KasIuranAgendaController extends Controller
         DB::transaction(function () use ($request, $fileUploaderHelper) {
             try {
                 $agenda = KasIuranAgenda::createFromRequest($request);
-                $pos = Keluarga::where('id', $agenda->pemberi)->first()->pos;
+                $pos = Keluarga::where('id', $agenda->warga)->first()->pos;
+                $agenda->pos = $pos->nama;
+                $agenda->petugas = $pos->petugastagihan->nama;
 
                 // dd($pos->petugastagihan->nama);
                 // $petugas = PetugasTagihan::select('pos')->where('id', $agenda->petugas)->first()->pos;
 
                 // $pos = Pos::where('id', $petugas)->first()->nama;
                 // // dd($pos);
-                $agenda->pos = $pos->nama;
-                $agenda->petugas = $pos->petugastagihan->nama;
-                // $agenda->pemberi = $pos->pemberi->nama;
+                // $agenda->warga = $pos->warga->nama;
                 $agenda->save();
                 if ($request->file()) {
 
@@ -96,16 +91,12 @@ class KasIuranAgendaController extends Controller
         $data = KasIuranAgenda::findOrFail($id);
         $jenis_iuranagenda = IuranAgenda::pluck('nama', 'id');
         $nama_petugas = PetugasTagihan::pluck('nama', 'id');
-        $nama_bulan = Bulan::pluck('nama', 'id');
-        $tahun = Tahun::pluck('nama', 'id');
-        $pemberi = Keluarga::pluck('pemberi', 'id');
+        $warga = Keluarga::pluck('warga', 'id');
         return view('pages.admin.kas-rt.kasiuranagenda.add-edit', [
             'data' => $data,
             'jenis_iuranagenda' => $jenis_iuranagenda,
             'nama_petugas' => $nama_petugas,
-            'pemberi' => $pemberi,
-            'nama_bulan' => $nama_bulan,
-            'tahun' => $tahun,
+            'warga' => $warga,
             'dataHelper' => $dataHelper
         ]);
     }

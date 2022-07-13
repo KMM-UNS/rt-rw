@@ -57,7 +57,7 @@ class KasIuranAgendaDataTable extends DataTable
         // $pos =
         //         $poss = PetugasTagihan::where('pos',$pos);
 
-        return $model->select('kas_iuran_agendas.*')->with(['iuranagenda', 'petugastagihan', 'namabulanss', 'tahuns', 'pemberii']);
+        return $model->select('kas_iuran_agendas.*')->with(['iuranagenda', 'petugastagihan', 'warga_agenda']);
     }
 
     public function html()
@@ -85,13 +85,10 @@ class KasIuranAgendaDataTable extends DataTable
                 ->printable(false)
                 ->width(60)
                 ->addClass('text-center'),
-            // Column::make('id'),
             Column::make('jenis_iuran_id')->data('iuranagenda.nama'),
-            // Column::make('bulan')->data('namabulanss.nama'),
-            // Column::make('tahun')->data('tahuns.nama'),
             Column::make('tanggal'),
             Column::make('petugas'),
-            Column::make('pemberi')->data('pemberii.pemberi'),
+            Column::make('warga')->data('warga_agenda.warga'),
             Column::make('pos'),
             Column::make('total_biaya'),
             Column::make('status'),

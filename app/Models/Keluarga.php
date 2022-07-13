@@ -14,7 +14,7 @@ class Keluarga extends Model
     protected $table = 'keluargas';
     protected $fillable = [
         'no_kk',
-        'pemberi',
+        'warga',
         'rumah_id',
         'telp',
         'status_tinggal',
@@ -28,8 +28,28 @@ class Keluarga extends Model
     {
         return $this->belongsTo(Pos::class, 'pos_tagihan');
     }
-    public function pemberii()
+    // public function warga_wajibb()
+    // {
+    //     return $this->belongsTo(KasIuranWajib::class, 'warga');
+    // }
+    // public function pemberii()
+    // {
+    //     return $this->hasMany(KasIuranAgenda::class, 'warga');
+    // }
+    public function warga_wajib()
     {
-        return $this->hasMany(KasIuranAgenda::class, 'pemberi');
+        return $this->hasMany(KasIuranWajib::class, 'warga');
+    }
+    public function warga_kondisional()
+    {
+        return $this->hasMany(KasIuranKondisional::class, 'warga');
+    }
+    public function warga_sukarela()
+    {
+        return $this->hasMany(KasIuranSukaRela::class, 'warga');
+    }
+    public function warga_agenda()
+    {
+        return $this->hasMany(KasIuranAgenda::class, 'warga');
     }
 }

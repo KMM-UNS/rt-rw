@@ -7,7 +7,7 @@
                 <div class="card">
                     <!-- begin panel -->
                     <form
-                        action="{{ isset($data) ? route('admin.kas-rt.kas-petugas.update', $data->id) : route('admin.kas-rt.kas-iuranwajib.store') }}"
+                        action="{{ isset($data) ? route('user.petugas-iuran.data-petugas.update', $data->id) : route('user.petugas-iuran.data-petugas.store') }}"
                         id="form" name="form" method="POST" data-parsley-validate="true" enctype="multipart/form-data">
                         @csrf
                         @if (isset($data))
@@ -32,7 +32,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="name">Nama</label>
-                                            <input type="text" id="pemberi" name="_pemberi" class="form-control" autofocus data-parsley-required="true" value=" {{ Auth::user()->name }}">
+                                            <input type="text" id="warga" name="warga" class="form-control" autofocus data-parsley-required="true" value=" {{ Auth::user()->name }}">
                                         </div>
                                         <div class="form-group">
                                             <label for="ttgl">Tanggal Lahir</label>
@@ -47,7 +47,7 @@
                                             <input type="text" id="alamat" name="alamat" class="form-control" autofocus data-parsley-required="true" value="{{{ $data->alamat ?? old('alamat') }}}">
                                         </div>
                                         <div class="form-group">
-                                            <label for="pemberi">Pos</label>
+                                            <label for="pos">Pos</label>
                                             <input type="text" id="pos" name="pos" class="form-control" autofocus data-parsley-required="true" value="{{{ $data->pos ?? old('pos') }}}">
                                         </div>
                                     </div>

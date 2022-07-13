@@ -14,41 +14,97 @@
                             </div>
                         @endif
 
-                        {{ __('Data Warga!') }}
+                        {{-- {{ __('Data Warga!') }} --}}
+                        <!-- begin row -->
+                        <div class="row">
+                            <!-- begin col-3 -->
+                            <div class="col-lg-3 col-md-6">
+                                <div class="widget widget-stats bg-red">
+                                    <div class="stats-icon"></div>
+                                    <div class="stats-info">
+                                        <h4>TOTAL Kas Iuran Wajib</h4>
+                                        <p>Rp.{{ number_format($total_wajib, 0) }}</p>
+                                    </div>
+                                    <div class="stats-link">
+                                        <a href="{{ url('/kepala-keluarga/bayar-iuranwajib') }}">View Detail<i
+                                                class="fa fa-arrow-alt-circle-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end col-3 -->
+                            <!-- begin col-3 -->
+                            <div class="col-lg-3 col-md-6">
+                                <div class="widget widget-stats bg-orange">
+                                    <div class="stats-icon"></div>
+                                    <div class="stats-info">
+                                        <h4>TOTAL Kas Iuran Sukarela</h4>
+                                        <p>Rp.{{ number_format($total_sukarela, 0) }}</p>
+                                    </div>
+                                    <div class="stats-link">
+                                        <a href="{{ url('/kepala-keluarga/bayar-iuransukarela') }}">View Detail<i
+                                                class="fa fa-arrow-alt-circle-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end col-3 -->
+                            <!-- begin col-3 -->
+                            <div class="col-lg-3 col-md-6">
+                                <div class="widget widget-stats bg-grey-darker">
+                                    <div class="stats-icon"></div>
+                                    <div class="stats-info">
+                                        <h4>TOTAL Kas Iuran Kondisional</h4>
+                                        <p>Rp.{{ number_format($total_kondisional, 0) }}</p>
+                                    </div>
+                                    <div class="stats-link">
+                                        <a href="{{ url('/kepala-keluarga/bayar-iurankondisional') }}">View Detail <i
+                                                class="fa fa-arrow-alt-circle-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end col-3 -->
+                            <!-- begin col-3 -->
+                            <div class="col-lg-3 col-md-6">
+                                <div class="widget widget-stats bg-black-lighter">
+                                    <div class="stats-icon"></div>
+                                    <div class="stats-info">
+                                        <h4>TOTAL Kas Iuran Agenda</h4>
+                                        <p>Rp.{{ number_format($total_agenda, 0) }}</p>
+                                    </div>
+                                    <div class="stats-link">
+                                        <a href="{{ url('/kepala-keluarga/bayar-iuranagenda') }}">View Detail <i
+                                                class="fa fa-arrow-alt-circle-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end col-3 -->
+                        </div>
+                        <!-- end row -->
                         {{-- <h1>Data Warga</h1> --}}
 
-                        <table border="1" cellpadding="2" class="table table-hover">
+                        {{-- <table border="1" cellpadding="2" class="table table-hover">
                             <thead>
                                 <tr>
                                     <th scope="col">No KK</th>
                                     <th scope="col">Kepala Keluarga</th>
                                     <th scope="col">Status</th>
-                                    {{-- <th scope="col">Pos Tagihan</th>
-                                    <th scope="col">Telp</th>
-                                    <th scope="col">Status</th> --}}
-
                                 </tr>
                             </thead>
 
                             <tbody>
-                                @foreach ($warga as $item)
+                                @foreach ($wargaa as $item)
                                     <tr>
                                         <td>{{ $item->no_kk }}</td>
-                                        <td>{{ $item->pemberi }}</td>
+                                        <td>{{ $item->warga }}</td>
                                         <td>
                                             <label for=""
                                                 class="label {{ $item->status == 1 ? 'label-success' : 'label-danger center' }}">{{ $item->status == 1 ? 'Sudah Bayar' : 'Belum Bayar' }}</label>
-                                            {{-- @if ($warga->status == 0)
-                                                <a href="#" class="text-success">Success link</a>
-                                            @else
-                                                <p><a href="#" class="text-danger">Danger link</a></p>
-                                            @endif --}}
+
                                         </td>
                                     </tr>
                                 @endforeach
 
                             </tbody>
-                        </table>
+                        </table> --}}
 
                     </div>
                 </div>
