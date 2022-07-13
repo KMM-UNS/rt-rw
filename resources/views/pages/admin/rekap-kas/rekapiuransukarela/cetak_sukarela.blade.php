@@ -43,8 +43,8 @@
 
     <h3 style="font-size: 16px; text-align: center;">LAPORAN IURAN SUKARELA</h1>
         <br>
-        <h4 style="text-align: left;"> Jenis Iuran : {{ $dataa->iuransukarela->nama }}</h4>
-        <h4 style="text-align: left;">Periode : {{ date('d M Y', strtotime($tglawal)) }} -
+        <p style="text-align: left;"> Jenis Iuran : {{ $dataa->iuransukarela->nama }}</p>
+        <p style="text-align: left;">Periode : {{ date('d M Y', strtotime($tglawal)) }} -
             {{ date('d M Y', strtotime($tglakhir)) }}</h4>
 
         <table style="width:100%" border="1" cellpadding="2" class="table">
