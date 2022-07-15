@@ -32,7 +32,7 @@ class KeluargaController extends Controller
     public function create()
     {
         $rumah = Rumah::pluck('nomor_rumah', 'id');
-        return view('pages.user.keluarga.add', [
+        return view('pages.user.keluarga.add-edit', [
             'rumah' => $rumah
         ]);
     }
@@ -53,6 +53,32 @@ class KeluargaController extends Controller
                 $riwayat->tanggal_masuk = Carbon::now()->format('Y-m-d');
                 $riwayat->save();
 
+            } catch (\Throwable $th) {
+                dd($th);
+                DB::rollback();
+                return back()->withInput()->withToastError('Something what happen');
+            }
+        });
+        return redirect(route('user.keluarga.index'))->withInput()->withToastSuccess('Data tersimpan');
+    }
+
+    public function edit($id)
+    {
+        $data = Keluarga::findOrFail($id);
+        $rumah = Rumah::pluck('nomor_rumah', 'id');
+        return view('pages.user.keluarga.add-edit', [
+            'rumah' => $rumah,
+            'data' => $data
+        ]);
+    }
+
+    public function update(KeluargaForm $request, $id)
+    {
+        $keluarga = Keluarga::findorFail($id);
+        DB::transaction(function () use ($request, $keluarga) {
+            try {
+                $keluarga->updateFromRequest($request);
+                $keluarga->save();
             } catch (\Throwable $th) {
                 dd($th);
                 DB::rollback();

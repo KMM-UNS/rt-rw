@@ -15,8 +15,11 @@
         <hr>
 		<!-- end panel -->
 		<!-- begin wizard-form -->
-		<form action="{{ route('user.keluarga.store') }}" method="POST" name="form-wizard" class="form-control-with-bg"  data-parsley-validate="true" enctype="multipart/form-data">
+		<form action="{{ isset($data) ? route('user.keluarga.update', $data->id) : route('user.keluarga.store') }}" method="POST" name="form-wizard" class="form-control-with-bg"  data-parsley-validate="true" enctype="multipart/form-data">
 			@csrf
+            @if(isset($data))
+            {{ method_field('PUT') }}
+            @endif
 			<!-- begin wizard -->
 			<div class="row">
                 <!-- begin col-8 -->
@@ -51,7 +54,12 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="input-group">
+                                        @if (isset($data))
+                                        <input type="text" id="rumah_id" name="keluarga_rumah_id" class="form-control" autofocus data-parsley-required="true" disabled  value="{{{ $data->rumah->nomor_rumah }}}">
+                                        <input type="hidden" id="rumah_id" name="keluarga_rumah_id" class="form-control" autofocus data-parsley-required="true"  value="{{{ $data->rumah_id }}}">
+                                        @else
                                         <x-form.Dropdown name="keluarga_rumah_id" :options="$rumah" selected="{{{ old('keluarga_rumah_id') ?? ($data['rumah_id'] ?? null) }}}" required />
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-md-2 my-auto">
@@ -59,7 +67,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="input-group">
-                                        <input type="text" id="telp" name="keluarga_telp" class="form-control" autofocus data-parsley-required="true" value="{{{ old('keluarga_telp') ?? ($data['telp'] ?? null) }}}">
+                                        <input type="text" id="telp" name="keluarga_telp" class="form-control" autofocus data-parsley-required="true"  value="{{{ old('keluarga_telp') ?? ($data['telp'] ?? null) }}}">
                                     </div>
                                 </div>
                             </div>

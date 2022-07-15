@@ -90,7 +90,8 @@
                 </div>
             </div>
             <div class="panel-footer">
-                <div class="text-center">
+                <div class="text-right">
+                    <a href="{{ route('user.keluarga.edit', $keluarga->id) }}" class="btn btn-dark mt-2 mb-2" style="font-size: 12px"><i class="fas fa-edit"></i>Edit</a>
                     <a href="{{ route('user.warga.index') }}" class="btn btn-primary mt-2 mb-2" style="font-size: 12px"><i class="fas fa-eye fa-fw mr-2"></i>Lihat Anggota Keluarga</a>
                 </div>
             </div>
