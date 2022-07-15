@@ -15,6 +15,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\KeluargaForm;
 use App\DataTables\Admin\KeluargaDataTable;
 use App\DataTables\Admin\DetailKeluargaDataTable;
+use App\Models\StatusHunian;
 
 class KeluargaController extends Controller
 {
@@ -81,10 +82,11 @@ class KeluargaController extends Controller
     {
         $data = Keluarga::findorFail($id);
         $rumah = Rumah::pluck('nomor_rumah', 'id');
-        // $status_tinggal = StatusTinggal::pluck('nama', 'id');
+        $status_hunian = StatusHunian::where('nama', '!=','Rumah Kosong')->pluck('nama', 'id');
         return $dataTable->render('pages.admin.keluarga.show', [
             'data' => $data,
             'rumah' => $rumah,
+            'status_hunian' => $status_hunian,
             // 'status_tinggal' => $status_tinggal
         ]);
     }
@@ -146,29 +148,42 @@ class KeluargaController extends Controller
         }
     }
 
-    public function pindah(Request $request, $id)
-    {
+        public function pindah(Request $request, $id)
+        {
         $keluarga = Keluarga::findorFail($id);
-        // dd($request->lokasi);
+
+
         if ($request->lokasi == "Dalam Lingkungan")
         {
             DB::transaction(function () use ($request, $keluarga) {
                 try {
-                    // dd($keluarga->rumah_id == null);
+                    // rumah yang dipilih untuk pindah
+                    $rumah = Rumah::where('id', $request->keluarga_rumah_id)->firstOrFail();
+
                     if ($keluarga->rumah_id != null)
                     {
+                        // update status hunian rumah sebelum pindah
+                        $rumahBefore = Rumah::where('id', $keluarga->rumah_id)->firstOrFail();
+                        $rumahBefore->status_hunian_id = 5;
+                        $rumahBefore->save();
+
                         // mencari riwayat
                         $riwayatBefore = RiwayatRumah::where('keluarga_id', $keluarga->id)->where('rumah_id', $keluarga->rumah_id)->firstorFail();
 
-                        // update ke rumah yang dipilih
+                        // update tanggal keluar rumah sebelum
+                        // $riwayatBefore->updateFromRequest($request);
+                        $riwayatBefore->tanggal_keluar = Carbon::now()->format('Y-m-d');
+                        $riwayatBefore->save();
+                        // dd($riwayatBefore);
+
+                        // update data keluarga ke rumah yang dipilih
                         $keluarga->updateFromRequest($request);
                         $keluarga->save();
 
-                        // update tanggal keluar rumah sebelum
-                        // dd($riwayatBefore);
-                        $riwayatBefore->updateFromRequest($request);
-                        $riwayatBefore->tanggal_keluar = Carbon::now()->format('Y-m-d');
-                        $riwayatBefore->save();
+                        // update status hunian rumah yang dipilih untuk pindah
+                        $rumah->updateFromRequest($request);
+                        $rumah->save();
+
 
                         // create riwayat baru dengan rumah baru
                         $riwayat = RiwayatRumah::createFromRequest($request);
@@ -179,11 +194,15 @@ class KeluargaController extends Controller
                     }
                     else
                     {
-                        // update ke rumah yang dipilih
+                        // update data keluarga ke rumah yang dipilih
                         $keluarga->updateFromRequest($request);
                         $keluarga->status_tinggal_id = 1;
                         // dd($keluarga);
                         $keluarga->save();
+
+                        // update status hunian rumah yang dipilih untuk pindah
+                        $rumah->updateFromRequest($request);
+                        $rumah->save();
 
                         // create riwayat baru dengan rumah baru
                         $riwayat = RiwayatRumah::createFromRequest($request);
@@ -204,18 +223,27 @@ class KeluargaController extends Controller
         {
             DB::transaction(function () use ($request, $keluarga) {
                 try {
+                        // dd($request->all());
+
+                        // update status hunian rumah sebelum pindah
+                        $rumahBefore = Rumah::where('id', $keluarga->rumah_id)->firstOrFail();
+                        $rumahBefore->status_hunian_id = 5;
+                        $rumahBefore->save();
+
+
+                        // update tanggal keluar rumah sebelumnya
                         $riwayatBefore = RiwayatRumah::where('keluarga_id', $keluarga->id)->where('rumah_id', $keluarga->rumah_id)->firstorFail();
+                        // $riwayatBefore->updateFromRequest($request);
+                        $riwayatBefore->tanggal_keluar = Carbon::now()->format('Y-m-d');
+                        $riwayatBefore->save();
 
                         // update ke rumah yang dipilih
                         $keluarga->updateFromRequest($request);
                         $keluarga->status_tinggal_id = 2;
-                        $keluarga->rumah_id = "";
+                        $keluarga->rumah_id = null;
                         $keluarga->save();
 
-                        // update tanggal keluar rumah sebelum
-                        $riwayatBefore->updateFromRequest($request);
-                        $riwayatBefore->tanggal_keluar = Carbon::now()->format('Y-m-d');
-                        $riwayatBefore->save();
+
                 } catch (\Throwable $th) {
                     dd($th);
                     DB::rollback();

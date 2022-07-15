@@ -1,6 +1,6 @@
 @extends('layouts.default', ['topMenu' => true, 'sidebarHide' => true])
 
-@section('title', 'Anggota Keluarga')
+@section('title', 'Detail Keluarga')
 
 @push('css')
 <!-- datatables -->
@@ -14,7 +14,7 @@
 <!-- begin breadcrumb -->
 <ol class="breadcrumb float-xl-right">
   <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
-  <li class="breadcrumb-item"><a href="javascript:;">Master Data</a></li>
+  <li class="breadcrumb-item"><a href="javascript:;">Keluarga</a></li>
   <li class="breadcrumb-item active">@yield('title')</li>
 </ol>
 <!-- end breadcrumb -->
@@ -63,7 +63,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Modal Dialog</h4>
+                    <h4 class="modal-title">Pindah Rumah</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body">
@@ -76,11 +76,13 @@
                             </select>
                         </div>
                         <div id="dropdownRumah" class="mt-2">
+                            <label for="keluarga_rumah_id">Nomor Rumah</label>
                             <x-form.Dropdown name="keluarga_rumah_id" :options="$rumah" selected="{{{ old('keluarga_rumah_id') ?? ($data['rumah_id'] ?? null) }}}" required />
                         </div>
-                        {{-- <div class="input-group">
-                            <x-form.Dropdown name="keluarga_status_tinggal" :options="$status_tinggal" selected="2" required />
-                        </div> --}}
+                        <div id="dropdownStatus" class="mt-2">
+                            <label for="rumah_status_hunian_id">Jenis Hunian</label>
+                            <x-form.Dropdown name="rumah_status_hunian_id" :options="$status_hunian" selected="{{{ old('rumah_status_hunian_id') ?? ($data->rumah->status_hunian_id ?? null) }}}" required />
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <a href="javascript:;" class="btn btn-white" data-dismiss="modal">Close</a>
@@ -96,7 +98,7 @@
 <div class="panel panel-inverse">
   <!-- begin panel-heading -->
   <div class="panel-heading">
-    <h4 class="panel-title">Data @yield('title')</h4>
+    <h4 class="panel-title">Data Anggota Keluarga</h4>
     <div class="panel-heading-btn">
       <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
       <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
@@ -128,7 +130,9 @@
     function pindahChange() {
     var lokasiPindah = document.getElementById("pindah");
     var keluargaId = document.getElementById("keluarga_rumah_id");
+    var statusId = document.getElementById("rumah_status_hunian_id");
     var dropdownRumah = document.getElementById("dropdownRumah");
+    var dropdownStatus = document.getElementById("dropdownStatus");
     var submit = document.getElementById("submit");
     var rumah = "<?= "$data->rumah_id"?>";
 
@@ -149,17 +153,23 @@
     if (empty(rumah) && lokasiPindah.value == "Luar Lingkungan" ) {
         submit.disabled = true;
         keluargaId.disabled = true;
+        statusId.disabled = true;
         dropdownRumah.style.display = "none";
+        dropdownStatus.style.display = "none";
     }
     else if (lokasiPindah.value == "Luar Lingkungan"){
         submit.disabled = false;
         keluargaId.disabled = true;
+        statusId.disabled = true;
         dropdownRumah.style.display = "none";
+        dropdownStatus.style.display = "none";
     }
     else {
         submit.disabled = false;
         keluargaId.disabled = false;
+        statusId.disabled = false;
         dropdownRumah.style.display = "block";
+        dropdownStatus.style.display = "block";
     }
 }
 </script>
