@@ -103,7 +103,7 @@ class RumahController extends Controller
         $status_hunian = StatusHunian::pluck('nama', 'id');
         return view('pages.admin.rumah.add-edit', [
             'data' => $data,
-            'status_penggunaan_rum$status_penggunaan_rumah' => $status_penggunaan_rumah,
+            'status_penggunaan_rumah' => $status_penggunaan_rumah,
             'status_hunian' => $status_hunian,
             'dataHelper' => $dataHelper
         ]);
@@ -129,12 +129,20 @@ class RumahController extends Controller
                         $existingFile = $rumah->dokumen;
                         $old = DataHelper::filterDokumenData($existingFile, 'nama', $key)->first();
 
-                        TrashHelper::moveToTrash($old->public_url);
+                        if ($old != null){
+                            TrashHelper::moveToTrash($old->public_url);
+                            $upload = $fileUploaderHelper->store($file, 'rumah/foto');
+                            $old->update([
+                                'public_url' => $upload['public_path']
+                            ]);
+                        } else {
+                            $upload = $fileUploaderHelper->store($file, 'rumah/foto');
+                            $rumah->dokumen()->create([
+                                'nama' => $key,
+                                'public_url' => $upload['public_path']
+                            ]);
+                        }
 
-                        $upload = $fileUploaderHelper->store($file, 'rumah$rumah/lampiran');
-                        $old->update([
-                            'public_url' => $upload['public_path']
-                        ]);
                     }
                 }
             } catch (\Throwable $th) {
@@ -143,7 +151,7 @@ class RumahController extends Controller
                 return back()->withInput()->withToastError('Something what happen');
             }
         });
-        return redirect(route('admin.rumah.index'))->withInput()->withToastSuccess('success saving data');
+        return redirect(route('admin.rumah.index'))->withInput()->withToastSuccess('Data tersimpan');
     }
 
     /**

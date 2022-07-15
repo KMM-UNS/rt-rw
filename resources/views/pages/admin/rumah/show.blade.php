@@ -45,6 +45,11 @@
                     <label>Jumlah KK</label>
                     <p class="font-weight-bold">{{ $data->keluarga->count() }}</p>
                 </div>
+                <div>
+                    <label>Foto Rumah</label>
+                    <img class="img-responsive w-50" src="{{ $data->dokumen->first()->public_url }}" alt="Rumah No.{{ $data->nomor_rumah }}">
+                    {{-- <p class="font-weight-bold">{{ $data->dokumen->first()->public_url }}</p> --}}
+                </div>
             </div>
             <div class="col-md-6">
                 <div>

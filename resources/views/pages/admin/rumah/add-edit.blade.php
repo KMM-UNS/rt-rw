@@ -77,6 +77,12 @@
                                 <x-form.Dropdown name="rumah_status_hunian_id" :options="$status_hunian" selected="{{{ old('rumah_status_hunian_id') ?? ($data['status_hunian_id'] ?? null) }}}" required />
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label for=""><h5><b>Google Maps</b></h5></label>
+                            <input type="text"  id="lat" name="landing_page_latitude" placeholder="Masukkan Koordinat Latitude" class="form-control" autofocus data-parsley-required="true" value="{{{ $data->latitude ?? old('latitude') }}}">
+                            <input type="text"  id="lng" name="landing_page_longitude" placeholder="Masukkan Koordinat Longitude" class="form-control" autofocus data-parsley-required="true" value="{{{ $data->longitude ?? old('longitude') }}}">
+                          </div>
+                          <div id="map" style="height:400px; width: 905px;" class="my-3"></div>
                     </div>
                 </div>
             </div>
@@ -117,7 +123,7 @@
                 }
                 @endphp
                 <div class="row">
-                    <x-form.ImageUploader :imageSrc="isset($imageSrc) ? asset(DataHelper::filterDokumenData($imageSrc, 'nama', 'foto_rumah')->first()['public_url']) : null" name="foto_rumah" title="Foto Rumah" value="{{{ $data->dokumen  ?? old('foto_rumah') }}}" />
+                    <x-form.ImageUploader :imageSrc="$imageSrc != null ? asset(DataHelper::filterDokumenData($imageSrc, 'nama', 'foto_rumah')->first()['public_url']) : null" name="foto_rumah" title="Foto Rumah" value="{{{ $data->dokumen  ?? old('foto_rumah') }}}" />
                 </div>
             </div>
         </div>
