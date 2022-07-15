@@ -25,7 +25,7 @@ class Surat extends Model
         'tanggal_pengajuan',
         'tanggal_disetujui',
         'keterangan',
-        'status'
+        'status_surat_id'
     ];
 
     protected $dates = [
@@ -55,7 +55,7 @@ class Surat extends Model
 
     public function status_surat()
     {
-        return $this->belongsTo(StatusSurat::class, 'status');
+        return $this->belongsTo(StatusSurat::class);
     }
 
     public function createable()

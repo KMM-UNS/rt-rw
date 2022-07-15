@@ -181,7 +181,7 @@ class SuratController extends Controller
             try {
 
                 $surat->updateFromRequest($request);
-                if ($surat->status == 4 ) {
+                if ($surat->status_surat_id == 4 ) {
                     $tanggal_disetujui = Carbon::now()->format('Y-m-d');
                     $surat->tanggal_disetujui = $tanggal_disetujui;
                 }

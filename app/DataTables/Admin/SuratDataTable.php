@@ -24,7 +24,7 @@ class SuratDataTable extends DataTable
         ->addIndexColumn()
         ->addColumn('action', function ($row) {
             $btn = '<div class="btn-group">';
-            $btn = $btn . '<a class="info btn btn-info"><i class="fas fa-info-circle text-white"></i></a>';
+            $btn = $btn . '<a class="info btn btn-white"><i class="fas fa-eye"></i></a>';
             $btn = $btn . '<a href="' . route('admin.surat.edit', $row->id) . '" class="btn btn-dark buttons-edit"><i class="fas fa-edit"></i></a>';
             $btn = $btn . '<a href="' . route('admin.surat.destroy', $row->id) . '" class="btn btn-danger buttons-delete"><i class="fas fa-trash fa-fw"></i></a>';
             $btn = $btn . '</div>';
