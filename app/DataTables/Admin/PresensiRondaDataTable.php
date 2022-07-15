@@ -3,6 +3,7 @@
 namespace App\DataTables\Admin;
 
 use App\Models\PresensiRonda;
+use Illuminate\Http\Request;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -17,17 +18,29 @@ class PresensiRondaDataTable extends DataTable
      * @param mixed $query Results from query() method.
      * @return \Yajra\DataTables\DataTableAbstract
      */
-    public function dataTable($query)
+    public function dataTable($query, Request $request)
     {
         return datatables()
         ->eloquent($query)
         ->addIndexColumn()
         ->addColumn('action', function ($row) {
             $btn = '<div class="btn-group">';
-            $btn = $btn . '<a href="' . route('admin.ronda.presensi.edit', $row->id) . '" class="btn btn-dark buttons-edit"><i class="fas fa-edit"></i></a>';
-            $btn = $btn . '<a href="' . route('admin.ronda.presensi.destroy', $row->id) . '" class="btn btn-danger buttons-delete"><i class="fas fa-trash fa-fw"></i></a>';
+            // $btn = $btn . '<a href="' . route('admin.ronda.presensi.edit', $row->id) . '" class="btn btn-dark buttons-edit"><i class="fas fa-edit"></i></a>';
+            // $btn = $btn . '<a href="' . route('admin.ronda.presensi.destroy', $row->id) . '" class="btn btn-danger buttons-delete"><i class="fas fa-trash fa-fw"></i></a>';
             $btn = $btn . '</div>';
             return $btn;
+        })
+        ->filter(function($query) use($request) {
+            // dd($request->all());
+            if($request->has('tanggal_awal') && $request->has('tanggal_akhir')){
+                $tanggal_awal = $request->get("tanggal_awal");
+                $tanggal_akhir = $request->get("tanggal_akhir");
+                if($tanggal_awal != null && $tanggal_akhir != null) {
+                    return $query->where('tanggal', '>=' ,$tanggal_awal)->where('tanggal', '<=' ,$tanggal_akhir);
+                } else {
+                    return $query;
+                }
+            }
         })
         ->editColumn('tanggal', function($row){
             return $row->tanggal->isoFormat('DD MMMM YYYY');
@@ -42,7 +55,7 @@ class PresensiRondaDataTable extends DataTable
      */
     public function query(PresensiRonda $model)
     {
-        return $model->newQuery()->with(['hari', 'jadwal_ronda.warga']);
+        return $model->with(['hari', 'jadwal_ronda.warga'])->select('presensi_ronda.*');
     }
 
     /**
@@ -83,16 +96,16 @@ class PresensiRondaDataTable extends DataTable
     {
         return [
             Column::make('DT_RowIndex')->title('No')->orderable(false)->searchable(false)->addClass('text-center'),
-            Column::make('hari_id')->data('hari.nama')->title('Hari'),
+            Column::make('hari.nama','hari.nama')->title('Hari'),
             Column::make('tanggal'),
-            Column::make('jadwal_id')->data('jadwal_ronda.warga.nama')->title('Nama Warga'),
-            Column::make('kehadiran'),
-            Column::computed('action')
-                  ->exportable(false)
-                  ->title('Aksi')
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center')
+            Column::make('jadwal_ronda.warga.nama','jadwal_ronda.warga.nama')->title('Nama Warga'),
+            Column::make('kehadiran', 'presensi_ronda.kehadiran'),
+            // Column::computed('action')
+            //       ->exportable(false)
+            //       ->title('Aksi')
+            //       ->printable(false)
+            //       ->width(60)
+            //       ->addClass('text-center')
         ];
     }
 

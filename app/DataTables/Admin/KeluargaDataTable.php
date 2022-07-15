@@ -24,9 +24,9 @@ class KeluargaDataTable extends DataTable
             ->addIndexColumn()
             ->addColumn('action', function ($row) {
                 $btn = '<div class="btn-group">';
-                $btn = $btn . '<a href="' . route('admin.keluarga.show', $row->id) . '" class="btn btn-primary buttons-info"><i class="fas fa-info fa-fw"></i></a>';
-                $btn = $btn . '<a href="' . route('admin.keluarga.edit', $row->id) . '" class="btn btn-dark buttons-edit"><i class="fas fa-edit"></i></a>';
-                $btn = $btn . '<a href="' . route('admin.keluarga.destroy', $row->id) . '" class="btn btn-danger buttons-delete"><i class="fas fa-trash fa-fw"></i></a>';
+                $btn = $btn . '<a href="' . route('admin.keluarga.show', $row->id) . '" class="btn btn-default buttons-info"><i class="fas fa-eye fa-fw"></i></a>';
+                // $btn = $btn . '<a href="' . route('admin.keluarga.edit', $row->id) . '" class="btn btn-dark buttons-edit"><i class="fas fa-edit"></i></a>';
+                // $btn = $btn . '<a href="' . route('admin.keluarga.destroy', $row->id) . '" class="btn btn-danger buttons-delete"><i class="fas fa-trash fa-fw"></i></a>';
                 $btn = $btn . '</div>';
                 return $btn;
             });
@@ -40,7 +40,7 @@ class KeluargaDataTable extends DataTable
      */
     public function query(Keluarga $model)
     {
-        return $model->select('keluarga.*')->with(['rumah', 'status_tinggal']);
+        return $model->with('status_tinggal')->select('keluarga.*')->newQuery();
     }
 
     /**
@@ -62,14 +62,14 @@ class KeluargaDataTable extends DataTable
                         'language' => [
                             'url' => url(asset('assets/datatables/lang/indonesia.json'))
                         ]
-                    ])
-                    ->buttons(
-                        Button::make('create'),
-                        Button::make('export'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    );
+                        ]);
+                    // ->buttons(
+                    //     Button::make('create'),
+                    //     Button::make('export'),
+                    //     Button::make('print'),
+                    //     Button::make('reset'),
+                    //     Button::make('reload')
+                    // );
     }
 
     /**
@@ -81,9 +81,9 @@ class KeluargaDataTable extends DataTable
     {
         return [
             Column::make('DT_RowIndex')->title('No')->orderable(false)->searchable(false)->addClass('text-center'),
-            Column::make('no_kk'),
-            Column::make('kepala_keluarga'),
-            Column::make('status_tinggal_id')->title('Status')->data('status_tinggal.nama'),
+            Column::make('no_kk','keluarga.no_kk'),
+            Column::make('kepala_keluarga','keluarga.kepala_keluarga'),
+            Column::make('status_tinggal.nama', 'status_tinggal.nama')->title('Status'),
             // Column::make('rumah_id')->title('Nomor Rumah')->data('rumah.nomor_rumah'),
             Column::computed('action')
             ->title('Aksi')

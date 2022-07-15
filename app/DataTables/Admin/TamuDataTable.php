@@ -42,7 +42,7 @@ class TamuDataTable extends DataTable
      */
     public function query(Tamu $model)
     {
-        return $model->newQuery();
+        return $model->with(['keluarga'])->select('tamu.*')->newQuery();
     }
 
     /**
@@ -83,12 +83,13 @@ class TamuDataTable extends DataTable
     {
         return [
             Column::make('DT_RowIndex')->title('No')->orderable(false)->searchable(false)->addClass('text-center'),
-            Column::make('jumlah'),
-            Column::make('nama')->title('Nama Tamu'),
-            Column::make('hubungan'),
-            Column::make('alamat'),
-            Column::make('tanggal_tiba'),
-            Column::make('lama_menetap'),
+            Column::make('jumlah', 'tamu.jumlah'),
+            Column::make('nama', 'tamu.nama')->title('Nama Tamu'),
+            Column::make('hubungan', 'tamu.hubungan'),
+            Column::make('alamat', 'tamu.alamat'),
+            Column::make('tanggal_tiba', 'tamu.tanggal_tiba'),
+            Column::make('lama_menetap', 'tamu.lama_menetap'),
+            Column::make('keluarga.kepala_keluarga', 'keluarga.kepala_keluarga')->title('Penerima Tamu'),
             Column::computed('action')
                   ->title('Aksi')
                   ->addClass('details-control')

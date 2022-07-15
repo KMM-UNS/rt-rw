@@ -54,7 +54,7 @@ class SuratDataTable extends DataTable
      */
     public function query(Surat $model)
     {
-        return $model->select('surat.*')->with(['warga', 'keperluan_surat', 'status_surat']);
+        return $model->with(['warga', 'keperluan_surat', 'status_surat'])->select('surat.*');
     }
 
     /**
@@ -125,11 +125,11 @@ class SuratDataTable extends DataTable
     {
         return [
             Column::make('DT_RowIndex')->title('No')->orderable(false)->searchable(false)->addClass('text-center'),
-            Column::make('nomor_surat'),
-            Column::make('warga_id')->data('warga.nama')->title('Warga'),
-            Column::make('keperluan_surat_id')->title('Keperluan'),
-            Column::make('tanggal_pengajuan'),
-            Column::make('status')->data('status_surat.nama'),
+            Column::make('nomor_surat', 'surat.nomor_surat'),
+            Column::make('warga.nama','warga.nama')->title('Warga'),
+            Column::make('keperluan_surat.nama', 'keperluan_surat.nama')->title('Keperluan'),
+            Column::make('tanggal_pengajuan', 'surat.tanggal_pengajuan'),
+            Column::make('status_surat.nama','status_surat.nama')->title('Status'),
             Column::computed('action')
                   ->addClass('details-control')
                   ->title('Aksi')
@@ -147,6 +147,6 @@ class SuratDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Admin\Surat_' . date('YmdHis');
+        return 'Surat_' . date('YmdHis');
     }
 }

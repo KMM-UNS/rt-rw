@@ -24,7 +24,7 @@ class RumahDataTable extends DataTable
             ->addIndexColumn()
             ->addColumn('action', function ($row) {
                 $btn = '<div class="btn-group">';
-                $btn = $btn . '<a href="' . route('admin.rumah.show', $row->id) . '" class="btn btn-primary buttons-info"><i class="fas fa-info fa-fw"></i></a>';
+                $btn = $btn . '<a href="' . route('admin.rumah.show', $row->id) . '" class="btn btn-white buttons-info"><i class="fas fa-eye fa-fw"></i></a>';
                 $btn = $btn . '<a href="' . route('admin.rumah.edit', $row->id) . '" class="btn btn-dark buttons-edit"><i class="fas fa-edit"></i></a>';
                 $btn = $btn . '<a href="' . route('admin.rumah.destroy', $row->id) . '" class="btn btn-danger buttons-delete"><i class="fas fa-trash fa-fw"></i></a>';
                 $btn = $btn . '</div>';
@@ -49,7 +49,7 @@ class RumahDataTable extends DataTable
      */
     public function query(Rumah $model)
     {
-        return $model->select('rumah.*')->with(['status_penggunaan_rumah', 'status_hunian']);
+        return $model->with(['status_penggunaan_rumah', 'status_hunian'])->select('rumah.*')->newQuery();
     }
 
     /**
@@ -92,8 +92,8 @@ class RumahDataTable extends DataTable
             Column::make('DT_RowIndex')->title('No')->orderable(false)->searchable(false)->addClass('text-center'),
             Column::make('alamat'),
             Column::make('nomor_rumah'),
-            Column::make('status_penggunaan_rumah_id')->title('Status Penggunaan')->data('status_penggunaan_rumah.nama'),
-            Column::make('status_hunian_id')->title('Status Hunian')->data('status_hunian.nama'),
+            Column::make('status_penggunaan_rumah.nama','status_penggunaan_rumah.nama')->title('Status Penggunaan'),
+            Column::make('status_hunian.nama','status_hunian.nama')->title('Status Hunian'),
             // memanggil column yang sudah dibuat di atas
             // Column::computed('image'),
             Column::computed('action')

@@ -96,12 +96,12 @@ class UserDataTable extends DataTable
             Column::make('roles')->title('Hak Akses'),
             Column::make('email'),
             Column::make('created_at')->title('Ditambahkan pada'),
-            Column::computed('action')
-                ->title('Aksi')
-                ->exportable(false)
-                ->printable(false)
-                ->width(60)
-                ->addClass('text-center'),
+            // Column::computed('action')
+            //     ->title('Aksi')
+            //     ->exportable(false)
+            //     ->printable(false)
+            //     ->width(60)
+            //     ->addClass('text-center'),
         ];
     }
 

@@ -24,8 +24,9 @@ class DetailKeluargaDataTable extends DataTable
             ->addIndexColumn()
             ->addColumn('action', function ($row) {
                 $btn = '<div class="btn-group">';
-                $btn = $btn . '<a href="' . route('admin.warga.edit', $row->id) . '" class="btn btn-dark buttons-edit"><i class="fas fa-edit"></i></a>';
-                $btn = $btn . '<a href="' . route('admin.warga.destroy', $row->id) . '" class="btn btn-danger buttons-delete"><i class="fas fa-trash fa-fw"></i></a>';
+                $btn = $btn . '<a href="' . route('admin.warga.show', $row->id) . '" class="btn btn-default buttons-info"><i class="fas fa-eye"></i></a>';
+                // $btn = $btn . '<a href="' . route('admin.warga.edit', $row->id) . '" class="btn btn-dark buttons-edit"><i class="fas fa-edit"></i></a>';
+                // $btn = $btn . '<a href="' . route('admin.warga.destroy', $row->id) . '" class="btn btn-danger buttons-delete"><i class="fas fa-trash fa-fw"></i></a>';
                 $btn = $btn . '</div>';
                 return $btn;
             })
@@ -43,7 +44,7 @@ class DetailKeluargaDataTable extends DataTable
     public function query(Warga $model)
     {
         $id = request()->segment(3);
-        return $model->select('warga.*')->with(['agama', 'status_keluarga'])->where('keluarga_id', $id);
+        return $model->with(['agama', 'status_keluarga'])->where('keluarga_id', $id)->select('warga.*')->newQuery();
     }
 
     /**
@@ -57,7 +58,7 @@ class DetailKeluargaDataTable extends DataTable
                     ->setTableId('detailkeluarga-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    // ->dom('<"dataTables_wrapper dt-bootstrap"B<"row"<"col-xl-7 d-block d-sm-flex d-xl-block justify-content-center"<"d-block d-lg-inline-flex"l>><"col-xl-5 d-flex d-xl-block justify-content-center"fr>>t<"row"<"col-sm-5"i><"col-sm-7"p>>>')
+                    ->dom('<"dataTables_wrapper dt-bootstrap"B<"row"<"col-xl-7 d-block d-sm-flex d-xl-block justify-content-center"<"d-block d-lg-inline-flex"l>><"col-xl-5 d-flex d-xl-block justify-content-center"fr>>t<"row"<"col-sm-5"i><"col-sm-7"p>>>')
                     ->orderBy(1)
                     ->parameters([
                         'responsive' => true,
@@ -65,14 +66,14 @@ class DetailKeluargaDataTable extends DataTable
                         'language' => [
                             'url' => url(asset('assets/datatables/lang/indonesia.json'))
                         ]
-                    ]);
-                    // ->buttons(
-                    //     Button::make('create'),
-                    //     Button::make('export'),
-                    //     Button::make('print'),
-                    //     Button::make('reset'),
-                    //     Button::make('reload')
-                    // );
+                    ])
+                    ->buttons(
+                        // Button::make('create'),
+                        Button::make('export'),
+                        Button::make('print'),
+                        Button::make('reset'),
+                        Button::make('reload')
+                    );
     }
 
     /**
@@ -84,13 +85,13 @@ class DetailKeluargaDataTable extends DataTable
     {
         return [
             Column::make('DT_RowIndex')->title('No')->orderable(false)->searchable(false)->addClass('text-center'),
-            Column::make('nik')->title('NIK'),
-            Column::make('nama'),
-            Column::make('jenis_kelamin'),
-            Column::make('agama_id')->title('Agama')->data('agama.nama'),
-            Column::make('tempat_lahir'),
-            Column::make('tanggal_lahir'),
-            Column::make('status_keluarga_id')->title('Status dalam Keluarga')->data('status_keluarga.nama')->width(120),
+            Column::make('nik', 'warga.nik')->title('NIK'),
+            Column::make('nama', 'warga.nama'),
+            Column::make('jenis_kelamin', 'warga.jenis_kelamin'),
+            Column::make('agama.nama','agama.nama')->title('Agama'),
+            Column::make('tempat_lahir', 'warga.tempat_lahir'),
+            Column::make('tanggal_lahir', 'warga.tanggal_lahir'),
+            Column::make('status_keluarga.nama','status_keluarga.nama')->title('Status dalam Keluarga')->width(120),
             Column::computed('action')
                 ->title('Aksi')
                 ->exportable(false)

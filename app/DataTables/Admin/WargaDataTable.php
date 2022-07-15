@@ -25,8 +25,9 @@ class WargaDataTable extends DataTable
             ->addIndexColumn()
             ->addColumn('action', function ($row) {
                 $btn = '<div class="btn-group">';
-                $btn = $btn . '<a href="' . route('admin.warga.edit', $row->id) . '" class="btn btn-dark buttons-edit"><i class="fas fa-edit"></i></a>';
-                $btn = $btn . '<a href="' . route('admin.warga.destroy', $row->id) . '" class="btn btn-danger buttons-delete"><i class="fas fa-trash fa-fw"></i></a>';
+                $btn = $btn . '<a href="' . route('admin.warga.show', $row->id) . '" class="btn btn-default buttons-info"><i class="fas fa-eye"></i></a>';
+                // $btn = $btn . '<a href="' . route('admin.warga.edit', $row->id) . '" class="btn btn-dark buttons-edit"><i class="fas fa-edit"></i></a>';
+                // $btn = $btn . '<a href="' . route('admin.warga.destroy', $row->id) . '" class="btn btn-danger buttons-delete"><i class="fas fa-trash fa-fw"></i></a>';
                 $btn = $btn . '</div>';
                 return $btn;
             })
@@ -43,7 +44,7 @@ class WargaDataTable extends DataTable
      */
     public function query(Warga $model)
     {
-        return $model->select('warga.*')->with(['keluarga', 'agama', 'status_keluarga']);
+        return $model->with(['keluarga', 'agama', 'status_keluarga'])->select('warga.*')->newQuery();
     }
 
     /**
@@ -65,9 +66,9 @@ class WargaDataTable extends DataTable
                         'language' => [
                             'url' => url(asset('assets/datatables/lang/indonesia.json'))
                         ]
-                    ])
+                        ])
                     ->buttons(
-                        Button::make('create'),
+                        // Button::make('create'),
                         Button::make('export'),
                         Button::make('print'),
                         Button::make('reset'),
@@ -84,13 +85,13 @@ class WargaDataTable extends DataTable
     {
         return [
             Column::make('DT_RowIndex')->title('No')->orderable(false)->searchable(false)->addClass('text-center'),
-            Column::make('nik')->title('NIK'),
-            Column::make('nama'),
-            Column::make('jenis_kelamin'),
-            Column::make('agama_id')->title('Agama')->data('agama.nama'),
-            Column::make('tempat_lahir'),
-            Column::make('tanggal_lahir'),
-            Column::make('status_keluarga_id')->title('Status dalam Keluarga')->data('status_keluarga.nama'),
+            Column::make('nik', 'warga.nik')->title('NIK'),
+            Column::make('nama', 'warga.nama'),
+            Column::make('jenis_kelamin', 'warga.jenis_kelamin'),
+            Column::make('agama.nama','agama.nama')->title('Agama'),
+            Column::make('tempat_lahir', 'warga.tempat_lahir'),
+            Column::make('tanggal_lahir', 'warga.tanggal_lahir'),
+            Column::make('status_keluarga.nama','status_keluarga.nama')->title('Status dalam Keluarga'),
             Column::computed('action')
                   ->exportable(false)
                   ->title('Aksi')

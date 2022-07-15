@@ -39,7 +39,7 @@ class JadwalRondaDataTable extends DataTable
      */
     public function query(JadwalRonda $model)
     {
-        return $model->select('jadwal_ronda.*')->with(['warga', 'hari']);
+        return $model->with(['warga', 'hari'])->select('jadwal_ronda.*')->newQuery();
     }
 
     /**
@@ -53,6 +53,7 @@ class JadwalRondaDataTable extends DataTable
                     ->setTableId('jadwalrondadatatable-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
+                    ->dom('Bfrtip')
                     ->dom('<"dataTables_wrapper dt-bootstrap"B<"row"<"col-xl-7 d-block d-sm-flex d-xl-block justify-content-center"<"d-block d-lg-inline-flex"l>><"col-xl-5 d-flex d-xl-block justify-content-center"fr>>t<"row"<"col-sm-5"i><"col-sm-7"p>>>')
                     ->orderBy(1)
                     ->parameters([
@@ -64,6 +65,7 @@ class JadwalRondaDataTable extends DataTable
                     ])
                     ->buttons(
                         Button::make('create'),
+                        Button::make('export'),
                         Button::make('print'),
                         Button::make('reset'),
                         Button::make('reload')
@@ -79,8 +81,8 @@ class JadwalRondaDataTable extends DataTable
     {
         return [
             Column::make('DT_RowIndex')->title('No')->orderable(false)->searchable(false)->addClass('text-center'),
-            Column::make('hari_id')->data('hari.nama')->title('Hari')->searchable(true),
-            Column::make('warga_id')->data('warga.nama')->title('Nama Warga'),
+            Column::make('hari.nama','hari.nama')->title('Hari'),
+            Column::make('warga.nama','warga.nama')->title('Nama Warga'),
             Column::computed('action')
                   ->exportable(false)
                   ->title('Aksi')
