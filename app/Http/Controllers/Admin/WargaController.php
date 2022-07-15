@@ -105,7 +105,11 @@ class WargaController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = Warga::with('dokumen')->findOrFail($id);
+        return view('pages.admin.warga.show',[
+            'data' => $data
+            ]
+        );
     }
 
     /**
@@ -175,7 +179,7 @@ class WargaController extends Controller
                 return back()->withInput()->withToastError('Something what happen');
             }
         });
-        return redirect(route('admin.warga.index'))->withInput()->withToastSuccess('success saving data');
+        return redirect(route('admin.warga.index'))->withInput()->withToastSuccess('Data tersimpan');
     }
 
     /**
