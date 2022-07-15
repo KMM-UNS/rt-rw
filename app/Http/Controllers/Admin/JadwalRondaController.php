@@ -22,7 +22,7 @@ class JadwalRondaController extends Controller
 
     public function create()
     {
-        $warga = Warga::where('status_keluarga_id', "1")->pluck('nama', 'id');
+        $warga = Warga::where('status_keluarga_id', "1")->doesntHave('jadwal_ronda')->pluck('nama', 'id');
         $hari = Hari::pluck('nama', 'id');
         // dd($hari);
         return view('pages.admin.ronda.jadwal.add-edit', [
