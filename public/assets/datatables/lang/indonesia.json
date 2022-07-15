@@ -27,6 +27,8 @@
     },
     "buttons": {
         "create" : "Tambah",
+        "reset": "Hapus",
+        "reload": "Mulai Ulang",
         "collection": "Kumpulan <span class='ui-button-icon-primary ui-icon ui-icon-triangle-1-s'\/>",
         "colvis": "Visibilitas Kolom",
         "colvisRestore": "Kembalikan visibilitas",
