@@ -18,9 +18,9 @@ class KasIuranWajib extends Model
 
     protected $table = 'kas_iuran_wajibs';
     protected $fillable = ['jenis_iuran_id', 'tanggal', 'warga', 'total_biaya', 'status'];
-    protected $dates = [
-        'created_at'
-    ];
+    // protected $dates = [
+    //     'created_at'
+    // ];
 
     public function iuranwajib()
     {

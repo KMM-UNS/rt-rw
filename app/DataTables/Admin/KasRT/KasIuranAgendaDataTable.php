@@ -3,6 +3,7 @@
 namespace App\DataTables\Admin\KasRT;
 
 use App\Models\KasIuranAgenda;
+use App\Models\Keluarga;
 use App\Models\PetugasTagihan;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
@@ -54,8 +55,11 @@ class KasIuranAgendaDataTable extends DataTable
 
     public function query(KasIuranAgenda $model)
     {
-        // $pos =
-        //         $poss = PetugasTagihan::where('pos',$pos);
+        // $agenda = KasIuranAgenda::get();
+        // $pos = Keluarga::where('id', $agenda->warga)->first()->pos;
+        // $agenda->pos = $pos->id;
+        // $agenda->petugas = $pos->petugastagihan->id;
+        // $agenda->save();
 
         return $model->select('kas_iuran_agendas.*')->with(['iuranagenda', 'petugastagihan', 'warga_agenda']);
     }

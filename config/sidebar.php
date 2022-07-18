@@ -31,33 +31,33 @@ return [
             'url' => '/admin/admin',
             'caret' => false,
         ],
+        // [
+        //     'icon' => 'fa fa-cogs',
+        //     'title' => 'Master',
+        //     'url' => 'javascript:;',
+        //     'caret' => true,
+        //     'sub_menu' => [
+        //         [
+        //             'url' => '/admin/setting',
+        //             'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;App'
+        //         ], [
+        //             'url' => '/admin/master-data/agama',
+        //             'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Agama'
+        //         ], [
+        //             'url' => '/admin/master-data/pekerjaan',
+        //             'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Pekerjaan'
+        //         ], [
+        //             'url' => '/admin/master-data/status-kawin',
+        //             'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Status Kawin'
+        //         ], [
+        //             'url' => '/admin/master-data/pendidikan',
+        //             'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Pendidikan'
+        //         ]
+        //     ]
+        // ],
         [
             'icon' => 'fa fa-cogs',
-            'title' => 'Master',
-            'url' => 'javascript:;',
-            'caret' => true,
-            'sub_menu' => [
-                [
-                    'url' => '/admin/setting',
-                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;App'
-                ], [
-                    'url' => '/admin/master-data/agama',
-                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Agama'
-                ], [
-                    'url' => '/admin/master-data/pekerjaan',
-                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Pekerjaan'
-                ], [
-                    'url' => '/admin/master-data/status-kawin',
-                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Status Kawin'
-                ], [
-                    'url' => '/admin/master-data/pendidikan',
-                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Pendidikan'
-                ]
-            ]
-        ],
-        [
-            'icon' => 'fa fa-cogs',
-            'title' => 'Bendahara',
+            'title' => 'Master Bendahara',
             'url' => 'javascript:;',
             'caret' => true,
             'sub_menu' => [
