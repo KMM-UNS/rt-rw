@@ -66,7 +66,7 @@ class TamuDataTable extends DataTable
                         ]
                     ])
                     ->buttons(
-                        Button::make('create'),
+                        // Button::make('create'),
                         Button::make('export'),
                         Button::make('print'),
                         Button::make('reset'),
@@ -90,13 +90,13 @@ class TamuDataTable extends DataTable
             Column::make('tanggal_tiba', 'tamu.tanggal_tiba'),
             Column::make('lama_menetap', 'tamu.lama_menetap'),
             Column::make('keluarga.kepala_keluarga', 'keluarga.kepala_keluarga')->title('Penerima Tamu'),
-            Column::computed('action')
-                  ->title('Aksi')
-                  ->addClass('details-control')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
+            // Column::computed('action')
+            //       ->title('Aksi')
+            //       ->addClass('details-control')
+            //       ->exportable(false)
+            //       ->printable(false)
+            //       ->width(60)
+            //       ->addClass('text-center'),
         ];
     }
 

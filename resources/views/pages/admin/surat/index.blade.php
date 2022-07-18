@@ -36,6 +36,42 @@
   <!-- end panel-heading -->
   <!-- begin panel-body -->
   <div class="panel-body">
+    <div class="container">
+        <form action="{{ route('admin.surat.index') }}" method="GET">
+        {{-- <input type="d" class="form-control" name="email" value="{{\Request::get('email')}}"> --}}
+        <div class="row my-2">
+            {{-- <div class="col-md-2 my-auto">
+                <label for="tanggal_awal"><strong>Tanggal Awal</strong></label>
+            </div> --}}
+            <div class="col-md-3 mx-1">
+                <div class="input-group date">
+                    <x-form.Dropdown name="keperluan_surat_id" :options="$keperluan_surat" placeholder="Keperluan Surat" selected="{{\Request::get('keperluan_surat_id')}}"/>
+                </div>
+            </div>
+            {{-- <div class="col-md-2 my-auto">
+                <label for="tanggal_awal"><strong>Tanggal Awal</strong></label>
+            </div> --}}
+            <div class="col-md-3 mx-1">
+                <div class="input-group">
+                    <x-form.Dropdown name="bulan" :options="$bulan" placeholder="Bulan" selected="{{\Request::get('bulan')}}"/>
+                </div>
+            </div>
+            {{-- <div class="col-md-2 my-auto">
+                <label for="tanggal_akhir"><strong>Tanggal Akhir</strong></label>
+            </div> --}}
+            <div class="col-md-3 mx-1">
+                <div class="input-group">
+                    <x-form.Dropdown name="tahun" :options="$tahun" placeholder="Tahun" selected="{{\Request::get('tahun')}}"/>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary"> Cari </button>
+            {{-- <button type="submit" class="btn btn-primary"> Cari </button> --}}
+            <a href="{{ route('admin.surat.index') }}" class="btn btn-white mx-2">Hapus Filter</a>
+        </div>
+        {{-- <button type="reset" class="btn btn-white"> Reset </button> --}}
+        </form>
+      </div>
+      <hr>
     {{ $dataTable->table() }}
   </div>
   <!-- end panel-body -->

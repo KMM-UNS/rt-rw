@@ -57,7 +57,9 @@
                 </div>
             </div>
         </div>
-        <a href="#modal-dialog" class="btn btn-sm btn-danger fw-normal float-right" data-toggle="modal" style="font-size: 13px">Pindah Rumah</a>
+        {{-- @if(auth()->user()->hasRole('admin')) --}}
+        <a href="#modal-dialog" class="btn btn-sm btn-dark fw-normal float-right" data-toggle="modal" style="font-size: 13px"><i class="fa fa-truck mr-2"></i> Pindah Rumah</a>
+        {{-- @endif --}}
     </div>
     <div class="modal fade" id="modal-dialog">
         <div class="modal-dialog">

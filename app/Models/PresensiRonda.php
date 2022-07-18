@@ -21,7 +21,6 @@ class PresensiRonda extends Model
         'tanggal',
         'kehadiran'
     ];
-
     protected $dates = [
         'tanggal'
     ];

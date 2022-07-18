@@ -15,6 +15,11 @@ use App\Models\JadwalRonda;
 
 class JadwalRondaController extends Controller
 {
+    function __construct()
+    {
+    $this->middleware('role:admin')->except(['index']);
+    }
+
     public function index(JadwalRondaDataTable $dataTable)
     {
         return $dataTable->render('pages.admin.ronda.jadwal.index');

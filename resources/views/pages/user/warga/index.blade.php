@@ -31,7 +31,7 @@
                         <th>NIK</th>
                         <th>Nama</th>
                         <th>Status dalam Keluarga</th>
-                        <th class="text-center">Action</th>
+                        <th class="text-center">Aksi</th>
                     </tr>
                 </thead>
                 @foreach ($data as $warga)
@@ -62,7 +62,7 @@
                     </td>
                     <!-- with button -->
                     <td class="with-btn text-center">
-                        <a href="{{ route('user.warga.show', $warga->id) }}" class="btn btn-info buttons-delete"><i class="fas fa-info-circle fa-fw"></i></a>
+                        <a href="{{ route('user.warga.show', $warga->id) }}" class="btn btn-aqua buttons-delete"><i class="fas fa-eye fa-fw"></i></a>
                         {{-- <a href="{{ route('user.warga.edit', $warga->id) }}" class="btn btn-dark buttons-edit"><i class="fas fa-edit fa-fw"></i></a> --}}
                         {{-- <a href="{{ route('user.warga.destroy', $warga->id) }}" class="btn btn-danger buttons-delete"><i class="fas fa-trash fa-fw"></i></a> --}}
                     </td>

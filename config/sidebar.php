@@ -133,6 +133,67 @@ return [
         ],
     ],
 
+    'menu_petugas' => [
+        [
+            'icon' => 'fa fa-th-large',
+            'title' => 'Dasbor',
+            'url' => '/admin/dashboard',
+            'caret' => false
+        ],
+        [
+            'icon' => 'fa fa-users',
+            'title' => 'Keluarga',
+            'url' => '/admin/keluarga',
+            'caret' => false,
+        ],
+        [
+            'icon' => 'fa fa-user',
+            'title' => 'Warga',
+            'url' => '/admin/warga',
+            'caret' => false,
+        ],
+        [
+            'icon' => 'fa fa-home',
+            'title' => 'Rumah',
+            'url' => '/admin/rumah',
+            'caret' => false,
+        ],
+        [
+            'icon' => 'fa fa-envelope',
+            'title' => 'Surat',
+            'url' => '/admin/surat',
+            'caret' => false
+        ],
+        [
+            'icon' => 'fa fa-shield-alt',
+            'title' => 'Ronda',
+            'url' => 'javascript:;',
+            'caret' => true,
+            'sub_menu' => [
+                [
+                    'url' => '/admin/ronda/jadwal',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Jadwal Ronda'
+                ],
+                [
+                    'url' => '/admin/ronda/presensi',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Presensi Ronda'
+                ],
+            ]
+        ],
+        [
+            'icon' => 'fa fa-address-book',
+            'title' => 'Tamu',
+            'url' => '/admin/tamu',
+            'caret' => false
+        ],
+        [
+            'icon' => 'fa fa-pencil-alt',
+            'title' => 'Kritik Saran',
+            'url' => '/admin/kritik-saran',
+            'caret' => false,
+        ],
+    ],
+
     'menu_user' => [
         [
             'icon' => 'fa fa-th-large',

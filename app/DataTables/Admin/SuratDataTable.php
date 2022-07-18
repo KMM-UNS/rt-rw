@@ -3,6 +3,7 @@
 namespace App\DataTables\Admin;
 
 use App\Models\Surat;
+use Illuminate\Http\Request;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -17,7 +18,7 @@ class SuratDataTable extends DataTable
      * @param mixed $query Results from query() method.
      * @return \Yajra\DataTables\DataTableAbstract
      */
-    public function dataTable($query)
+    public function dataTable($query, Request $request)
     {
         return datatables()
         ->eloquent($query)
@@ -25,8 +26,8 @@ class SuratDataTable extends DataTable
         ->addColumn('action', function ($row) {
             $btn = '<div class="btn-group">';
             $btn = $btn . '<a class="info btn btn-white"><i class="fas fa-eye"></i></a>';
-            $btn = $btn . '<a href="' . route('admin.surat.edit', $row->id) . '" class="btn btn-dark buttons-edit"><i class="fas fa-edit"></i></a>';
-            $btn = $btn . '<a href="' . route('admin.surat.destroy', $row->id) . '" class="btn btn-danger buttons-delete"><i class="fas fa-trash fa-fw"></i></a>';
+            // $btn = $btn . '<a href="' . route('admin.surat.edit', $row->id) . '" class="btn btn-dark buttons-edit"><i class="fas fa-edit"></i></a>';
+            // $btn = $btn . '<a href="' . route('admin.surat.destroy', $row->id) . '" class="btn btn-danger buttons-delete"><i class="fas fa-trash fa-fw"></i></a>';
             $btn = $btn . '</div>';
             return $btn;
         })
@@ -41,7 +42,18 @@ class SuratDataTable extends DataTable
                 return $row->keterangan;
             }
             return $row->keperluan_surat->nama;
+        })
+        ->filter(function($query) use($request) {
+            // dd($request->all());
+            if($request->has('keperluan_surat_id') || $request->has('bulan') || $request->has('tahun')){
+                $keperluan_surat_id = $request->get("keperluan_surat_id");
+                $bulan = $request->get("bulan");
+                $tahun = $request->get("tahun");
+
+                return $query->where('keperluan_surat_id', '=' ,$keperluan_surat_id)->whereMonth('tanggal_pengajuan' , '=', $bulan)->whereYear('tanggal_pengajuan' , '=', $tahun);
+            }
         });
+
     }
 
 
@@ -78,7 +90,6 @@ class SuratDataTable extends DataTable
                         ]
                     ])
                     ->buttons(
-                        Button::make('create'),
                         Button::make('export'),
                         Button::make('print'),
                         Button::make('reset'),

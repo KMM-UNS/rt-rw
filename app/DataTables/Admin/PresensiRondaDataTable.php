@@ -65,8 +65,31 @@ class PresensiRondaDataTable extends DataTable
      */
     public function html()
     {
+        // jika yang login admin
+       if(auth()->user()->hasRole('admin')){
         return $this->builder()
-                    ->setTableId('presensirondadatatable-table')
+        ->setTableId('rumah-table')
+        ->columns($this->getColumns())
+        ->minifiedAjax()
+        ->dom('<"dataTables_wrapper dt-bootstrap"B<"row"<"col-xl-7 d-block d-sm-flex d-xl-block justify-content-center"<"d-block d-lg-inline-flex"l>><"col-xl-5 d-flex d-xl-block justify-content-center"fr>>t<"row"<"col-sm-5"i><"col-sm-7"p>>>')
+        ->orderBy(1)
+        ->parameters([
+            'responsive' => true,
+            'autoWidth' => false,
+            'language' => [
+                'url' => url(asset('assets/datatables/lang/indonesia.json'))
+            ]
+        ])
+        ->buttons(
+            Button::make('create'),
+            Button::make('export'),
+            Button::make('print'),
+            Button::make('reset'),
+            Button::make('reload')
+        );
+        } else {
+            return $this->builder()
+                    ->setTableId('rumah-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('<"dataTables_wrapper dt-bootstrap"B<"row"<"col-xl-7 d-block d-sm-flex d-xl-block justify-content-center"<"d-block d-lg-inline-flex"l>><"col-xl-5 d-flex d-xl-block justify-content-center"fr>>t<"row"<"col-sm-5"i><"col-sm-7"p>>>')
@@ -79,12 +102,12 @@ class PresensiRondaDataTable extends DataTable
                         ]
                     ])
                     ->buttons(
-                        Button::make('create'),
                         Button::make('export'),
                         Button::make('print'),
                         Button::make('reset'),
                         Button::make('reload')
                     );
+        }
     }
 
     /**
@@ -100,12 +123,6 @@ class PresensiRondaDataTable extends DataTable
             Column::make('tanggal'),
             Column::make('jadwal_ronda.warga.nama','jadwal_ronda.warga.nama')->title('Nama Warga'),
             Column::make('kehadiran', 'presensi_ronda.kehadiran'),
-            // Column::computed('action')
-            //       ->exportable(false)
-            //       ->title('Aksi')
-            //       ->printable(false)
-            //       ->width(60)
-            //       ->addClass('text-center')
         ];
     }
 

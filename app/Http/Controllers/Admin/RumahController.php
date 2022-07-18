@@ -18,6 +18,11 @@ use App\Models\RiwayatRumah;
 
 class RumahController extends Controller
 {
+    function __construct()
+    {
+    $this->middleware('role:admin')->except(['index', 'show']);
+    }
+
     /**
      * Display a listing of the resource.
      *

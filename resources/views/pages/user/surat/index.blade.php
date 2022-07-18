@@ -33,18 +33,18 @@
                         <th>Keperluan</th>
                         <th>Tanggal Pengajuan</th>
                         <th>Status</th>
-                        <th class="text-center">Action</th>
+                        <th class="text-center">Aksi</th>
                     </tr>
                 </thead>
-                @foreach ($data as $surat)
+                @foreach ($data as $suratKey => $surat)
                 <tbody>
                     <tr>
-                        <td class="text-center">{{ $loop->count }}</td>
+                        <td class="text-center">{{ $suratKey + 1 }}</td>
                         <td>{{ $surat->nomor_surat }}</td>
                         <td>{{ ($surat->keperluan_surat_id == "7") ?  $surat->keterangan : $surat->keperluan_surat->nama }}</td>
                         <td>{{ $surat->tanggal_pengajuan->isoFormat('DD MMMM YYYY') }}</td>
                         <td>{{ $surat->status_surat->nama }}</td>
-                        <td class="text-center"><a href="{{ route('user.surat.cetak', $surat->id) }}" class=" {{ ($surat->status != 4) ? 'btn btn-default disabled' : 'btn btn-aqua' }}"><i class="fas fa-download"></i></a></td>
+                        <td class="text-center"><a href="{{ ($surat->status_surat_id != 4) ? 'javascript:;' : route('user.surat.cetak', $surat->id) }}" class=" {{ ($surat->status_surat_id != 4) ? 'btn btn-default disabled' : 'btn btn-aqua' }}"><i class="fas fa-download"></i></a></td>
                     </tr>
                 </tbody>
                 @endforeach

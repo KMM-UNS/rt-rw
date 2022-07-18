@@ -29,9 +29,18 @@ class SuratController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(SuratDataTable $dataTable)
+    public function index(SuratDataTable $dataTable, DataHelper $dataHelper)
     {
-        return $dataTable->render('pages.admin.surat.index');
+        $keperluan_surat = KeperluanSurat::pluck('nama', 'id');
+        $bulan = $dataHelper->monthDropdownData();
+        $tahun = $dataHelper->yearDropdownData();
+        return $dataTable->render('pages.admin.surat.index',
+        [
+            'keperluan_surat' => $keperluan_surat,
+            'bulan' => $bulan,
+            'tahun' => $tahun,
+        ]
+    );
     }
 
     /**

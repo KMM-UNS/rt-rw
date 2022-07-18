@@ -13,6 +13,11 @@ use App\Models\JadwalRonda;
 
 class PresensiRondaController extends Controller
 {
+    function __construct()
+    {
+    $this->middleware('role:admin')->except(['index']);
+    }
+
     public function index(PresensiRondaDataTable $dataTable)
     {
         return $dataTable->render('pages.admin.ronda.presensi.index');

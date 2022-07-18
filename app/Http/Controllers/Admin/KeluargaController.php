@@ -19,6 +19,11 @@ use App\Models\StatusHunian;
 
 class KeluargaController extends Controller
 {
+    function __construct()
+    {
+    $this->middleware('role:admin')->except(['index', 'show']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -148,11 +153,9 @@ class KeluargaController extends Controller
         }
     }
 
-        public function pindah(Request $request, $id)
-        {
+    public function pindah(Request $request, $id)
+    {
         $keluarga = Keluarga::findorFail($id);
-
-
         if ($request->lokasi == "Dalam Lingkungan")
         {
             DB::transaction(function () use ($request, $keluarga) {
@@ -251,6 +254,6 @@ class KeluargaController extends Controller
                 }
             });
             return redirect(route('admin.keluarga.index'))->withInput()->withToastSuccess('Data tersimpan');
-        }
+            }
     }
 }

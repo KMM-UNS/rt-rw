@@ -49,11 +49,33 @@ class JadwalRondaDataTable extends DataTable
      */
     public function html()
     {
+       // jika yang login admin
+       if(auth()->user()->hasRole('admin')){
         return $this->builder()
-                    ->setTableId('jadwalrondadatatable-table')
+        ->setTableId('rumah-table')
+        ->columns($this->getColumns())
+        ->minifiedAjax()
+        ->dom('<"dataTables_wrapper dt-bootstrap"B<"row"<"col-xl-7 d-block d-sm-flex d-xl-block justify-content-center"<"d-block d-lg-inline-flex"l>><"col-xl-5 d-flex d-xl-block justify-content-center"fr>>t<"row"<"col-sm-5"i><"col-sm-7"p>>>')
+        ->orderBy(1)
+        ->parameters([
+            'responsive' => true,
+            'autoWidth' => false,
+            'language' => [
+                'url' => url(asset('assets/datatables/lang/indonesia.json'))
+            ]
+        ])
+        ->buttons(
+            Button::make('create'),
+            Button::make('export'),
+            Button::make('print'),
+            Button::make('reset'),
+            Button::make('reload')
+        );
+        } else {
+            return $this->builder()
+                    ->setTableId('rumah-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->dom('Bfrtip')
                     ->dom('<"dataTables_wrapper dt-bootstrap"B<"row"<"col-xl-7 d-block d-sm-flex d-xl-block justify-content-center"<"d-block d-lg-inline-flex"l>><"col-xl-5 d-flex d-xl-block justify-content-center"fr>>t<"row"<"col-sm-5"i><"col-sm-7"p>>>')
                     ->orderBy(1)
                     ->parameters([
@@ -64,12 +86,12 @@ class JadwalRondaDataTable extends DataTable
                         ]
                     ])
                     ->buttons(
-                        Button::make('create'),
                         Button::make('export'),
                         Button::make('print'),
                         Button::make('reset'),
                         Button::make('reload')
                     );
+        }
     }
 
     /**
@@ -79,17 +101,25 @@ class JadwalRondaDataTable extends DataTable
      */
     protected function getColumns()
     {
-        return [
+        $columns = [
             Column::make('DT_RowIndex')->title('No')->orderable(false)->searchable(false)->addClass('text-center'),
             Column::make('hari.nama','hari.nama')->title('Hari'),
             Column::make('warga.nama','warga.nama')->title('Nama Warga'),
-            Column::computed('action')
-                  ->exportable(false)
-                  ->title('Aksi')
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center')
+
         ];
+
+        if(auth()->user()->hasRole('admin')){
+            $column = Column::computed('action')
+            ->exportable(false)
+            ->title('Aksi')
+            ->printable(false)
+            ->width(60)
+            ->addClass('text-center');
+            array_push($columns, $column);
+        }
+
+
+        return $columns;
     }
 
     /**

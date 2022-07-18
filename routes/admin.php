@@ -5,19 +5,19 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     // require base_path('vendor/laravel/fortify/routes/routes.php');
 
-    Route::group(['namespace' => 'Admin', 'middleware' => ['role:admin|ketua_rt|ketua_rw|sekretaris_rt']], function () {
+    Route::group(['namespace' => 'Admin', 'middleware' => ['role:admin|ketua_rt|ketua_rw']], function () {
         Route::get('/', function () {
             return redirect(route('admin.dashboard'));
         });
 
         Route::view('/dashboard', 'pages.admin.dashboard')->name('dashboard');
 
-        Route::resource('/users', 'UserController');
+        Route::resource('/users', 'UserController')->middleware('role:admin');
         Route::resource('/settings', 'SettingController');
         Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
-        Route::resource('/admin', 'AdminController');
-        Route::resource('/user', 'UserController');
+        // Route::resource('/admin', 'AdminController');
+        // Route::resource('/user', 'UserController');
         Route::resource('/kritik-saran', 'KritikSaranController');
 
         Route::group(['prefix' => '/surat', 'as' => 'surat.'], function () {
@@ -38,7 +38,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
             Route::resource('/presensi', 'PresensiRondaController');
         });
 
-        Route::group(['prefix' => '/master-data', 'as' => 'master-data.', 'namespace' => 'Master', ], function () {
+        Route::group(['prefix' => '/master-data', 'as' => 'master-data.', 'namespace' => 'Master', 'middleware' => ['role:admin'] ], function () {
             Route::resource('agama', 'AgamaController');
             Route::resource('aplikasi', 'AppController');
             Route::resource('pekerjaan', 'PekerjaanController');
