@@ -17,7 +17,7 @@ class KasIuranWajib extends Model
     public const ACTIVE = "aktif";
 
     protected $table = 'kas_iuran_wajibs';
-    protected $fillable = ['jenis_iuran_id', 'tanggal', 'warga', 'total_biaya', 'status'];
+    protected $fillable = ['jenis_iuran_id', 'tanggal', 'warga', 'pos', 'total_biaya', 'status'];
     // protected $dates = [
     //     'created_at'
     // ];
@@ -52,5 +52,9 @@ class KasIuranWajib extends Model
     public function warga_wajib()
     {
         return $this->belongsTo(Keluarga::class, 'warga');
+    }
+    public function postagihanwajib()
+    {
+        return $this->belongsTo(Pos::class, 'pos');
     }
 }

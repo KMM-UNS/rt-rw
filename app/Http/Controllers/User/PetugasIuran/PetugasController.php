@@ -16,7 +16,7 @@ class PetugasController extends Controller
      */
     public function index()
     {
-        $data = PetugasTagihan::where('petugas_id', auth()->user()->id)->first()->id;
+        $data = PetugasTagihan::where('id', auth()->user()->id)->first()->id;
         $data1 = PetugasTagihan::where('id', $data)->with('poss')->get();
         // $data1 = PetugasTagihan::where('petugas_id', auth()->user()->id)->first()->id;
 

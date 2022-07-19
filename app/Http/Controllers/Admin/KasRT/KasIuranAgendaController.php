@@ -51,15 +51,8 @@ class KasIuranAgendaController extends Controller
             try {
                 $agenda = KasIuranAgenda::createFromRequest($request);
                 $pos = Keluarga::where('id', $agenda->warga)->first()->pos;
-                $agenda->pos = $pos->nama;
-                $agenda->petugas = $pos->petugastagihan->nama;
-
-                // dd($pos->petugastagihan->nama);
-                // $petugas = PetugasTagihan::select('pos')->where('id', $agenda->petugas)->first()->pos;
-
-                // $pos = Pos::where('id', $petugas)->first()->nama;
-                // // dd($pos);
-                // $agenda->warga = $pos->warga->nama;
+                $agenda->pos = $pos->id;
+                $agenda->petugas = $pos->petugastagihan->id;
                 $agenda->save();
                 if ($request->file()) {
 

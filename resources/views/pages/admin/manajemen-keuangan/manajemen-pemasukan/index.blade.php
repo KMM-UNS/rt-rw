@@ -42,7 +42,7 @@
         {{-- <div class="panel-body">
             {{ $dataTable->table() }}
         </div> --}}
-        <a href="{{ url('admin/manajemen-keuangan/manajemen-pemasukan/create') }}" class="btn btn-outline-info">CREATE</a>
+        {{-- <a href="{{ url('admin/manajemen-keuangan/manajemen-pemasukan/create') }}" class="btn btn-outline-info">CREATE</a> --}}
         <form action="{{ route('admin.manajemen-keuangan.manajemen-pemasukan.store') }}" id="form" name="form"
             method="POST" data-parsley-validate="true" enctype="multipart/form-data">
             @csrf
@@ -51,15 +51,17 @@
             @endif
             <div class="panel-body">
                 {{-- {{ $rekap }} --}}
-                <a href="{{ url('admin/rekap-kas/export-rekapwajib') }}" class="btn btn-success"> Export To Excel</a>
+                {{-- <a href="{{ url('admin/rekap-kas/export-rekapwajib') }}" class="btn btn-success"> Export To Excel</a> --}}
+                <a href="{{ url('admin/manajemen-keuangan/manajemen-pemasukan/create') }}"
+                    class="btn btn-success">CREATE</a>
                 <a href="{{ url('admin/manajemen-keuangan/manajemen-pemasukan/cetak_pdf') }}" class="btn btn-primary"
                     target="_blank">CETAK
                     PDF</a>
                 <table border="1" cellpadding="2" class="table">
                     <thead>
                         <tr>
-                            <th scope="col">Nominal</th>
                             <th scope="col">Keterangan</th>
+                            <th scope="col">Nominal</th>
 
                         </tr>
                     </thead>

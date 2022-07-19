@@ -22,7 +22,22 @@ class Pos extends Model
     {
         return $this->hasOne(PetugasTagihan::class, 'pos');
     }
-
+    public function postagihanagenda()
+    {
+        return $this->hasMany(KasIuranAgenda::class, 'nama');
+    }
+    public function postagihankondisional()
+    {
+        return $this->hasMany(KasIuranKondisional::class, 'nama');
+    }
+    public function postagihansukarela()
+    {
+        return $this->hasMany(KasIuranSukaRela::class, 'nama');
+    }
+    public function postagihanwajib()
+    {
+        return $this->hasMany(KasIuranWajib::class, 'nama');
+    }
     public function keluarga()
     {
         return $this->hasMany(Keluarga::class);

@@ -41,10 +41,9 @@ class KasIuranAgendaDataTable extends DataTable
         // // raw column berfungsi untuk menjalankan tag html
         // ->rawColumns(['image', 'action']);
     }
-
     public function query(KasIuranAgenda $model)
     {
-        return $model->select('kas_iuran_agendas.*')->with(['iuranagenda', 'petugastagihan', 'warga_agenda']);
+        return $model->with(['iuranagenda', 'petugastagihan', 'postagihanagenda', 'warga_agenda'])->select('kas_iuran_agendas.*');
     }
 
     public function html()
@@ -72,18 +71,23 @@ class KasIuranAgendaDataTable extends DataTable
                 ->printable(false)
                 ->width(60)
                 ->addClass('text-center'),
-            Column::make('jenis_iuran_id')->data('iuranagenda.nama'),
+            Column::make('iuranagenda.nama', 'iuranagenda.nama')->title('Jenis Iuran Agenda'),
             Column::make('tanggal'),
-            Column::make('petugas'),
-            Column::make('warga')->data('warga_agenda.warga'),
-            Column::make('pos'),
+            Column::make('petugastagihan.nama', 'petugastagihan.nama')->title('Nama Petugas'),
+            Column::make('warga_agenda.warga', 'warga_agenda.warga')->title('Nama Warga'),
+            Column::make('postagihanagenda.nama', 'postagihanagenda.nama')->title('Pos'),
             Column::make('total_biaya'),
             Column::make('status'),
+            // Column::computed('image'),
+            // Column::make('tanggal'),
+            // Column::make('updated_at'),
         ];
     }
 
+
+
     protected function filename()
     {
-        return 'KasIuranWajib_' . date('YmdHis');
+        return 'KasIuranAgenda_' . date('YmdHis');
     }
 }

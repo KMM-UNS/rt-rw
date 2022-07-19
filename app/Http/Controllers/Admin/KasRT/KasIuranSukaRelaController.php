@@ -49,8 +49,8 @@ class KasIuranSukaRelaController extends Controller
             try {
                 $sukarela = KasIuranSukaRela::createFromRequest($request);
                 $pos = Keluarga::where('id', $sukarela->warga)->first()->pos;
-                $sukarela->pos = $pos->nama;
-                $sukarela->petugas = $pos->petugastagihan->nama;
+                $sukarela->pos = $pos->id;
+                $sukarela->petugas = $pos->petugastagihan->id;
 
                 $sukarela->save();
                 if ($request->file()) {

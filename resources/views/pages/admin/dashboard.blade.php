@@ -42,7 +42,7 @@
                     <!-- begin row -->
                     <div class="row">
                         <!-- begin col-7 -->
-                        <div class="col-xl-7 col-lg-8">
+                        <div class="col-xl-12 col-lg-8">
                             <!-- begin title -->
                             <div class="mb-3 text-grey">
                                 <b>SALDO</b>
@@ -58,39 +58,41 @@
                                 <h2 class="mb-0">Rp. <span data-animation="number"
                                         data-value={{ $saldo }}>888888888888888</span>
                                 </h2>
-                                <div class="ml-auto mt-n1 mb-n1">
-                                    <div id="total-sales-sparkline"></div>
-                                </div>
+                                {{-- <div class="ml-auto mt-n1 mb-n1">
+                                    <div id="total-sales-sparkline" data-value={{ $pemasukan }}></div>
+                                </div> --}}
                             </div>
                             <!-- end total-sales -->
                             <!-- begin percentage -->
-                            <div class="mb-3 text-grey">
-                                <i class="fa fa-caret-up"></i> <span data-animation="number" data-value="33.21">0.00</span>%
+                            {{-- <div class="mb-3 text-grey">
+                                <i class="fa fa-caret-up"></i> <span data-animation="number"
+                                    data-value={{ $saldo }}>0.00</span>%
                                 compare to last week
-                            </div>
+                            </div> --}}
                             <!-- end percentage -->
                             <hr class="bg-white-transparent-2" />
                             <!-- begin row -->
                             <div class="row text-truncate">
                                 <!-- begin col-6 -->
                                 <div class="col-6">
-                                    <div class="f-s-12 text-grey">Total sales order</div>
-                                    <div class="f-s-18 m-b-5 f-w-600 p-b-1" data-animation="number" data-value="1568">0
+                                    <div class="f-s-12 text-grey">Pemasukan</div>
+                                    <div class="f-s-18 m-b-5 f-w-600 p-b-1">Rp <span data-animation="number"
+                                            data-value={{ $pemasukan }}>0.00</span>
                                     </div>
                                     <div class="progress progress-xs rounded-lg bg-dark-darker m-b-5">
                                         <div class="progress-bar progress-bar-striped rounded-right bg-teal"
-                                            data-animation="width" data-value="55%" style="width: 0%"></div>
+                                            data-animation="width" data-value={{ $pemasukan }} style="width: 0%"></div>
                                     </div>
                                 </div>
                                 <!-- end col-6 -->
                                 <!-- begin col-6 -->
                                 <div class="col-6">
-                                    <div class="f-s-12 text-grey">Avg. sales per order</div>
-                                    <div class="f-s-18 m-b-5 f-w-600 p-b-1">$<span data-animation="number"
-                                            data-value="41.20">0.00</span></div>
+                                    <div class="f-s-12 text-grey">Pengeluaran</div>
+                                    <div class="f-s-18 m-b-5 f-w-600 p-b-1">Rp <span data-animation="number"
+                                            data-value={{ $pengeluaran }}>0.00</span></div>
                                     <div class="progress progress-xs rounded-lg bg-dark-darker m-b-5">
                                         <div class="progress-bar progress-bar-striped rounded-right" data-animation="width"
-                                            data-value="55%" style="width: 0%"></div>
+                                            data-value={{ $pengeluaran }} style="width: 0%"></div>
                                     </div>
                                 </div>
                                 <!-- end col-6 -->
@@ -99,9 +101,9 @@
                         </div>
                         <!-- end col-7 -->
                         <!-- begin col-5 -->
-                        <div class="col-xl-5 col-lg-4 align-items-center d-flex justify-content-center">
+                        {{-- <div class="col-xl-5 col-lg-4 align-items-center d-flex justify-content-center">
                             <img src="/assets/img/svg/img-1.svg" height="150px" class="d-none d-lg-block" />
-                        </div>
+                        </div> --}}
                         <!-- end col-5 -->
                     </div>
                     <!-- end row -->
@@ -136,28 +138,28 @@
                                     <h2 class="text-white mb-0">Rp. <span data-animation="number"
                                             data-value={{ $pemasukan }}>0.00</span>
                                     </h2>
-                                    <div class="ml-auto">
+                                    {{-- <div class="ml-auto">
                                         <div id="conversion-rate-sparkline"></div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <!-- end conversion-rate -->
                                 <!-- begin percentage -->
-                                <div class="mb-4 text-grey">
+                                {{-- <div class="mb-4 text-grey">
                                     <i class="fa fa-caret-down"></i> <span data-animation="number"
                                         data-value="0.50">0.00</span>% compare to last week
-                                </div>
+                                </div> --}}
                                 <!-- end percentage -->
                                 <!-- begin info-row -->
                                 <div class="d-flex mb-2">
                                     <div class="d-flex align-items-center">
                                         <i class="fa fa-circle text-red f-s-8 mr-2"></i>
-                                        Added to cart
+                                        Total Iuran Wajib
                                     </div>
                                     <div class="d-flex align-items-center ml-auto">
-                                        <div class="text-grey f-s-11"><i class="fa fa-caret-up"></i> <span
-                                                data-animation="number" data-value="262">0</span>%</div>
-                                        <div class="width-50 text-right pl-2 f-w-600"><span data-animation="number"
-                                                data-value="3.79">0.00</span>%</div>
+                                        {{-- <div class="text-grey f-s-11"><i class="fa fa-caret-up"></i> <span
+                                                data-animation="number" data-value={{ $total_wajib }}>0</span>%</div> --}}
+                                        <div class="width-50 text-right pl-2 f-w-600">Rp <span data-animation="number"
+                                                data-value={{ $total_wajib }}>0.00</span></div>
                                     </div>
                                 </div>
                                 <!-- end info-row -->
@@ -165,27 +167,42 @@
                                 <div class="d-flex mb-2">
                                     <div class="d-flex align-items-center">
                                         <i class="fa fa-circle text-warning f-s-8 mr-2"></i>
-                                        Reached checkout
+                                        Total Iuran Sukarela
                                     </div>
                                     <div class="d-flex align-items-center ml-auto">
-                                        <div class="text-grey f-s-11"><i class="fa fa-caret-up"></i> <span
-                                                data-animation="number" data-value="11">0</span>%</div>
-                                        <div class="width-50 text-right pl-2 f-w-600"><span data-animation="number"
-                                                data-value="3.85">0.00</span>%</div>
+                                        {{-- <div class="text-grey f-s-11"><i class="fa fa-caret-up"></i> <span
+                                                data-animation="number" data-value={{ $total_sukarela }}>0</span>%</div> --}}
+                                        <div class="width-50 text-right pl-2 f-w-600">Rp <span data-animation="number"
+                                                data-value={{ $total_sukarela }}>0.00</span></div>
                                     </div>
                                 </div>
                                 <!-- end info-row -->
                                 <!-- begin info-row -->
-                                <div class="d-flex">
+                                <div class="d-flex mb-2">
                                     <div class="d-flex align-items-center">
                                         <i class="fa fa-circle text-lime f-s-8 mr-2"></i>
-                                        Sessions converted
+                                        Total Iuran Kondisional
                                     </div>
                                     <div class="d-flex align-items-center ml-auto">
-                                        <div class="text-grey f-s-11"><i class="fa fa-caret-up"></i> <span
-                                                data-animation="number" data-value="57">0</span>%</div>
-                                        <div class="width-50 text-right pl-2 f-w-600"><span data-animation="number"
-                                                data-value="2.19">0.00</span>%</div>
+                                        {{-- <div class="text-grey f-s-11"><i class="fa fa-caret-up"></i> <span
+                                                data-animation="number" data-value={{ $total_kondisional }}>0</span>%
+                                        </div> --}}
+                                        <div class="width-50 text-right pl-2 f-w-600">Rp<span data-animation="number"
+                                                data-value={{ $total_kondisional }}>0.00</span></div>
+                                    </div>
+                                </div>
+                                <!-- end info-row -->
+                                <!-- begin info-row -->
+                                <div class="d-flex mb-2">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fa fa-circle text-lime f-s-8 mr-2"></i>
+                                        Total Iuran Agenda
+                                    </div>
+                                    <div class="d-flex align-items-center ml-auto">
+                                        {{-- <div class="text-grey f-s-11"><i class="fa fa-caret-up"></i> <span
+                                                data-animation="number" data-value={{ $total_agenda }}>0</span>%</div> --}}
+                                        <div class="width-50 text-right pl-2 f-w-600">Rp <span data-animation="number"
+                                                data-value={{ $total_agenda }}>0.00</span></div>
                                     </div>
                                 </div>
                                 <!-- end info-row -->
@@ -214,12 +231,12 @@
                                 <div class="d-flex align-items-center mb-1">
                                     <h2 class="text-white mb-0">Rp. <span data-animation="number"
                                             data-value="{{ $pengeluarannn }}">0</span></h2>
-                                    <div class="ml-auto">
+                                    {{-- <div class="ml-auto">
                                         <div id="store-session-sparkline"></div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <!-- end store-session -->
-                                <!-- begin percentage -->
+                                {{-- <!-- begin percentage -->
                                 <div class="mb-4 text-grey">
                                     <i class="fa fa-caret-up"></i> <span data-animation="number"
                                         data-value="9.5">0.00</span>%
@@ -267,7 +284,7 @@
                                                 data-value="5545">0</span></div>
                                     </div>
                                 </div>
-                                <!-- end info-row -->
+                                <!-- end info-row --> --}}
                             </div>
                             <!-- end card-body -->
                         </div>

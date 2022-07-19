@@ -16,7 +16,7 @@ class KasIuranSukaRela extends Model
     public const ACTIVE = "aktif";
 
     protected $table = 'kas_iuran_suka_relas';
-    protected $fillable = ['jenis_iuran_id', 'tanggal', 'warga', 'total_biaya', 'status'];
+    protected $fillable = ['jenis_iuran_id', 'tanggal', 'warga', 'pos', 'total_biaya', 'status'];
     protected $dates = [
         'created_at'
     ];
@@ -50,5 +50,9 @@ class KasIuranSukaRela extends Model
     public function warga_sukarela()
     {
         return $this->belongsTo(Keluarga::class, 'warga');
+    }
+    public function postagihansukarela()
+    {
+        return $this->belongsTo(Pos::class, 'pos');
     }
 }

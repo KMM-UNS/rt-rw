@@ -59,8 +59,8 @@
                         <tr>
                             <td>{{ date('d M Y', strtotime($item->tanggal)) }}</td>
                             <td>{{ $item->iuransukarela->nama }}</td>
-                            <td>{{ $item->petugas }}</td>
-                            <td>{{ $item->pos }}</td>
+                            <td>{{ $item->petugastagihan->nama }}</td>
+                            <td>{{ $item->postagihansukarela->nama }}</td>
                             <td>{{ $item->warga_sukarela->warga }}</td>
                             <td>Rp. {{ number_format($item->total_biaya, 0) }}</td>
 

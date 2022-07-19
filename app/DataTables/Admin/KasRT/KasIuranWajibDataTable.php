@@ -44,7 +44,7 @@ class KasIuranWajibDataTable extends DataTable
 
     public function query(KasIuranWajib $model)
     {
-        return $model->select('kas_iuran_wajibs.*')->with(['iuranwajib', 'petugastagihan', 'warga_wajib']);
+        return $model->with(['iuranwajib', 'petugastagihan', 'postagihanwajib', 'warga_wajib'])->select('kas_iuran_wajibs.*');
     }
 
     public function html()
@@ -73,11 +73,11 @@ class KasIuranWajibDataTable extends DataTable
                 ->width(60)
                 ->addClass('text-center'),
             // Column::make('id'),
-            Column::make('jenis_iuran_id')->data('iuranwajib.nama'),
+            Column::make('iuranwajib.nama', 'iuranwajib.nama')->title('Jenis Iuran wajib'),
             Column::make('tanggal'),
-            Column::make('petugas'),
-            Column::make('warga')->data('warga_wajib.warga'),
-            Column::make('pos'),
+            Column::make('petugastagihan.nama', 'petugastagihan.nama')->title('Nama Petugas'),
+            Column::make('warga_wajib.warga', 'warga_wajib.warga')->title('Nama Warga'),
+            Column::make('postagihanwajib.nama', 'postagihanwajib.nama')->title('Pos'),
             Column::make('total_biaya'),
             Column::make('status'),
         ];

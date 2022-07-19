@@ -3,8 +3,6 @@
 namespace App\DataTables\Admin\KasRT;
 
 use App\Models\KasIuranAgenda;
-use App\Models\Keluarga;
-use App\Models\PetugasTagihan;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -55,13 +53,7 @@ class KasIuranAgendaDataTable extends DataTable
 
     public function query(KasIuranAgenda $model)
     {
-        // $agenda = KasIuranAgenda::get();
-        // $pos = Keluarga::where('id', $agenda->warga)->first()->pos;
-        // $agenda->pos = $pos->id;
-        // $agenda->petugas = $pos->petugastagihan->id;
-        // $agenda->save();
-
-        return $model->select('kas_iuran_agendas.*')->with(['iuranagenda', 'petugastagihan', 'warga_agenda']);
+        return $model->with(['iuranagenda', 'petugastagihan', 'postagihanagenda', 'warga_agenda'])->select('kas_iuran_agendas.*');
     }
 
     public function html()
@@ -89,11 +81,11 @@ class KasIuranAgendaDataTable extends DataTable
                 ->printable(false)
                 ->width(60)
                 ->addClass('text-center'),
-            Column::make('jenis_iuran_id')->data('iuranagenda.nama'),
+            Column::make('iuranagenda.nama', 'iuranagenda.nama')->title('Jenis Iuran Agenda'),
             Column::make('tanggal'),
-            Column::make('petugas'),
-            Column::make('warga')->data('warga_agenda.warga'),
-            Column::make('pos'),
+            Column::make('petugastagihan.nama', 'petugastagihan.nama')->title('Nama Petugas'),
+            Column::make('warga_agenda.warga', 'warga_agenda.warga')->title('Nama Warga'),
+            Column::make('postagihanagenda.nama', 'postagihanagenda.nama')->title('Pos'),
             Column::make('total_biaya'),
             Column::make('status'),
             // Column::computed('image'),

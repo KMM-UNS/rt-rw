@@ -40,8 +40,8 @@ class KasIuranKondisionalController extends Controller
             try {
                 $kondisional = KasIuranKondisional::createFromRequest($request);
                 $pos = Keluarga::where('id', $kondisional->warga)->first()->pos;
-                $kondisional->pos = $pos->nama;
-                $kondisional->petugas = $pos->petugastagihan->nama;
+                $kondisional->pos = $pos->id;
+                $kondisional->petugas = $pos->petugastagihan->id;
 
                 $kondisional->save();
                 if ($request->file()) {

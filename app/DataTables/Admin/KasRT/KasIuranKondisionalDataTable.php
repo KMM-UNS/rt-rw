@@ -45,7 +45,7 @@ class KasIuranKondisionalDataTable extends DataTable
 
     public function query(KasIuranKondisional $model)
     {
-        return $model->select('kas_iuran_kondisionals.*')->with(['iurankondisional', 'petugastagihan', 'warga_kondisional']);
+        return $model->with(['iurankondisional', 'petugastagihan', 'postagihankondisional', 'warga_kondisional'])->select('kas_iuran_kondisionals.*');
     }
 
     public function html()
@@ -73,11 +73,11 @@ class KasIuranKondisionalDataTable extends DataTable
                 ->printable(false)
                 ->width(60)
                 ->addClass('text-center'),
-            Column::make('jenis_iuran_id')->data('iurankondisional.nama'),
+            Column::make('iurankondisional.nama', 'iurankondisional.nama')->title('Jenis Iuran kondisional'),
             Column::make('tanggal'),
-            Column::make('petugas'),
-            Column::make('warga')->data('warga_kondisional.warga'),
-            Column::make('pos'),
+            Column::make('petugastagihan.nama', 'petugastagihan.nama')->title('Nama Petugas'),
+            Column::make('warga_kondisional.warga', 'warga_kondisional.warga')->title('Nama Warga'),
+            Column::make('postagihankondisional.nama', 'postagihankondisional.nama')->title('Pos'),
             Column::make('total_biaya'),
             Column::make('status'),
         ];

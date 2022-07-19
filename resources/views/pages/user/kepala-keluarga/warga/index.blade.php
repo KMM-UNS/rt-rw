@@ -22,7 +22,7 @@
                                 <div class="widget widget-stats bg-red">
                                     <div class="stats-icon"></div>
                                     <div class="stats-info">
-                                        <h4>TOTAL Kas Iuran Wajib</h4>
+                                        <h4>TOTAL Kas Iuran Wajibb</h4>
                                         <p>Rp.{{ number_format($total_wajib, 0) }}</p>
                                     </div>
                                     <div class="stats-link">

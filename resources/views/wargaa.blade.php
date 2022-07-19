@@ -58,7 +58,7 @@ $contentClass .= !empty($contentInverseMode) ? 'content-inverse-mode ' : '';
                         <!-- begin panel-body -->
                         <div class="panel-body">
 
-                            <h1>Iuran Wajib </h1>
+                            <h1>Iuran Wajibbb </h1>
                             <table class="table">
                                 <thead class="thead-light">
                                     <tr>

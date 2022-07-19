@@ -47,8 +47,8 @@ class KasIuranWajibController extends Controller
             try {
                 $wajib = KasIuranWajib::createFromRequest($request);
                 $pos = Keluarga::where('id', $wajib->warga)->first()->pos;
-                $wajib->pos = $pos->nama;
-                $wajib->petugas = $pos->petugastagihan->nama;
+                $wajib->pos = $pos->id;
+                $wajib->petugas = $pos->petugastagihan->id;
 
                 $wajib->save();
                 if ($request->file()) {

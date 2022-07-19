@@ -16,7 +16,7 @@ class KasIuranAgenda extends Model
     public const ACTIVE = "aktif";
 
     protected $table = 'kas_iuran_agendas';
-    protected $fillable = ['jenis_iuran_id', 'tanggal', 'warga', 'total_biaya', 'status'];
+    protected $fillable = ['jenis_iuran_id', 'tanggal', 'warga', 'pos', 'total_biaya', 'status'];
     protected $dates = [
         'created_at'
     ];
@@ -46,5 +46,9 @@ class KasIuranAgenda extends Model
     public function warga_agenda()
     {
         return $this->belongsTo(Keluarga::class, 'warga');
+    }
+    public function postagihanagenda()
+    {
+        return $this->belongsTo(Pos::class, 'pos');
     }
 }

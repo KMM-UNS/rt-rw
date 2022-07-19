@@ -16,7 +16,7 @@ class KasIuranKondisional extends Model
     public const ACTIVE = "aktif";
 
     protected $table = 'kas_iuran_kondisionals';
-    protected $fillable = ['jenis_iuran_id', 'tanggal', 'warga', 'total_biaya', 'status'];
+    protected $fillable = ['jenis_iuran_id', 'tanggal', 'warga', 'pos', 'total_biaya', 'status'];
     protected $dates = [
         'created_at'
     ];
@@ -50,5 +50,9 @@ class KasIuranKondisional extends Model
     public function warga_kondisional()
     {
         return $this->belongsTo(Keluarga::class, 'warga');
+    }
+    public function postagihankondisional()
+    {
+        return $this->belongsTo(Pos::class, 'pos');
     }
 }
