@@ -31,55 +31,34 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    {{-- <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="#agenda">Agenda</a></li>
                     <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
-                    @if (auth()->check() && auth()->user()->role->nama === 'Petugas')
-                        <li class="nav-item"><a class="nav-link"
-                                href="{{ route('user.kepala-keluarga.warga.index') }}">Data
-                                Pembayaran</a></li>
-                    @endif
-                    @if (auth()->check() && auth()->user()->role->nama === 'Warga')
-                        <li class="nav-item"><a class="nav-link"
-                                href="{{ route('user.kepala-keluarga.warga.index') }}">Data
-                                Pembayaran</a></li>
-                    @endif
-                    @if (auth()->check() && auth()->user()->role->nama === 'Warga')
-                        <li class="nav-item"><a class="nav-link" href="{{ route('user.warga.wargak.index') }}">Data
-                                Warga</a></li>
-                    @endif
-                    @if (Auth::check())
-                        <li class="nav-item"><a class="nav-link" href="">
-                                <form action="{{ request()->is('admin*') ? route('admin.logout') : route('logout') }}"
-                                    method="post">
-                                    @csrf
-                                    <button type="submit" class="nav-item">Log Out</button>
-                                </form>
-                        </li>
-                    @else
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
-                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Login
-                            </a>
-                            <ul class="dropdown-menu navbar-dark bg-dark" aria-labelledby="navbarDropdownMenuLink">
-                                <li class="nav-item"><a class="nav-link" href='{{ route('login') }}'>Login User</a>
-                                </li>
-                                <li class="nav-item"><a class="nav-link" href='{{ route('admin.login') }}'>Login
-                                        Admin</a>
-                                </li>
-                            </ul>
-                        </li>
-                    @endif
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"><i
-                                class="fa fa-cog"></i></a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link" href='{{ route('login') }}'>Login User</a></li>
+                    <li class="nav-item"><a class="nav-link" href='{{ route('admin.login') }}'>Login Admin</a></li> --}}
 
 
 
-                    {{-- <li class="nav-item"><a class="nav-link" href="#team">Login</a></li> --}}
 
+
+
+
+                    {{-- @if (auth()->check() && auth()->user()->role->nama === 'Petugas') --}}
+                    <li class="nav-item"><a class="nav-link"
+                            href="{{ route('user.kepala-keluarga.warga.index') }}">Data
+                            Pembayaran</a></li>
+                    {{-- @endif --}}
+                    {{-- @if (auth()->check() && auth()->user()->role->nama === 'Warga') --}}
+                    <li class="nav-item"><a class="nav-link" href="{{ route('user.warga.wargak.index') }}">Data
+                            Warga</a></li>
+                    {{-- @endif --}}
+
+
+                    <form action="{{ request()->is('admin*') ? route('admin.logout') : route('logout') }}"
+                        method="post">
+                        @csrf
+                        <button type="submit" class="nav-item">Log Out</button>
+                    </form>
                 </ul>
             </div>
         </div>

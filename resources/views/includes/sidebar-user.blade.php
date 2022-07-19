@@ -79,9 +79,18 @@ $sidebarClass = !empty($sidebarTransparent) ? 'sidebar-transparent' : '';
                                 <span>Kembali ke Home</span>
                             </a>
                         </li>
+                        @if (auth()->check() && auth()->user()->role->nama === 'Warga')
+                            <li class="">
+                                <a class="nav-link" href="{{ route('user.warga.wargak.index') }}">
+                                    <i class="fa fa-id-card"></i>
+                                    <span>Data Warga</span>
+
+                                </a>
+                            </li>
+                        @endif
 
                         @if (auth()->check() && auth()->user()->role->nama === 'Warga')
-                            <li class="has-sub">
+                            {{-- <li class="has-sub">
                                 <a href="javascript:;">
                                     <b class="caret"></b>
                                     <i class="fa fa-list-ol"></i>
@@ -91,7 +100,7 @@ $sidebarClass = !empty($sidebarTransparent) ? 'sidebar-transparent' : '';
                                     <li><a href="index.html">Data Diri Warga</a></li>
                                     <li><a href="index_v2.html">Status Pembayaran</a></li>
                                 </ul>
-                            </li>
+                            </li> --}}
                         @endif
 
                         @if (auth()->check() && auth()->user()->role->nama === 'Petugas')
@@ -119,27 +128,28 @@ $sidebarClass = !empty($sidebarTransparent) ? 'sidebar-transparent' : '';
                                             Pembayaran Iuran Suka Agenda</a></li>
                                 </ul>
                             </li>
+
+
+
+                            <li class="has-sub">
+                                <a href="javascript:;">
+                                    <b class="caret"></b>
+                                    <i class="fa fa-list-ol"></i>
+                                    <span>Input Pembayaran</span>
+
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="{{ route('user.kas-rt.kas-iuranwajib.index') }}">Pembayaran
+                                            Iuran Wajib</a></li>
+                                    <li><a href="{{ route('user.kas-rt.kas-iuransukarela.index') }}">Pembayaran
+                                            Iuran Suka Rela</a></li>
+                                    <li><a href="{{ route('user.kas-rt.kas-iurankondisional.index') }}">Pembayaran
+                                            Iuran Kondisional</a></li>
+                                    <li><a href="{{ route('user.kas-rt.kas-iuranagenda.index') }}">Pembayaran
+                                            Iuran Suka Agenda</a></li>
+                                </ul>
+                            </li>
                         @endif
-
-
-                        <li class="has-sub">
-                            <a href="javascript:;">
-                                <b class="caret"></b>
-                                <i class="fa fa-list-ol"></i>
-                                <span>Input Pembayaran</span>
-
-                            </a>
-                            <ul class="sub-menu">
-                                <li><a href="{{ route('user.kas-rt.kas-iuranwajib.index') }}">Pembayaran
-                                        Iuran Wajib</a></li>
-                                <li><a href="{{ route('user.kas-rt.kas-iuransukarela.index') }}">Pembayaran
-                                        Iuran Suka Rela</a></li>
-                                <li><a href="{{ route('user.kas-rt.kas-iurankondisional.index') }}">Pembayaran
-                                        Iuran Kondisional</a></li>
-                                <li><a href="{{ route('user.kas-rt.kas-iuranagenda.index') }}">Pembayaran
-                                        Iuran Suka Agenda</a></li>
-                            </ul>
-                        </li>
                         <!-- begin sidebar minify button -->
                         <li>
                             <a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify">

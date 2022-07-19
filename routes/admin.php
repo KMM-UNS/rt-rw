@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\RekapIuran\RekapIuranAgendaController;
 
+Route::get('/', function () {
+    return redirect(route('home'));
+});
+
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     require base_path('vendor/laravel/fortify/routes/routes.php');
     Route::resource('/setting', 'SettingController');

@@ -19,19 +19,24 @@ Route::get('/token', function () {
     return csrf_token();
 });
 
+Route::view('/', 'home')->name('home');
 //versi asli
 
+
 Route::group(['middleware' => 'auth:web', 'as' => 'user.'], function () {
-    Route::view('/', 'home')->name('home');
+    // Route::view('/home', 'homekedua')->name('homekedua');
 
     Route::group(['namespace' => 'User'], function () {
 
-        Route::group(['prefix' => '/petugas-iuran', 'as' => 'petugas-iuran.', 'namespace' => 'PetugasIuran', 'middleware' => ['auth', 'petugas']], function () {
+        Route::group([
+            'prefix' => '/petugas-iuran', 'as' => 'petugas-iuran.', 'namespace' => 'PetugasIuran',
+            'middleware' => ['auth', 'petugas']
+        ], function () {
             // Route::resource('petugas', 'PetugasController');
             Route::resource('data-petugas', 'PetugasController');
         });
 
-        Route::group(['prefix' => '/kepala-keluarga', 'as' => 'kepala-keluarga.', 'namespace' => 'KepalaKeluarga', 'middleware' => ['auth', 'petugas']], function () {
+        Route::group(['prefix' => '/kepala-keluarga', 'as' => 'kepala-keluarga.', 'namespace' => 'KepalaKeluarga'], function () {
             Route::get('/updatewajib/status/{id}', 'KeluargaaController@status')->name('bayar-iuranwajib.status');
             Route::get('/updatesukarela/status/{id}', 'BayarSukarelaController@status')->name('bayar-iuransukarela.status');
             Route::get('/updatekondisional/status/{id}', 'BayarKondisionalController@status')->name('bayar-iurankondisional.status');

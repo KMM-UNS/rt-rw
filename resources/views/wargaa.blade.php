@@ -1,34 +1,6 @@
-<!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+@extends('layouts.user')
 
-<head>
-    @include('includes.head')
-</head>
-@php
-$bodyClass = !empty($boxedLayout) ? 'boxed-layout' : '';
-$bodyClass .= !empty($paceTop) ? 'pace-top ' : '';
-$bodyClass .= !empty($bodyExtraClass) ? $bodyExtraClass . ' ' : '';
-$sidebarHide = !empty($sidebarHide) ? $sidebarHide : '';
-$sidebarTwo = !empty($sidebarTwo) ? $sidebarTwo : '';
-$sidebarSearch = !empty($sidebarSearch) ? $sidebarSearch : '';
-$topMenu = !empty($topMenu) ? $topMenu : '';
-$footer = !empty($footer) ? $footer : '';
-
-$pageContainerClass = !empty($topMenu) ? 'page-with-top-menu ' : '';
-$pageContainerClass .= !empty($sidebarRight) ? 'page-with-right-sidebar ' : '';
-$pageContainerClass .= !empty($sidebarLight) ? 'page-with-light-sidebar ' : '';
-$pageContainerClass .= !empty($sidebarWide) ? 'page-with-wide-sidebar ' : '';
-$pageContainerClass .= !empty($sidebarHide) ? 'page-without-sidebar ' : '';
-$pageContainerClass .= !empty($sidebarMinified) ? 'page-sidebar-minified ' : '';
-$pageContainerClass .= !empty($sidebarTwo) ? 'page-with-two-sidebar ' : '';
-$pageContainerClass .= !empty($contentFullHeight) ? 'page-content-full-height ' : '';
-
-$contentClass = !empty($contentFullWidth) || !empty($contentFullHeight) ? 'content-full-width ' : '';
-$contentClass .= !empty($contentInverseMode) ? 'content-inverse-mode ' : '';
-@endphp
-
-
-<body>
+@section('content')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -173,7 +145,8 @@ $contentClass .= !empty($contentInverseMode) ? 'content-inverse-mode ' : '';
                 </div>
             </div>
         </div>
-
+    @endsection
+    @push('scripts')
         <script src="{{ asset('/assets/plugins/select2/dist/js/select2.min.js') }}"></script>
         <script src="{{ asset('/assets/plugins/parsleyjs/dist/parsley.js') }}"></script>
         <script src="{{ asset('/assets/js/custom/string-helper.js') }}"></script>
@@ -188,8 +161,4 @@ $contentClass .= !empty($contentInverseMode) ? 'content-inverse-mode ' : '';
                 });
             });
         </script>
-
-
-</body>
-
-</html>
+    @endpush
