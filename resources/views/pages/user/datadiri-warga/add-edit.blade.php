@@ -6,9 +6,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <!-- begin panel -->
-                    <form
-                        action="{{ isset($data) ? route('user.petugas-iuran.data-petugas.update', $data->id) : route('user.petugas-iuran.data-petugas.store') }}"
-                        id="form" name="form" method="POST" data-parsley-validate="true" enctype="multipart/form-data">
+                    <form action="{{ isset($data) ? route('user.warga.data-diri.update', $data->id) : route('user.warga.data-diri.store') }}" id="form" name="form" method="POST" data-parsley-validate="true">
                         @csrf
                         @if (isset($data))
                             {{ method_field('PUT') }}
@@ -32,43 +30,24 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="name">Nama</label>
-                                            <input type="text" id="warga" name="warga" class="form-control" autofocus data-parsley-required="true" value=" {{ Auth::user()->name }}">
+                                            <input type="text" id="warga" name="warga" class="form-control" autofocus data-parsley-required="true" value="{{{  old('warga') ?? ($data['warga'] ?? null) }}}">
                                         </div>
                                         <div class="form-group">
                                             <label for="no_kk">No.KK</label>
-                                            <input type="int" id="no_kk" name="no_kk" class="form-control" autofocus data-parsley-required="true" value="{{{ $data->no_kk ?? old('no_kk') }}}">
+                                            <input type="text" name="no_kk" class="form-control" autofocus data-parsley-required="true" value="{{{  old('no_kk') ?? ($data['no_kk'] ?? null) }}}">
                                         </div>
                                         <div class="form-group">
                                             <label for="user_id">user_id</label>
-                                            <input type="int" id="user_id" name="user_id" class="form-control" autofocus data-parsley-required="true" value="{{{ $data->user_id ?? old('user_id') }}}">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="rumah_id">rumah_id</label>
-                                            <input type="int" id="rumah_id" name="rumah_id" class="form-control" autofocus data-parsley-required="true" value="{{{ $data->rumah_id ?? old('rumah_id') }}}">
+                                            <input type="text" id="user_id" name="user_id" class="form-control" autofocus  data-parsley-required="true"  value="{{Auth::user()->id}}">
                                         </div>
                                         <div class="form-group">
                                             <label for="telp">No.Telpon</label>
-                                            <input type="text" id="telp" name="telp" class="form-control" autofocus data-parsley-required="true" value="{{{ $data->telp ?? old('telp') }}}">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="status_tinggal">status_tinggal</label>
-                                            <input type="int" id="status_tinggal" name="status_tinggal" class="form-control" autofocus data-parsley-required="true" value="{{{ $data->status_tinggal ?? old('status_tinggal') }}}">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="createable_id">createable_id</label>
-                                            <input type="int" id="createable_id" name="createable_id" class="form-control" autofocus data-parsley-required="true" value="{{{ $data->createable_id ?? old('createable_id') }}}">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="createable_type">createable_type</label>
-                                            <input type="int" id="createable_type" name="createable_type" class="form-control" autofocus data-parsley-required="true" value="{{{ $data->createable_type ?? old('createable_type') }}}">
+                                            <input type="text" id="telp" name="telp" class="form-control" autofocus data-parsley-required="true" value="{{{  old('telp') ?? ($data['telp'] ?? null) }}}">
                                         </div>
                                         <div class="form-group">
                                             <label for="pos_tagihan">pos_tagihan</label>
-                                            <input type="int" id="pos_tagihan" name="pos_tagihan" class="form-control" autofocus data-parsley-required="true" value="{{{ $data->pos_tagihan ?? old('pos_tagihan') }}}">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="status">status</label>
-                                            <input type="int" id="status" name="status" class="form-control" autofocus data-parsley-required="true" value="{{{ $data->status ?? old('status') }}}">
+                                            {{-- <input type="int" id="pos_tagihan" name="pos_tagihan" class="form-control" autofocus data-parsley-required="true" value="{{{ $data->pos_tagihan ?? old('pos_tagihan') }}}"> --}}
+                                            <x-form.Dropdown name="pos_tagihan" :options="$poss" selected="{{{ old('pos_tagihan') ?? ($data['pos_tagihan'] ?? null) }}}" required />
                                         </div>
 
                                     </div>

@@ -89,7 +89,7 @@
                         @endauth
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a href="javascript:;" class="dropdown-item">Edit Profile</a>
+                        <a href="javascript:;" class="dropdown-item">Editx Profile</a>
                         <a href="javascript:;" class="dropdown-item">Change Password</a>
                         <div class="dropdown-divider"></div>
                         <form action="{{ request()->is('admin*') ? route('admin.logout') : route('logout') }}"

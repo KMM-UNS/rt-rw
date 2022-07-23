@@ -60,10 +60,10 @@
                     <input type="radio" class="form-check-input" name="kas_iuran_kondisionals_status" value="1" id="radio-required" data-parsley-required="true" />
                     <label class="form-check-label">Sudah Bayar</label>
                 </div>
-                <div class="form-check">
+                {{-- <div class="form-check">
                     <input type="radio" class="form-check-input" name="kas_iuran_kondisionals_status" id="radio-required2" value="2" />
                     <label class="form-check-label">Belum Bayar</label>
-                </div>
+                </div> --}}
             </div>
     </div>
       {{-- <div class="panel-body">

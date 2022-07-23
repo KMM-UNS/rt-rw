@@ -33,6 +33,7 @@ class PetugasTagihanController extends Controller
     {
         DB::transaction(function () use ($request, $fileUploaderHelper) {
             try {
+                // dd($request->all());
                 $petugas = PetugasTagihan::createFromRequest($request);
                 $petugas->save();
                 if ($request->file()) {
@@ -89,7 +90,7 @@ class PetugasTagihanController extends Controller
 
                         TrashHelper::moveToTrash($old->public_url);
 
-                        $upload = $fileUploaderHelper->store($file, 'petugas-tagihan/lampiran');
+                        $upload = $fileUploaderHelper->store($file, 'petugas/lampiran');
                         $old->update([
                             'public_url' => $upload['public_path']
                         ]);

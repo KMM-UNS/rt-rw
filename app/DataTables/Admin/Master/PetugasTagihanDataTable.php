@@ -33,6 +33,13 @@ class PetugasTagihanDataTable extends DataTable
                 $img = '<img src="' . asset($row->dokumen[0]['public_url']) . '" class="img-rounded height-80" >';
                 return $img;
             })
+            // ->rawColumns(['image', 'action'])
+
+            // ->editColumn('image', function ($row) {
+            //     $img = '<img src="' . asset($row->dokumen->first()['public_url']) . '" class="img-rounded height-80" >';
+            //     return $img;
+            // })
+            // raw column berfungsi untuk menjalankan tag html
             ->rawColumns(['image', 'action']);
     }
 
@@ -69,15 +76,12 @@ class PetugasTagihanDataTable extends DataTable
                 ->printable(false)
                 ->width(60)
                 ->addClass('text-center'),
-            // Column::make('id'),
             Column::make('nama'),
             Column::make('ttgl'),
             Column::make('no_telp'),
             Column::make('alamat'),
             Column::make('pos')->data('pos.nama'),
             Column::computed('image'),
-            // Column::make('created_at'),
-            // Column::make('updated_at'),
         ];
     }
 

@@ -47,6 +47,7 @@ class UserController extends Controller
 
     public function edit($id)
     {
+        // return ('berhasil');
         $data = User::findOrFail($id);
         return view('pages.admin.user.add-edit', ['data' => $data]);
     }

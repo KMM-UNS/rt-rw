@@ -84,4 +84,14 @@ class RequestRuleConstant
             'petugas_tagihans_pos' => 'required'
         ];
     }
+    public static function KeluargaTable()
+    {
+        return [
+            'keluargas_nama' => 'required',
+            // 'keluargas_ttgl' => 'required',
+            'keluargas_telp' => 'required',
+            // 'keluargas_alamat' => 'required',
+            // 'keluargas_pos' => 'required'
+        ];
+    }
 }

@@ -36,7 +36,7 @@ Route::group(['middleware' => 'auth:web', 'as' => 'user.'], function () {
             Route::resource('data-petugas', 'PetugasController');
         });
 
-        Route::group(['prefix' => '/kepala-keluarga', 'as' => 'kepala-keluarga.', 'namespace' => 'KepalaKeluarga'], function () {
+        Route::group(['prefix' => '/kepala-keluarga', 'as' => 'kepala-keluarga.', 'namespace' => 'KepalaKeluarga', 'middleware' => ['auth', 'petugas']], function () {
             Route::get('/updatewajib/status/{id}', 'KeluargaaController@status')->name('bayar-iuranwajib.status');
             Route::get('/updatesukarela/status/{id}', 'BayarSukarelaController@status')->name('bayar-iuransukarela.status');
             Route::get('/updatekondisional/status/{id}', 'BayarKondisionalController@status')->name('bayar-iurankondisional.status');
@@ -63,6 +63,7 @@ Route::group(['middleware' => 'auth:web', 'as' => 'user.'], function () {
             // Route::get('/wargak/status', 'WargaController@wargah');
             // Route::resource('wargak', 'WargaController');
             Route::resource('/wargak', 'WargaController');
+            Route::resource('/data-diri', 'DataWargaController');
         });
     });
 });

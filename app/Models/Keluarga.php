@@ -9,20 +9,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Keluarga extends Model
 {
-    use HasFactory, SoftDeletes, FillableInputTrait;
+    use HasFactory, SoftDeletes;
 
     protected $table = 'keluargas';
     protected $fillable = [
+        'user_id',
         'no_kk',
         'warga',
-        'rumah_id',
         'telp',
-        'status_tinggal',
-        'createable_id',
-        'createable_type',
         'pos_tagihan',
-        'status'
     ];
+    public $timestamps = false;
 
     public function pos()
     {
@@ -51,5 +48,9 @@ class Keluarga extends Model
     public function warga_agenda()
     {
         return $this->hasMany(KasIuranAgenda::class, 'warga');
+    }
+    public function postagihan()
+    {
+        return $this->belongsTo(Pos::class, 'pos_tagihan');
     }
 }

@@ -58,10 +58,7 @@
                   <div class="form-check">
                       <input type="radio" class="form-check-input" name="kas_iuran_wajibs_status" value="1" id="radio-required" data-parsley-required="true" />
                       <label class="form-check-label">Sudah Bayar</label>
-                  </div>
-                  <div class="form-check">
-                      <input type="radio" class="form-check-input" name="kas_iuran_wajibs_status" id="radio-required2" value="2" />
-                      <label class="form-check-label">Belum Bayar</label>
+                      {{-- <input required="" type="radio" name="kas_iuran_wajibs_status" id="radio-required" value="1" aria-required="true" class="valid" {{ old('kas_iuran_wajibs_status') == '1' ? "checked" : (isset($selected) && $selected == '1' ? "checked" : null ) }}> Sudah Bayar --}}
                   </div>
               </div>
       </div>

@@ -14,9 +14,9 @@ class IuranBulananController extends Controller
 {
     public function index()
     {
-        $nama_bulans = Bulan::pluck('nama', 'id');
-        $tahuns = Tahun::pluck('nama', 'id');
-        return view('pages.admin.kas-rt.iuranbulanan.index', ['nama_bulans' => $nama_bulans, 'tahuns' => $tahuns]);
+        // $nama_bulans = Bulan::pluck('nama', 'id');
+        // $tahuns = Tahu::pluck('nama', 'id');
+        // return view('pages.admin.kas-rt.iuranbulanan.index', ['nama_bulans' => $nama_bulans, 'tahuns' => $tahuns]);
     }
 
     // function detail(KasIuranWajibDataTable $dataTable)

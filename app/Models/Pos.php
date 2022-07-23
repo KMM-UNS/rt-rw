@@ -42,4 +42,8 @@ class Pos extends Model
     {
         return $this->hasMany(Keluarga::class);
     }
+    public function postagihan()
+    {
+        return $this->hasMany(Keluarga::class, 'nama');
+    }
 }

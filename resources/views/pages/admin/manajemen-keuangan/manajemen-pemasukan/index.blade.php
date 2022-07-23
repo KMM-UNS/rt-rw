@@ -57,9 +57,10 @@
                 <a href="{{ url('admin/manajemen-keuangan/manajemen-pemasukan/cetak_pdf') }}" class="btn btn-primary"
                     target="_blank">CETAK
                     PDF</a>
-                <table border="1" cellpadding="2" class="table">
+                <table border="1" class="table">
                     <thead>
                         <tr>
+                            <th scope="col">Action</th>
                             <th scope="col">Keterangan</th>
                             <th scope="col">Nominal</th>
 
@@ -68,32 +69,69 @@
 
                     <tbody>
                         <tr>
+                            <td></td>
                             <td>Kas Iuran Wajib</td>
                             <td>Rp.{{ number_format($total_wajib, 0) }}</td>
                         </tr>
                         <tr>
+                            <td></td>
                             <td>Kas Iuran Kondisional</td>
                             <td>Rp.{{ number_format($total_kondisional, 0) }}</td>
                         </tr>
                         <tr>
+                            <td></td>
                             <td>Kas Iuran Sukarela</td>
                             <td>Rp.{{ number_format($total_sukarela, 0) }}</td>
                         </tr>
                         <tr>
+                            <td></td>
                             <td>Kas Iuran Agenda</td>
                             <td>Rp.{{ number_format($total_agenda, 0) }}</td>
                         </tr>
                         @foreach ($pemasukann as $item)
                             <tr>
+                                {{-- <td>
+                                    <div class="btn-group">
+                                        <a class="btn btn-primary"
+                                            href="{{ route('admin.manajemen-keuangan.manajemen-pemasukan.edit', $item->id) }}">Edit</a>
+                                        <form
+                                            action="{{ route('admin.manajemen-keuangan.manajemen-pemasukan.destroy', $item->id) }}"
+                                            method="POST">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" class="btn btn-warning btn-sm"
+                                                onclick="return confirm('are you sure you want to delete this post')"><i
+                                                    class="fas fa-trash fa-fw">
+                                                    Delete</i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td> --}}
+                                <td>
+                                    <form
+                                        action="{{ route('admin.manajemen-keuangan.manajemen-pemasukan.destroy', $item->id) }}"
+                                        method="POST">
+                                        <a class="btn btn-primary"
+                                            href="{{ route('admin.manajemen-keuangan.manajemen-pemasukan.edit', $item->id) }}">Edit</a>
+                                        @csrf
+                                        @method('delete')
+                                        {{-- <button type="submit" class="btn btn-danger"
+                                            onclick="return confirm('are you sure you want to delete this post')">Delete
+                                        </button> --}}
+                                        <button type="submit" class="btn btn-danger btn-flat show_confirm"
+                                            data-toggle="tooltip" title='Delete'>Delete</button>
+                                    </form>
+                                </td>
                                 <td>{{ $item->keterangan }}</td>
-                                <td>Rp.{{ number_format($item->nominal, 0) }}</td>
+                                <td>Rp.{{ $item->nominal }}</td>
+                                {{-- <td>Rp.{{ number_format($item->nominal, 0) }}</td> --}}
                             </tr>
                         @endforeach
 
                     </tbody>
 
-                    <td><b>Total</b></td>
-                    <td colspan="1"><b>Rp. {{ number_format($pemasukan, 0) }}</b></td>
+                    <td colspan="2"><b>Total</b></td>
+                    <td><b>Rp. {{ number_format($pemasukan, 0) }}</b></td>
 
 
 
@@ -107,3 +145,26 @@
 
     <!-- end panel -->
 @endsection
+@push('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+    <script type="text/javascript">
+        $('.show_confirm').click(function(event) {
+            var form = $(this).closest("form");
+            var name = $(this).data("name");
+            event.preventDefault();
+            swal({
+                    title: 'Anda yakin?',
+                    text: "Data yang sudah dihapus tidak dapat dikembalikan!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        form.submit();
+                    }
+                });
+        });
+    </script>
+@endpush

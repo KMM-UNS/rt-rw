@@ -45,12 +45,12 @@
                 <div class="form-group">
                     <label for="keterangan">Keterangan</label>
                     <input type="text" id="keterangan" name="keterangan" class="form-control" autofocus
-                        data-parsley-required="true" value="keterangan">
+                        data-parsley-required="true" value="">
                 </div>
                 <div class="form-group">
                     <label for="nominal">Nominal</label>
                     <input type="text" id="nominal" name="nominal" class="form-control" autofocus
-                        data-parsley-required="true" value="keterangan">
+                        data-parsley-required="true" value="">
                 </div>
 
 

@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\KasIuranWajib;
 use App\Models\ManajemenPemasukan;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\DB;
 
 class ManajemenPemasukanController extends Controller
 {
@@ -86,18 +87,45 @@ class ManajemenPemasukanController extends Controller
 
     public function edit($id)
     {
-        //
+        $data = ManajemenPemasukan::findOrFail($id);
+        $pemasukannn = ManajemenPemasukan::sum('nominal');
+
+        return view('pages.admin.manajemen-keuangan.manajemen-pemasukan.add-edit', [
+            'data' => $data,
+            'pemasukannn' => $pemasukannn,
+        ]);
     }
 
 
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $request->validate([
+                'keterangan' => 'required|min:3'
+            ]);
+        } catch (\Throwable $th) {
+            return back()->withInput()->withToastError($th->validator->messages()->all()[0]);
+        }
+
+        try {
+            $data = ManajemenPemasukan::findOrFail($id);
+            $data->update($request->all());
+        } catch (\Throwable $th) {
+            return back()->withInput()->withToastError('Something went wrong');
+        }
+
+        return redirect(route('admin.manajemen-keuangan.manajemen-pemasukan.index'))->withToastSuccess('Data tersimpan');
     }
+
 
 
     public function destroy($id)
     {
-        //
+        try {
+            DB::table('manajemen_pemasukans')->where('id', $id)->delete();
+        } catch (\Throwable $th) {
+            return response(['error' => 'Something went wrong']);
+        }
+        return redirect(route('admin.manajemen-keuangan.manajemen-pemasukan.index'))->withToastSuccess('Data terhapus');
     }
 }

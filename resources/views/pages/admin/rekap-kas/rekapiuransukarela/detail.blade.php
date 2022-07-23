@@ -68,7 +68,7 @@
                     </tbody>
                 @endforeach
                 <td colspan="5">TOTAL</td>
-                <td>Rp. {{ number_format($total, 0) }}</td>
+                <td><b>Rp. {{ number_format($total, 0) }}</b></td>
             </table>
 
         </div>

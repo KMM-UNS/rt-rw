@@ -20,8 +20,8 @@ class WargaController extends Controller
 
     public function index()
     {
+        // return view('wargaa');
         $id_keluarga = Keluarga::where('user_id', auth()->user()->id)->first()->id;
-
         $data1 = KasIuranWajib::where('warga', $id_keluarga)->get();
         $data2 = KasIuranSukaRela::where('warga', $id_keluarga)->get();
         $data3 = KasIuranKondisional::where('warga', $id_keluarga)->get();

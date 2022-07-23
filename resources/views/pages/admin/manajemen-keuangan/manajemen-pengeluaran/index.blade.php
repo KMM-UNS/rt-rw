@@ -73,7 +73,7 @@
 
                         @foreach ($pengeluarann as $item)
                             <tr>
-                                <td>
+                                {{-- <td>
                                     <div class="btn-group">
                                         <a class="btn btn-primary"
                                             href="{{ route('admin.manajemen-keuangan.manajemen-pengeluaran.edit', $item->id) }}">Edit</a>
@@ -88,6 +88,35 @@
                                             </button>
                                         </form>
                                     </div>
+                                </td> --}}
+                                <td>
+                                    {{-- <a href="{{ route('admin.manajemen-keuangan.manajemen-pengeluaran.edit', $item->id) }}"
+                                        class="btn btn-dark buttons-edit"><i class="fas fa-edit"></i></a> --}}
+                                    {{-- <a href="{{ route('admin.manajemen-keuangan.manajemen-pengeluaran.destroy', $item->id) }}"
+                                        class="btn btn-danger buttons-delete"><i class="fas fa-trash fa-fw">Delete</i></a> --}}
+
+                                    <form
+                                        action="{{ route('admin.manajemen-keuangan.manajemen-pengeluaran.destroy', $item->id) }}"
+                                        method="POST">
+                                        <a class="btn btn-primary"
+                                            href="{{ route('admin.manajemen-keuangan.manajemen-pengeluaran.edit', $item->id) }}">Edit</a>
+                                        @csrf
+                                        @method('delete')
+                                        {{-- <button type="submit" class="btn btn-danger"
+                                            onclick="return confirm('are you sure you want to delete this post')">Delete
+                                        </button> --}}
+                                        <button type="submit" class="btn btn-danger btn-flat show_confirm"
+                                            data-toggle="tooltip" title='Delete'>Delete</button>
+                                    </form>
+                                    {{-- <form
+                                        action="{{ route('admin.manajemen-keuangan.manajemen-pengeluaran.edit', $item->id) }}"
+                                        method="Post">
+                                        <a class="btn btn-primary"
+                                            href="{{ route('admin.manajemen-keuangan.manajemen-pengeluaran.destroy', $item->id) }}">Edit</a>
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form> --}}
                                 </td>
                                 <td>{{ date('d M Y', strtotime($item->tanggal)) }}</td>
                                 <td>{{ $item->keterangan }}</td>
@@ -100,7 +129,8 @@
                     <td><b>Total</b></td>
                     <td></td>
                     <td></td>
-                    <td colspan=""><b>Rp. {{ number_format($pengeluarannn, 0) }}</b></td>
+
+                    <td colspan="cols-2"><b>Rp. {{ number_format($pengeluarannn, 0) }}</b></td>
 
 
 
@@ -117,4 +147,26 @@
 
 @push('scripts')
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+    <script type="text/javascript">
+        $('.show_confirm').click(function(event) {
+            var form = $(this).closest("form");
+            var name = $(this).data("name");
+            event.preventDefault();
+            swal({
+                    title: 'Anda yakin?',
+                    text: "Data yang sudah dihapus tidak dapat dikembalikan!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        form.submit();
+                    }
+                });
+        });
+    </script>
 @endpush

@@ -37,6 +37,8 @@
                             @endif
                             <!-- begin panel-body -->
                             <div class="panel-body">
+                                <a href="{{ url('petugas-iuran/data-petugas/create') }}"
+                                    class="btn btn-success">CREATE</a>
                                 <div class="row">
                                     <div class="col">
                                         <img src="/assets/img/user/user-13.jpg" alt="Foto Petugas" width="200">

@@ -18,7 +18,7 @@
                     <div class="panel panel-inverse">
                         <!-- begin panel-heading -->
                         <div class="panel-heading">
-                            <h4 class="panel-title">Notifikasi Pembayaran INI @yield('title')</h4>
+                            <h4 class="panel-title">Notifikasi Pembayaran @yield('title')</h4>
                             <div class="panel-heading-btn">
                                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default"
                                     data-click="panel-expand"><i class="fa fa-expand"></i></a>

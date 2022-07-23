@@ -56,7 +56,7 @@ $sidebarClass = !empty($sidebarTransparent) ? 'sidebar-transparent' : '';
                                 <div class="info">
                                     <b class="caret pull-right"></b>
                                     {{ Auth::user()->name }}
-                                    <small>Front end developer</small>
+
                                 </div>
                             </a>
                         </li>
@@ -80,6 +80,12 @@ $sidebarClass = !empty($sidebarTransparent) ? 'sidebar-transparent' : '';
                             </a>
                         </li>
                         @if (auth()->check() && auth()->user()->role->nama === 'Warga')
+                            <li class="">
+                                <a href="{{ route('user.warga.data-diri.index') }}">
+                                    <i class="fa fa-id-card"></i>
+                                    <span>Data Diri</span>
+                                </a>
+                            </li>
                             <li class="">
                                 <a class="nav-link" href="{{ route('user.warga.wargak.index') }}">
                                     <i class="fa fa-id-card"></i>

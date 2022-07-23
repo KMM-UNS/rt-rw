@@ -11,7 +11,7 @@ use App\Models\ManajemenPengeluaran;
 use App\Models\Saldo;
 use ArielMejiaDev\LarapexCharts\LarapexChart;
 
-class KeuanganChart
+class KasChart
 {
     protected $chart;
 
@@ -23,10 +23,10 @@ class KeuanganChart
     public function build(): \ArielMejiaDev\LarapexCharts\PieChart
     {
 
-        $total_wajib = KasIuranWajib::sum('total_biaya');
-        $total_agenda = KasIuranAgenda::sum('total_biaya');
-        $total_kondisional = KasIuranKondisional::sum('total_biaya');
-        $total_sukarela = KasIuranSukaRela::sum('total_biaya');
+        $total_wajib = 0 + KasIuranWajib::sum('total_biaya');
+        $total_agenda = 0 + KasIuranAgenda::sum('total_biaya');
+        $total_kondisional = 0 + KasIuranKondisional::sum('total_biaya');
+        $total_sukarela = 0 + KasIuranSukaRela::sum('total_biaya');
         $pemasukannn = ManajemenPemasukan::sum('nominal');
         $pengeluarannn = ManajemenPengeluaran::sum('nominal');
         $pemasukann = ManajemenPemasukan::all();
@@ -39,7 +39,11 @@ class KeuanganChart
 
 
         return $this->chart->pieChart()
-            ->addData([$pengeluaran, $pemasukan])
-            ->setLabels(['Pengeluaran', 'Pemasukan']);
+            ->addData([$total_wajib, $total_agenda, $total_kondisional, $total_sukarela])
+            ->setLabels(['Kas Iuran Wajib', 'Kas Iuran Agenda', 'Kas Iuran Kondisional', 'Kas Iuran Sukarela']);
+        // ->setTitle('Grafik Dana Pemasukan')
+        // ->setSubtitle('Periode 2022')
+        // ->addData([$total_wajib, $total_agenda, $total_kondisional, $total_sukarela])
+        // ->setLabels(['Total Kas Iuran Wajib', 'Total Kas Iuran Agenda', 'Total Kas Iuran Kondisional', 'Total Kas Iuran Sukarela']);
     }
 }

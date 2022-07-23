@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Charts\KeuanganChart;
+use App\Charts\KasChart;
 use App\Http\Controllers\Controller;
 use App\Models\KasIuranAgenda;
 use App\Models\KasIuranKondisional;
@@ -20,7 +21,7 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(KeuanganChart $chart)
+    public function index(KeuanganChart  $keuanganchart, KasChart $kaschart)
     {
         $total_wajib = KasIuranWajib::sum('total_biaya');
         $total_agenda = KasIuranAgenda::sum('total_biaya');
@@ -35,7 +36,23 @@ class DashboardController extends Controller
         $pengeluaran = 0 + $pengeluarannn;
         $pemasukan = $total_agenda + $total_wajib + $total_kondisional + $total_sukarela + $pemasukannn;
         $saldo =  $saldooo + $total_agenda + $total_wajib + $total_kondisional + $total_sukarela + $pemasukannn - $pengeluarannn;
-        return view('pages.admin.dashboard', ['total_wajib' => $total_wajib, 'total_agenda' => $total_agenda, 'pemasukan' => $pemasukan, 'saldo' => $saldo, 'saldoo' => $saldoo, 'saldooo' => $saldooo, 'total_kondisional' => $total_kondisional, 'total_sukarela' => $total_sukarela, 'pemasukann' => $pemasukann, 'pemasukannn' => $pemasukannn, 'pengeluarann' => $pengeluarann, 'pengeluaran' => $pengeluaran, 'pengeluarannn' => $pengeluarannn, 'chart' => $chart->build()]);
+        return view('pages.admin.dashboard', [
+            'total_wajib' => $total_wajib,
+            'total_agenda' => $total_agenda,
+            'pemasukan' => $pemasukan,
+            'saldo' => $saldo,
+            'saldoo' => $saldoo,
+            'saldooo' => $saldooo,
+            'total_kondisional' => $total_kondisional,
+            'total_sukarela' => $total_sukarela,
+            'pemasukann' => $pemasukann,
+            'pemasukannn' => $pemasukannn,
+            'pengeluarann' => $pengeluarann,
+            'pengeluaran' => $pengeluaran,
+            'pengeluarannn' => $pengeluarannn,
+            'KeuanganChart' => $keuanganchart->build(),
+            'KasChart' => $kaschart->build()
+        ]);
     }
 
     /**

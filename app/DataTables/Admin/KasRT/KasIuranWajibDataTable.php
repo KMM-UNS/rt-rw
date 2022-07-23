@@ -15,14 +15,14 @@ class KasIuranWajibDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', function ($row) {
-                $btn = '<div class="btn-group">';
-                $btn = $btn . '<a href="' . route('admin.kas-rt.kas-iuranwajib.edit', $row->id) . '" class="btn btn-dark buttons-edit"><i class="fas fa-edit"></i></a>';
-                $btn = $btn . '<a href="' . route('admin.kas-rt.kas-iuranwajib.destroy', $row->id) . '" class="btn btn-danger buttons-delete"><i class="fas fa-trash fa-fw"></i></a>';
-                $btn = $btn . '</div>';
+            // ->addColumn('action', function ($row) {
+            //     $btn = '<div class="btn-group">';
+            //     $btn = $btn . '<a href="' . route('admin.kas-rt.kas-iuranwajib.edit', $row->id) . '" class="btn btn-dark buttons-edit"><i class="fas fa-edit"></i></a>';
+            //     $btn = $btn . '<a href="' . route('admin.kas-rt.kas-iuranwajib.destroy', $row->id) . '" class="btn btn-danger buttons-delete"><i class="fas fa-trash fa-fw"></i></a>';
+            //     $btn = $btn . '</div>';
 
-                return $btn;
-            })
+            //     return $btn;
+            // })
 
             ->editColumn('status', function ($row) {
                 if ($row->status == '1') {
@@ -32,7 +32,8 @@ class KasIuranWajibDataTable extends DataTable
                 $label = '<label for="" class="label label-danger">Belum Bayar</label>';
                 return  $label;
             })
-            ->rawColumns(['status', 'action']);
+            // ->rawColumns(['status', 'action']);
+            ->rawColumns(['status']);
 
         // ->addColumn('image', function ($row) {
         //     $img = '<img src="' . asset($row->dokumen[0]['public_url']) . '" class="img-rounded height-80" >';
@@ -55,23 +56,24 @@ class KasIuranWajibDataTable extends DataTable
             ->minifiedAjax()
             ->dom('<"dataTables_wrapper dt-bootstrap"B<"row"<"col-xl-7 d-block d-sm-flex d-xl-block justify-content-center"<"d-block d-lg-inline-flex"l>><"col-xl-5 d-flex d-xl-block justify-content-center"fr>>t<"row"<"col-sm-5"i><"col-sm-7"p>>>')
             ->orderBy(1)
-            ->buttons(
-                Button::make('create'),
-                Button::make('export'),
-                Button::make('print'),
-                Button::make('reset'),
-                Button::make('reload')
-            );
+            // ->buttons(
+            //     Button::make('create'),
+            //     Button::make('export'),
+            //     Button::make('print'),
+            //     Button::make('reset'),
+            //     Button::make('reload')
+            // )
+        ;
     }
 
     protected function getColumns()
     {
         return [
-            Column::computed('action')
-                ->exportable(false)
-                ->printable(false)
-                ->width(60)
-                ->addClass('text-center'),
+            // Column::computed('action')
+            //     ->exportable(false)
+            //     ->printable(false)
+            //     ->width(60)
+            //     ->addClass('text-center'),
             // Column::make('id'),
             Column::make('iuranwajib.nama', 'iuranwajib.nama')->title('Jenis Iuran wajib'),
             Column::make('tanggal'),
