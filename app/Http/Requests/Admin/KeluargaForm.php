@@ -48,6 +48,12 @@ class KeluargaForm extends FormRequest
      */
     public function rules()
     {
-        return RequestRuleConstant::keluargaTable();
+        return [
+            'keluarga_no_kk' => 'required|min:16|max:16|unique:keluarga,no_kk,'.$this->keluarga,
+            'keluarga_kepala_keluarga' => 'required',
+            'keluarga_rumah_id' => 'required',
+            'keluarga_telp' => 'required'
+        ];
+        // return RequestRuleConstant::keluargaTable();
     }
 }

@@ -54,9 +54,9 @@ class KeluargaController extends Controller
                 $riwayat->save();
 
             } catch (\Throwable $th) {
-                dd($th);
+                // dd($th);
                 DB::rollback();
-                return back()->withInput()->withToastError('Something what happen');
+                return back()->withInput()->withToastError('Terdapat kesalahan saat menyimpan data');
             }
         });
         return redirect(route('user.keluarga.index'))->withInput()->withToastSuccess('Data tersimpan');
@@ -74,15 +74,16 @@ class KeluargaController extends Controller
 
     public function update(KeluargaForm $request, $id)
     {
+        // dd($request->all());
         $keluarga = Keluarga::findorFail($id);
         DB::transaction(function () use ($request, $keluarga) {
             try {
                 $keluarga->updateFromRequest($request);
                 $keluarga->save();
             } catch (\Throwable $th) {
-                dd($th);
+                // dd($th);
                 DB::rollback();
-                return back()->withInput()->withToastError('Something what happen');
+                return back()->withInput()->withToastError('Terdapat kesalahan saat menyimpan data');
             }
         });
         return redirect(route('user.keluarga.index'))->withInput()->withToastSuccess('Data tersimpan');

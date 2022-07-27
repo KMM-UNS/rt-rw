@@ -13,9 +13,9 @@
 @section('content')
 <!-- begin breadcrumb -->
 <ol class="breadcrumb float-xl-right">
-  <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
-  <li class="breadcrumb-item"><a href="javascript:;">Keluarga</a></li>
-  <li class="breadcrumb-item active">@yield('title')</li>
+    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dasbor</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('admin.keluarga.index') }}">Keluarga</a></li>
+    <li class="breadcrumb-item active">@yield('title')</li>
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
@@ -57,9 +57,9 @@
                 </div>
             </div>
         </div>
-        {{-- @if(auth()->user()->hasRole('admin')) --}}
+        @if(auth()->user()->hasRole('admin'))
         <a href="#modal-dialog" class="btn btn-sm btn-dark fw-normal float-right" data-toggle="modal" style="font-size: 13px"><i class="fa fa-truck mr-2"></i> Pindah Rumah</a>
-        {{-- @endif --}}
+        @endif
     </div>
     <div class="modal fade" id="modal-dialog">
         <div class="modal-dialog">

@@ -33,15 +33,15 @@
                                     <label for="no_kk"><strong>No KK</strong></label>
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="input-group">
-                                        <input type="text" id="no_kk" name="keluarga_no_kk" class="form-control" autofocus data-parsley-required="true" value="{{{ old('keluarga_no_kk') ?? ($data['no_kk'] ?? null) }}}">
+                                    <div class="">
+                                        <input type="text" id="no_kk" name="keluarga_no_kk" class="form-control" autofocus data-parsley-required="true" value="{{{ old('keluarga_no_kk') ?? ($data['no_kk'] ?? null) }}}" data-parsley-minlength="16" data-parsley-maxlength="16" data-parsley-type="integer">
                                     </div>
                                 </div>
                                 <div class="col-md-2 my-auto">
                                     <label for="kepala_keluarga"><strong>Nama Kepala Keluarga</strong></label>
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="input-group">
+                                    <div class="">
                                         <input type="text" id="kepala_keluarga" name="keluarga_kepala_keluarga" class="form-control" autofocus data-parsley-required="true" value="{{{ old('keluarga_kepala_keluarga') ?? ($data['kepala_keluarga'] ?? auth()->user()->name) }}}">
                                     </div>
                                 </div>
@@ -66,7 +66,8 @@
                                     <label for="telp"><strong>Nomor Telepon/HP</strong></label>
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="input-group">
+                                    <div class="\
+                                    ">
                                         <input type="text" id="telp" name="keluarga_telp" class="form-control" autofocus data-parsley-required="true"  value="{{{ old('keluarga_telp') ?? ($data['telp'] ?? null) }}}">
                                     </div>
                                 </div>
@@ -87,9 +88,9 @@
 
 @push('scripts')
 <script src="{{ asset('/assets/plugins/parsleyjs/dist/parsley.js') }}"></script>
+<script src="{{ asset('/assets/js/parsley/language-id.js') }}"></script>
 <script src="{{ asset('/assets/plugins/smartwizard/dist/js/jquery.smartWizard.js') }}"></script>
 <script src="{{ asset('/assets/js/demo/form-wizards-validation.demo.js') }}"></script>
-<script src="{{ asset('/assets/plugins/parsleyjs/dist/parsley.js') }}"></script>
 <script src="{{ asset('/assets/js/custom/datetime-picker.js') }}"></script>
 <script src="{{ asset('/assets/js/custom/string-helper.js') }}"></script>
 <script>
