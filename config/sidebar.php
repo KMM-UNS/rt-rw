@@ -83,10 +83,7 @@ return [
             'url' => 'javascript:;',
             'caret' => true,
             'sub_menu' => [
-                [
-                    'url' => '/admin/setting',
-                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;App'
-                ], [
+                 [
                     'url' => '/admin/master-data/agama',
                     'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Agama'
                 ], [
@@ -128,7 +125,7 @@ return [
         [
             'icon' => 'fa fa-server',
             'title' => 'Aplikasi',
-            'url' => '/admin/master-data/aplikasi',
+            'url' => '/admin/aplikasi',
             'caret' => false,
         ],
     ],
@@ -192,13 +189,19 @@ return [
             'url' => '/admin/kritik-saran',
             'caret' => false,
         ],
+        [
+            'icon' => 'fa fa-server',
+            'title' => 'Aplikasi',
+            'url' => '/admin/aplikasi',
+            'caret' => false,
+        ],
     ],
 
     'menu_user' => [
         [
             'icon' => 'fa fa-th-large',
             'title' => 'Dasbor',
-            'url' => '/user',
+            'url' => '/user/dashboard',
             'caret' => false
         ], [
             'icon' => 'fa fa-users',
