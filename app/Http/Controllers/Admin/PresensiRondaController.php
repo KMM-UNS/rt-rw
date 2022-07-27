@@ -25,11 +25,22 @@ class PresensiRondaController extends Controller
 
     public function create()
     {
-        $jadwal_ronda = JadwalRonda::with('warga:id,nama')->get()->pluck('warga.nama', 'id');
-        // dd($jadwal_ronda);
+        $minggu = JadwalRonda::with('warga:id,nama')->where('hari_id', 1)->get()->pluck('warga.nama', 'id');
+        $senin = JadwalRonda::with('warga:id,nama')->where('hari_id', 2)->get()->pluck('warga.nama', 'id');
+        $selasa = JadwalRonda::with('warga:id,nama')->where('hari_id', 3)->get()->pluck('warga.nama', 'id');
+        $rabu = JadwalRonda::with('warga:id,nama')->where('hari_id', 4)->get()->pluck('warga.nama', 'id');
+        $kamis = JadwalRonda::with('warga:id,nama')->where('hari_id', 5)->get()->pluck('warga.nama', 'id');
+        $jumat = JadwalRonda::with('warga:id,nama')->where('hari_id', 6)->get()->pluck('warga.nama', 'id');
+        $sabtu = JadwalRonda::with('warga:id,nama')->where('hari_id', 7)->get()->pluck('warga.nama', 'id');
         $hari = Hari::pluck('nama', 'id');
         return view('pages.admin.ronda.presensi.add-edit', [
-            'jadwal_ronda' => $jadwal_ronda,
+            'minggu' => $minggu,
+            'senin' => $senin,
+            'selasa' => $selasa,
+            'rabu' => $rabu,
+            'kamis' => $kamis,
+            'jumat' => $jumat,
+            'sabtu' => $sabtu,
             'hari' => $hari,
         ]);
     }
@@ -38,7 +49,7 @@ class PresensiRondaController extends Controller
     {
         DB::transaction(function () use ($request) {
             try {
-                // dd($request->all());
+            // dd($request->all());
 
                 $presensi_ronda = PresensiRonda::createFromRequest($request);
                 $presensi_ronda->save();
