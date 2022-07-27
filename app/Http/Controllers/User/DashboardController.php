@@ -15,7 +15,7 @@ class DashboardController extends Controller
     public function index()
     {
         $app = App::first();
-        if(auth()->user()->hasRole('regular_user')){
+        if(auth()->user()->hasRole('warga')){
             $keluarga = Keluarga::select('id')->where('createable_id', auth()->user()->id)->where('createable_type', 'App\Models\User')->first();
             // jika sudah mengisi data keluarga
             if(isset($keluarga)) {
@@ -23,7 +23,7 @@ class DashboardController extends Controller
                 $warga = Warga::select('id')->where('keluarga_id', $keluarga->id)->where('status_keluarga_id', '1')->first();
                 if(isset($warga)){
                     $jadwal = JadwalRonda::where('warga_id', $warga->id)->first();
-                    
+
                     return view('pages.user.dashboard.index', [
                         'jadwal' => $jadwal,
                         'app' => $app
@@ -33,7 +33,7 @@ class DashboardController extends Controller
             return view('pages.user.dashboard.index', [
                 'app' => $app
             ]);
-    
+
         }
         else {
             return redirect(route('admin.dashboard'));
