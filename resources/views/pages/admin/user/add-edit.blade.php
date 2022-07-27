@@ -1,15 +1,18 @@
 @extends('layouts.default', ['topMenu' => true, 'sidebarHide' => true])
 
-@section('title', isset($data) ? 'Edit Pengguna' : 'Create Pengguna' )
+@section('title', isset($data) ? 'Edit Pengguna' : 'Tambah Pengguna' )
 
 @push('css')
 <link href="{{ asset('/assets/plugins/smartwizard/dist/css/smart_wizard.css') }}" rel="stylesheet" />
+<link href="{{ asset('/assets/css/default/style.css') }}" rel="stylesheet" />
+<link href="{{ asset('/assets/plugins/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet" />
 @endpush
 
 @section('content')
 <!-- begin breadcrumb -->
 <ol class="breadcrumb float-xl-right">
-    <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dasbor</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('admin.users.index') }}">Pengguna</a></li>
     <li class="breadcrumb-item active">@yield('title')</li>
 </ol>
 <!-- end breadcrumb -->
@@ -52,7 +55,12 @@
                     </div>
                     <div class="form-group">
                         <label for="name">Kata Sandi</label>
-                        <input type="password" id="user_password" name="user_password" class="form-control" autofocus data-parsley-required="{{{ isset($data) ? 'false' : 'true' }}}" value="{{ old('user_password') }}">
+                        <input type="password" id="user_password" name="user_password" class="form-control" autofocus data-parsley-minlength="8"
+                        data-parsley-errors-container=".errorspannewpassinput"
+                        data-parsley-required-message="Masukkan kata sandi baru."
+                        data-parsley-uppercase="1"
+                        data-parsley-lowercase="1"
+                        data-parsley-number="1" data-parsley-required="{{{ isset($data) ? 'false' : 'true' }}}" value="{{ old('user_password') }}">
                         @if(isset($data))
                         <small class="text-red">*Kosongkan bila tidak ada perubahan</small>
                         @endif
@@ -130,6 +138,20 @@
 
 @push('scripts')
 <script src="{{ asset('/assets/plugins/parsleyjs/dist/parsley.js') }}"></script>
-<script src="{{ asset('/assets/js/custom/ajax-form-handler.js') }}"></script>
+<script src="{{ asset('/assets/js/parsley/language-id.js') }}"></script>
+<script src="{{ asset('/assets/plugins/smartwizard/dist/js/jquery.smartWizard.js') }}"></script>
+<script src="{{ asset('/assets/js/demo/form-wizards-validation.demo.js') }}"></script>
 <script src="{{ asset('/assets/js/custom/datetime-picker.js') }}"></script>
+<script src="{{ asset('/assets/js/custom/string-helper.js') }}"></script>
+<script>
+    $( document ).ready(function() {
+        $("#from-datepicker").datepicker({
+            format: 'yyyy-mm-dd'
+        });
+        $("#from-datepicker").on("change", function () {
+            var fromdate = $(this).val();
+            alert(fromdate);
+        });
+    });
+    </script>
 @endpush
