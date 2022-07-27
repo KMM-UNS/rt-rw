@@ -93,7 +93,7 @@
                 <h4>Jadwal Ronda</h4>
             </div>
             <div class="card-body">
-                <table class="table table-bordered w-100">
+                <table class="table table-responsive table-bordered w-100">
                     <tr>
                         <th class="text-center">Minggu</th>
                         @foreach ($minggu as $jadwal)
