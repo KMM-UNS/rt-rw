@@ -1,6 +1,6 @@
 @extends('layouts.default', ['topMenu' => true, 'sidebarHide' => true])
 
-@section('title', isset($data) ? 'Edit Jadwal Ronda' : 'Create Jadwal Ronda' )
+@section('title', isset($data) ? 'Ubah Jadwal Ronda' : 'Tambah Jadwal Ronda' )
 
 @push('css')
 <link href="{{ asset('/assets/plugins/select2/dist/css/select2.min.css') }}" rel="stylesheet" />
@@ -9,9 +9,9 @@
 @section('content')
 <!-- begin breadcrumb -->
 <ol class="breadcrumb float-xl-right">
-  <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-  <li class="breadcrumb-item"><a href="javascript:;">Ronda</a></li>
-  <li class="breadcrumb-item active">@yield('title')</li>
+    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dasbor</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('admin.ronda.jadwal.index') }}">Jadwal Ronda</a></li>
+    <li class="breadcrumb-item active">@yield('title')</li>
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
@@ -52,9 +52,12 @@
                         </div>
                         <div class="col-md-5">
                             <div class="input-group">
+                                @if(isset($data))
+                                <x-form.dropdown name="jadwal_ronda_warga_id" data-parsley-required="true" :options="$warga" selected="{{{ old('jadwal_ronda_warga_id') ?? $data->warga->id ?? null }}}" required />
+                                @else
                                 <x-form.dropdown name="jadwal_ronda_warga_id[]" :options="$warga" :selected="old('jadwal_ronda_warga_id') ?? (isset($data->warga_id) ? $data->roles->pluck('id')->toArray() : null)" placeholder="Roles" multiple />
+                                @endif
 
-                                {{-- <x-form.Dropdown name="jadwal_ronda_warga_id" :options="$warga" selected="{{{ old('jadwal_ronda_warga_id') ?? ($data['warga_id'] ?? null) }}}" required /> --}}
                             </div>
                         </div>
                     </div>
@@ -78,6 +81,7 @@
 @push('scripts')
 <script src="{{ asset('/assets/plugins/select2/dist/js/select2.min.js') }}"></script>
 <script src="{{ asset('/assets/plugins/parsleyjs/dist/parsley.js') }}"></script>
+<script src="{{ asset('/assets/js/parsley/language-id.js') }}"></script>
 <script src="{{ asset('/assets/js/custom/string-helper.js') }}"></script>
 <script>
     $( document ).ready(function() {
