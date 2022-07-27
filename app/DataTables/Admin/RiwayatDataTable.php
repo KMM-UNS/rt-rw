@@ -57,7 +57,10 @@ class RiwayatDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->parameters([
                         'responsive' => true,
-                        'autoWidth' => false
+                        'autoWidth' => false,
+                        'language' => [
+                            'url' => url(asset('assets/datatables/lang/indonesia.json'))
+                        ]
                     ]);
     //                 ->minifiedAjax()
     //                 ->dom('<"dataTables_wrapper dt-bootstrap"B<"row"<"col-xl-7 d-block d-sm-flex d-xl-block justify-content-center"<"d-block d-lg-inline-flex"l>><"col-xl-5 d-flex d-xl-block justify-content-center"fr>>t<"row"<"col-sm-5"i><"col-sm-7"p>>>')
@@ -93,6 +96,6 @@ class RiwayatDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Admin/Riwayat_' . date('YmdHis');
+        return 'Riwayat_' . date('YmdHis');
     }
 }

@@ -25,9 +25,12 @@ class SuratDataTable extends DataTable
         ->addIndexColumn()
         ->addColumn('action', function ($row) {
             $btn = '<div class="btn-group">';
-            $btn = $btn . '<a class="info btn btn-white"><i class="fas fa-eye"></i></a>';
-            // $btn = $btn . '<a href="' . route('admin.surat.edit', $row->id) . '" class="btn btn-dark buttons-edit"><i class="fas fa-edit"></i></a>';
-            // $btn = $btn . '<a href="' . route('admin.surat.destroy', $row->id) . '" class="btn btn-danger buttons-delete"><i class="fas fa-trash fa-fw"></i></a>';
+            if ($row->status_surat_id == '2' && auth()->user()->hasRole('ketua_rt') || $row->status_surat_id == '3' && auth()->user()->hasRole('ketua_rw') || $row->status_surat_id == '1') {
+                $btn = $btn . '<a class="info btn btn-white"><i class="fas fa-plus"></i></a>';
+            }
+            else {
+                $btn = $btn . '<a class="btn btn-white disabled"><i class="fas fa-plus"></i></a>';
+            }
             $btn = $btn . '</div>';
             return $btn;
         })
@@ -37,22 +40,44 @@ class SuratDataTable extends DataTable
         ->editColumn('tanggal_pengajuan', function($row){
             return $row->tanggal_pengajuan->isoFormat('DD MMMM YYYY');
         })
-        ->editColumn('keperluan_surat_id', function($row){
+        ->editColumn('keperluan_surat.nama', function($row){
             if($row->keperluan_surat_id == '7'){
                 return $row->keterangan;
             }
             return $row->keperluan_surat->nama;
         })
         ->filter(function($query) use($request) {
-            // dd($request->all());
             if($request->has('keperluan_surat_id') || $request->has('bulan') || $request->has('tahun')){
                 $keperluan_surat_id = $request->get("keperluan_surat_id");
                 $bulan = $request->get("bulan");
                 $tahun = $request->get("tahun");
 
-                return $query->where('keperluan_surat_id', '=' ,$keperluan_surat_id)->whereMonth('tanggal_pengajuan' , '=', $bulan)->whereYear('tanggal_pengajuan' , '=', $tahun);
+                if($keperluan_surat_id != null && $bulan == null && $tahun == null) {
+                    $query->where('keperluan_surat_id', '=' ,$keperluan_surat_id);
+                }
+                elseif($keperluan_surat_id == null && $bulan != null && $tahun == null) {
+                    $query->whereMonth('tanggal_pengajuan' , '=', $bulan);
+                }
+                elseif($keperluan_surat_id == null && $bulan == null && $tahun != null) {
+                    $query->whereYear('tanggal_pengajuan' , '=', $tahun);
+                }
+                elseif($keperluan_surat_id != null && $bulan != null && $tahun == null) {
+                    $query->where('keperluan_surat_id', '=' ,$keperluan_surat_id)->whereMonth('tanggal_pengajuan' , '=', $bulan);
+                }
+                elseif($keperluan_surat_id != null && $bulan == null && $tahun != null) {
+                    $query->where('keperluan_surat_id', '=' ,$keperluan_surat_id)->whereYear('tanggal_pengajuan' , '=', $tahun);
+                }
+                elseif($keperluan_surat_id == null && $bulan != null && $tahun != null) {
+                    $query->whereMonth('tanggal_pengajuan' , '=', $bulan)->whereYear('tanggal_pengajuan' , '=', $tahun);
+                }
+                elseif($keperluan_surat_id != null && $bulan != null && $tahun != null) {
+                    return $query->where('keperluan_surat_id', '=' ,$keperluan_surat_id)->whereMonth('tanggal_pengajuan' , '=', $bulan)->whereYear('tanggal_pengajuan' , '=', $tahun);
+                }
+                else {
+                    return $query;
+                }
             }
-        });
+        }, true);
 
     }
 
@@ -80,7 +105,12 @@ class SuratDataTable extends DataTable
                     ->setTableId('surat-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->dom('<"dataTables_wrapper dt-bootstrap"B<"row"<"col-xl-7 d-block d-sm-flex d-xl-block justify-content-center"<"d-block d-lg-inline-flex"l>><"col-xl-5 d-flex d-xl-block justify-content-center"fr>>t<"row"<"col-sm-5"i><"col-sm-7"p>>>')
+                    ->dom('<"dataTables_wrapper dt-bootstrap"B
+                    <"row"
+                    <"col-xl-7 d-block d-sm-flex d-xl-block justify-content-center"
+                    <"d-block d-lg-inline-flex"l>>
+                    <"col-xl-5 d-flex d-xl-block justify-content-center"fr>>
+                    t<"row"<"col-sm-5"i><"col-sm-7"p>>>')
                     ->orderBy(1)
                     ->parameters([
                         'responsive' => true,

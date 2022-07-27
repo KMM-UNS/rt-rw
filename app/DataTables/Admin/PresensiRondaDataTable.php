@@ -41,7 +41,7 @@ class PresensiRondaDataTable extends DataTable
                     return $query;
                 }
             }
-        })
+        }, true)
         ->editColumn('tanggal', function($row){
             return $row->tanggal->isoFormat('DD MMMM YYYY');
         });
@@ -133,6 +133,6 @@ class PresensiRondaDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Admin\PresensiRonda_' . date('YmdHis');
+        return 'PresensiRonda_' . date('YmdHis');
     }
 }

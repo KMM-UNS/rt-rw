@@ -62,14 +62,14 @@ class KeluargaDataTable extends DataTable
                         'language' => [
                             'url' => url(asset('assets/datatables/lang/indonesia.json'))
                         ]
-                        ]);
-                    // ->buttons(
-                    //     Button::make('create'),
-                    //     Button::make('export'),
-                    //     Button::make('print'),
-                    //     Button::make('reset'),
-                    //     Button::make('reload')
-                    // );
+                        ])
+                    ->buttons(
+                        // Button::make('create'),
+                        Button::make('export'),
+                        Button::make('print'),
+                        Button::make('reset'),
+                        Button::make('reload')
+                    );
     }
 
     /**
