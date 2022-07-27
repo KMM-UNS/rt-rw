@@ -14,14 +14,21 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="image text-center">
-                            @foreach ($data['dokumen'] as $dokumen)
-                            <img src="{{ asset($dokumen['public_url']) }}" class="img-rounded height-150" data-toggle="modal" data-target="#exampleModal" style="
+                            @php
+                            $imageSrc = null;
+                            if(isset($data->dokumen)){
+                            $imageSrc = $data->dokumen->toArray();
+                            }
+                            @endphp
+                            @if ($imageSrc != null)
+                            <img src="{{ $imageSrc != null ? asset(DataHelper::filterDokumenData($imageSrc, 'nama', 'foto')->first()['public_url']) : null }}" class="img-rounded height-150" data-toggle="modal" data-target="#exampleModal" style="
                             object-fit: cover;
                             border-radius: 50%;
                             width: 150px;
                             height: 150px;"
-                            >
-                            @endforeach
+                            alt="{{ $data->nama }}">
+                            @else
+                            @endif
                         </div>
                     </div>
                     <div class="col-md-7 d-flex align-items-center justify-content-center">

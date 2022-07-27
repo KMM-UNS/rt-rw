@@ -32,15 +32,15 @@
                                       <label for="nik"><strong>NIK</strong></label>
                                   </div>
                                   <div class="col-md-4">
-                                      <div class="input-group">
-                                          <input type="text" id="nik" name="warga_nik" class="form-control" autofocus data-parsley-required="true" value="{{{ old('warga_nik') ?? ($data['nik'] ?? null) }}}">
+                                      <div class="">
+                                          <input type="text" id="nik" name="warga_nik" class="form-control" autofocus data-parsley-required="true" minlength="16" data-parsley-minlength="16" data-parsley-maxlength="16" value="{{{ old('warga_nik') ?? ($data['nik'] ?? null) }}}">
                                       </div>
                                   </div>
                                   <div class="col-md-2 my-auto">
                                       <label for="nama"><strong>Nama</strong></label>
                                   </div>
                                   <div class="col-md-4">
-                                      <div class="input-group">
+                                      <div class="">
                                           <input type="text" id="nama" name="warga_nama" class="form-control" autofocus data-parsley-required="true" value="{{{ old('warga_nama') ?? ($data['nama'] ?? null) }}}">
                                       </div>
                                   </div>
@@ -52,7 +52,7 @@
                                       <label for="tempat_lahir"><strong>Tempat Lahir</strong></label>
                                   </div>
                                   <div class="col-md-4">
-                                      <div class="input-group">
+                                      <div class="">
                                           <input type="text" id="nama" name="warga_tempat_lahir" class="form-control" autofocus data-parsley-required="true" value="{{{ old('warga_tempat_lahir') ?? ($data['tempat_lahir'] ?? null) }}}">
                                       </div>
                                   </div>
@@ -60,11 +60,11 @@
                                       <label for="tanggal_lahir"><strong>Tanggal Lahir</strong></label>
                                   </div>
                                   <div class="col-md-4">
-                                      <div class="input-group date">
-                                          <input type="text" id="tanggal_lahir" name="warga_tanggal_lahir" class="form-control date-picker" autofocus data-parsley-required="true" value="{{{ old('warga_tanggal_lahir') ?? (isset($data['tanggal_lahir']) ? $data['tanggal_lahir']->format('dd-mm-YYYY') : null) ?? null}}}">
+                                      <div class="date input-group">
                                           <span class="input-group-addon">
                                               <i class="fa fa-calendar"></i>
                                           </span>
+                                          <input type="text" id="tanggal_lahir" name="warga_tanggal_lahir" class="form-control date-picker" autofocus data-parsley-required="true" value="{{{ old('warga_tanggal_lahir') ?? (isset($data['tanggal_lahir']) ? $data['tanggal_lahir']->format('dd-mm-YYYY') : null) ?? null}}}">
                                       </div>
                                   </div>
                               </div>
@@ -75,7 +75,7 @@
                                       <label for="jenis_kelamin"><strong>Jenis Kelamin</strong></label>
                                   </div>
                                   <div class="col-md-4">
-                                      <div class="input-group">
+                                      <div class="">
                                           <x-form.genderRadio name="warga_jenis_kelamin" selected="{{{ old('warga_jenis_kelamin') ?? ($data['jenis_kelamin'] ?? null) }}}" />
                                       </div>
                                   </div>
@@ -83,7 +83,7 @@
                                       <label for="alamat"><strong>Alamat</strong><sup> sesuai KTP</sup></label>
                                   </div>
                                   <div class="col-md-4">
-                                      <div class="input-group mb-2">
+                                      <div class="mb-2">
                                           <input type="text" id="alamat" name="warga_alamat" class="form-control" autofocus data-parsley-required="true" value="{{{ old('warga_alamat') ?? ($data['alamat'] ?? null) }}}">
                                       </div>
                                   </div>
@@ -193,7 +193,7 @@
                           }
                           @endphp
                           <div class="row">
-                              <x-form.ImageUploader :imageSrc="isset($imageSrc) ? asset(DataHelper::filterDokumenData($imageSrc, 'nama', 'foto')->first()['public_url']) :  null" name="foto" title="Pas Foto" />
+                            <x-form.ImageUploader :imageSrc="$imageSrc != null ? asset(DataHelper::filterDokumenData($imageSrc, 'nama', 'foto')->first()['public_url']) :  null" name="foto" title="Pas Foto" />
                           </div>
                       </div>
                   </div>
@@ -217,10 +217,10 @@
 
 
 @push('scripts')
-<script src="{{ asset('/assets/plugins/parsleyjs/dist/parsley.js') }}"></script>
 <script src="{{ asset('/assets/plugins/smartwizard/dist/js/jquery.smartWizard.js') }}"></script>
 <script src="{{ asset('/assets/js/demo/form-wizards-validation.demo.js') }}"></script>
 <script src="{{ asset('/assets/plugins/parsleyjs/dist/parsley.js') }}"></script>
+<script src="{{ asset('/assets/js/parsley/language-id.js') }}"></script>
 <script src="{{ asset('/assets/js/custom/datetime-picker.js') }}"></script>
 <script src="{{ asset('/assets/js/custom/string-helper.js') }}"></script>
 <script>

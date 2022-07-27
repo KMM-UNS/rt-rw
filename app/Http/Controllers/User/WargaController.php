@@ -90,9 +90,9 @@ class WargaController extends Controller
                     }
                 }
             } catch (\Throwable $th) {
-                dd($th);
+                // dd($th);
                 DB::rollback();
-                return back()->withInput()->withToastError('Something what happen');
+                return back()->withInput()->withToastError('Terdapat kesalahan saat menyimpan data');
             }
         });
         return redirect(route('user.warga.index'))->withInput()->withToastSuccess('Data tersimpan');
@@ -145,18 +145,26 @@ class WargaController extends Controller
                         $existingFile = $warga->dokumen;
                         $old = DataHelper::filterDokumenData($existingFile, 'nama', $key)->first();
 
-                        TrashHelper::moveToTrash($old->public_url);
+                        if ($old != null){
+                            TrashHelper::moveToTrash($old->public_url);
+                            $upload = $fileUploaderHelper->store($file, 'warga$warga/foto');
+                            $old->update([
+                                'public_url' => $upload['public_path']
+                            ]);
+                        } else {
+                            $upload = $fileUploaderHelper->store($file, 'warga$warga/foto');
+                            $warga->dokumen()->create([
+                                'nama' => $key,
+                                'public_url' => $upload['public_path']
+                            ]);
+                        }
 
-                        $upload = $fileUploaderHelper->store($file, 'warga/lampiran');
-                        $old->update([
-                            'public_url' => $upload['public_path']
-                        ]);
                     }
                 }
             } catch (\Throwable $th) {
-                dd($th);
+                // dd($th);
                 DB::rollback();
-                return back()->withInput()->withToastError('Something what happen');
+                return back()->withInput()->withToastError('Terdapat kesalahan saat menyimpan data');
             }
         });
         return redirect(route('user.warga.index'))->withInput()->withToastSuccess('Data Tersimpan!');
