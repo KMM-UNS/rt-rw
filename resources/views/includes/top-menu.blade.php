@@ -25,7 +25,7 @@
 						$subSubMenu .= '</ul>';
 					}
 
-					$active = ($currentUrl == $menu['url']) ? 'active' : '';
+					$active = (strstr($currentUrl, $menu['url'])) ? 'active' : '';
 
 					if ($active) {
 						$GLOBALS['parent_active'] = true;
@@ -69,7 +69,7 @@
 					$subMenu .= renderHeaderSubMenu($menu['sub_menu'], $currentUrl);
 					$subMenu .= '</ul>';
 				}
-				$active = ($currentUrl == $menu['url']) ? 'active' : '';
+				$active = (strstr($currentUrl, $menu['url'])) ? 'active' : '';
 				$active = (empty($active) && !empty($GLOBALS['parent_active'])) ? 'active' : $active;
 				echo '
 					<li class="'. $hasSub .' '. $active .'">

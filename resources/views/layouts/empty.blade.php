@@ -10,9 +10,9 @@
 @endphp
 <body class="{{ $bodyClass }}">
 	@include('includes.component.page-loader')
-	
+
 	@yield('content')
-			
+
 	@include('includes.page-js')
 </body>
 </html>
