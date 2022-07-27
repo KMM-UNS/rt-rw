@@ -6,5 +6,5 @@
         <button type="submit" class="btn btn-primary my-2 ml-3 mr-1"><i class="fa fa-check mr-2" aria-hidden="true"></i>Verifikasi</button>
     </form>
     @endif
-    <a href="{{ route('admin.surat.cetak', $surat->id) }}"  class="btn btn-warning my-2 mx-1 {{ ($surat->status_surat_id != 4) ? 'disabled' : '' }}"><i class="fas fa-print mr-2"></i>Cetak</a>
+    {{-- <a href="{{ route('admin.surat.cetak', $surat->id) }}"  class="btn btn-warning my-2 mx-1 {{ ($surat->status_surat_id != 4) ? 'disabled' : '' }}"><i class="fas fa-print mr-2"></i>Cetak</a> --}}
     </div>

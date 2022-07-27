@@ -38,9 +38,6 @@ class Surat extends Model
         $this->attributes['tanggal_pengajuan'] = Carbon::createFromFormat('Y-m-d', $value);
     }
 
-
-
-
     public function warga()
     {
         return $this->belongsTo(Warga::class);

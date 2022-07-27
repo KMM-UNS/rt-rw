@@ -45,7 +45,7 @@
                                 <div class="input-group">
                                     <input type="text" id="keterangan" name="surat_keterangan" class="form-control" autofocus  placeholder="Tuliskan disini. . ." value="{{{ old('surat_keterangan') ?? ($data['keterangan'] ?? null) }}}" style="display: none;">
                                 </div>
-                                <input type="hidden" id="status" name="surat_status" class="form-control" value="1">
+                                <input type="hidden" id="status" name="surat_status_surat_id" class="form-control" value="1">
                             </div>
                         </div>
                     </div>
@@ -73,9 +73,9 @@
 
 @push('scripts')
 <script src="{{ asset('/assets/plugins/parsleyjs/dist/parsley.js') }}"></script>
+<script src="{{ asset('/assets/js/parsley/language-id.js') }}"></script>
 <script src="{{ asset('/assets/plugins/smartwizard/dist/js/jquery.smartWizard.js') }}"></script>
 <script src="{{ asset('/assets/js/demo/form-wizards-validation.demo.js') }}"></script>
-<script src="{{ asset('/assets/plugins/parsleyjs/dist/parsley.js') }}"></script>
 <script src="{{ asset('/assets/js/custom/datetime-picker.js') }}"></script>
 <script src="{{ asset('/assets/js/custom/string-helper.js') }}"></script>
 <script>

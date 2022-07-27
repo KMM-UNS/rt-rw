@@ -82,6 +82,7 @@
 @push('scripts')
 <script src="{{ asset('/assets/plugins/select2/dist/js/select2.min.js') }}"></script>
 <script src="{{ asset('/assets/plugins/parsleyjs/dist/parsley.js') }}"></script>
+<script src="{{ asset('/assets/js/parsley/language-id.js') }}"></script>
 <script src="{{ asset('/assets/js/custom/string-helper.js') }}"></script>
 <script>
     $( document ).ready(function() {

@@ -127,7 +127,7 @@
         </p>
         <p>
             <strong>
-                {{ $surat->keperluan_surat->nama }}
+                {{ $surat->keperluan_surat_id != 7 ? $surat->keperluan_surat->nama : $surat->keterangan }}
             </strong>
         </p>
         <p>
