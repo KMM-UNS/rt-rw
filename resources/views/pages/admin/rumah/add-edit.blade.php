@@ -1,6 +1,6 @@
 @extends('layouts.default', ['topMenu' => true, 'sidebarHide' => true])
 
-@section('title', isset($data) ? 'Edit Rumah' : 'Create Rumah' )
+@section('title', isset($data) ? 'Ubah Rumah' : 'Tambah Rumah' )
 
 @push('css')
 <link href="{{ asset('/assets/plugins/select2/dist/css/select2.min.css') }}" rel="stylesheet" />
@@ -9,9 +9,9 @@
 @section('content')
 <!-- begin breadcrumb -->
 <ol class="breadcrumb float-xl-right">
-  <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-  <li class="breadcrumb-item"><a href="javascript:;">Admin</a></li>
-  <li class="breadcrumb-item active">@yield('title')</li>
+    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dasbor</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('admin.rumah.index') }}">Master Data</a></li>
+    <li class="breadcrumb-item active">@yield('title')</li>
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
@@ -20,7 +20,7 @@
 
 
 <!-- begin panel -->
-<form action="{{ isset($data) ? route('admin.rumah.update', $data->id) : route('admin.rumah.store') }}" id="form" name="form" method="POST" data-parsley-validate="true" enctype="multipart/form-data">
+<form action="{{ isset($data) ? route('admin.rumah.update', $data->id) : route('admin.rumah.store') }}" id="form" name="form" method="POST" data-parsley-validate="true" data-parsley-ui-enabled="true" enctype="multipart/form-data">
   @csrf
   @if(isset($data))
   {{ method_field('PUT') }}
@@ -45,7 +45,7 @@
                             <label for="alamat"><strong>Alamat</strong></label>
                         </div>
                         <div class="col-md-5">
-                            <div class="input-group">
+                            <div class="">
                                 <input type="text" id="alamat" name="rumah_alamat" class="form-control" autofocus data-parsley-required="true" value="{{{ old('rumah_alamat') ?? ($data['alamat'] ?? null) }}}">
                             </div>
                         </div>
@@ -53,7 +53,7 @@
                             <label for="nomor_rumah"><strong>Nomor Rumah</strong></label>
                         </div>
                         <div class="col-md-5">
-                            <div class="input-group">
+                            <div class="">
                                 <input type="text" id="nomor_rumah" name="rumah_nomor_rumah" class="form-control" autofocus data-parsley-required="true" value="{{{ old('rumah_nomor_rumah') ?? ($data['nomor_rumah'] ?? null) }}}">
                             </div>
                         </div>
@@ -65,7 +65,7 @@
                             <label for="status_penggunaan_rumah_id"><strong>Status Penggunaan Rumah</strong></label>
                         </div>
                         <div class="col-md-5">
-                            <div class="input-group">
+                            <div class="">
                                 <x-form.Dropdown name="rumah_status_penggunaan_rumah_id" :options="$status_penggunaan_rumah" selected="{{{ old('rumah_status_penggunaan_rumah_id') ?? ($data['status_penggunaan_rumah_id'] ?? null) }}}" required />
                             </div>
                         </div>
@@ -73,7 +73,7 @@
                             <label for="status_hunian_id"><strong>Status Hunian</strong></label>
                         </div>
                         <div class="col-md-5">
-                            <div class="input-group">
+                            <div class="">
                                 <x-form.Dropdown name="rumah_status_hunian_id" :options="$status_hunian" selected="{{{ old('rumah_status_hunian_id') ?? ($data['status_hunian_id'] ?? null) }}}" required />
                             </div>
                         </div>
@@ -117,7 +117,7 @@
                 }
                 @endphp
                 <div class="row">
-                    <x-form.ImageUploader :imageSrc="$imageSrc != null ? asset(DataHelper::filterDokumenData($imageSrc, 'nama', 'foto_rumah')->first()['public_url']) : null" name="foto_rumah" title="Foto Rumah" value="{{{ $data->dokumen  ?? old('foto_rumah') }}}" />
+                    <x-form.ImageUploader :imageSrc="$imageSrc != null ? asset(DataHelper::filterDokumenData($imageSrc, 'nama', 'foto_rumah')->first()['public_url']) : null" name="foto_rumah" title="Foto Rumah" data-parsley-required="true" value="{{{ $data->dokumen  ?? old('foto_rumah') }}}" />
                 </div>
             </div>
         </div>
@@ -134,6 +134,7 @@
 @push('scripts')
 <script src="{{ asset('/assets/plugins/select2/dist/js/select2.min.js') }}"></script>
 <script src="{{ asset('/assets/plugins/parsleyjs/dist/parsley.js') }}"></script>
+<script src="{{ asset('/assets/js/parsley/language-id.js') }}"></script>
 <script src="{{ asset('/assets/js/custom/string-helper.js') }}"></script>
 <script>
     $( document ).ready(function() {

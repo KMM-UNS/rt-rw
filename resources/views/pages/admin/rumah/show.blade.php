@@ -1,6 +1,6 @@
 @extends('layouts.default', ['topMenu' => true, 'sidebarHide' => true])
 
-@section('title', 'Rumah')
+@section('title', 'Detail Rumah')
 
 @push('css')
 <!-- datatables -->
@@ -13,18 +13,18 @@
 @section('content')
 <!-- begin breadcrumb -->
 <ol class="breadcrumb float-xl-right">
-  <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
-  <li class="breadcrumb-item"><a href="javascript:;">Master Data</a></li>
-  <li class="breadcrumb-item active">@yield('title')</li>
+    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dasbor</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('admin.rumah.index') }}">Rumah</a></li>
+    <li class="breadcrumb-item active">@yield('title')</li>
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">@yield('title')<small> Data</small></h1>
+<h1 class="page-header">@yield('title')</h1>
 <!-- end page-header -->
 
 <div class="panel panel-inverse">
     <div class="panel-heading">
-        <h4 class="panel-title">Data Keluarga</h4>
+        <h4 class="panel-title">Data @yield('title')</h4>
         <div class="panel-heading-btn">
             <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
             <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
@@ -47,8 +47,17 @@
                 </div>
                 <div>
                     <label>Foto Rumah</label>
-                    <img class="img-responsive w-50" src="{{ $data->dokumen->first()->public_url }}" alt="Rumah No.{{ $data->nomor_rumah }}">
-                    {{-- <p class="font-weight-bold">{{ $data->dokumen->first()->public_url }}</p> --}}
+                    @php
+                    $imageSrc = null;
+                    if(isset($data->dokumen)){
+                    $imageSrc = $data->dokumen->toArray();
+                    }
+                    @endphp
+                    @if ($imageSrc != null)
+                    <img class="img-responsive w-50" src="{{ $imageSrc != null ? asset(DataHelper::filterDokumenData($imageSrc, 'nama', 'foto_rumah')->first()['public_url']) : null}}" alt="Rumah No.{{ $data->nomor_rumah }}">
+                    @else
+                    <p class="font-weight-bold">-</p>
+                    @endif
                 </div>
             </div>
             <div class="col-md-6">
