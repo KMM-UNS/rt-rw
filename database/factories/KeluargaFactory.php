@@ -24,8 +24,7 @@ class KeluargaFactory extends Factory
         return [
             'no_kk' => $this->faker->numerify('################'),
             'kepala_keluarga' => $this->faker->name() ,
-            'rumah_id' => $this->faker->numberBetween(3, 28),
-            'status_tinggal_id' => '1',
+            'status_tinggal_id' => '2',
             'telp' => $this->faker->phoneNumber(),
             'createable_id' => '1',
             'createable_type' => 'App\Models\User'

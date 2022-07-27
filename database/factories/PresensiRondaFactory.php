@@ -18,7 +18,7 @@ class PresensiRondaFactory extends Factory
     {
         // dd(Carbon::now()->format('Y-m-d'));
         return [
-            'jadwal_ronda_id' => $this->faker->numberBetween(1, 28),
+            'jadwal_ronda_id' => $this->faker->numberBetween(1, 12),
             'hari_id' => $this->faker->numberBetween(1,7),
             'tanggal' => $this->faker->dateTimeThisMonth()->format('d-m-Y'),
             'kehadiran' => 'hadir',
