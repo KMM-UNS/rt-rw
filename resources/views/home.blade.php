@@ -147,7 +147,7 @@
                     <!-- begin col-12 -->
                     <div class="col-md-6 contact">
                         <div class="div-title">
-                            <h2>Contact Us</h2>
+                            <h2>Kontak Kami</h2>
                         </div>
 
                         <div class="row mt-1 d-flex justify-content-start" data-aos="fade-right" data-aos-delay="100">
