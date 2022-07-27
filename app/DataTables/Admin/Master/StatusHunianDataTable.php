@@ -100,6 +100,6 @@ class StatusHunianDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Admin\Master\StatusHunian_' . date('YmdHis');
+        return 'MasterStatusHunian_' . date('YmdHis');
     }
 }

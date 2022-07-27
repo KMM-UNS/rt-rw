@@ -107,6 +107,6 @@ class WargaDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Admin\Warga_' . date('YmdHis');
+        return 'Warga_' . date('YmdHis');
     }
 }

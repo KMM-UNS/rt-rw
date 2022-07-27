@@ -137,6 +137,6 @@ class RumahDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Admin\Rumah_' . date('YmdHis');
+        return 'Rumah_' . date('YmdHis');
     }
 }

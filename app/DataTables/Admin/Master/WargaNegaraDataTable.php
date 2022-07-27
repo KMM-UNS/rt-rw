@@ -100,6 +100,6 @@ class WargaNegaraDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Admin\Master\WargaNegara_' . date('YmdHis');
+        return 'MasterWargaNegara_' . date('YmdHis');
     }
 }

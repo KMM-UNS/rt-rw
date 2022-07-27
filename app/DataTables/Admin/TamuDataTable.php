@@ -107,6 +107,6 @@ class TamuDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Admin\Tamu_' . date('YmdHis');
+        return 'Tamu_' . date('YmdHis');
     }
 }

@@ -100,6 +100,6 @@ class StatusPenggunaanRumahDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Admin\Master\StatusPenggunaanRumah_' . date('YmdHis');
+        return 'MasterStatusPenggunaanRumah_' . date('YmdHis');
     }
 }

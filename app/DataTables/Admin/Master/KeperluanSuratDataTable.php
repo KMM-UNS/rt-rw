@@ -100,6 +100,6 @@ class KeperluanSuratDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Admin\Master\JenisSurat_' . date('YmdHis');
+        return 'JenisSurat_' . date('YmdHis');
     }
 }

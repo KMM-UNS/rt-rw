@@ -108,6 +108,6 @@ class DetailKeluargaDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Admin\DetailKeluarga_' . date('YmdHis');
+        return 'DetailKeluarga_' . date('YmdHis');
     }
 }

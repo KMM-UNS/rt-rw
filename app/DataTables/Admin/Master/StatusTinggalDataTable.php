@@ -100,6 +100,6 @@ class StatusTinggalDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Admin\Master\StatusTinggal_' . date('YmdHis');
+        return 'MasterStatusTinggal_' . date('YmdHis');
     }
 }

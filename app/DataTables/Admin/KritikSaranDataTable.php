@@ -101,6 +101,6 @@ class KritikSaranDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Admin\KritikSaran_' . date('YmdHis');
+        return 'KritikSaran_' . date('YmdHis');
     }
 }

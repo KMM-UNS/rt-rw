@@ -129,6 +129,6 @@ class JadwalRondaDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Admin\JadwalRonda_' . date('YmdHis');
+        return 'JadwalRonda_' . date('YmdHis');
     }
 }

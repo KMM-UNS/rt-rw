@@ -100,6 +100,6 @@ class StatusWargaDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Admin\Master\StatusWarga_' . date('YmdHis');
+        return 'MasterStatusWarga_' . date('YmdHis');
     }
 }
