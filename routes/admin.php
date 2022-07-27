@@ -38,9 +38,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
             Route::resource('/presensi', 'PresensiRondaController');
         });
 
+        Route::resource('aplikasi', 'AppController');
         Route::group(['prefix' => '/master-data', 'as' => 'master-data.', 'namespace' => 'Master', 'middleware' => ['role:admin'] ], function () {
             Route::resource('agama', 'AgamaController');
-            Route::resource('aplikasi', 'AppController');
             Route::resource('pekerjaan', 'PekerjaanController');
             Route::resource('status-kawin', 'StatusKawinController');
             Route::resource('pendidikan', 'PendidikanController');

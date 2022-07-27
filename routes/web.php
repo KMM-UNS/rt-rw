@@ -36,9 +36,11 @@ Route::get('/edit-profile', 'ProfileController@edit')->name('edit-profile');
 Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
     require base_path('vendor/laravel/fortify/routes/routes.php');
     Route::resource('/setting', 'SettingController');
-
     Route::group(['namespace' => 'User', 'middleware' => 'auth:web'], function () {
-        Route::get('', 'DashboardController@index');
+        Route::get('/', function () {
+            return redirect(route('user.dashboard'));
+        });
+        Route::get('dashboard', 'DashboardController@index')->name('dashboard');
         Route::resource('/keluarga', 'KeluargaController');
         Route::group(['prefix' => '/surat', 'as' => 'surat.'], function () {
             Route::get('/cetak/{id}', 'SuratController@cetak')->name('cetak');
@@ -49,7 +51,6 @@ Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
 
     });
 });
-
 
 
 require __DIR__ . '/demo.php';
