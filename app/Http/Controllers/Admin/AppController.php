@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Master;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\App;
 use App\Models\Warga;
@@ -58,7 +58,7 @@ class AppController extends Controller
             }
         }
 
-        return view('pages.admin.master.app.index', [
+        return view('pages.admin.app.index', [
             'data' => $data,
             'provinsi' => $provinsi,
             'kabupaten' => $kabupaten,
@@ -85,7 +85,7 @@ class AppController extends Controller
         if (old('apps_kecamatan')) {
             $kelurahan = District::find(old('apps_kecamatan'))->villages->pluck('name', 'id');
         }
-        return view('pages.admin.master.app.add-edit', [
+        return view('pages.admin.app.add-edit', [
             'provinsi' => $provinsi,
             'kabupaten' => $kabupaten,
             'kecamatan' => $kecamatan,
@@ -117,7 +117,7 @@ class AppController extends Controller
                 return back()->withInput()->withToastError('Something what happen');
             }
         });
-        return redirect(route('admin.master-data.aplikasi.index'))->withToastSuccess('Data tersimpan');
+        return redirect(route('admin.aplikasi.index'))->withToastSuccess('Data tersimpan');
     }
 
     public function edit($id)
@@ -139,12 +139,20 @@ class AppController extends Controller
                         $existingFile = $app->dokumen;
                         $old = DataHelper::filterDokumenData($existingFile, 'nama', $key)->first();
 
-                        TrashHelper::moveToTrash($old->public_url);
+                        if ($old != null){
+                            TrashHelper::moveToTrash($old->public_url);
+                            $upload = $fileUploaderHelper->store($file, 'app/tanda-tangan');
+                            $old->update([
+                                'public_url' => $upload['public_path']
+                            ]);
+                        } else {
+                            $upload = $fileUploaderHelper->store($file, 'app/tanda-tangan');
+                            $app->dokumen()->create([
+                                'nama' => $key,
+                                'public_url' => $upload['public_path']
+                            ]);
+                        }
 
-                        $upload = $fileUploaderHelper->store($file, 'app/lampiran');
-                        $old->update([
-                            'public_url' => $upload['public_path']
-                        ]);
                     }
                 }
             } catch (\Throwable $th) {
@@ -154,7 +162,7 @@ class AppController extends Controller
             }
         });
 
-        return redirect(route('admin.master-data.aplikasi.index'))->withToastSuccess('Data tersimpan');
+        return redirect(route('admin.aplikasi.index'))->withToastSuccess('Data tersimpan');
     }
 
     public function destroy($id)
