@@ -2,6 +2,12 @@
 
 @section('title', '')
 
+@push('css')
+<link href="{{ asset('/assets/plugins/smartwizard/dist/css/smart_wizard.css') }}" rel="stylesheet" />
+<link href="{{ asset('/assets/css/default/style.css') }}" rel="stylesheet" />
+<link href="{{ asset('/assets/plugins/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet" />
+@endpush
+
 @section('content')
 <!-- begin login -->
 <div class="login login-with-news-feed">
@@ -30,11 +36,11 @@
                 {{ session('status') }}
             </div>
             @endif
-            <form action="{{ route('register') }}" method="POST" class="margin-bottom-0">
+            <form action="{{ route('register') }}" method="POST" class="margin-bottom-0" id="form" name="form" data-parsley-validate="true" redirect-back="true">
                 @csrf
 
                 <div class="form-group m-b-15">
-                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" placeholder="{{ __('Nama') }}" autofocus>
+                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}"  autocomplete="name" placeholder="{{ __('Nama') }}" autofocus data-parsley-required="true" >
 
                     @error('name')
                     <span class="invalid-feedback" role="alert">
@@ -45,7 +51,7 @@
 
                 <div class="form-group m-b-15">
 
-                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="{{ __('Alamat Surel') }}">
+                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  autocomplete="email" placeholder="{{ __('Alamat Surel') }}" data-parsley-required="true" >
 
                     @error('email')
                     <span class="invalid-feedback" role="alert">
@@ -55,7 +61,12 @@
                 </div>
 
                 <div class="form-group m-b-15">
-                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="{{ __('Kata Sandi') }}">
+                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password"  autocomplete="new-password" placeholder="{{ __('Kata Sandi') }}"  data-parsley-required="true" data-parsley-minlength="8"
+                    data-parsley-errors-container=".errorspannewpassinput"
+                    data-parsley-required-message="Masukkan kata sandi baru."
+                    data-parsley-uppercase="1"
+                    data-parsley-lowercase="1"
+                    data-parsley-number="1">
 
                     @error('password')
                     <span class="invalid-feedback" role="alert">
@@ -65,7 +76,7 @@
                 </div>
 
                 <div class="form-group m-b-15">
-                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="{{ __('Konfirmasi Kata Sandi') }}">
+                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation"  autocomplete="new-password" placeholder="{{ __('Konfirmasi Kata Sandi') }}" data-parsley-required="true" >
                 </div>
 
                 <div class="register-buttons">
@@ -86,3 +97,8 @@
 </div>
 <!-- end login -->
 @endsection
+
+@push('script')
+    <script src="{{ asset('/assets/plugins/parsleyjs/dist/parsley.js') }}"></script>
+    <script src="{{ asset('/assets/js/parsley/language-id.js') }}"></script>
+@endpush

@@ -14,11 +14,7 @@ return [
             'users' => 'c,r,u,d',
             'profile' => 'r,u'
         ],
-        'sekretaris_rt' => [
-            'users' => 'c,r,u,d',
-            'profile' => 'r,u'
-        ],
-        'regular_user' => [
+        'warga' => [
             'profile' => 'r,u'
         ]
     ],

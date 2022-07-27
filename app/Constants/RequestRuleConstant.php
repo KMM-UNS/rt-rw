@@ -10,7 +10,7 @@ class RequestRuleConstant
     {
         return [
             'user_name' => 'required|min:3',
-            'user_email' => 'required|min:7|max:15',
+            'user_email' => 'required|min:7|max:30',
             'user_password' => 'sometimes|required|min:6|confirmed',
         ];
     }

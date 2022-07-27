@@ -30,7 +30,7 @@
 				{{ session('status') }}
 			</div>
 			@endif
-			<form action="{{ route('login') }}" method="POST" class="margin-bottom-0">
+			<form action="{{ route('login') }}" method="POST" class="margin-bottom-0" >
 				@csrf
 				<div class="form-group m-b-15">
 					<input id="email" type="email" class="form-control form-control-lg @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Surel" autofocus />
@@ -51,23 +51,23 @@
 					@enderror
 				</div>
 
-				<div class="checkbox checkbox-css m-b-30">
+				{{-- <div class="checkbox checkbox-css m-b-30">
 					<input type="checkbox" id="remember_me_checkbox" value="" />
 					<label for="remember_me_checkbox">
 						Ingat Saya
 					</label>
-				</div>
+				</div> --}}
 				<div class="login-buttons">
 					<button type="submit" class="btn btn-success btn-block btn-lg">Masuk</button>
 				</div>
-				@if(!request()->routeIs('admin*'))
+				{{-- @if(!request()->routeIs('admin*')) --}}
 				<p>
 					<br />
 					Belum punya akun? <a href="{{ route('register') }}">Mendaftar</a>
 					<br />
 					Lupa kata sandi? <a href="{{ route('password.request') }}">Dapatkan kembali</a>
 				</p>
-				@endif
+				{{-- @endif --}}
 				<hr />
 				<p class="text-center text-grey-darker">
 					&copy; <?= date('Y') ?> Mandiri Solusindo </p>

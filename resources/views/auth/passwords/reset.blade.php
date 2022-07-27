@@ -30,13 +30,13 @@
                 {{ session('status') }}
             </div>
             @endif
-            <form action="{{ request()->routeIs('admin*') ? route('admin.password.update') : route('password.update') }}" method="POST" class="margin-bottom-0">
+            <form action="{{ request()->routeIs('admin*') ? route('admin.password.update') : route('password.update') }}" method="POST" class="margin-bottom-0" data-parsley-validate="true">
                 @csrf
                 <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
                 <div class="form-group m-b-15">
 
-                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $request->email ?? old('email') }}" required autocomplete="email" placeholder="{{ __('E-Mail Address') }}">
+                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $request->email ?? old('email') }}" data-parsley-required="true" autocomplete="email" placeholder="{{ __('E-Mail Address') }}">
 
                     @error('email')
                     <span class="invalid-feedback" role="alert">
@@ -46,7 +46,12 @@
                 </div>
 
                 <div class="form-group m-b-15">
-                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="{{ __('New Password') }}">
+                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" data-parsley-required="true" autocomplete="new-password" placeholder="{{ __('Kata Sandi Baru') }}" data-parsley-minlength="8"
+                    data-parsley-errors-container=".errorspannewpassinput"
+                    data-parsley-required-message="Masukkan kata sandi baru."
+                    data-parsley-uppercase="1"
+                    data-parsley-lowercase="1"
+                    data-parsley-number="1">
 
                     @error('password')
                     <span class="invalid-feedback" role="alert">
@@ -56,11 +61,11 @@
                 </div>
 
                 <div class="form-group m-b-15">
-                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="{{ __('Confirm Password') }}">
+                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" data-parsley-required="true" data-parsley-equalto="#password" autocomplete="new-password" placeholder="{{ __('Konfirmasi Kata Sandi') }}">
                 </div>
 
                 <div class="register-buttons">
-                    <button type="submit" class="btn btn-success btn-block btn-lg">{{ __('Reset Password') }}</button>
+                    <button type="submit" class="btn btn-success btn-block btn-lg">{{ __('Atur Ulang Kata Sandi') }}</button>
                 </div>
                 <p>
                     <br />

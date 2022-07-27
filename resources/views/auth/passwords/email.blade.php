@@ -42,7 +42,7 @@
                     @enderror
                 </div>
                 <div class="login-buttons">
-                    <button type="submit" class="btn btn-success btn-block btn-lg"> {{ __('Send Password Reset Link') }}</button>
+                    <button type="submit" class="btn btn-success btn-block btn-lg"> {{ __('Kirim Tautan Setel Ulang Kata Sandi') }}</button>
                 </div>
                 @if(!request()->routeIs('admin*'))
                 <p>
