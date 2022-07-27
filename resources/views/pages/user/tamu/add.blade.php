@@ -27,7 +27,7 @@
                                         <label for="jumlah"><strong>Jumlah</strong></label>
                                     </div>
                                     <div class="col-md-4">
-                                        <div class="input-group">
+                                        <div class="">
                                             <input type="number" id="jumlah" name="tamu_jumlah" class="form-control" autofocus data-parsley-required="true" value="{{{ old('tamu_jumlah') ?? ($data['jumlah'] ?? null) }}}">
                                         </div>
                                     </div>
@@ -35,7 +35,7 @@
                                         <label for="nama"><strong>Nama</strong><sup> (isi satu nama tamu)</sup></label>
                                     </div>
                                     <div class="col-md-4">
-                                        <div class="input-group">
+                                        <div class="">
                                             <input type="text" id="nama" name="tamu_nama" class="form-control" autofocus data-parsley-required="true" value="{{{ old('tamu_nama') ?? ($data['nama'] ?? null) }}}">
                                         </div>
                                     </div>
@@ -47,7 +47,7 @@
                                         <label for="alamat"><strong>Alamat</strong></label>
                                     </div>
                                     <div class="col-md-4">
-                                        <div class="input-group">
+                                        <div class="">
                                             <input type="text" id="alamat" name="tamu_alamat" class="form-control" autofocus data-parsley-required="true" value="{{{ old('tamu_alamat') ?? ($data['alamat'] ?? null) }}}">
                                         </div>
                                     </div>
@@ -55,7 +55,7 @@
                                         <label for="hubungan"><strong>Hubungan</strong></label>
                                     </div>
                                     <div class="col-md-4">
-                                        <div class="input-group">
+                                        <div class="">
                                             <input type="text" id="hubungan" name="tamu_hubungan" class="form-control" autofocus data-parsley-required="true" value="{{{ old('tamu_hubungan') ?? ($data['hubungan'] ?? null) }}}">
                                         </div>
                                     </div>
@@ -68,17 +68,17 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="input-group date">
-                                            <input type="text" id="tanggal_tiba" name="tamu_tanggal_tiba" class="form-control date-picker" autofocus data-parsley-required="true" value="{{{ old('tamu_tanggal_tiba') ?? (isset($data['tanggal_tiba']) ? $data['tanggal_tiba']->format('dd-mm-YYYY') : null) ?? null}}}">
                                             <span class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </span>
+                                            <input type="text" id="tanggal_tiba" name="tamu_tanggal_tiba" class="form-control date-picker" autofocus data-parsley-required="true" value="{{{ old('tamu_tanggal_tiba') ?? (isset($data['tanggal_tiba']) ? $data['tanggal_tiba']->format('dd-mm-YYYY') : null) ?? null}}}">
                                         </div>
                                     </div>
                                     <div class="col-md-2 my-auto">
                                         <label for="keluarga_id"><strong>Lama Menetap</strong><sup> (dalam hari)</sup></label>
                                     </div>
                                     <div class="col-md-4">
-                                        <div class="input-group">
+                                        <div class="">
                                             <input type="number" id="lama_menetap" name="tamu_lama_menetap" class="form-control" autofocus data-parsley-required="true" value="{{{ old('tamu_lama_menetap') ?? ($data['lama_menetap'] ?? null) }}}">
                                         </div>
                                     </div>
@@ -111,9 +111,9 @@
 
 @push('scripts')
 <script src="{{ asset('/assets/plugins/parsleyjs/dist/parsley.js') }}"></script>
+<script src="{{ asset('/assets/js/parsley/language-id.js') }}"></script>
 <script src="{{ asset('/assets/plugins/smartwizard/dist/js/jquery.smartWizard.js') }}"></script>
 <script src="{{ asset('/assets/js/demo/form-wizards-validation.demo.js') }}"></script>
-<script src="{{ asset('/assets/plugins/parsleyjs/dist/parsley.js') }}"></script>
 <script src="{{ asset('/assets/js/custom/datetime-picker.js') }}"></script>
 <script src="{{ asset('/assets/js/custom/string-helper.js') }}"></script>
 <script>

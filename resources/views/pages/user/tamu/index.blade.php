@@ -15,8 +15,28 @@
             <div class="panel-body mx-3 text-center">
                 <h3>Data Tamu</h3>
                 <hr>
+                @if (auth()->user()->email_verified_at == null)
+                    @if (session('status') == 'verification-link-sent')
+                        <div class="alert alert-success text-center" style="font-size:13px;">
+                            <strong>
+                                Email verifikasi terkirim.
+                            </strong>
+                        </div>
+                    @endif
+                <div class="alert alert-danger fade show text-center" style="font-size:13px">
+                    <div class="text-center">
+                        <h3>Verifikasi E-mail</h3>
+                        <p>Silakan cek email Anda atau klik tombol di bawah jika belum mendapatkan email verifikasi.</p>
+                    </div>
+                    <form method="POST" action="{{ route('verification.send') }}" class="text-center">
+                        @csrf
+                        <button type="submit" class="btn btn-dark font-weight-normal" style="font-size:13px">Kirim ulang email verifikasi</button>
+                    </form>
+                </div>
+                @else
                 <p style="font-size: 14px">Anda belum mengisi data keluarga.</p>
                 <a href="{{ route('user.keluarga.create') }}" class="btn btn-primary"><i class="fas fa-pencil-alt fa-fw mr-2"></i>Isi Data Keluarga</a>
+                @endif
             </div>
         </div>
         <!-- end panel -->
@@ -25,7 +45,7 @@
         <div class="panel-body" style="font-size: 14px">
             <h3 class="text-center mb-4">Data Tamu Bermalam</h3>
             <a href="{{ route('user.tamu.create') }}" class="btn btn-default mb-2" style="font-size:  14px"><i class="fas fa-address-book fa-fw mr-2"></i>Tambah Tamu</a>
-            <table class="table">
+            <table class="table table-responsive table-bordered d-sm-table">
                 <thead>
                     <tr>
                         <th class="text-center">No</th>
