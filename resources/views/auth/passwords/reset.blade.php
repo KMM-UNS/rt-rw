@@ -1,6 +1,6 @@
 @extends('layouts.empty', ['paceTop' => true, 'bodyExtraClass' => 'bg-white'])
 
-@section('title', __('Reset Password'))
+@section('title', __('Atur Ulang Kata Sandi'))
 
 @section('content')
 <!-- begin login -->
@@ -9,10 +9,10 @@
     <div class="news-feed">
         <div class="news-image" style="background-image: url(/assets/img/login-bg/front.png)"></div>
         <div class="news-caption">
-            <h4 class="caption-title"><b>e</b>Layanan</h4>
-            <p>
-                Sistem Informasi Layanan
-            </p>
+            <h4 class="caption-title"><b>e</b>RT RW</h4>
+			<p>
+				Sistem Informasi Layanan RT RW
+			</p>
         </div>
     </div>
     <!-- end news-feed -->

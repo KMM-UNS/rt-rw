@@ -1,6 +1,6 @@
 @extends('layouts.empty', ['paceTop' => true, 'bodyExtraClass' => 'bg-white'])
 
-@section('title', '')
+@section('title', 'Daftar')
 
 @push('css')
 <link href="{{ asset('/assets/plugins/smartwizard/dist/css/smart_wizard.css') }}" rel="stylesheet" />
@@ -80,7 +80,7 @@
                 </div>
 
                 <div class="register-buttons">
-                    <button type="submit" class="btn btn-success btn-block btn-lg">{{ __('Register') }}</button>
+                    <button type="submit" class="btn btn-success btn-block btn-lg">{{ __('Daftar') }}</button>
                 </div>
                 <p>
                     <br />
