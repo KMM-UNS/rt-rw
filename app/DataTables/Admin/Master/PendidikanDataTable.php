@@ -71,7 +71,7 @@ class PendidikanDataTable extends DataTable
                 Button::make('export'),
                 Button::make('print'),
                 Button::make('reset'),
-                Button::make('reload')
+                // Button::make('reload')
             );
     }
 
