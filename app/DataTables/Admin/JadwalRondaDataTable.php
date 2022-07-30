@@ -39,7 +39,9 @@ class JadwalRondaDataTable extends DataTable
      */
     public function query(JadwalRonda $model)
     {
-        return $model->with(['warga', 'hari'])->select('jadwal_ronda.*')->newQuery();
+        return $model->whereHas('ronda', function ($query){
+            return $query->where('status', 'aktif');
+        })->with(['warga', 'hari'])->select('jadwal_ronda.*')->newQuery();
     }
 
     /**

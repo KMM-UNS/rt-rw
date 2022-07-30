@@ -55,7 +55,9 @@ class PresensiRondaDataTable extends DataTable
      */
     public function query(PresensiRonda $model)
     {
-        return $model->with(['hari', 'jadwal_ronda.warga'])->select('presensi_ronda.*');
+        return $model->select('presensi_ronda.*')->whereHas('jadwal_ronda.ronda', function($query){
+             $query->where('status','aktif');
+        })->with(['hari','jadwal_ronda.warga'])->orderBy('tanggal', 'DESC');
     }
 
     /**

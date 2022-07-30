@@ -25,13 +25,27 @@ class DashboardController extends Controller
      */
     public function index(GenderChart $genderChart, PendidikanChart $pendidikanChart, PekerjaanChart $pekerjaanChart, SuratChart $suratChart)
     {
-        $minggu = JadwalRonda::with(['warga'])->where('hari_id', '1')->get();
-        $senin = JadwalRonda::with(['warga'])->where('hari_id', '2')->get();
-        $selasa = JadwalRonda::with(['warga'])->where('hari_id', '3')->get();
-        $rabu = JadwalRonda::with(['warga'])->where('hari_id', '4')->get();
-        $kamis = JadwalRonda::with(['warga'])->where('hari_id', '5')->get();
-        $jumat = JadwalRonda::with(['warga'])->where('hari_id', '6')->get();
-        $sabtu = JadwalRonda::with(['warga'])->where('hari_id', '7')->get();
+        $minggu = JadwalRonda::whereHas('ronda', function ($query){
+            return $query->where('status', 'aktif');
+        })->with(['warga'])->where('hari_id', '1')->get();
+        $senin = JadwalRonda::whereHas('ronda', function ($query){
+            return $query->where('status', 'aktif');
+        })->with(['warga'])->where('hari_id', '2')->get();
+        $selasa = JadwalRonda::whereHas('ronda', function ($query){
+            return $query->where('status', 'aktif');
+        })->with(['warga'])->where('hari_id', '3')->get();
+        $rabu = JadwalRonda::whereHas('ronda', function ($query){
+            return $query->where('status', 'aktif');
+        })->with(['warga'])->where('hari_id', '4')->get();
+        $kamis = JadwalRonda::whereHas('ronda', function ($query){
+            return $query->where('status', 'aktif');
+        })->with(['warga'])->where('hari_id', '5')->get();
+        $jumat = JadwalRonda::whereHas('ronda', function ($query){
+            return $query->where('status', 'aktif');
+        })->with(['warga'])->where('hari_id', '6')->get();
+        $sabtu = JadwalRonda::whereHas('ronda', function ($query){
+            return $query->where('status', 'aktif');
+        })->with(['warga'])->where('hari_id', '7')->get();
         // dd($jadwal);
         $app = App::first();
         $warga = Warga::count();

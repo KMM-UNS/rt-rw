@@ -24,11 +24,9 @@
 
 
 <!-- begin panel -->
-<form action="{{ isset($data) ? route('admin.ronda.presensi.update', $data->id) : route('admin.ronda.presensi.store') }}" id="form" name="form" method="POST" data-parsley-validate="true" enctype="multipart/form-data">
-  @csrf
-  @if(isset($data))
-  {{ method_field('PUT') }}
-  @endif
+@if (isset($jadwal_ronda))
+<form action="{{ route('admin.ronda.presensi.store') }}" id="form" name="form" method="POST" data-parsley-validate="true" enctype="multipart/form-data">
+    @csrf
     <div class="panel panel-inverse">
             <!-- begin panel-heading -->
             <div class="panel-heading">
@@ -48,93 +46,21 @@
                         </div>
                         <div class="col-md-5">
                             <div class="input-group">
-                                <x-form.Dropdown name="presensi_ronda_hari_id" :options="$hari" onchange="hariChange()" selected="{{{ old('presensi_ronda_hari_id') ?? ($data['hari_id'] ?? null) }}}" required />
+                                {{-- {{{ $hari[\Request::get('hari')] }}} --}}
+                                <input type="hidden" name="presensi_ronda_hari_id" value="{{ \Request::get('hari') }}">
+                                <x-form.Dropdown name="presensi_ronda_hari_id" :options="$hari" disabled selected="{{{ \Request::get('hari') }}}" required />
+                                {{-- <x-form.Dropdown name="hari" :options="$hari" selected="{{{ \Request::get('hari') }}}" required /> --}}
                             </div>
                         </div>
-                        <div class="col-md-1 my-auto">
-                            <label for="jadwal_ronda_id"><strong>Warga</strong></label>
-                        </div>
-                            <div id="mingguSelect" class="input-group col-md-5">
-                                <select class="select2 form-control" name="presensi_ronda_jadwal_ronda_id" id="minggu" >
-                                    @foreach ($minggu as $id => $minggu)
-                                        <option value="{{ $id }}">
-                                        {{ in_array($id, old('minggu', [])) ? 'selected' : '' }}
-                                        {{ $minggu }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div id="seninSelect" class="input-group col-md-5" style="display:none;">
-                                <select class="select2 form-control" name="presensi_ronda_jadwal_ronda_id" id="senin">
-                                    @foreach ($senin as $id => $senin)
-                                        <option value="{{ $id }}">
-                                        {{ in_array($id, old('senin', [])) ? 'selected' : '' }}
-                                        {{ $senin }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div id="selasaSelect" class="input-group col-md-5" style="display:none;">
-                                <select class="select2 form-control" name="presensi_ronda_jadwal_ronda_id" id="selasa">
-                                    @foreach ($selasa as $id => $selasa)
-                                        <option value="{{ $id }}">
-                                        {{ in_array($id, old('selasa', [])) ? 'selected' : '' }}
-                                        {{ $selasa }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div id="rabuSelect" class="input-group col-md-5" style="display:none;">
-                                <select class="select2 form-control" name="presensi_ronda_jadwal_ronda_id" id="rabu">
-                                    @foreach ($rabu as $id => $rabu)
-                                        <option value="{{ $id }}">
-                                        {{ in_array($id, old('rabu', [])) ? 'selected' : '' }}
-                                        {{ $rabu }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div id="kamisSelect" class="input-group col-md-5" style="display:none;">
-                                <select class="select2 form-control" name="presensi_ronda_jadwal_ronda_id" id="kamis">
-                                    @foreach ($kamis as $id => $kamis)
-                                        <option value="{{ $id }}">
-                                        {{ in_array($id, old('kamis', [])) ? 'selected' : '' }}
-                                        {{ $kamis }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div id="jumatSelect" class="input-group col-md-5" style="display:none;">
-                                <select class="select2 form-control" name="presensi_ronda_jadwal_ronda_id" id="jumat">
-                                    @foreach ($jumat as $id => $jumat)
-                                        <option value="{{ $id }}">
-                                        {{ in_array($id, old('jumat', [])) ? 'selected' : '' }}
-                                        {{ $jumat }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div id="sabtuSelect" class="input-group col-md-5" style="display:none;">
-                                <select class="select2 form-control" name="presensi_ronda_jadwal_ronda_id" id="sabtu">
-                                    @foreach ($sabtu as $id => $sabtu)
-                                        <option value="{{ $id }}">
-                                        {{ in_array($id, old('sabtu', [])) ? 'selected' : '' }}
-                                        {{ $sabtu }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
                         <div class="col-md-1 my-auto">
                             <label for="tanggal"><strong>Tanggal</strong></label>
                         </div>
                         <div class="col-md-5">
                             <div class="">
                                 <div class="input-group date">
-                                    <input type="text" id="tanggal" name="presensi_ronda_tanggal" class="form-control date-picker" autofocus data-parsley-required="true" value="{{{ old('presensi_ronda_tanggal') ?? (isset($data['tanggal']) ? $data['tanggal']->format('dd-mm-YYYY') : null) ?? null}}}">
+                                    <input type="hidden" data-parsley-required="true"  name="presensi_ronda_tanggal" value="{{ \Request::get('presensi_ronda_tanggal')}}">
+                                    {{-- {{ \Request::get('presensi_ronda_tanggal') }} --}}
+                                    <input type="text" id="tanggal" name="presensi_ronda_tanggal" class="form-control date-picker" disabled data-parsley-required="true" value="{{{ \Request::get('presensi_ronda_tanggal')}}}">
                                     <div class="input-group-append">
                                         <span class="input-group-text">
                                             <i class="fa fa-calendar"></i>
@@ -144,17 +70,32 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-1 my-auto">
-                            <label for="kehadiran"><strong>Kehadiran</strong></label>
-                        </div>
-                        <div class="col-md-5">
-                            <div class="input-group">
-                                <div>
-                                    <x-form.presensiRadio name="presensi_ronda_kehadiran" selected="{{{ old('presensi_ronda_kehadiran') ?? ($data['kehadiran'] ?? null) }}}" />
-                                </div>
+                    </div>
+                        <div class="form-group mt-4">
+                            <div class="row">
+                                <table class="table table-bordered mx-4 text-center">
+                                    <thead>
+                                        <tr>
+                                            <th>Warga</th>
+                                            <th>Kehadiran</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($jadwal_ronda as $warga)
+                                        <tr>
+                                            <td>
+                                                <p>{{ $warga->warga->nama }}</p>
+                                                <input type="hidden" name="presensi_ronda_jadwal_ronda_id[]" value="{{{ $warga->id }}}">
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" name="presensi_ronda_kehadiran[]" value="hadir" id="">
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                    </div>
                 </div>
             </div>
             <!-- end panel-body -->
@@ -166,10 +107,70 @@
             <!-- end panel-footer -->
     </div>
 </form>
+@else
+<form action="{{ route('admin.ronda.presensi.create') }}" id="form" name="form" method="GET" data-parsley-validate="true" enctype="multipart/form-data">
+    <div class="panel panel-inverse">
+            <!-- begin panel-heading -->
+            <div class="panel-heading">
+              <h4 class="panel-title">Form @yield('title')</h4>
+              <div class="panel-heading-btn">
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+              </div>
+            </div>
+            <!-- end panel-heading -->
+            <!-- begin panel-body -->
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-1 my-auto">
+                            <label for="hari_id"><strong>Hari</strong></label>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                {{-- <x-form.Dropdown name="presensi_ronda_hari_id" :options="$hari" selected="{{{ old('presensi_ronda_hari_id') ?? ($data['hari_id'] ?? null) }}}" required /> --}}
+                                <x-form.Dropdown name="hari" :options="$hari" selected="{{{ \Request::get('hari') }}}" required />
+                            </div>
+                        </div>
+                        <div class="col-md-1 my-auto">
+                            <label for="tanggal"><strong>Tanggal</strong></label>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="">
+                                <div class="input-group date">
+                                    {{-- <input type="text" id="tanggal" name="presensi_ronda_tanggal" class="form-control date-picker" autofocus data-parsley-required="true" value="{{{ old('presensi_ronda_tanggal') ?? (isset($data['tanggal']) ? $data['tanggal']->format('dd-mm-YYYY') : null) ?? null}}}"> --}}
+                                    <input type="text" id="tanggal" name="presensi_ronda_tanggal" class="form-control date-picker" autofocus data-parsley-required="true" value="{{{ \Request::get('presensi_ronda_tanggal')}}}">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-primary">Pilih</button>
+                            <button type="reset" class="btn btn-default">Reset</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- end panel-body -->
+            <!-- begin panel-footer -->
+            {{-- <div class="panel-footer">
+              <button type="submit" class="btn btn-primary">Simpan</button>
+              <button type="reset" class="btn btn-default">Reset</button>
+            </div> --}}
+            <!-- end panel-footer -->
+    </div>
+</form>
+@endif
+
 <a href="javascript:history.back(-1);" class="btn btn-success">
   <i class="fa fa-arrow-circle-left"></i> Kembali
 </a>
-
 @endsection
 
 @push('scripts')
@@ -192,161 +193,160 @@
     });
     </script>
     <script>
-    function hariChange() {
-        var hari = document.getElementById("presensi_ronda_hari_id").value;
-        var minggu = document.getElementById("minggu");
-        var senin = document.getElementById("senin");
-        var selasa = document.getElementById("selasa");
-        var rabu = document.getElementById("rabu");
-        var kamis = document.getElementById("kamis");
-        var jumat = document.getElementById("jumat");
-        var sabtu = document.getElementById("sabtu");
+        form.addEventListener('submit', () => {
+            if(document.getElementById("testName").checked) {
+            document.getElementById('testNameHidden').disabled = true;
+            }
+        })
+    </script>
+    <script>
+    // function hariChange() {
+    //     var hari = document.getElementById("presensi_ronda_hari_id").value;
+    //     var minggu = document.getElementById("minggu");
+    //     var senin = document.getElementById("senin");
+    //     var selasa = document.getElementById("selasa");
+    //     var rabu = document.getElementById("rabu");
+    //     var kamis = document.getElementById("kamis");
+    //     var jumat = document.getElementById("jumat");
+    //     var sabtu = document.getElementById("sabtu");
 
-        var mingguSelect = document.getElementById("mingguSelect");
-        var seninSelect = document.getElementById("seninSelect");
-        var selasaSelect = document.getElementById("selasaSelect");
-        var rabuSelect = document.getElementById("rabuSelect");
-        var kamisSelect = document.getElementById("kamisSelect");
-        var jumatSelect = document.getElementById("jumatSelect");
-        var sabtuSelect = document.getElementById("sabtuSelect");
+    //     switch (hari) {
+    //     case '1':
+    //         minggu.style.display = "block";
+    //         senin.style.display = "none";
+    //         selasa.style.display = "none";
+    //         rabu.style.display = "none";
+    //         kamis.style.display = "none";
+    //         jumat.style.display = "none";
+    //         sabtu.style.display = "none";
 
-        switch (hari) {
-        case '1':
-            mingguSelect.style.display = "block";
-            seninSelect.style.display = "none";
-            selasaSelect.style.display = "none";
-            rabuSelect.style.display = "none";
-            kamisSelect.style.display = "none";
-            jumatSelect.style.display = "none";
-            sabtuSelect.style.display = "none";
+    //         minggu.disabled = false;
+    //         senin.disabled = true;
+    //         selasa.disabled = true;
+    //         rabu.disabled = true;
+    //         kamis.disabled = true;
+    //         jumat.disabled = true;
+    //         sabtu.disabled = true;
+    //         break;
+    //     case '2':
+    //         minggu.style.display = "none";
+    //         senin.style.display = "block";
+    //         selasa.style.display = "none";
+    //         rabu.style.display = "none";
+    //         kamis.style.display = "none";
+    //         jumat.style.display = "none";
+    //         sabtu.style.display = "none";
 
-            minggu.disabled = false;
-            senin.disabled = true;
-            selasa.disabled = true;
-            rabu.disabled = true;
-            kamis.disabled = true;
-            jumat.disabled = true;
-            sabtu.disabled = true;
-            break;
-        case '2':
-            mingguSelect.style.display = "none";
-            seninSelect.style.display = "block";
-            selasaSelect.style.display = "none";
-            rabuSelect.style.display = "none";
-            kamisSelect.style.display = "none";
-            jumatSelect.style.display = "none";
-            sabtuSelect.style.display = "none";
+    //         minggu.getAttributeNode('input').disabled = true;
+    //         senin.disabled = false;
+    //         selasa.disabled = true;
+    //         rabu.disabled = true;
+    //         kamis.disabled = true;
+    //         jumat.disabled = true;
+    //         sabtu.disabled = true;
+    //         break;
+    //     case '3':
+    //         minggu.style.display = "none";
+    //         senin.style.display = "none";
+    //         selasa.style.display = "block";
+    //         rabu.style.display = "none";
+    //         kamis.style.display = "none";
+    //         jumat.style.display = "none";
+    //         sabtu.style.display = "none";
 
-            minggu.disabled = true;
-            senin.disabled = false;
-            selasa.disabled = true;
-            rabu.disabled = true;
-            kamis.disabled = true;
-            jumat.disabled = true;
-            sabtu.disabled = true;
-            break;
-        case '3':
-            mingguSelect.style.display = "none";
-            seninSelect.style.display = "none";
-            selasaSelect.style.display = "block";
-            rabuSelect.style.display = "none";
-            kamisSelect.style.display = "none";
-            jumatSelect.style.display = "none";
-            sabtuSelect.style.display = "none";
+    //         minggu.getAttributeNode('input').disabled = true;
+    //         senin.disabled = true;
+    //         selasa.disabled = false;
+    //         rabu.disabled = true;
+    //         kamis.disabled = true;
+    //         jumat.disabled = true;
+    //         sabtu.disabled = true;
+    //         break;
+    //     case '4':
+    //         minggu.style.display = "none";
+    //         senin.style.display = "none";
+    //         selasa.style.display = "none";
+    //         rabu.style.display = "block";
+    //         kamis.style.display = "none";
+    //         jumat.style.display = "none";
+    //         sabtu.style.display = "none";
 
-            minggu.disabled = true;
-            senin.disabled = true;
-            selasa.disabled = false;
-            rabu.disabled = true;
-            kamis.disabled = true;
-            jumat.disabled = true;
-            sabtu.disabled = true;
-            break;
-        case '4':
-            mingguSelect.style.display = "none";
-            seninSelect.style.display = "none";
-            selasaSelect.style.display = "none";
-            rabuSelect.style.display = "block";
-            kamisSelect.style.display = "none";
-            jumatSelect.style.display = "none";
-            sabtuSelect.style.display = "none";
+    //         minggu.getAttributeNode('input').disabled = true;
+    //         senin.disabled = true;
+    //         selasa.disabled = true;
+    //         rabu.disabled = false;
+    //         kamis.disabled = true;
+    //         jumat.disabled = true;
+    //         sabtu.disabled = true;
+    //         break;
+    //     case '5':
+    //         minggu.style.display = "none";
+    //         senin.style.display = "none";
+    //         selasa.style.display = "none";
+    //         rabu.style.display = "none";
+    //         kamis.style.display = "block";
+    //         jumat.style.display = "none";
+    //         sabtu.style.display = "none";
 
-            minggu.disabled = true;
-            senin.disabled = true;
-            selasa.disabled = true;
-            rabu.disabled = false;
-            kamis.disabled = true;
-            jumat.disabled = true;
-            sabtu.disabled = true;
-            break;
-        case '5':
-            mingguSelect.style.display = "none";
-            seninSelect.style.display = "none";
-            selasaSelect.style.display = "none";
-            rabuSelect.style.display = "none";
-            kamisSelect.style.display = "block";
-            jumatSelect.style.display = "none";
-            sabtuSelect.style.display = "none";
+    //         minggu.getAttributeNode('input').disabled = true;
+    //         senin.disabled = true;
+    //         selasa.disabled = true;
+    //         rabu.disabled = true;
+    //         kamis.disabled = false;
+    //         jumat.disabled = true;
+    //         sabtu.disabled = true;
+    //         break;
+    //     case '6':
+    //         minggu.style.display = "none";
+    //         senin.style.display = "none";
+    //         selasa.style.display = "none";
+    //         rabu.style.display = "none";
+    //         kamis.style.display = "none";
+    //         jumat.style.display = "block";
+    //         sabtu.style.display = "none";
 
-            minggu.disabled = true;
-            senin.disabled = true;
-            selasa.disabled = true;
-            rabu.disabled = true;
-            kamis.disabled = false;
-            jumat.disabled = true;
-            sabtu.disabled = true;
-            break;
-        case '6':
-            mingguSelect.style.display = "none";
-            seninSelect.style.display = "none";
-            selasaSelect.style.display = "none";
-            rabuSelect.style.display = "none";
-            kamisSelect.style.display = "none";
-            jumatSelect.style.display = "block";
-            sabtuSelect.style.display = "none";
+    //         minggu.getAttributeNode('input').disabled = true;
+    //         senin.disabled = true;
+    //         selasa.disabled = true;
+    //         rabu.disabled = true;
+    //         kamis.disabled = true;
+    //         jumat.disabled = false;
+    //         sabtu.disabled = true;
+    //         break;
+    //     case '7':
+    //         minggu.style.display = "none";
+    //         senin.style.display = "none";
+    //         selasa.style.display = "none";
+    //         rabu.style.display = "none";
+    //         kamis.style.display = "none";
+    //         jumat.style.display = "none";
+    //         sabtu.style.display = "block";
 
-            minggu.disabled = true;
-            senin.disabled = true;
-            selasa.disabled = true;
-            rabu.disabled = true;
-            kamis.disabled = true;
-            jumat.disabled = false;
-            sabtu.disabled = true;
-            break;
-        case '7':
-            mingguSelect.style.display = "none";
-            seninSelect.style.display = "none";
-            selasaSelect.style.display = "none";
-            rabuSelect.style.display = "none";
-            kamisSelect.style.display = "none";
-            jumatSelect.style.display = "none";
-            sabtuSelect.style.display = "block";
+    //         minggu.getAttributeNode('input').disabled = true;
+    //         senin.disabled = true;
+    //         selasa.disabled = true;
+    //         rabu.disabled = true;
+    //         kamis.disabled = true;
+    //         jumat.disabled = true;
+    //         sabtu.disabled = false;
+    //         break;
+    //     default:
+    //         minggu.style.display = "block";
+    //         senin.style.display = "none";
+    //         selasa.style.display = "none";
+    //         rabu.style.display = "none";
+    //         kamis.style.display = "none";
+    //         jumat.style.display = "none";
+    //         sabtu.style.display = "none";
 
-            minggu.disabled = true;
-            senin.disabled = true;
-            selasa.disabled = true;
-            rabu.disabled = true;
-            kamis.disabled = true;
-            jumat.disabled = true;
-            sabtu.disabled = false;
-            break;
-        default:
-            mingguSelect.style.display = "block";
-            seninSelect.style.display = "none";
-            selasaSelect.style.display = "none";
-            rabuSelect.style.display = "none";
-            kamisSelect.style.display = "none";
-            jumatSelect.style.display = "none";
-            sabtuSelect.style.display = "none";
-
-            minggu.disabled = false;
-            senin.disabled = true;
-            selasa.disabled = true;
-            rabu.disabled = true;
-            kamis.disabled = true;
-            jumat.disabled = true;
-            sabtu.disabled = true;
-        }
-    }
+    //         minggu.getAttributeNode('input').disabled = false;
+    //         senin.disabled = true;
+    //         selasa.disabled = true;
+    //         rabu.disabled = true;
+    //         kamis.disabled = true;
+    //         jumat.disabled = true;
+    //         sabtu.disabled = true;
+    //     }
+    // }
     </script>
 @endpush

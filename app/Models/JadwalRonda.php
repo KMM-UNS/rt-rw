@@ -17,6 +17,7 @@ class JadwalRonda extends Model
 
     protected $table = 'jadwal_ronda';
     protected $fillable = [
+        'ronda_id',
         'warga_id',
         'hari_id',
     ];
@@ -34,6 +35,11 @@ class JadwalRonda extends Model
     public function warga()
     {
         return $this->belongsTo(Warga::class);
+    }
+
+    public function ronda()
+    {
+        return $this->belongsTo(Ronda::class);
     }
 
 }

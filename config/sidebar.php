@@ -99,6 +99,9 @@ return [
                     'url' => '/admin/master-data/pendidikan',
                     'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Pendidikan'
                 ], [
+                    'url' => '/admin/master-data/ronda',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Ronda'
+                ], [
                     'url' => '/admin/master-data/status-hunian',
                     'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Status Hunian'
                 ], [

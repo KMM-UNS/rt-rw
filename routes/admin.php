@@ -44,6 +44,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
             Route::resource('pekerjaan', 'PekerjaanController');
             Route::resource('status-kawin', 'StatusKawinController');
             Route::resource('pendidikan', 'PendidikanController');
+            Route::group(['prefix' => '/ronda', 'as' => 'ronda.'], function () {
+                Route::get('aktif/{id}', 'RondaController@aktif')->name('aktif');
+                Route::resource('/', 'RondaController')->parameter('', 'ronda');
+            });
             Route::resource('golongan-darah', 'GolonganDarahController');
             Route::resource('keperluan-surat', 'KeperluanSuratController');
             Route::resource('status-keluarga', 'StatusKeluargaController');

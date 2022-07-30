@@ -23,24 +23,21 @@ class PresensiRondaController extends Controller
         return $dataTable->render('pages.admin.ronda.presensi.index');
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        $minggu = JadwalRonda::with('warga:id,nama')->where('hari_id', 1)->get()->pluck('warga.nama', 'id');
-        $senin = JadwalRonda::with('warga:id,nama')->where('hari_id', 2)->get()->pluck('warga.nama', 'id');
-        $selasa = JadwalRonda::with('warga:id,nama')->where('hari_id', 3)->get()->pluck('warga.nama', 'id');
-        $rabu = JadwalRonda::with('warga:id,nama')->where('hari_id', 4)->get()->pluck('warga.nama', 'id');
-        $kamis = JadwalRonda::with('warga:id,nama')->where('hari_id', 5)->get()->pluck('warga.nama', 'id');
-        $jumat = JadwalRonda::with('warga:id,nama')->where('hari_id', 6)->get()->pluck('warga.nama', 'id');
-        $sabtu = JadwalRonda::with('warga:id,nama')->where('hari_id', 7)->get()->pluck('warga.nama', 'id');
+        // dd($request->all());
         $hari = Hari::pluck('nama', 'id');
+        if($request->has('hari')) {
+            $hari_id = $request->get("hari");
+            $jadwal_ronda = JadwalRonda::whereHas('ronda', function ($query){
+                return $query->where('status', 'aktif');
+            })->where('hari_id', $hari_id )->get();
+            // dd($jadwal_ronda);
+        } else {
+            $jadwal_ronda = null;
+        }
         return view('pages.admin.ronda.presensi.add-edit', [
-            'minggu' => $minggu,
-            'senin' => $senin,
-            'selasa' => $selasa,
-            'rabu' => $rabu,
-            'kamis' => $kamis,
-            'jumat' => $jumat,
-            'sabtu' => $sabtu,
+            'jadwal_ronda' => $jadwal_ronda,
             'hari' => $hari,
         ]);
     }
@@ -50,9 +47,19 @@ class PresensiRondaController extends Controller
         DB::transaction(function () use ($request) {
             try {
             // dd($request->all());
-
-                $presensi_ronda = PresensiRonda::createFromRequest($request);
-                $presensi_ronda->save();
+                foreach($request->presensi_ronda_jadwal_ronda_id as $key => $jadwal) {
+                    // dd($key);
+                    if($request->presensi_ronda_kehadiran != null && array_key_exists($key, $request->presensi_ronda_kehadiran) ) {
+                        $kehadiran = $request->presensi_ronda_kehadiran[$key];
+                    }
+                    else {
+                        $kehadiran = 'tidak hadir';
+                    }
+                    $presensi_ronda = PresensiRonda::createFromRequest($request);
+                    $presensi_ronda->jadwal_ronda_id = $jadwal;
+                    $presensi_ronda->kehadiran = $kehadiran;
+                    $presensi_ronda->save();
+                }
             } catch (\Throwable $th) {
                 dd($th);
                 DB::rollback();

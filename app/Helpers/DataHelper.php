@@ -24,6 +24,20 @@ class DataHelper
     return $arr;
   }
 
+  public static function dayDropdownData(){
+    $arr = [];
+
+    $arr['1'] = 'Minggu';
+    $arr['2'] = 'Senin';
+    $arr['3'] = 'Selasa';
+    $arr['4'] = 'Rabu';
+    $arr['5'] = 'Kamis';
+    $arr['6'] = 'Jumat';
+    $arr['7'] = 'Sabtu';
+
+    return $arr;
+  }
+
   public static function monthDropdownData()
   {
     $arr = [];
