@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use App\Constants\RequestRuleConstant;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class KeluargaForm extends FormRequest
@@ -52,8 +53,22 @@ class KeluargaForm extends FormRequest
             'keluarga_no_kk' => 'required|min:16|max:16|unique:keluarga,no_kk,'.$this->keluarga,
             'keluarga_kepala_keluarga' => 'required',
             'keluarga_rumah_id' => 'required',
-            'keluarga_telp' => 'required'
+            'keluarga_telp' => 'required',
+            'kartu_keluarga' => [
+                Rule::requiredIf(function () {
+                    return request()->method() != "PUT";
+                }),
+                'mimes:pdf,png,jpeg,jpg|max:2048'
+            ],
+            'ktp' => [
+                Rule::requiredIf(function () {
+                    return request()->method() != "PUT";
+                }),
+                'mimes:pdf,png,jpeg,jpg|max:2048'
+            ],
+            'surat_nikah' => [
+                'mimes:pdf,png,jpeg,jpg|max:2048'
+            ]
         ];
-        // return RequestRuleConstant::keluargaTable();
     }
 }

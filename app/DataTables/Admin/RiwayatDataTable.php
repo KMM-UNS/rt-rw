@@ -83,7 +83,8 @@ class RiwayatDataTable extends DataTable
     {
         return [
             Column::make('DT_RowIndex')->title('No')->orderable(false)->searchable(false)->addClass('text-center'),
-            Column::make('keluarga_id')->data('keluarga.kepala_keluarga')->title('Kepala Keluarga'),
+            Column::make('keluarga.no_kk','keluarga.no_kk')->title('No KK'),
+            Column::make('keluarga.kepala_keluarga','keluarga.kepala_keluarga')->title('Kepala Keluarga'),
             Column::make('tanggal_masuk'),
             Column::make('tanggal_keluar')
         ];

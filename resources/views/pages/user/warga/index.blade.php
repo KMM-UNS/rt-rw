@@ -39,6 +39,29 @@
             </div>
         </div>
         <!-- end panel -->
+    @elseif($keluarga->verified_at == null)
+    <div class="panel panel-inverse">
+        <div class="panel-body mx-3 text-center">
+            <h3>Data Anggota Keluarga</h3>
+            <hr>
+            @if($keluarga->keterangan != null)
+            <div class="alert alert-danger fade show text-center my-2" style="font-size:13px">
+                <div class="text-center">
+                    <p class="my-2 font-weight-bold" style="font-size: 14px">Pengajuan akun ditolak.</p>
+                    <p class="my-2" style="font-size: 14px">Alasan: {{ $keluarga->keterangan }}</p>
+                    <p class="my-2" style="font-size: 14px">Silakan <a class="text-danger" href="{{ route('user.keluarga.edit', $keluarga->id) }}">ubah data</a>  Anda.</p>
+                </div>
+            </div>
+            @else
+            <div class="alert alert-info fade show text-center my-2" style="font-size:13px">
+                <div class="text-center">
+                    <p class="my-2" style="font-size: 14px">Data keluarga sedang dalam proses verifikasi.</p>
+                </div>
+            </div>
+            @endif
+            {{-- <p style="font-size: 14px">Data keluarga sedang dalam proses verifikasi.</p> --}}
+        </div>
+    </div>
     @else
     <div class="panel panel-inverse">
         <div class="panel-body" style="font-size: 14px">

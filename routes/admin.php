@@ -31,6 +31,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::group(['prefix' => '/keluarga', 'as' => 'keluarga.'], function () {
             Route::resource('/', 'KeluargaController')->parameter('','keluarga');
             Route::post('pindah/{id}', 'KeluargaController@pindah')->name('pindah');
+            Route::post('verifikasi/{id}', 'KeluargaController@verifikasi')->name('verifikasi');
+            Route::post('tolak/{id}', 'KeluargaController@tolak')->name('tolak');
         });
 
         Route::group(['prefix' => '/ronda', 'as' => 'ronda.'], function () {

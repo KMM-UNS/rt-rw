@@ -30,7 +30,7 @@ class WargaController extends Controller
 
     public function index()
     {
-        $keluarga = Keluarga::select('id')->where('createable_id', auth()->user()->id)->where('createable_type', 'App\Models\User')->first();
+        $keluarga = Keluarga::where('createable_id', auth()->user()->id)->where('createable_type', 'App\Models\User')->first();
         if ($keluarga == null)
         {
             return view('pages.user.warga.index', [

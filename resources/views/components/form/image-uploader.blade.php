@@ -1,11 +1,11 @@
 <div class="col-sm-12 mb-3">
     <div class="upload-image-container card border-0" style="cursor: pointer;">
-        <img class="card-img-top" src="{{{ $imageSrc ?? '/assets/img/no_image.png' }}}" alt="image-{{ $title }}">
+        <img class="card-img-top" src="{{{ $imageSrc ?? '/assets/img/no_image.png' }}}" alt="file-{{ $title }}">
         <div class="card-footer text-center">
             <h5><b>{{ $title }}</b></h5>
         </div>
     </div>
-    <input type="file" name="{{ $name }}" accept="image/*" hidden>
+    <input type="file" name="{{ $name }}" accept="image/*,.pdf" hidden>
 </div>
 
 

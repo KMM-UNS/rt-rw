@@ -16,8 +16,14 @@ class Keluarga extends Model
         'no_kk',
         'kepala_keluarga',
         'rumah_id',
-        'telp'
+        'telp',
+        'keterangan'
     ];
+
+    public function dokumen()
+    {
+        return $this->morphToMany(Dokumen::class, 'dokumenable');
+    }
 
     public function warga()
     {

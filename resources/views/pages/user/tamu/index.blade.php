@@ -40,10 +40,33 @@
             </div>
         </div>
         <!-- end panel -->
+        @elseif($keluarga->verified_at == null)
+        <div class="panel panel-inverse">
+            <div class="panel-body mx-3 text-center">
+                <h3>Data Tamu</h3>
+                <hr>
+                @if($keluarga->keterangan != null)
+                <div class="alert alert-danger fade show text-center my-2" style="font-size:13px">
+                    <div class="text-center">
+                        <p class="my-2 font-weight-bold" style="font-size: 14px">Pengajuan akun ditolak.</p>
+                        <p class="my-2" style="font-size: 14px">Alasan: {{ $keluarga->keterangan }}</p>
+                        <p class="my-2" style="font-size: 14px">Silakan <a class="text-danger" href="{{ route('user.keluarga.edit', $keluarga->id) }}">ubah data</a>  Anda.</p>
+                    </div>
+                </div>
+                @else
+                <div class="alert alert-info fade show text-center my-2" style="font-size:13px">
+                    <div class="text-center">
+                        <p class="my-2" style="font-size: 14px">Data keluarga sedang dalam proses verifikasi.</p>
+                    </div>
+                </div>
+                @endif
+                {{-- <p style="font-size: 14px">Data keluarga sedang dalam proses verifikasi.</p> --}}
+            </div>
+        </div>
     @else
     <div class="panel panel-inverse">
         <div class="panel-body" style="font-size: 14px">
-            <h3 class="text-center mb-4">Data Tamu Bermalam</h3>
+            <h3 class="text-center mb-4">Data Tamu</h3>
             <a href="{{ route('user.tamu.create') }}" class="btn btn-default mb-2" style="font-size:  14px"><i class="fas fa-address-book fa-fw mr-2"></i>Tambah Tamu</a>
             <table class="table table-responsive table-bordered d-sm-table">
                 <thead>
@@ -56,10 +79,10 @@
                         <th>Lama Menetap</th>
                     </tr>
                 </thead>
-                @foreach ($data as $tamu)
+                @foreach ($data as $tamuKey => $tamu)
                 <tbody>
                     <tr>
-                        <td class="text-center">{{ $loop->count }}</td>
+                        <td class="text-center">{{ $tamuKey + 1 }}</td>
                         <td>{{ $tamu->jumlah }} orang</td>
                         <td>{{ $tamu->nama }}</td>
                         <td>{{ $tamu->hubungan}}</td>

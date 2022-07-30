@@ -16,22 +16,26 @@ class DashboardController extends Controller
     {
         $app = App::first();
         if(auth()->user()->hasRole('warga')){
-            $keluarga = Keluarga::select('id')->where('createable_id', auth()->user()->id)->where('createable_type', 'App\Models\User')->first();
+            $keluarga = Keluarga::where('createable_id', auth()->user()->id)->where('createable_type', 'App\Models\User')->first();
             // jika sudah mengisi data keluarga
             if(isset($keluarga)) {
                 // jika sudah mengisi data warga
                 $warga = Warga::select('id')->where('keluarga_id', $keluarga->id)->where('status_keluarga_id', '1')->first();
                 if(isset($warga)){
-                    $jadwal = JadwalRonda::where('warga_id', $warga->id)->first();
+                    $jadwal = JadwalRonda::whereHas('ronda', function ($query){
+                        return $query->where('status', 'aktif');
+                    })->where('warga_id', $warga->id)->first();
 
                     return view('pages.user.dashboard.index', [
+                        'keluarga' => $keluarga,
                         'jadwal' => $jadwal,
                         'app' => $app
                     ]);
                 }
             }
             return view('pages.user.dashboard.index', [
-                'app' => $app
+                'app' => $app,
+                'keluarga' => $keluarga,
             ]);
 
         }

@@ -55,6 +55,22 @@
                     <strong>Informasi</strong>
                 </div>
                 <div class="card-body">
+                    @if ($keluarga->verified_at == null)
+                    @if($keluarga->keterangan != null)
+                    <div class="alert alert-danger fade show text-center my-2" style="font-size:13px">
+                        <div class="text-center">
+                            <p class="my-2 font-weight-bold" style="font-size: 14px">Pengajuan akun ditolak.</p>
+                            <p class="my-2" style="font-size: 14px">Alasan: {{ $keluarga->keterangan }}</p>
+                        </div>
+                    </div>
+                    @else
+                    <div class="alert alert-info fade show text-center my-2" style="font-size:13px">
+                        <div class="text-center">
+                            <p class="my-2" style="font-size: 14px">Data keluarga sedang dalam proses verifikasi.</p>
+                        </div>
+                    </div>
+                    @endif
+                    @endif
 
                     @isset($jadwal)
                     <p style="font-size: 14px;">Jadwal Ronda: {{ $jadwal->hari->nama }}</p>

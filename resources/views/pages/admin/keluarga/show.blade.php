@@ -55,13 +55,32 @@
                     <label>Nomor Rumah</label>
                     <p class="font-weight-bold">{{ !empty($data->rumah_id) ? $data->rumah['nomor_rumah'] : "-" }}</p>
                 </div>
+                <div>
+                    <label>Dokumen</label>
+                    @foreach ($data->dokumen as $dokumen)
+                            @php
+                                $original = $dokumen['nama'];
+                                $replace = str_replace('_', ' ', $original);
+                            @endphp
+                            <div class="my-1">
+                                {{-- <img src="{{ asset($dokumen['public_url']) }}"> --}}
+                                <a href="{{ $dokumen['public_url'] }}" class="btn btn-dark btn-sm" target="_blank" rel="noopener noreferrer" style="text-transform: {{ ($replace == 'ktp' ?  'uppercase' : 'capitalize') }}; align-items:center">{{ $replace }}<a>
+                            </div>
+                    @endforeach
+                </div>
             </div>
         </div>
         @if(auth()->user()->hasRole('admin'))
-        <a href="#modal-dialog" class="btn btn-sm btn-dark fw-normal float-right" data-toggle="modal" style="font-size: 13px"><i class="fa fa-truck mr-2"></i> Pindah Rumah</a>
+        @if($data->verified_at == null)
+        <a href="#modal-tolak" class="btn btn-sm btn-danger {{ $data->keterangan != null ? 'disabled d-none' : '' }} fw-normal float-right" data-toggle="modal" style="font-size: 13px"><i class="fa fa-times mr-2"></i> Tolak</a>
+        <a href="#modal-verifikasi" class="btn btn-sm btn-primary fw-normal float-right mx-2" data-toggle="modal" style="font-size: 13px"><i class="fa fa-check mr-2" aria-hidden="true"></i> Verifikasi</a>
+        @else
+        <a href="#modal-pindah" class="btn btn-sm btn-dark fw-normal float-right" data-toggle="modal" style="font-size: 13px"><i class="fa fa-truck mr-2"></i> Pindah Rumah</a>
+        @endif
         @endif
     </div>
-    <div class="modal fade" id="modal-dialog">
+    {{-- begin modal pindah --}}
+    <div class="modal fade" id="modal-pindah">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -87,13 +106,59 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <a href="javascript:;" class="btn btn-white" data-dismiss="modal">Close</a>
+                        <a href="javascript:;" class="btn btn-white" data-dismiss="modal">Tutup</a>
                         <button type="submit" id="submit" class="btn btn-primary">Simpan</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+    {{-- end modal pindah --}}
+    {{-- begin modal verifikasi --}}
+    <div class="modal fade" id="modal-verifikasi">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Verifikasi Keluarga</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('admin.keluarga.verifikasi', $data->id) }}" method="POST" name="form-wizard" class="form-control-with-bg"  data-parsley-validate="true" enctype="multipart/form-data">
+                        @csrf
+                        Dengan ini Anda menyetujui jika keluarga ini adalah warga Anda.
+                        Apakah Anda yakin?
+                    </div>
+                    <div class="modal-footer">
+                        <a href="javascript:;" class="btn btn-white" data-dismiss="modal">Tidak</a>
+                        <button type="submit" id="submit" class="btn btn-primary">Ya</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- end modal verifikasi --}}
+    {{-- begin modal tolak --}}
+    <div class="modal fade" id="modal-tolak">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Tolak</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('admin.keluarga.tolak', $data->id) }}" method="POST" name="form-wizard" class="form-control-with-bg"  data-parsley-validate="true" enctype="multipart/form-data">
+                        @csrf
+                        <input type="text" class="form-control" name="keluarga_keterangan" id="keterangan" placeholder="Tulis alasan ditolak" required>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="javascript:;" class="btn btn-white" data-dismiss="modal">Tutup</a>
+                        <button type="submit" id="submit" class="btn btn-primary">Simpan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- end modal tolak --}}
 </div>
 
 <!-- begin panel -->

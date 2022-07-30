@@ -74,6 +74,77 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-xl-3 ui-sortable mx-auto">
+                            <div class="panel panel-inverse">
+                                <!-- begin panel-body -->
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            {{-- <img src="{{ asset($data->foto)}}" alt="" srcset=""> --}}
+                                        </div>
+                                        {{-- <img src="{{ asset('storage/app/public/foto')$data->foto }}" alt="" srcset=""> --}}
+                                    </div>
+                                    @php
+                                    $imageSrc = null;
+                                    if(isset($data->dokumen)){
+                                    $imageSrc = $data->dokumen->where('nama', 'kartu_keluarga')->toArray();
+                                    }
+                                    @endphp
+                                    <div class="row">
+                                        {{-- {{  $data->dokumen->where('nama', 'kartu_keluarga') }} --}}
+                                        <x-form.ImageUploader :imageSrc="$imageSrc != null ? asset(DataHelper::filterDokumenData($imageSrc, 'nama', 'kartu_keluarga')->first()['public_url']) : null" name="kartu_keluarga" title="Scan Kartu Keluarga" value="{{{  old('kartu_keluarga') }}}" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 ui-sortable mx-auto">
+                            <div class="panel panel-inverse">
+                                <!-- begin panel-body -->
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            {{-- <img src="{{ asset($data->foto)}}" alt="" srcset=""> --}}
+                                        </div>
+                                        {{-- <img src="{{ asset('storage/app/public/foto')$data->foto }}" alt="" srcset=""> --}}
+                                    </div>
+                                    @php
+                                    $imageSrc = null;
+                                    if(isset($data->dokumen)){
+                                    $imageSrc = $data->dokumen->where('nama', 'ktp')->toArray();
+                                    }
+                                    @endphp
+                                    <div class="row">
+                                        {{-- {{  $data->dokumen->where('nama', 'ktp') }} --}}
+                                        <x-form.ImageUploader :imageSrc="$imageSrc != null ? asset(DataHelper::filterDokumenData($imageSrc, 'nama', 'ktp')->first()['public_url']) : null" name="ktp" title="Scan KTP Kepala Keluarga" value="{{{  old('ktp') }}}" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 ui-sortable mx-auto">
+                            <div class="panel panel-inverse">
+                                <!-- begin panel-body -->
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            {{-- <img src="{{ asset($data->foto)}}" alt="" srcset=""> --}}
+                                        </div>
+                                        {{-- <img src="{{ asset('storage/app/public/foto')$data->foto }}" alt="" srcset=""> --}}
+                                    </div>
+                                    @php
+                                    $imageSrc = null;
+                                    if(isset($data->dokumen)){
+                                    $imageSrc = $data->dokumen->where('nama', 'surat_nikah')->toArray();
+                                    }
+                                    @endphp
+                                    <div class="row">
+                                        {{-- {{  $data->dokumen->where('nama', 'surat_nikah') }} --}}
+                                        <x-form.ImageUploader :imageSrc="$imageSrc != null ? asset(DataHelper::filterDokumenData($imageSrc, 'nama', 'surat_nikah')->first()['public_url']) : null" name="surat_nikah" title="Scan Bukti Nikah" value="{{{  old('surat_nikah') }}}" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <!-- end form-group -->
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary">Simpan</button>

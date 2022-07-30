@@ -22,6 +22,8 @@ class CreateKeluargaTable extends Migration
             $table->unsignedBigInteger('status_tinggal_id');
             $table->unsignedBigInteger('createable_id');
             $table->text('createable_type');
+            $table->timestamp('verified_at')->nullable();
+            $table->string('keterangan')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers\User;
 
+use Carbon\Carbon;
 use App\Models\Rumah;
 use App\Models\Keluarga;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
-use App\DataTables\User\KeluargaDataTable;
-use App\Http\Requests\Admin\KeluargaForm;
+use App\Helpers\DataHelper;
+use App\Helpers\TrashHelper;
 use App\Models\RiwayatRumah;
+use Illuminate\Http\Request;
 use App\Models\StatusTinggal;
-use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+use App\Helpers\FileUploaderHelper;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\KeluargaForm;
+use App\DataTables\User\KeluargaDataTable;
 
 class KeluargaController extends Controller
 {
@@ -37,9 +40,9 @@ class KeluargaController extends Controller
         ]);
     }
 
-    public function store(KeluargaForm $request)
+    public function store(KeluargaForm $request, FileUploaderHelper $fileUploaderHelper)
     {
-        DB::transaction(function () use ($request) {
+        DB::transaction(function () use ($request, $fileUploaderHelper) {
             try {
                 $status_tinggal = StatusTinggal::select('id')->where('nama', 'Warga Tinggal')->first();
                 $keluarga = Keluarga::createFromRequest($request);
@@ -47,11 +50,22 @@ class KeluargaController extends Controller
                 $keluarga->createable()->associate($request->user());
                 $keluarga->save();
 
-                $riwayat = RiwayatRumah::createFromRequest($request);
-                $riwayat->rumah_id = $keluarga->rumah_id;
-                $riwayat->keluarga_id = $keluarga->id;
-                $riwayat->tanggal_masuk = Carbon::now()->format('Y-m-d');
-                $riwayat->save();
+                // $riwayat = RiwayatRumah::createFromRequest($request);
+                // $riwayat->rumah_id = $keluarga->rumah_id;
+                // $riwayat->keluarga_id = $keluarga->id;
+                // $riwayat->tanggal_masuk = Carbon::now()->format('Y-m-d');
+                // $riwayat->save();
+
+                if ($request->file()) {
+
+                    foreach ($request->file() as $key => $file) {
+                        $upload = $fileUploaderHelper->store($file, 'keluarga/dokumen');
+                        $keluarga->dokumen()->create([
+                            'nama' => $key,
+                            'public_url' => $upload['public_path']
+                        ]);
+                    }
+                }
 
             } catch (\Throwable $th) {
                 // dd($th);
@@ -72,14 +86,36 @@ class KeluargaController extends Controller
         ]);
     }
 
-    public function update(KeluargaForm $request, $id)
+    public function update(KeluargaForm $request, $id,  FileUploaderHelper $fileUploaderHelper)
     {
         // dd($request->all());
         $keluarga = Keluarga::findorFail($id);
-        DB::transaction(function () use ($request, $keluarga) {
+        DB::transaction(function () use ($request, $fileUploaderHelper, $keluarga) {
             try {
                 $keluarga->updateFromRequest($request);
                 $keluarga->save();
+
+                if ($request->file()) {
+                    foreach ($request->file() as $key => $file) {
+                        $existingFile = $keluarga->dokumen;
+                        $old = DataHelper::filterDokumenData($existingFile, 'nama', $key)->first();
+
+                        if ($old != null){
+                            TrashHelper::moveToTrash($old->public_url);
+                            $upload = $fileUploaderHelper->store($file, 'keluarga/dokumen');
+                            $old->update([
+                                'public_url' => $upload['public_path']
+                            ]);
+                        } else {
+                            $upload = $fileUploaderHelper->store($file, 'keluarga/dokumen');
+                            $keluarga->dokumen()->create([
+                                'nama' => $key,
+                                'public_url' => $upload['public_path']
+                            ]);
+                        }
+
+                    }
+                }
             } catch (\Throwable $th) {
                 // dd($th);
                 DB::rollback();

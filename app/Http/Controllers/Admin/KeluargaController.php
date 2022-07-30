@@ -256,4 +256,44 @@ class KeluargaController extends Controller
             return redirect(route('admin.keluarga.index'))->withInput()->withToastSuccess('Data tersimpan');
             }
     }
+
+    public function verifikasi(Request $request, $id)
+    {
+        // dd(Carbon::now());
+        $keluarga = Keluarga::findOrFail($id);
+        DB::transaction(function () use ($request, $keluarga) {
+            try {
+                $keluarga->updateFromRequest($request);
+                $keluarga->verified_at = Carbon::now();
+                $keluarga->save();
+
+                $riwayat = RiwayatRumah::createFromRequest($request);
+                $riwayat->rumah_id = $keluarga->rumah_id;
+                $riwayat->keluarga_id = $keluarga->id;
+                $riwayat->tanggal_masuk = Carbon::now()->format('Y-m-d');
+                $riwayat->save();
+            } catch (\Throwable $th) {
+                dd($th);
+                DB::rollback();
+                return back()->withInput()->withToastError('Something what happen');
+            }
+        });
+        return redirect(route('admin.keluarga.index'))->withInput()->withToastSuccess('Data tersimpan');        
+    } 
+
+    public function tolak(Request $request, $id)
+    {
+        $keluarga = Keluarga::findOrFail($id);
+        DB::transaction(function () use ($request, $keluarga) {
+            try {
+                $keluarga->updateFromRequest($request);
+                $keluarga->save();
+            } catch (\Throwable $th) {
+                dd($th);
+                DB::rollback();
+                return back()->withInput()->withToastError('Something what happen');
+            }
+        });
+        return redirect(route('admin.keluarga.index'))->withInput()->withToastSuccess('Data tersimpan');        
+    }
 }
