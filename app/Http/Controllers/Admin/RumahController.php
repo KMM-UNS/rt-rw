@@ -14,6 +14,7 @@ use App\Http\Controllers\Controller;
 use App\Models\StatusPenggunaanRumah;
 use App\Http\Requests\Admin\RumahForm;
 use App\DataTables\Admin\RumahDataTable;
+use App\Models\Keluarga;
 use App\Models\RiwayatRumah;
 
 class RumahController extends Controller
@@ -90,8 +91,10 @@ class RumahController extends Controller
     public function show($id, RiwayatDataTable $dataTable)
     {
        $data = Rumah::with('dokumen')->findOrFail($id);
+       $keluargas = Keluarga::with('warga')->where('rumah_id', $data->id)->get();
        return $dataTable->render('pages.admin.rumah.show', [
-        'data' => $data
+        'data' => $data,
+        'keluargas' => $keluargas
         ]);
     }
 

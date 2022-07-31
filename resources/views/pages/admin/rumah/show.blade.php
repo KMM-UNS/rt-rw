@@ -26,7 +26,7 @@
     <div class="panel-heading">
         <h4 class="panel-title">Data @yield('title')</h4>
         <div class="panel-heading-btn">
-            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+            {{-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a> --}}
             <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
         </div>
     </div>
@@ -80,7 +80,7 @@
   <div class="panel-heading">
     <h4 class="panel-title">Riwayat Rumah</h4>
     <div class="panel-heading-btn">
-      <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+      {{-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a> --}}
       <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
     </div>
   </div>
@@ -92,6 +92,72 @@
   <!-- end panel-body -->
 </div>
 <!-- end panel -->
+
+<!-- begin panel -->
+@if ($keluargas != null)
+<div class="panel panel-inverse">
+  <!-- begin panel-heading -->
+  <div class="panel-heading">
+    <h4 class="panel-title">Keluarga Penghuni</h4>
+    <div class="panel-heading-btn">
+      {{-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a> --}}
+      <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+    </div>
+  </div>
+  <!-- end panel-heading -->
+  <!-- begin panel-body -->
+  <div class="panel-body">
+    <div class="mb-3">
+        @foreach ($keluargas as $keluarga)
+        <div class="row mx-auto" style="font-size: 14px">
+         <div class="col-md-6">
+             <div>
+                 <label>No KK</label>
+                 <p class="font-weight-bold">{{ $keluarga->no_kk }}</p>
+             </div>
+         </div>
+         <div class="col-md-6">
+             <div>
+                 <label>Nama Kepala Keluarga</label>
+                 <p class="font-weight-bold">{{ $keluarga->kepala_keluarga }}</p>
+             </div>
+         </div>
+        </div>
+        <table class="table table-bordered">
+         <thead>
+             <tr>
+                 <th>No</th>
+                 <th>NIK</th>
+                 <th>Nama</th>
+                 <th>Jenis Kelamin</th>
+                 <th>Agama</th>
+                 <th>Tempat Lahir</th>
+                 <th>Tanggal Lahir</th>
+                 <th>Status dalam Keluarga</th>
+             </tr>
+         </thead>
+         <tbody>
+             @foreach ($keluarga->warga as $key => $warga)
+             <tr>
+                 <td>{{ $key + 1 }}</td>
+                 <td>{{ $warga->nik }}</td>
+                 <td>{{ $warga->nama }}</td>
+                 <td>{{ $warga->jenis_kelamin }}</td>
+                 <td>{{ $warga->agama->nama }}</td>
+                 <td>{{ $warga->tempat_lahir }}</td>
+                 <td>{{ $warga->tanggal_lahir->isoFormat('DD MMMM YYYY') }}</td>
+                 <td>{{ $warga->status_keluarga->nama }}</td>
+             </tr>
+             @endforeach
+         </tbody>
+        </table>
+        @endforeach
+    </div>
+  </div>
+  <!-- end panel-body -->
+</div>
+<!-- end panel -->
+@endif
 @endsection
 
 @push('scripts')
