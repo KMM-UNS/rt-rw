@@ -29,7 +29,14 @@ class KeluargaDataTable extends DataTable
                 // $btn = $btn . '<a href="' . route('admin.keluarga.destroy', $row->id) . '" class="btn btn-danger buttons-delete"><i class="fas fa-trash fa-fw"></i></a>';
                 $btn = $btn . '</div>';
                 return $btn;
-            });
+            })
+            ->editColumn('verified_at', function ($row){
+                if($row->verified_at == null){
+                    return "-";
+                } else {
+                    return $row->verified_at;
+                }
+            }, true);
     }
 
     /**
@@ -81,10 +88,10 @@ class KeluargaDataTable extends DataTable
     {
         return [
             Column::make('DT_RowIndex')->title('No')->orderable(false)->searchable(false)->addClass('text-center'),
-            Column::make('no_kk','keluarga.no_kk'),
+            Column::make('no_kk','keluarga.no_kk')->title('No KK'),
             Column::make('kepala_keluarga','keluarga.kepala_keluarga'),
             Column::make('status_tinggal.nama', 'status_tinggal.nama')->title('Status'),
-            // Column::make('rumah_id')->title('Nomor Rumah')->data('rumah.nomor_rumah'),
+            Column::make('verified_at')->title('Terverifikasi pada'),
             Column::computed('action')
             ->title('Aksi')
             ->exportable(false)
