@@ -1,10 +1,53 @@
-<form action="{{ route('admin.surat.verifikasi', $surat->id) }}" id="form" name="form" method="POST" data-parsley-validate="true" enctype="multipart/form-data">
-    @csrf
-    <input type="hidden" id="status" name="surat_status_surat_id" class="form-control" autofocus  value="{{ ($surat->status_surat_id != "4") ? $surat->status_surat_id + 1 : $surat->status_surat_id}}">
-    @if($surat->status_surat_id == '2' && auth()->user()->hasRole('ketua_rt') || $surat->status_surat_id == '3' && auth()->user()->hasRole('ketua_rw') || $surat->status_surat_id == '1')
-    <div class="row">
-        <button type="submit" class="btn btn-primary my-2 ml-3 mr-1"><i class="fa fa-check mr-2" aria-hidden="true"></i>Verifikasi</button>
-    </form>
-    @endif
-    {{-- <a href="{{ route('admin.surat.cetak', $surat->id) }}"  class="btn btn-warning my-2 mx-1 {{ ($surat->status_surat_id != 4) ? 'disabled' : '' }}"><i class="fas fa-print mr-2"></i>Cetak</a> --}}
+<div class="button">
+    <a href="#modal-tolak" class="btn btn-sm btn-danger fw-normal float-right" data-toggle="modal" style="font-size: 13px"><i class="fa fa-times mr-2"></i> Tolak</a>
+    <a href="#modal-verifikasi" class="btn btn-sm btn-primary fw-normal float-right mx-2" data-toggle="modal" style="font-size: 13px"><i class="fa fa-check mr-2" aria-hidden="true"></i> Verifikasi</a>
+</div>
+
+
+ {{-- begin modal verifikasi --}}
+ <div class="modal fade" id="modal-verifikasi">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Verifikasi Surat</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('admin.surat.verifikasi', $surat->id) }}" method="POST" name="form-wizard" class="form-control-with-bg"  data-parsley-validate="true" enctype="multipart/form-data">
+                    @csrf
+                    Dengan ini Anda menyetujui jika surat ini valid.
+                    Apakah Anda yakin?
+                    <hr>
+                    <div class="float-right">
+                        <a href="javascript:;" class="btn btn-white" data-dismiss="modal">Tidak</a>
+                        <button type="submit" class="btn btn-primary">Ya</button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
+</div>
+{{-- end modal verifikasi --}}
+{{-- begin modal tolak --}}
+<div class="modal fade" id="modal-tolak">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Tolak Surat</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('admin.surat.tolak', $surat->id) }}" method="POST" name="form-wizard" class="form-control-with-bg"  data-parsley-validate="true" enctype="multipart/form-data">
+                    @csrf
+                    <input type="text" class="form-control w-100" name="surat_alasan" id="alasan" placeholder="Tulis alasan ditolak" required>
+                    <div class="modal-footer">
+                        <a href="javascript:;" class="btn btn-white" data-dismiss="modal">Tutup</a>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{{-- end modal tolak --}}

@@ -86,8 +86,14 @@
                         <td>{{ $surat->nomor_surat }}</td>
                         <td>{{ ($surat->keperluan_surat_id == "7") ?  $surat->keterangan : $surat->keperluan_surat->nama }}</td>
                         <td>{{ $surat->tanggal_pengajuan->isoFormat('DD MMMM YYYY') }}</td>
-                        <td>{{ $surat->status_surat->nama }}</td>
-                        <td class="text-center"><a href="{{ ($surat->status_surat_id != 4) ? 'javascript:;' : route('user.surat.cetak', $surat->id) }}" class=" {{ ($surat->status_surat_id != 4) ? 'btn btn-default disabled' : 'btn btn-aqua' }}"><i class="fas fa-download"></i></a></td>
+                        <td>
+                            <p>
+                                {{  $surat->status_surat->nama }}
+                            </p>
+                            <p>
+                                {{ ($surat->status_surat_id == 3) ? 'Alasan: '. $surat->alasan : '' }}</td>
+                            </p>
+                        <td class="text-center"><a href="{{ ($surat->status_surat_id != 2) ? 'javascript:;' : route('user.surat.cetak', $surat->id) }}" class=" {{ ($surat->status_surat_id != 2) ? 'btn btn-default disabled' : 'btn btn-aqua' }}"><i class="fas fa-download"></i></a></td>
                     </tr>
                 </tbody>
                 @endforeach

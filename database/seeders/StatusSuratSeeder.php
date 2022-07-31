@@ -15,10 +15,9 @@ class StatusSuratSeeder extends Seeder
     public function run()
     {
         $status_surats = [
-            'Menunggu Verifikasi',
             'Menunggu Tanda Tangan RT',
-            'Menunggu Tanda Tangan RW',
         	'Selesai',
+            'Ditolak',
         ];
 
         foreach ($status_surats as $status_surat) :

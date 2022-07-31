@@ -1,11 +1,12 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
 use Carbon\Carbon;
 use App\Models\App;
+use App\Models\User;
 use App\Models\Surat;
 use App\Models\Warga;
+use Twilio\Rest\Client;
 use App\Models\Keluarga;
 use App\Helpers\DataHelper;
 use App\Models\StatusSurat;
@@ -15,9 +16,11 @@ use Illuminate\Http\Request;
 use App\Models\KeperluanSurat;
 use Barryvdh\DomPDF\Facade\PDF;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
-use App\DataTables\Admin\SuratDataTable;
 use App\Http\Requests\Admin\SuratForm;
+use Twilio\Exceptions\TwilioException;
+use App\DataTables\Admin\SuratDataTable;
 use Barryvdh\DomPDF\Facade\Pdf as PDFCetak;
 use HnhDigital\LaravelNumberConverter\Facade as NumConvert;
 
@@ -190,12 +193,32 @@ class SuratController extends Controller
             try {
 
                 $surat->updateFromRequest($request);
-                if ($surat->status_surat_id == 4 ) {
-                    $tanggal_disetujui = Carbon::now()->format('Y-m-d');
-                    $surat->tanggal_disetujui = $tanggal_disetujui;
-                }
+                $surat->tanggal_disetujui = Carbon::now()->format('Y-m-d');
+                $surat->status_surat_id = 2;
                 $surat->save();
 
+                // $recipient = User::where('id', $surat->createable_id)->first()->phone_number;
+                // $token  = getenv("TWILIO_AUTH_TOKEN");
+                // $sid    = getenv("TWILIO_SID");
+                // $wa_from= getenv("TWILIO_WHATSAPP_FROM");
+                // $twilio = new Client($sid, $token);
+
+                // $body = "Surat Anda sudah diverifikasi, silakan unduh di halaman pengajuan surat.";
+                // try {
+                //     $twilio->messages->create(
+                //         $recipient,
+                //         [
+                //             "body" => $body,
+                //             "from" => $wa_from
+                //         ]
+                //     );
+                //     Log::info('Message sent to ' . $recipient);
+                // } catch (TwilioException $e) {
+                //     Log::error(
+                //         'Could not send SMS notification.' .
+                //         ' Twilio replied with: ' . $e
+                //     );
+                // }
             } catch (\Throwable $th) {
                 dd($th);
                 DB::rollback();
@@ -214,8 +237,37 @@ class SuratController extends Controller
             'surat' => $surat,
             'app' => $app,
             'ttd_rt'=> $app->dokumen->where('nama', 'ttd_rt'),
-            'ttd_rw'=> $app->dokumen->where('nama', 'ttd_rw')
+            // 'ttd_rw'=> $app->dokumen->where('nama', 'ttd_rw')
         ]);
         return $pdf->download('cetak_' . $surat->nomor_surat . '.pdf');
+    }
+
+    public function tolak(Request $request, $id)
+    {
+        $surat = Surat::findOrFail($id);
+        DB::transaction(function () use ($request, $surat) {
+            try {
+                $surat->updateFromRequest($request);
+                $surat->status_surat_id = 3;
+                $surat->save();
+
+
+                // $recipient = User::where('id', $surat->createable_id)->first()->phone_number;
+                // $sid    = getenv("TWILIO_AUTH_SID");
+                // $token  = getenv("TWILIO_AUTH_TOKEN");
+                // $wa_from= getenv("TWILIO_WHATSAPP_FROM");
+                // $twilio = new Client($sid, $token);
+
+                // $body = "Hello, welcome to codelapan.com.";
+
+                // return $twilio->messages->create("whatsapp:$recipient",["from" => "whatsapp:$wa_from", "body" => $body]);
+
+            } catch (\Throwable $th) {
+                dd($th);
+                DB::rollback();
+                return back()->withInput()->withToastError('Something what happen');
+            }
+        });
+        return redirect(route('admin.surat.index'))->withInput()->withToastSuccess('Data tersimpan');
     }
 }

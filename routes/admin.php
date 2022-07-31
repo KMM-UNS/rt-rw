@@ -24,6 +24,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
             Route::get('/cetak/{id}', 'SuratController@cetak')->name('cetak');
             Route::resource('/', 'SuratController')->parameter('', 'surat');
             Route::post('verifikasi/{id}', 'SuratController@verifikasi')->name('verifikasi');
+            Route::post('tolak/{id}', 'SuratController@tolak')->name('tolak');
         });
         Route::resource('rumah', 'RumahController');
         Route::resource('tamu', 'TamuController');

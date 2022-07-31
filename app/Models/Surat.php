@@ -25,7 +25,8 @@ class Surat extends Model
         'tanggal_pengajuan',
         'tanggal_disetujui',
         'keterangan',
-        'status_surat_id'
+        'status_surat_id',
+        'alasan'
     ];
 
     protected $dates = [

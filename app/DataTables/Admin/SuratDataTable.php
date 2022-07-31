@@ -25,7 +25,7 @@ class SuratDataTable extends DataTable
         ->addIndexColumn()
         ->addColumn('action', function ($row) {
             $btn = '<div class="btn-group">';
-            if ($row->status_surat_id == '2' && auth()->user()->hasRole('ketua_rt') || $row->status_surat_id == '3' && auth()->user()->hasRole('ketua_rw') || $row->status_surat_id == '1') {
+            if (auth()->user()->hasRole('ketua_rt') && $row->status_surat_id == 1) {
                 $btn = $btn . '<a class="info btn btn-white"><i class="fas fa-plus"></i></a>';
             }
             else {
@@ -91,7 +91,7 @@ class SuratDataTable extends DataTable
      */
     public function query(Surat $model)
     {
-        return $model->with(['warga', 'keperluan_surat', 'status_surat'])->select('surat.*');
+        return $model->with(['warga', 'keperluan_surat', 'status_surat'])->select('surat.*')->orderBy('tanggal_pengajuan', 'DESC');
     }
 
     /**
