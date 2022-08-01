@@ -68,7 +68,7 @@
                                 <div class="col-md-4">
                                     <div class="\
                                     ">
-                                        <input type="text" id="telp" name="keluarga_telp" class="form-control" autofocus data-parsley-required="true"  value="{{{ old('keluarga_telp') ?? ($data['telp'] ?? null) }}}">
+                                        <input type="text" id="telp" name="keluarga_telp" class="form-control" autofocus data-parsley-required="true"  value="{{{ old('keluarga_telp') ?? ($data['telp'] ?? auth()->user()->phone_number) }}}">
                                     </div>
                                 </div>
                             </div>

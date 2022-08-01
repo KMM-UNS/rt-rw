@@ -15,7 +15,7 @@
             <div class="panel-body mx-3 text-center">
                 <h3>Data Tamu</h3>
                 <hr>
-                @if (auth()->user()->email_verified_at == null)
+                {{-- @if (auth()->user()->email_verified_at == null)
                     @if (session('status') == 'verification-link-sent')
                         <div class="alert alert-success text-center" style="font-size:13px;">
                             <strong>
@@ -33,10 +33,10 @@
                         <button type="submit" class="btn btn-dark font-weight-normal" style="font-size:13px">Kirim ulang email verifikasi</button>
                     </form>
                 </div>
-                @else
+                @else --}}
                 <p style="font-size: 14px">Anda belum mengisi data keluarga.</p>
                 <a href="{{ route('user.keluarga.create') }}" class="btn btn-primary"><i class="fas fa-pencil-alt fa-fw mr-2"></i>Isi Data Keluarga</a>
-                @endif
+                {{-- @endif --}}
             </div>
         </div>
         <!-- end panel -->
