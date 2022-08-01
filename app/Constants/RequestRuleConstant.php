@@ -11,6 +11,7 @@ class RequestRuleConstant
         return [
             'user_name' => 'required|min:3',
             'user_email' => 'required|min:7|max:30',
+            'user_phone_number' => 'required|min:7|max:20',
             'user_password' => 'sometimes|required|min:6|confirmed',
         ];
     }
@@ -23,7 +24,6 @@ class RequestRuleConstant
             'user_profile_tempat_lahir' => 'required',
             'user_profile_tanggal_lahir' => 'required',
             'user_profile_alamat' => 'required',
-            'user_profile_no_telp' => 'required',
         ];
     }
 

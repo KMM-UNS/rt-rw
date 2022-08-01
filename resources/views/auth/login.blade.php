@@ -65,7 +65,7 @@
 					<br />
 					Belum punya akun? <a href="{{ route('register') }}">Mendaftar</a>
 					<br />
-					Lupa kata sandi? <a href="{{ route('password.request') }}">Dapatkan kembali</a>
+					{{-- Lupa kata sandi? <a href="{{ route('password.request') }}">Dapatkan kembali</a> --}}
 				</p>
 				{{-- @endif --}}
 				<hr />

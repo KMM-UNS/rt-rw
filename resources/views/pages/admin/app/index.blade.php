@@ -121,7 +121,7 @@
                         <div class="col-md-2 my-auto">
                             <label for="kode_pos"><strong>Kode Pos</strong></label>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-4">
                             <div class="">
                                 <input type="text" id="kode_pos" name="apps_kode_pos" class="form-control" autofocus data-parsley-required="true" value="{{{ old('apps_kode_pos') ?? ($data['kode_pos'] ?? null) }}}">
                             </div>
@@ -129,17 +129,9 @@
                         <div class="col-md-2 my-auto">
                             <label for="telepon"><strong>Telepon</strong></label>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-4">
                             <div class="">
                                 <input type="text" id="telepon" name="apps_telepon" class="form-control" autofocus data-parsley-required="true" value="{{{ old('apps_telepon') ?? ($data['telepon'] ?? null) }}}">
-                            </div>
-                        </div>
-                        <div class="col-md-2 my-auto">
-                            <label for="email"><strong>Email</strong></label>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="">
-                                <input type="text" id="email" name="apps_email" class="form-control" autofocus data-parsley-required="true" value="{{{ old('apps_email') ?? ($data['email'] ?? null) }}}">
                             </div>
                         </div>
                     </div>
@@ -147,19 +139,19 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-2 my-auto">
+                            <label for="email"><strong>Email</strong></label>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="">
+                                <input type="text" id="email" name="apps_email" class="form-control" autofocus data-parsley-required="true" value="{{{ old('apps_email') ?? ($data['email'] ?? null) }}}">
+                            </div>
+                        </div>
+                        <div class="col-md-2 my-auto">
                             <label for="ketua_rt"><strong>Ketua RT</strong></label>
                         </div>
                         <div class="col-md-4">
                             <div class="">
                                 <input type="text" id="ketua_rt" name="apps_ketua_rt" class="form-control" autofocus data-parsley-required="true" value="{{{ old('apps_ketua_rt') ?? ($data['ketua_rt'] ?? null) }}}">
-                            </div>
-                        </div>
-                        <div class="col-md-2 my-auto">
-                            <label for="ketua_rw"><strong>Ketua RW</strong></label>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="">
-                                <input type="text" id="ketua_rw" name="apps_ketua_rw" class="form-control" autofocus data-parsley-required="true" value="{{{ old('apps_ketua_rw') ?? ($data['ketua_rw'] ?? null) }}}">
                             </div>
                         </div>
                     </div>
@@ -198,41 +190,6 @@
                     @endphp
                     <div class="row">
                         <x-form.ImageUploader :imageSrc="$imageSrc != null ? asset(DataHelper::filterDokumenData($imageSrc, 'nama', 'ttd_rt')->first()['public_url']) : null" name="ttd_rt" title="Tanda Tangan RT" value="{{{  old('ttd_rt') }}}" />
-                    </div>
-                </div>
-            </div>
-        </div>
-        @elseif(auth()->user()->hasRole('ketua_rw'))
-        <div class="col-xl-3 ui-sortable mx-auto">
-            <div class="panel panel-inverse">
-                <!-- begin panel-heading -->
-                <div class="panel-heading">
-                    <h4 class="panel-title">Lampiran Berkas</h4>
-                    <div class="panel-heading-btn">
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a>
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
-                    </div>
-                </div>
-                <!-- end panel-heading -->
-                <!-- begin panel-body -->
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            {{-- <img src="{{ asset($data->foto)}}" alt="" srcset=""> --}}
-                        </div>
-                        {{-- <img src="{{ asset('storage/app/public/foto')$data->foto }}" alt="" srcset=""> --}}
-                    </div>
-                    @php
-                    $imageSrc = null;
-                    if(isset($data->dokumen)){
-                    $imageSrc = $data->dokumen->where('nama', 'ttd_rw')->toArray();
-                    }
-                    @endphp
-                    <div class="row">
-                        {{-- {{  $data->dokumen->where('nama', 'ttd_rw') }} --}}
-                        <x-form.ImageUploader :imageSrc="$imageSrc != null ? asset(DataHelper::filterDokumenData($imageSrc, 'nama', 'ttd_rw')->first()['public_url']) : null" name="ttd_rw" title="Tanda Tangan RW" value="{{{  old('ttd_rw') }}}" />
                     </div>
                 </div>
             </div>

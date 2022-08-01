@@ -41,6 +41,7 @@ class UserController extends Controller
                 $profile->updateFromRequest($request);
                 $profile->save();
             } catch (\Throwable $th) {
+                dd($th);
                 DB::rollBack();
                 $msg = "Terdapat kesalahan saat menyimpan data";
 

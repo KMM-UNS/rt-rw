@@ -17,7 +17,6 @@ class UserProfile extends Model
         'tempat_lahir',
         'tanggal_lahir',
         'alamat',
-        'no_telp',
     ];
 
     protected $dates = ['tanggal_lahir'];

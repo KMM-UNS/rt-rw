@@ -26,7 +26,6 @@ class CreateAppsTable extends Migration
             $table->string('telepon');
             $table->string('email');
             $table->string('ketua_rt');
-            $table->string('ketua_rw');
             $table->timestamps();
             $table->softDeletes();
 

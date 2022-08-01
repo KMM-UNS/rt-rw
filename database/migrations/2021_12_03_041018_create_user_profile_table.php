@@ -21,7 +21,6 @@ class CreateUserProfileTable extends Migration
             $table->string('tempat_lahir');
             $table->date('tanggal_lahir');
             $table->text('alamat');
-            $table->string('no_telp');
             $table->timestamps();
         });
     }

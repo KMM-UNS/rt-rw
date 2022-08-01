@@ -25,8 +25,7 @@ class App extends Model
         'kode_pos',
         'telepon',
         'email',
-        'ketua_rt',
-        'ketua_rw'
+        'ketua_rt'
     ];
 
     public function dokumen()

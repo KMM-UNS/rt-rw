@@ -50,6 +50,10 @@
                         <input type="text" id="user_email" name="user_email" class="form-control" autofocus data-parsley-required="true" value="{{{ $data->email ?? old('user_email') }}}">
                     </div>
                     <div class="form-group">
+                        <label for="name">Telepon</label>
+                        <input type="text" id="user_phone_number" name="user_phone_number" class="form-control" autofocus data-parsley-required="true" value="{{{ $data->phone_number ?? old('user_phone_number') }}}">
+                    </div>
+                    <div class="form-group">
                         <label>Peran</label>
                         <x-form.dropdown name="user_roles[]" :options="$roles" :selected="old('user_roles') ?? (isset($data->roles) ? $data->roles->pluck('id')->toArray() : null)" placeholder="Roles" multiple />
                     </div>
@@ -106,10 +110,6 @@
                                 <input type="text" name="user_profile_tanggal_lahir" class="form-control date-picker" placeholder="Tanggal Lahir" value="{{{ old('user_profile_tanggal_lahir') ?? (isset($data->profile->tanggal_lahir) ? $data->profile->tanggal_lahir->format('d-m-Y') : null) ?? null }}}" />
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Nomor Telp.</label>
-                        <input type="number" name="user_profile_no_telp" class="form-control" placeholder="" value="{{{ old('user_profile_no_telp') ?? $data->profile->no_telp ?? null }}}" />
                     </div>
                     <div class="form-group">
                         <label>Alamat Sekarang</label>

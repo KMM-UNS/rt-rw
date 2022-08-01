@@ -10,17 +10,13 @@ return [
             'users' => 'c,r,u,d',
             'profile' => 'r,u'
         ],
-        'ketua_rw' => [
-            'users' => 'c,r,u,d',
-            'profile' => 'r,u'
-        ],
         'warga' => [
             'profile' => 'r,u'
         ]
     ],
     'user_roles' => [
         'admin' => [
-            ['name' => "Admin", "email" => "admin@admin.com", "password" => 'password'],
+            ['name' => "Admin", "email" => "admin@admin.com", "phone_number" => "083728290281","password" => 'password'],
         ],
     ],
     'permissions_map' => [
