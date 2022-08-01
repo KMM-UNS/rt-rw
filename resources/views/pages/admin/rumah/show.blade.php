@@ -151,6 +151,7 @@
              @endforeach
          </tbody>
         </table>
+        <hr>
         @endforeach
     </div>
   </div>
