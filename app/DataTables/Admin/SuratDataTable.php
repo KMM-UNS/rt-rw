@@ -91,7 +91,7 @@ class SuratDataTable extends DataTable
      */
     public function query(Surat $model)
     {
-        return $model->with(['warga', 'keperluan_surat', 'status_surat'])->select('surat.*')->orderBy('tanggal_pengajuan', 'DESC');
+        return $model->with(['warga', 'keperluan_surat', 'status_surat'])->select('surat.*')->orderBy('created_at', 'DESC');
     }
 
     /**

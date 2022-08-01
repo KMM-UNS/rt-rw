@@ -18,6 +18,7 @@ use Barryvdh\DomPDF\Facade\PDF;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use App\Services\WhatsappApiServices;
 use App\Http\Requests\Admin\SuratForm;
 use Twilio\Exceptions\TwilioException;
 use App\DataTables\Admin\SuratDataTable;
@@ -186,10 +187,10 @@ class SuratController extends Controller
         }
     }
 
-    public function verifikasi($id, Request $request)
+    public function verifikasi($id, Request $request, WhatsappApiServices $whatsappApiServices)
     {
         $surat = Surat::findOrFail($id);
-        DB::transaction(function () use ($request, $surat) {
+        DB::transaction(function () use ($request, $surat, $whatsappApiServices) {
             try {
 
                 $surat->updateFromRequest($request);
@@ -197,28 +198,11 @@ class SuratController extends Controller
                 $surat->status_surat_id = 2;
                 $surat->save();
 
-                // $recipient = User::where('id', $surat->createable_id)->first()->phone_number;
-                // $token  = getenv("TWILIO_AUTH_TOKEN");
-                // $sid    = getenv("TWILIO_SID");
-                // $wa_from= getenv("TWILIO_WHATSAPP_FROM");
-                // $twilio = new Client($sid, $token);
+                $keperluan = ($surat->keperluan_surat_id == "7") ?  $surat->keterangan : $surat->keperluan_surat->nama;
+                $body = "Sistem Informasi RT - Surat dengan nomor surat ".$surat->nomor_surat.", keperluan ".$keperluan." terverifikasi, Anda dapat mengunduhnya pada halaman surat.";;
 
-                // $body = "Surat Anda sudah diverifikasi, silakan unduh di halaman pengajuan surat.";
-                // try {
-                //     $twilio->messages->create(
-                //         $recipient,
-                //         [
-                //             "body" => $body,
-                //             "from" => $wa_from
-                //         ]
-                //     );
-                //     Log::info('Message sent to ' . $recipient);
-                // } catch (TwilioException $e) {
-                //     Log::error(
-                //         'Could not send SMS notification.' .
-                //         ' Twilio replied with: ' . $e
-                //     );
-                // }
+                $whatsappApiServices->sendMessage($surat->createable->phone_number, $body);
+
             } catch (\Throwable $th) {
                 dd($th);
                 DB::rollback();
@@ -232,35 +216,27 @@ class SuratController extends Controller
     {
         $surat = Surat::findOrFail($id);
         $app = App::first();
-        // dd($app->dokumen->where('nama', 'ttd_rw'));
         $pdf = PDFCetak::loadview('pages.admin.surat.cetak', [
             'surat' => $surat,
             'app' => $app,
             'ttd_rt'=> $app->dokumen->where('nama', 'ttd_rt'),
-            // 'ttd_rw'=> $app->dokumen->where('nama', 'ttd_rw')
         ]);
         return $pdf->download('cetak_' . $surat->nomor_surat . '.pdf');
     }
 
-    public function tolak(Request $request, $id)
+    public function tolak(Request $request, $id, WhatsappApiServices $whatsappApiServices)
     {
         $surat = Surat::findOrFail($id);
-        DB::transaction(function () use ($request, $surat) {
+        DB::transaction(function () use ($request, $surat, $whatsappApiServices) {
             try {
                 $surat->updateFromRequest($request);
                 $surat->status_surat_id = 3;
                 $surat->save();
 
+                $keperluan = ($surat->keperluan_surat_id == "7") ?  $surat->keterangan : $surat->keperluan_surat->nama;
+                $body = "Sistem Informasi RT - Pengajuan surat ditolak dengan nomor surat ".$surat->nomor_surat.", keperluan ".$keperluan.". Alasan: ".$surat->alasan.".";
 
-                // $recipient = User::where('id', $surat->createable_id)->first()->phone_number;
-                // $sid    = getenv("TWILIO_AUTH_SID");
-                // $token  = getenv("TWILIO_AUTH_TOKEN");
-                // $wa_from= getenv("TWILIO_WHATSAPP_FROM");
-                // $twilio = new Client($sid, $token);
-
-                // $body = "Hello, welcome to codelapan.com.";
-
-                // return $twilio->messages->create("whatsapp:$recipient",["from" => "whatsapp:$wa_from", "body" => $body]);
+                $whatsappApiServices->sendMessage($surat->createable->phone_number, $body);
 
             } catch (\Throwable $th) {
                 dd($th);
