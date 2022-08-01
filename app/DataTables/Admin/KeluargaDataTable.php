@@ -47,7 +47,7 @@ class KeluargaDataTable extends DataTable
      */
     public function query(Keluarga $model)
     {
-        return $model->with('status_tinggal')->select('keluarga.*')->newQuery();
+        return $model->with('status_tinggal')->select('keluarga.*')->orderBy('created_at', 'DESC')->newQuery();
     }
 
     /**

@@ -2,20 +2,25 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\User;
 use App\Models\Rumah;
 use App\Models\Warga;
+use Twilio\Rest\Client;
 use App\Models\Keluarga;
 use App\Models\RiwayatRumah;
+use App\Models\StatusHunian;
 use Illuminate\Http\Request;
 use App\Models\StatusTinggal;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Helpers\FileUploaderHelper;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use Twilio\Exceptions\TwilioException;
 use App\Http\Requests\Admin\KeluargaForm;
 use App\DataTables\Admin\KeluargaDataTable;
 use App\DataTables\Admin\DetailKeluargaDataTable;
-use App\Models\StatusHunian;
+use App\Services\WhatsappApiServices;
 
 class KeluargaController extends Controller
 {
@@ -257,11 +262,11 @@ class KeluargaController extends Controller
             }
     }
 
-    public function verifikasi(Request $request, $id)
+    public function verifikasi(Request $request, $id, WhatsappApiServices $whatsappApiServices)
     {
         // dd(Carbon::now());
         $keluarga = Keluarga::findOrFail($id);
-        DB::transaction(function () use ($request, $keluarga) {
+        DB::transaction(function () use ($request, $keluarga, $whatsappApiServices) {
             try {
                 $keluarga->updateFromRequest($request);
                 $keluarga->verified_at = Carbon::now();
@@ -272,28 +277,37 @@ class KeluargaController extends Controller
                 $riwayat->keluarga_id = $keluarga->id;
                 $riwayat->tanggal_masuk = Carbon::now()->format('Y-m-d');
                 $riwayat->save();
+
+                // $user = User::where('id', $keluarga->createable_id);
+                $body = "Sistem Informasi RT - Keluarga terverifikasi, Anda dapat melanjutkan proses pengisian data.";
+
+                $whatsappApiServices->sendMessage($keluarga->createable->phone_number, $body);
             } catch (\Throwable $th) {
                 dd($th);
                 DB::rollback();
                 return back()->withInput()->withToastError('Something what happen');
             }
         });
-        return redirect(route('admin.keluarga.index'))->withInput()->withToastSuccess('Data tersimpan');        
-    } 
+        return redirect(route('admin.keluarga.index'))->withInput()->withToastSuccess('Data tersimpan');
+    }
 
-    public function tolak(Request $request, $id)
+    public function tolak(Request $request, $id, WhatsappApiServices $whatsappApiServices)
     {
         $keluarga = Keluarga::findOrFail($id);
-        DB::transaction(function () use ($request, $keluarga) {
+        DB::transaction(function () use ($request, $keluarga, $whatsappApiServices) {
             try {
                 $keluarga->updateFromRequest($request);
                 $keluarga->save();
+
+                $body = "Sistem Informasi RT - Pengajuan data keluarga ditolak. Alasan: ".$keluarga->keterangan.". Silakan ubah data Anda lalu hubungi Admin." ;
+
+                $whatsappApiServices->sendMessage($keluarga->createable->phone_number, $body);
             } catch (\Throwable $th) {
                 dd($th);
                 DB::rollback();
                 return back()->withInput()->withToastError('Something what happen');
             }
         });
-        return redirect(route('admin.keluarga.index'))->withInput()->withToastSuccess('Data tersimpan');        
+        return redirect(route('admin.keluarga.index'))->withInput()->withToastSuccess('Data tersimpan');
     }
 }

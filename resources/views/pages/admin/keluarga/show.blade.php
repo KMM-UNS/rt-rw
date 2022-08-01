@@ -72,7 +72,7 @@
         </div>
         @if(auth()->user()->hasRole('admin'))
         @if($data->verified_at == null)
-        <a href="#modal-tolak" class="btn btn-sm btn-danger {{ $data->keterangan != null ? 'disabled d-none' : '' }} fw-normal float-right" data-toggle="modal" style="font-size: 13px"><i class="fa fa-times mr-2"></i> Tolak</a>
+        <a href="#modal-tolak" class="btn btn-sm btn-danger fw-normal float-right" data-toggle="modal" style="font-size: 13px"><i class="fa fa-times mr-2"></i> Tolak</a>
         <a href="#modal-verifikasi" class="btn btn-sm btn-primary fw-normal float-right mx-2" data-toggle="modal" style="font-size: 13px"><i class="fa fa-check mr-2" aria-hidden="true"></i> Verifikasi</a>
         @else
         <a href="#modal-pindah" class="btn btn-sm btn-dark fw-normal float-right" data-toggle="modal" style="font-size: 13px"><i class="fa fa-truck mr-2"></i> Pindah Rumah</a>
