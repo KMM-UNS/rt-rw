@@ -29,7 +29,9 @@ class JadwalRondaController extends Controller
 
     public function create(DataHelper $dataHelper)
     {
-        $warga = Warga::where('status_keluarga_id', "1")->doesntHave('jadwal_ronda')->pluck('nama', 'id');
+        $warga = Warga::where('status_keluarga_id', "1")->whereDoesntHave('jadwal_ronda.ronda', function ($query){
+            return $query->where('status', 'aktif');
+        })->pluck('nama', 'id');
         $hari = $dataHelper->dayDropdownData();
         // dd($hari);
         return view('pages.admin.ronda.jadwal.add-edit', [

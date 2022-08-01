@@ -96,7 +96,7 @@ class Warga extends Model
 
     public function jadwal_ronda()
     {
-        return $this->hasOne(JadwalRonda::class);
+        return $this->hasMany(JadwalRonda::class);
     }
 
     public function presensi_ronda()
