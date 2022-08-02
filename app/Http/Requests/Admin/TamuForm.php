@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Support\Arr;
+use Illuminate\Validation\Rule;
 use App\Constants\RequestRuleConstant;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -45,6 +46,14 @@ class TamuForm extends FormRequest
      */
     public function rules(RequestRuleConstant $rrc)
     {
+        $rules = [
+                'ktp' => [
+                    Rule::requiredIf(function () {
+                        return request()->method() != "PUT";
+                    }),
+                    'mimes:pdf,png,jpeg,jpg|max:2048'
+                ]
+            ];
         $rules = [
             $rrc->tamuTable()
         ];

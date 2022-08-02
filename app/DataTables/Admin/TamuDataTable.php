@@ -24,10 +24,14 @@ class TamuDataTable extends DataTable
             ->addIndexColumn()
             ->addColumn('action', function ($row) {
                 $btn = '<div class="btn-group">';
-                $btn = $btn . '<a href="' . route('admin.tamu.edit', $row->id) . '" class="btn btn-dark buttons-edit"><i class="fas fa-edit"></i></a>';
-                $btn = $btn . '<a href="' . route('admin.tamu.destroy', $row->id) . '" class="btn btn-danger buttons-delete"><i class="fas fa-trash fa-fw"></i></a>';
+                $btn = $btn . '<a class="info btn btn-white"><i class="fas fa-plus"></i></a>';
+                // $btn = $btn . '<a href="' . route('admin.tamu.edit', $row->id) . '" class="btn btn-dark buttons-edit"><i class="fas fa-edit"></i></a>';
+                // $btn = $btn . '<a href="' . route('admin.tamu.destroy', $row->id) . '" class="btn btn-danger buttons-delete"><i class="fas fa-trash fa-fw"></i></a>';
                 $btn = $btn . '</div>';
                 return $btn;
+            })
+            ->addColumn('show', function(Tamu $tamu){
+                return view('pages.admin.tamu.show', compact('tamu'));
             })
             ->editColumn('tanggal_tiba', function($row){
                 return $row->tanggal_tiba->isoFormat('DD MMMM YYYY');
@@ -71,7 +75,37 @@ class TamuDataTable extends DataTable
                         Button::make('print'),
                         Button::make('reset'),
                         // Button::make('reload')
-                    );
+                    )
+                    ->parameters([
+                        'initComplete' => 'function(){
+
+                        // 1. Dapatkan instance datatable di javascript
+                        let table = this.api();
+
+                        $("#tamudatatable-table").on("click", ".info", function(){
+
+                        // 2. dapatkan elemen `tr` yang mewakili baris dari ikon yang diklik
+                        let tr = $(this).closest("tr");
+
+                        // 3. dapatkan baris di datatable berdasarkan `tr` di atas
+                        let row = table.row(tr);
+
+                        // 4. check apakah baris sedang terlihat (visible)
+                        if ( row.child.isShown() ) {
+
+                        // jika posisi sekarang terlihat, maka hide
+                        row.child.hide();
+                        tr.removeClass("shown");
+                        }
+                        else {
+                        // jika posisi sekarang tidak terlihat (hidden), maka perlihatkan
+                        // dengan data "Helllo again"
+                        row.child(row.data().show).show();
+                        tr.addClass("shown");
+                        }
+                        })
+                                                }'
+                    ]);
     }
 
     /**
@@ -90,13 +124,13 @@ class TamuDataTable extends DataTable
             Column::make('tanggal_tiba', 'tamu.tanggal_tiba'),
             Column::make('lama_menetap', 'tamu.lama_menetap'),
             Column::make('keluarga.kepala_keluarga', 'keluarga.kepala_keluarga')->title('Penerima Tamu'),
-            // Column::computed('action')
-            //       ->title('Aksi')
-            //       ->addClass('details-control')
-            //       ->exportable(false)
-            //       ->printable(false)
-            //       ->width(60)
-            //       ->addClass('text-center'),
+            Column::computed('action')
+                  ->title('Aksi')
+                  ->addClass('details-control')
+                  ->exportable(false)
+                  ->printable(false)
+                  ->width(60)
+                  ->addClass('text-center'),
         ];
     }
 

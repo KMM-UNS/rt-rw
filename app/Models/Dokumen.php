@@ -23,4 +23,14 @@ class Dokumen extends Model
     {
         return $this->morphedByMany(Warga::class, 'dokumenable');
     }
+
+    public function keluarga()
+    {
+        return $this->morphedByMany(Keluarga::class, 'dokumenable');
+    }
+
+    public function tamu()
+    {
+        return $this->morphedByMany(Tamu::class, 'dokumenable');
+    }
 }

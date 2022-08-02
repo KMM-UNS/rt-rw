@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Helpers\FileUploaderHelper;
 use App\Models\Tamu;
 use App\Models\Surat;
 use App\Models\Warga;
@@ -50,10 +51,11 @@ class TamuController extends Controller
         ]);
     }
 
-    public function store(TamuForm $request)
+    public function store(TamuForm $request, FileUploaderHelper $fileUploaderHelper)
     {
-        DB::transaction(function () use ($request) {
+        DB::transaction(function () use ($request, $fileUploaderHelper) {
             try {
+                // dd($request->all());
                 $keluarga = Keluarga::where('createable_id', auth()->user()->id)->where('createable_type', 'App\Models\User')->first()->id;
                 // dd($keluarga);
 
@@ -61,6 +63,17 @@ class TamuController extends Controller
                 $tamu->createable()->associate($request->user());
                 $tamu->keluarga_id = $keluarga;
                 $tamu->save();
+
+                if ($request->file()) {
+
+                    foreach ($request->file() as $key => $file) {
+                        $upload = $fileUploaderHelper->store($file, 'tamu/dokumen');
+                        $tamu->dokumen()->create([
+                            'nama' => $key,
+                            'public_url' => $upload['public_path']
+                        ]);
+                    }
+                }
             } catch (\Throwable $th) {
                 dd($th);
                 DB::rollback();

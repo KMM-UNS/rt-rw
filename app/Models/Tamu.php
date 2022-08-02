@@ -35,4 +35,9 @@ class Tamu extends Model
     {
         return $this->morphTo();
     }
+
+    public function dokumen()
+    {
+        return $this->morphToMany(Dokumen::class, 'dokumenable');
+    }
 }

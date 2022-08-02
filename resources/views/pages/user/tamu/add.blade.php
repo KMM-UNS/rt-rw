@@ -17,7 +17,7 @@
             @csrf
             <!-- begin wizard -->
             <div class="row ">
-                <div class="col-xl ui-sortable">
+                <div class="col-xl-8 ui-sortable">
                     <div class="panel panel-inverse">
                         <!-- begin panel-body -->
                         <div class="panel-body">
@@ -91,6 +91,29 @@
                     <!-- begin panel-footer -->
 
                     <!-- end panel-footer -->
+                    </div>
+                    <div class="col-xl-3 ui-sortable mx-auto">
+                        <div class="panel panel-inverse">
+                            <!-- begin panel-body -->
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        {{-- <img src="{{ asset($data->foto)}}" alt="" srcset=""> --}}
+                                    </div>
+                                    {{-- <img src="{{ asset('storage/app/public/foto')$data->foto }}" alt="" srcset=""> --}}
+                                </div>
+                                @php
+                                $imageSrc = null;
+                                if(isset($data->dokumen)){
+                                $imageSrc = $data->dokumen->where('nama', 'ktp')->toArray();
+                                }
+                                @endphp
+                                <div class="row">
+                                    {{-- {{  $data->dokumen->where('nama', 'ktp') }} --}}
+                                    <x-form.ImageUploader :imageSrc="$imageSrc != null ? asset(DataHelper::filterDokumenData($imageSrc, 'nama', 'ktp')->first()['public_url']) : null" name="ktp" title="Scan KTP Tamu" value="{{{  old('ktp') }}}" />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
