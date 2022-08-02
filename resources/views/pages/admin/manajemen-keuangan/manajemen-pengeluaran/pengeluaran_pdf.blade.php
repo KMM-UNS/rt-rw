@@ -50,7 +50,7 @@
                     <th scope="col">Tanggal</th>
                     <th scope="col">Nominal</th>
                     <th scope="col">Keterangan</th>
-
+                    {{-- <th scope="col">Bukti</th> --}}
                 </tr>
             </thead>
 
@@ -60,6 +60,8 @@
                         <td>{{ date('d M Y', strtotime($item->tanggal)) }}</td>
                         <td>{{ $item->keterangan }}</td>
                         <td>Rp.{{ number_format($item->nominal, 0) }}</td>
+                        {{-- <td> <img src="{{ asset($item->dokumen->first()['public_url']) }}" alt="Foto Pengeluaran"
+                                width="200"></td> --}}
                     </tr>
                 @endforeach
 

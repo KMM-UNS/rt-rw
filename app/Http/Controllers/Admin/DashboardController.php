@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Charts\KeuanganChart;
 use App\Charts\KasChart;
+use App\Charts\KasIuranChart;
+use App\Charts\TahunChart;
 use App\Http\Controllers\Controller;
 use App\Models\KasIuranAgenda;
 use App\Models\KasIuranKondisional;
@@ -21,7 +23,7 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(KeuanganChart  $keuanganchart, KasChart $kaschart)
+    public function index(KeuanganChart  $keuanganchart, KasChart $kaschart, KasIuranChart $kasiuranchart, TahunChart $tahunchart)
     {
         $total_wajib = KasIuranWajib::sum('total_biaya');
         $total_agenda = KasIuranAgenda::sum('total_biaya');
@@ -51,7 +53,9 @@ class DashboardController extends Controller
             'pengeluaran' => $pengeluaran,
             'pengeluarannn' => $pengeluarannn,
             'KeuanganChart' => $keuanganchart->build(),
-            'KasChart' => $kaschart->build()
+            'KasChart' => $kaschart->build(),
+            'KasIuranChart' => $kasiuranchart->build(),
+            'TahunChart' => $tahunchart->build()
         ]);
     }
 

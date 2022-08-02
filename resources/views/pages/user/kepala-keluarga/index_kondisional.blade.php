@@ -24,10 +24,6 @@
                                     <th scope="col">Kepala Keluarga</th>
                                     <th scope="col">Pos Tagihan</th>
                                     <th scope="col">Telp</th>
-                                    {{-- @foreach ($iuran_kondisional as $itemm)
-                                        <th>{{ $itemm->nama }}</th>
-                                    @endforeach --}}
-
                                     <th scope="col">Denda Ronda</th>
 
 

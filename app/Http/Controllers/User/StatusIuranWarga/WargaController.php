@@ -14,21 +14,25 @@ use App\Models\KasIuranWajib;
 use App\Models\Keluarga;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class WargaController extends Controller
 {
 
     public function index()
     {
-        // return view('wargaa');
         $id_keluarga = Keluarga::where('user_id', auth()->user()->id)->first()->id;
         $data1 = KasIuranWajib::where('warga', $id_keluarga)->get();
         $data2 = KasIuranSukaRela::where('warga', $id_keluarga)->get();
         $data3 = KasIuranKondisional::where('warga', $id_keluarga)->get();
         $data4 = KasIuranAgenda::where('warga', $id_keluarga)->get();
 
-
-        return view('wargaa', ['data1' => $data1, 'data2' => $data2, 'data3' => $data3, 'data4' => $data4]);
+        return view('wargaa', [
+            'data1' => $data1,
+            'data2' => $data2,
+            'data3' => $data3,
+            'data4' => $data4,
+        ]);
     }
 
     public function status($id)
@@ -44,12 +48,42 @@ class WargaController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    public function cetak_pdf_wajib()
+    {
+        $id_keluarga = Keluarga::where('user_id', auth()->user()->id)->first()->id;
+        $warga = KasIuranWajib::with(['iuranwajib', 'petugastagihan', 'postagihanwajib', 'warga_wajib'])->where('warga', $id_keluarga)->get();
+        $wargaa = KasIuranWajib::with(['iuranwajib', 'petugastagihan', 'postagihanwajib', 'warga_wajib'])->where('warga', $id_keluarga)->first();
+        $pdf = PDF::loadView('warga_pdf_wajib', ['warga' => $warga, 'wargaa' => $wargaa]);
+        return $pdf->download('wajib_buktipembayaranwarga.pdf');
+    }
+
+    public function cetak_pdf_sukarela()
+    {
+        $id_keluarga = Keluarga::where('user_id', auth()->user()->id)->first()->id;
+        $warga = KasIuranSukaRela::with(['iuransukarela', 'petugastagihan', 'postagihansukarela', 'warga_sukarela'])->where('warga', $id_keluarga)->get();
+        $wargaa = KasIuranSukaRela::with(['iuransukarela', 'petugastagihan', 'postagihansukarela', 'warga_sukarela'])->where('warga', $id_keluarga)->first();
+        $pdf = PDF::loadView('warga_pdf', ['warga' => $warga, 'wargaa' => $wargaa]);
+        return $pdf->download('sukarela_buktipembayaranwarga.pdf');
+    }
+
+    public function cetak_pdf_kondisional()
+    {
+        $id_keluarga = Keluarga::where('user_id', auth()->user()->id)->first()->id;
+        $warga = KasIuranKondisional::with(['iurankondisional', 'petugastagihan', 'postagihankondisional', 'warga_kondisional'])->where('warga', $id_keluarga)->get();
+        $wargaa = KasIuranKondisional::with(['iurankondisional', 'petugastagihan', 'postagihankondisional', 'warga_kondisional'])->where('warga', $id_keluarga)->first();
+        $pdf = PDF::loadView('warga_pdf_kondisional', ['warga' => $warga, 'wargaa' => $wargaa]);
+        return $pdf->download('kondisional_buktipembayaranwarga.pdf');
+    }
+
+    public function cetak_pdf_agenda()
+    {
+        $id_keluarga = Keluarga::where('user_id', auth()->user()->id)->first()->id;
+        $warga = KasIuranAgenda::with(['iuranagenda', 'petugastagihan', 'postagihanagenda', 'warga_agenda'])->where('warga', $id_keluarga)->get();
+        $wargaa = KasIuranAgenda::with(['iuranagenda', 'petugastagihan', 'postagihanagenda', 'warga_agenda'])->where('warga', $id_keluarga)->first();
+        $pdf = PDF::loadView('warga_pdf_agenda', ['warga' => $warga, 'wargaa' => $wargaa]);
+        return $pdf->download('agenda_buktipembayaranwarga.pdf');
+    }
+
     public function store(Request $request)
     {
         $warga = Keluarga::all();

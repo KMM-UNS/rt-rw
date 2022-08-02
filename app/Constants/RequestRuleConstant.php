@@ -94,4 +94,14 @@ class RequestRuleConstant
             // 'keluargas_pos' => 'required'
         ];
     }
+    public static function PengeluaranTable()
+    {
+        return [
+            'manajemen_pengeluarans_keterangan' => 'required',
+            'manajemen_pengeluarans_tanggal' => 'required',
+            'manajemen_pengeluarans_nominal' => 'required',
+            // 'pengeluarans_alamat' => 'required',
+            // 'pengeluarans_pos' => 'required'
+        ];
+    }
 }

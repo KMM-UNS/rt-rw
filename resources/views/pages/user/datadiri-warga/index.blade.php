@@ -40,12 +40,11 @@
                                     @endif
                                     <!-- begin panel-body -->
                                     <div class="panel-body">
-                                        <a href="{{ url('warga/data-diri/create') }}" class="btn btn-success">CREATE</a>
-                                        {{-- <a class="btn btn-primary"
-                                        href="{{ route('user.warga.data-diri.edit', $data->id) }}">Edit</a> --}}
+                                        {{-- <a href="{{ url('warga/data-diri/create') }}" class="btn btn-success">CREATE</a> --}}
+
                                         <div class="row">
                                             <div class="col">
-                                                <img src="/assets/img/user/user-13.jpg" alt="Foto Petugas" width="200">
+                                                <img src="/assets/img/user/user-1.jpg" alt="Foto Warga" width="200">
                                             </div>
                                             <div class="col">
                                                 <table class="table">
@@ -79,6 +78,10 @@
                                                 </table>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="panel-footer">
+                                        <a href="{{ route('user.warga.data-diri.edit', $data->id) }}"
+                                            class="btn btn-success">Edit</a>
                                     </div>
                                 </form>
                             </div>

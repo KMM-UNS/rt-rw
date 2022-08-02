@@ -12,13 +12,15 @@ class BayarAgendaController extends Controller
 {
     public function index()
     {
-        // return 'berhasil';
         $pos_tagihan = Pos::pluck('nama', 'id');
-        // $wargaa = Keluarga::with(['pemberii'])->get();
         $wargaa = Keluarga::with(['warga_agenda'])->get();
         $iuran_agenda = IuranAgenda::all();
 
-        return view('pages.user.kepala-keluarga.index_agenda', ['pos_tagihan' => $pos_tagihan, 'wargaa' => $wargaa, 'iuran_agenda' => $iuran_agenda]);
+        return view('pages.user.kepala-keluarga.index_agenda', [
+            'pos_tagihan' => $pos_tagihan,
+            'wargaa' => $wargaa,
+            'iuran_agenda' => $iuran_agenda
+        ]);
     }
 
     public function create()

@@ -17,7 +17,11 @@ class BayarSukarelaController extends Controller
         $wargaa = Keluarga::with(['warga_sukarela'])->get();
         $iuran_sukarela = IuranSukarela::all();
 
-        return view('pages.user.kepala-keluarga.index_sukarela', ['pos_tagihan' => $pos_tagihan, 'wargaa' => $wargaa, 'iuran_sukarela' => $iuran_sukarela]);
+        return view('pages.user.kepala-keluarga.index_sukarela', [
+            'pos_tagihan' => $pos_tagihan,
+            'wargaa' => $wargaa,
+            'iuran_sukarela' => $iuran_sukarela
+        ]);
     }
 
     public function create()

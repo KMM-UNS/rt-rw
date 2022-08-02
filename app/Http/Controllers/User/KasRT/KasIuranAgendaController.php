@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Helpers\DataHelper;
 use App\Helpers\TrashHelper;
 use App\Helpers\FileUploaderHelper;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Requests\Admin\IuranAgendaForm;
 use App\Models\Keluarga;
 use Illuminate\Support\Facades\DB;
@@ -34,14 +35,6 @@ class KasIuranAgendaController extends Controller
 
         return view('pages.user.kas-rt.kasiuranagenda.add-edit',  ['jenis_iuranagenda' => $jenis_iuranagenda, 'nama_petugas' => $nama_petugas, 'wargaa' => $wargaa, 'warga' => $warga]);
     }
-
-    // public function status($id)
-    // {
-    //     $agenda = KasIuranAgenda::find($id);
-    //     $agenda->status = !$agenda->status;
-    //     $agenda->save();
-    //     return redirect()->back();
-    // }
 
     public function store(IuranAgendaForm $request, FileUploaderHelper $fileUploaderHelper)
     {
@@ -70,6 +63,13 @@ class KasIuranAgendaController extends Controller
             }
         });
         return redirect(route('user.kas-rt.kas-iuranagenda.index'))->withToastSuccess('Data tersimpan');
+    }
+
+    public function cetak_pdf($id)
+    {
+        $warga = KasIuranAgenda::with(['iuranagenda', 'petugastagihan', 'postagihanagenda', 'warga_agenda'])->findOrFail($id);
+        $pdf = PDF::loadView('pages.user.kas-rt.kasiuranagenda.agenda_pdf', ['warga' => $warga]);
+        return $pdf->download('agenda_buktipembayaran.pdf');
     }
 
     public function show($id)

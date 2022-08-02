@@ -31,6 +31,10 @@ class Dokumen extends Model
     {
         return $this->morphToMany(PetugasTagihan::class, 'dokumenable');
     }
+    public function pengeluaran()
+    {
+        return $this->morphToMany(ManajemenPengeluaran::class, 'dokumenable');
+    }
     // public function pengawalan()
     // {
     //     return $this->morphedByMany(Pengawalan::class, 'dokumenable');

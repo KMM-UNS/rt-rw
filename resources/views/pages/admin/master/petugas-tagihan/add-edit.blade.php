@@ -59,7 +59,8 @@
                     <x-form.Dropdown name="petugas_tagihans_pos" :options="$area_pos" selected="{{{ old('petugas_tagihans_pos') ?? ($data['pos'] ?? null) }}}" required />
                 </div>
                 <div class="form-group">
-                    <label for="foto_petugas">Foto</label>
+                    <label for="foto_iurankondisional">Foto Petugas</label>
+                    {{-- <input type="file" id="foto_iurankondisional" name="foto_iurankondisional" class="form-control @error('image') is-invalid @enderror" autofocus data-parsley-required="true"> --}}
                     @php
                             $imageSrc = null;
                             if(isset($data->dokumen)){

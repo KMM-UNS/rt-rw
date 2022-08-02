@@ -73,10 +73,12 @@ return [
                 ], [
                     'url' => '/admin/master-data/iuran-agenda',
                     'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Iuran Agenda'
-                ], [
-                    'url' => '/admin/master-data/petugas-tagihan',
-                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Petugas Tagihan'
-                ], [
+                ],
+                //  [
+                //     'url' => '/admin/master-data/petugas-tagihan',
+                //     'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Petugas Tagihan'
+                // ],
+                [
                     'url' => '/admin/master-data/pos',
                     'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Pos'
                 ]
@@ -109,7 +111,7 @@ return [
         ],
         [
             'icon' => 'fa fa-cogs',
-            'title' => 'Rekap Iuran Bulanan',
+            'title' => 'Rekap Iuran',
             'url' => 'javascript:;',
             'caret' => true,
             'sub_menu' => [

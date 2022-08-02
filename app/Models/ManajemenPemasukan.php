@@ -16,5 +16,5 @@ class ManajemenPemasukan extends Model
 
     protected $table = 'manajemen_pemasukans';
     protected $fillable = ['keterangan', 'nominal'];
-    public $timestamps = false;
+    public $timestamps = true;
 }

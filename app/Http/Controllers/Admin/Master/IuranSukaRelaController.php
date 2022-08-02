@@ -39,11 +39,6 @@ class IuranSukarelaController extends Controller
         return redirect(route('admin.master-data.iuran-sukarela.index'))->withToastSuccess('Data tersimpan');
     }
 
-    // public function show(IuranSukarela $iuranSukarela)
-    // {
-    //     //
-    // }
-
     public function edit($id)
     {
         $data = IuranSukarela::findOrFail($id);

@@ -19,6 +19,7 @@ class KasIuranAgendaDataTable extends DataTable
                 $btn = '<div class="btn-group">';
                 $btn = $btn . '<a href="' . route('user.kas-rt.kas-iuranagenda.edit', $row->id) . '" class="btn btn-dark buttons-edit"><i class="fas fa-edit"></i></a>';
                 $btn = $btn . '<a href="' . route('user.kas-rt.kas-iuranagenda.destroy', $row->id) . '" class="btn btn-danger buttons-delete"><i class="fas fa-trash fa-fw"></i></a>';
+                $btn = $btn . '<a href="' . route('user.kas-rt.cetak_pdf_agenda', $row->id) . '" class="btn btn-info"><i class="fas fa-file-export"></i></a>';
                 $btn = $btn . '</div>';
 
                 return $btn;
@@ -66,11 +67,7 @@ class KasIuranAgendaDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::computed('action')
-                ->exportable(false)
-                ->printable(false)
-                ->width(60)
-                ->addClass('text-center'),
+
             Column::make('iuranagenda.nama', 'iuranagenda.nama')->title('Jenis Iuran Agenda'),
             Column::make('tanggal'),
             Column::make('petugastagihan.nama', 'petugastagihan.nama')->title('Nama Petugas'),
@@ -78,6 +75,11 @@ class KasIuranAgendaDataTable extends DataTable
             Column::make('postagihanagenda.nama', 'postagihanagenda.nama')->title('Pos'),
             Column::make('total_biaya'),
             Column::make('status'),
+            Column::computed('action')
+                ->exportable(false)
+                ->printable(false)
+                ->width(60)
+                ->addClass('text-center'),
             // Column::computed('image'),
             // Column::make('tanggal'),
             // Column::make('updated_at'),

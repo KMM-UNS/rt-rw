@@ -44,11 +44,11 @@
                                             <label for="telp">No.Telpon</label>
                                             <input type="text" id="telp" name="telp" class="form-control" autofocus data-parsley-required="true" value="{{{  old('telp') ?? ($data['telp'] ?? null) }}}">
                                         </div>
-                                        <div class="form-group">
-                                            <label for="pos_tagihan">pos_tagihan</label>
+                                        {{-- <div class="form-group">
+                                            <label for="pos_tagihan">Pos Tagihan</label>
                                             {{-- <input type="int" id="pos_tagihan" name="pos_tagihan" class="form-control" autofocus data-parsley-required="true" value="{{{ $data->pos_tagihan ?? old('pos_tagihan') }}}"> --}}
-                                            <x-form.Dropdown name="pos_tagihan" :options="$poss" selected="{{{ old('pos_tagihan') ?? ($data['pos_tagihan'] ?? null) }}}" required />
-                                        </div>
+                                            {{-- <x-form.Dropdown name="pos_tagihan" :options="$poss" selected="{{{ old('pos_tagihan') ?? ($data['pos_tagihan'] ?? null) }}}" required />
+                                        </div> --}}
 
                                     </div>
                                     {{-- <div class="col-md-5">
@@ -70,15 +70,18 @@
                             <!-- end panel-body -->
                         </div>
                         <!-- end panel -->
-                        <div class="panel-footer">
-                            <button type="submit" class="btn btn-primary">Simpan</button>
-                            <button type="reset" class="btn btn-default">Reset</button>
-                        </div>
-
-                    </form>
-                    <a href="javascript:history.back(-1);" class="btn btn-success">
-                        <i class="fa fa-arrow-circle-left"></i> Kembali
-                    </a>
+                      <!-- begin panel-footer -->
+            <div class="panel-footer">
+                <button type="submit" class="btn btn-primary">Simpan</button>
+                <button type="reset" class="btn btn-default">Reset</button>
+              </div>
+              <!-- end panel-footer -->
+            </div>
+            <!-- end panel -->
+          </form>
+          <a href="javascript:history.back(-1);" class="btn btn-success">
+            <i class="fa fa-arrow-circle-left"></i> Kembali
+          </a>
                 </div>
             </div>
         </div>

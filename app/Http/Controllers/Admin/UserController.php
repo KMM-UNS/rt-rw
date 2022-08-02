@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Datatables\Admin\UserDataTable;
+use App\Models\AdminRole;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -16,16 +17,17 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('pages.admin.user.add-edit');
+        $role = AdminRole::pluck('nama', 'id');
+        return view('pages.admin.user.add-edit', ['role' => $role]);
     }
 
     public function store(Request $request)
     {
         try {
             $request->validate([
-                'name' => 'required|min:3',
-                'email' => 'required|min:7|max:15',
-                'password' => ['required', 'string', 'min:8', 'confirmed'],
+                'name' => 'required|min:3'
+                // 'email' => 'required|min:7|max:15',
+                // 'password' => ['required', 'string', 'min:8', 'confirmed'],
             ]);
         } catch (\Throwable $th) {
             return back()->withInput()->withToastError($th->validator->messages()->all()[0]);
@@ -33,12 +35,14 @@ class UserController extends Controller
 
         try {
             User::create([
-                'fullname' => $request->fullname,
+                'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
-                'isAdmin' => $request->isAdmin
+                'role_id' => $request->role_id,
+                // 'isAdmin' => $request->isAdmin
             ]);
         } catch (\Throwable $th) {
+            dd($th);
             return back()->withInput()->withToastError('Error saving data');
         }
 
@@ -48,16 +52,17 @@ class UserController extends Controller
     public function edit($id)
     {
         // return ('berhasil');
+        $role = AdminRole::pluck('nama', 'id');
         $data = User::findOrFail($id);
-        return view('pages.admin.user.add-edit', ['data' => $data]);
+        return view('pages.admin.user.add-edit', ['data' => $data, 'role' => $role]);
     }
 
     public function update(Request $request, $id)
     {
         try {
             $request->validate([
-                'fullname' => 'required|min:3',
-                'email' => 'required|min:7|max:15',
+                'name' => 'required|min:3',
+                'email' => 'required|min:7|max:20',
             ]);
 
             if (!empty($request->password)) :
@@ -71,10 +76,10 @@ class UserController extends Controller
 
         try {
             $data = User::findOrFail($id);
-            $data->fullname = $request->fullname;
+            $data->name = $request->name;
             $data->email = $request->email;
-            $data->isAdmin = $request->isAdmin;
-            $data->fullname = $request->fullname;
+            // $data->isAdmin = $request->isAdmin;
+            // $data->fullname = $request->fullname;
 
             if (!empty($request->password)) :
                 $data->password = Hash::make($request->password);
@@ -82,10 +87,11 @@ class UserController extends Controller
 
             $data->save();
         } catch (\Throwable $th) {
+            dd($th);
             return back()->withInput()->withToastError('Error saving data');
         }
 
-        return redirect(route('user.index'))->withToastSuccess('Data tersimpan');
+        return redirect(route('admin.user.index'))->withToastSuccess('Data tersimpan');
     }
 
     public function destroy($id)

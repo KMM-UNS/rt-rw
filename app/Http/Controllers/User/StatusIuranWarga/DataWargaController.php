@@ -12,7 +12,6 @@ class DataWargaController extends Controller
 {
     public function index()
     {
-        // $data = Keluarga::where('id', auth()->user()->id)->first();
         $data = Keluarga::where('user_id', auth()->user()->id)->first();
         return view('pages.user.datadiri-warga.index', ['data' => $data]);
     }
@@ -39,7 +38,7 @@ class DataWargaController extends Controller
         } catch (\Throwable $th) {
             dd($th);
             // dd($request->all());
-            return back()->withInput()->withToastError('Something went wrong sista');
+            return back()->withInput()->withToastError('Something went wrong');
         }
 
         return redirect(route('user.warga.data-diri.index'))->withToastSuccess('Data tersimpan');
@@ -53,7 +52,11 @@ class DataWargaController extends Controller
     public function edit($id)
     {
         $data = Keluarga::findOrFail($id);
-        return view('pages.user.datadiri-warga.add-edit', ['data' => $data]);
+        $poss = Pos::pluck('nama', 'id');
+        return view('pages.user.datadiri-warga.add-edit', [
+            'data' => $data,
+            'pos' => $poss
+        ]);
     }
 
     public function update($id, Request $request)

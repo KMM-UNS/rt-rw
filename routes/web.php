@@ -27,7 +27,6 @@ Route::group(['middleware' => 'auth:web', 'as' => 'user.'], function () {
     // Route::view('/home', 'homekedua')->name('homekedua');
 
     Route::group(['namespace' => 'User'], function () {
-
         Route::group([
             'prefix' => '/petugas-iuran', 'as' => 'petugas-iuran.', 'namespace' => 'PetugasIuran',
             'middleware' => ['auth', 'petugas']
@@ -53,6 +52,10 @@ Route::group(['middleware' => 'auth:web', 'as' => 'user.'], function () {
         });
 
         Route::group(['prefix' => '/kas-rt', 'as' => 'kas-rt.', 'namespace' => 'KasRT', 'middleware' => ['auth', 'petugas']], function () {
+            Route::get('/kas-iuranwajib/cetak_pdf/{id}', 'KasIuranWajibController@cetak_pdf')->name('cetak_pdf_wajib');
+            Route::get('/kas-iurasukarela/cetak_pdf/{id}', 'KasIuranSukaRelaController@cetak_pdf')->name('cetak_pdf_sukarela');
+            Route::get('/kas-iurankondisional/cetak_pdf/{id}', 'KasIuranKondisionalController@cetak_pdf')->name('cetak_pdf_kondisional');
+            Route::get('/kas-iuranagenda/cetak_pdf/{id}', 'KasIuranAgendaController@cetak_pdf')->name('cetak_pdf_agenda');
             Route::resource('kas-iuranwajib', 'KasIuranWajibController');
             Route::resource('kas-iuransukarela', 'KasIuranSukaRelaController');
             Route::resource('kas-iurankondisional', 'KasIuranKondisionalController');
@@ -62,6 +65,10 @@ Route::group(['middleware' => 'auth:web', 'as' => 'user.'], function () {
         Route::group(['prefix' => '/warga', 'as' => 'warga.', 'namespace' => 'StatusIuranWarga', 'middleware' => ['auth', 'warga']], function () {
             // Route::get('/wargak/status', 'WargaController@wargah');
             // Route::resource('wargak', 'WargaController');
+            Route::get('/wargak/cetak_pdf_wajib/{jenis_iuran_id}', 'WargaController@cetak_pdf_wajib')->name('cetak_pdf_wajib');
+            // Route::get('/wargak/cetak_pdf_sukarela/{jenis_iuran_id}', 'WargaController@cetak_pdf_sukarela')->name('cetak_pdf_sukarela');
+            // Route::get('/wargak/cetak_pdf_kondisional/{jenis_iuran_id}', 'WargaController@cetak_pdf_kondisional')->name('cetak_pdf_kondisional');
+            // Route::get('/wargak/cetak_pdf_agenda/{jenis_iuran_id}', 'WargaController@cetak_pdf_agenda')->name('cetak_pdf_agenda');
             Route::resource('/wargak', 'WargaController');
             Route::resource('/data-diri', 'DataWargaController');
         });

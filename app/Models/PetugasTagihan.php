@@ -5,18 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Traits\FillableInputTrait;
+// use App\Traits\FillableInputTrait;
 
 class PetugasTagihan extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    use FillableInputTrait;
+    // use FillableInputTrait;
 
     public const ACTIVE = "aktif";
 
     protected $table = 'petugas_tagihans';
-    protected $fillable = ['nama', 'ttgl', 'no_telp', 'alamat', 'pos'];
+    protected $fillable = ['nama', 'user_id', 'ttgl', 'no_telp', 'alamat', 'pos'];
     protected $dates = [
         'created_at'
     ];

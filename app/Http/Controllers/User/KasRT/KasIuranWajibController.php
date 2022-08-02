@@ -7,8 +7,10 @@ use App\Models\IuranWajib;
 use App\Models\PetugasTagihan;
 use App\Http\Controllers\Controller;
 use App\Models\KasIuranWajib;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
 use Illuminate\Support\Facades\File;
 use App\Helpers\DataHelper;
 use App\Helpers\TrashHelper;
@@ -32,14 +34,6 @@ class KasIuranWajibController extends Controller
 
         return view('pages.user.kas-rt.kasiuranwajib.add-edit',  ['jenis_iuranwajib' => $jenis_iuranwajib, 'nama_petugas' => $nama_petugas, 'wargaa' => $wargaa, 'warga' => $warga]);
     }
-
-    // public function status($id)
-    // {
-    //     $wajib = KasIuranWajib::find($id);
-    //     $wajib->status = !$wajib->status;
-    //     $wajib->save();
-    //     return redirect()->back();
-    // }
 
     public function store(IuranWajibForm $request, FileUploaderHelper $fileUploaderHelper)
     {
@@ -68,6 +62,13 @@ class KasIuranWajibController extends Controller
             }
         });
         return redirect(route('user.kas-rt.kas-iuranwajib.index'))->withToastSuccess('Data tersimpan');
+    }
+
+    public function cetak_pdf($id)
+    {
+        $warga = KasIuranWajib::with(['iuranwajib', 'petugastagihan', 'postagihanwajib', 'warga_wajib'])->findOrFail($id);
+        $pdf = PDF::loadView('pages.user.kas-rt.kasiuranwajib.wajib_pdf', ['warga' => $warga]);
+        return $pdf->download('wajib_buktipembayaran.pdf');
     }
 
     public function show($id)

@@ -12,4 +12,9 @@ class AdminRole extends Model
     protected $fillable = [
         'id', 'nama', 'status',
     ];
+
+    public function role()
+    {
+        return $this->hasMany(User::class);
+    }
 }

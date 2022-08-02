@@ -22,7 +22,6 @@ class KasIuranSukaRelaController extends Controller
 {
     public function index(KasIuranSukaRelaDataTable $dataTable)
     {
-        // $sukarela = KasIuranSukaRela::all();
         return $dataTable->render('pages.admin.kas-rt.kasiuransukarela.index');
     }
 

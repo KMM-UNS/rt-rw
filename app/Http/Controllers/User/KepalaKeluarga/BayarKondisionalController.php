@@ -16,7 +16,11 @@ class BayarKondisionalController extends Controller
         $wargaa = Keluarga::with(['warga_kondisional'])->get();
         $iuran_kondisional = IuranKondisional::all();
 
-        return view('pages.user.kepala-keluarga.index_kondisional', ['pos_tagihan' => $pos_tagihan, 'wargaa' => $wargaa, 'iuran_kondisional' => $iuran_kondisional]);
+        return view('pages.user.kepala-keluarga.index_kondisional', [
+            'pos_tagihan' => $pos_tagihan,
+            'wargaa' => $wargaa,
+            'iuran_kondisional' => $iuran_kondisional
+        ]);
     }
 
     public function create()

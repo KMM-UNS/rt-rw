@@ -21,9 +21,8 @@
                                     <th scope="col">Kepala Keluarga</th>
                                     <th scope="col">Pos Tagihan</th>
                                     <th scope="col">Telp</th>
-                                    @foreach ($iuran_wajib as $itemm)
-                                        <th>{{ $itemm->nama }}</th>
-                                    @endforeach
+                                    <th scope="col">Iuran Sosial</th>
+                                    <th scope="col">Iuran Kebersihan</th>
                                 </tr>
                             </thead>
 
@@ -55,6 +54,9 @@
 
                             </tbody>
                         </table>
+
+                        <a href="{{}}" class="btn btn-primary" target="_blank">CETAK
+                            PDF</a>
                     </div>
                 </div>
             </div>

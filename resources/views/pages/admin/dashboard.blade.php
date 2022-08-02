@@ -31,7 +31,7 @@
 
     <!-- end page-header -->
     <!-- begin daterange-filter -->
-    <div class="d-sm-flex align-items-center mb-3">
+    {{-- <div class="d-sm-flex align-items-center mb-3">
         <a href="#" class="btn btn-inverse mr-2 text-truncate" id="daterange-filter">
             <i class="fa fa-calendar fa-fw text-white-transparent-5 ml-n1"></i>
             <span>1 Jun 2020 - 7 Jun 2020</span>
@@ -39,7 +39,7 @@
         </a>
         <div class="text-muted f-w-600 mt-2 mt-sm-0">compared to <span id="daterange-prev-date">24 Mar-30 Apr 2020</span>
         </div>
-    </div>
+    </div> --}}
     <!-- end daterange-filter -->
     <!-- begin row -->
 
@@ -288,13 +288,33 @@
 
     {{-- tempat grafik --}}
     <div class="row">
-        <div class="col-xl-5">
+        {{-- <div class="col-xl-5">
             <div class="container px-1 md-auto">
                 <div class="p-6 m-20 bg-white rounded shadow">
                     <div class="card-title mt-3 mb-1 text-center">
                         <h4>Grafik Pemasukan dan Pengeluaran</h4>
                     </div>
                     {!! $KeuanganChart->container() !!}
+                </div>
+            </div>
+        </div> --}}
+        {{-- <div class="col-xl-6">
+            <div class="container px-1 md-auto">
+                <div class="p-6 m-20 bg-white rounded shadow">
+                    <div class="card-title mt-3 mb-1 text-center">
+                        <h4>Grafik Total Kas</h4>
+                    </div>
+                    {!! $KasChart->container() !!}
+                </div>
+            </div>
+        </div> --}}
+        <div class="col-xl-6">
+            <div class="container px-1 md-auto">
+                <div class="p-6 m-20 bg-white rounded shadow">
+                    <div class="card-title mt-3 mb-1 text-center">
+                        <h4>Grafik Tahun Total Kas</h4>
+                    </div>
+                    {!! $TahunChart->container() !!}
                 </div>
             </div>
         </div>
@@ -304,7 +324,7 @@
                     <div class="card-title mt-3 mb-1 text-center">
                         <h4>Grafik Total Kas</h4>
                     </div>
-                    {!! $KasChart->container() !!}
+                    {!! $KasIuranChart->container() !!}
                 </div>
             </div>
         </div>
@@ -725,6 +745,12 @@
 
     <script src="{{ $KasChart->cdn() }}"></script>
     {{ $KasChart->script() }}
+
+    <script src="{{ $KasIuranChart->cdn() }}"></script>
+    {{ $KasIuranChart->script() }}
+
+    <script src="{{ $TahunChart->cdn() }}"></script>
+    {{ $TahunChart->script() }}
 
 
 

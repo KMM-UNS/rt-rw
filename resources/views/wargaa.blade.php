@@ -6,14 +6,6 @@
             <div class="col-md-8">
                 <div class="card">
                     <!-- begin panel -->
-                    {{-- <form
-                        action="{{ isset($data) ? route('admin.kas-rt.kas-petugas.update', $data->id) : route('admin.kas-rt.kas-iuranwajib.store') }}"
-                        id="form" name="form" method="POST" data-parsley-validate="true"
-                        enctype="multipart/form-data">
-                        @csrf
-                        @if (isset($data))
-                            {{ method_field('PUT') }}
-                        @endif --}}
 
                     <div class="panel panel-inverse">
                         <!-- begin panel-heading -->
@@ -30,12 +22,14 @@
                         <!-- begin panel-body -->
                         <div class="panel-body">
 
-                            <h1>Iuran Wajibbb </h1>
+                            <h1>Iuran Wajib </h1>
                             <table class="table">
                                 <thead class="thead-light">
                                     <tr>
                                         <th scope="col">Jenis</th>
                                         <th scope="col">Status</th>
+                                        <th scope="col">Tanggal Pembayaran</th>
+                                        <th scope="col">Bukti Pembayaran</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -44,20 +38,33 @@
                                         $status2 = $data1->where('jenis_iuran_id', 8);
                                     @endphp
 
-                                    <tr>
-                                        <td>Iuran Sosisal</td>
-                                        <td>
-                                            <label for=""
-                                                class="label {{ count($status1) != 0 ? 'label-success' : 'label-danger center' }}">{{ count($status1) != 0 ? 'Sudah Bayar' : 'Belum Bayar' }}</label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Iuran Kebersihan</td>
-                                        <td>
-                                            <label for=""
-                                                class="label {{ count($status2) != 0 ? 'label-success' : 'label-danger center' }}">{{ count($status2) != 0 ? 'Sudah Bayar' : 'Belum Bayar' }}</label>
-                                        </td>
-                                    </tr>
+                                    @foreach ($status1 as $i)
+                                        <tr>
+                                            <td width="150">Iuran Sosial</td>
+                                            <td> <label for=""
+                                                    class="label {{ count($status1) != 0 ? 'label-success' : 'label-danger center' }}">{{ count($status1) != 0 ? 'Sudah Bayar' : 'Belum Bayar' }}</label>
+                                            </td>
+                                            <td> {{ date('d M Y', strtotime($i->tanggal)) }}</td>
+                                            @if ($i->status == 1)
+                                                <td>
+                                                    <a class="btn btn-info"
+                                                        href="{{ route('user.warga.cetak_pdf_wajib', $i->jenis_iuran_id) }}">Lihat
+                                                        Bukti</a>
+                                                </td>
+                                            @endif
+                                        </tr>
+                                    @endforeach
+
+                                    @foreach ($status2 as $j)
+                                        <tr>
+                                            <td width="150">Iuran Kebersiahan</td>
+                                            <td> <label for=""
+                                                    class="label {{ count($status2) != 0 ? 'label-success' : 'label-danger center' }}">{{ count($status2) != 0 ? 'Sudah Bayar' : 'Belum Bayar' }}</label>
+                                            </td>
+                                            <td> {{ date('d M Y', strtotime($j->tanggal)) }}</td>
+                                        </tr>
+                                    @endforeach
+
                                 </tbody>
                             </table>
                             <h1>Iuran Sukarela</h1>
@@ -66,6 +73,8 @@
                                     <tr>
                                         <th scope="col">Jenis</th>
                                         <th scope="col">Status</th>
+                                        <th scope="col">Tanggal Pembayaran</th>
+                                        <th scope="col">Bukti Pembayaran</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -73,17 +82,33 @@
                                         $status3 = $data2->where('jenis_iuran_id', 1);
                                         $status4 = $data2->where('jenis_iuran_id', 2);
                                     @endphp
+
                                     <tr>
-                                        <td>Iuran Pendidikan</td>
+                                        <td width="150">Iuran Pendidikan</td>
+
                                         <td><label for=""
                                                 class="label {{ count($status3) != 0 ? 'label-success' : 'label-danger center' }}">{{ count($status3) != 0 ? 'Sudah Bayar' : 'Belum Bayar' }}</label>
                                         </td>
+                                        @foreach ($status3 as $item3)
+                                            {{-- @if ($status3 == 1) --}}
+                                            <td> {{ date('d M Y', strtotime($item3->tanggal)) }}</td>
+                                            <td>
+                                                <a class="btn btn-info"
+                                                    href="{{ route('user.warga.cetak_pdf_sukarela', $item3->jenis_iuran_id) }}">Lihat
+                                                    Bukti</a>
+                                            </td>
+                                            {{-- @endif --}}
+                                        @endforeach
                                     </tr>
+
                                     <tr>
-                                        <td>Arisan</td>
+                                        <td width="150">Arisan</td>
                                         <td><label for=""
                                                 class="label {{ count($status4) != 0 ? 'label-success' : 'label-danger center' }}">{{ count($status4) != 0 ? 'Sudah Bayar' : 'Belum Bayar' }}</label>
                                         </td>
+                                        @foreach ($status4 as $item4)
+                                            <td> {{ date('d M Y', strtotime($items4->tanggal)) }}</td>
+                                        @endforeach
                                     </tr>
                                 </tbody>
                             </table>
@@ -93,18 +118,32 @@
                                     <tr>
                                         <th scope="col">Jenis</th>
                                         <th scope="col">Status</th>
+                                        <th scope="col">Tanggal Pembayaran</th>
+                                        <th scope="col">Bukti Pembayaran</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @php
                                         $status5 = $data3->where('jenis_iuran_id', 1);
                                     @endphp
+
                                     <tr>
-                                        <td>Denda Ronda </td>
+                                        <td width="150">Denda Ronda</td>
                                         <td><label for=""
                                                 class="label {{ count($status5) != 0 ? 'label-success' : 'label-danger center' }}">{{ count($status5) != 0 ? 'Sudah Bayar' : 'Belum Bayar' }}</label>
                                         </td>
+                                        @foreach ($status5 as $item5)
+                                            <td>{{ date('d M Y', strtotime($item5->tanggal)) }}</td>
+                                            <td>
+                                                <a class="btn btn-info"
+                                                    href="{{ route('user.warga.cetak_pdf_kondisional', $item5->jenis_iuran_id) }}">Lihat
+                                                    Bukti</a>
+                                            </td>
+                                        @endforeach
                                     </tr>
+
+
+
                                 </tbody>
                             </table>
                             <h1>Iuran Agenda</h1>
@@ -113,6 +152,8 @@
                                     <tr>
                                         <th scope="col">Jenis</th>
                                         <th scope="col">Status</th>
+                                        <th scope="col">Tanggal Pembayaran</th>
+                                        <th scope="col">Bukti Pembayaran</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -121,16 +162,26 @@
                                         $status7 = $data4->where('jenis_iuran_id', 2);
                                     @endphp
                                     <tr>
-                                        <td>Peringatan HUT RI</td>
+                                        <td width="150">Peringatan HUT RI</td>
                                         <td><label for=""
                                                 class="label {{ count($status6) != 0 ? 'label-success' : 'label-danger center' }}">{{ count($status6) != 0 ? 'Sudah Bayar' : 'Belum Bayar' }}</label>
                                         </td>
+                                        @foreach ($status6 as $item6)
+                                            <td>{{ date('d M Y', strtotime($item6->tanggal)) }}</td>
+                                            <td><a class="btn btn-info"
+                                                    href="{{ route('user.warga.cetak_pdf_agenda', $item6->jenis_iuran_id) }}">Lihat
+                                                    Bukti</a>
+                                            </td>
+                                        @endforeach
                                     </tr>
                                     <tr>
-                                        <td>Halal Bi Halal</td>
+                                        <td width="150">Halal Bi Halal</td>
                                         <td><label for=""
                                                 class="label {{ count($status7) != 0 ? 'label-success' : 'label-danger center' }}">{{ count($status7) != 0 ? 'Sudah Bayar' : 'Belum Bayar' }}</label>
                                         </td>
+                                        @foreach ($status7 as $item7)
+                                            <td>{{ date('d M Y', strtotime($item7->tanggal)) }}</td>
+                                        @endforeach
                                     </tr>
                                 </tbody>
                             </table>

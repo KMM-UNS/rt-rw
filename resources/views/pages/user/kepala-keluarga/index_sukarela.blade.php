@@ -21,9 +21,8 @@
                                     <th scope="col">Kepala Keluarga</th>
                                     <th scope="col">Pos Tagihan</th>
                                     <th scope="col">Telp</th>
-                                    @foreach ($iuran_sukarela as $itemm)
-                                        <th>{{ $itemm->nama }}</th>
-                                    @endforeach
+                                    <th scope="col">Iuran Pendidikan</th>
+                                    <th scope="col">Iuran Arian</th>
                                 </tr>
                             </thead>
 

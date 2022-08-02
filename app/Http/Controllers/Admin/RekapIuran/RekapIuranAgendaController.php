@@ -14,10 +14,6 @@ class RekapIuranAgendaController extends Controller
     public function index()
     {
         $jenis_iuran = IuranAgenda::pluck('nama', 'id');
-        // $nama_bulans = Bulan::pluck('nama', 'id');
-        // $tahun = Tahun::pluck('nama', 'id');
-
-        // return view('pages.admin.rekap-kas.rekapiuranagenda.index', ['jenis_iuran' => $jenis_iuran, 'nama_bulans' => $nama_bulans, 'tahun' => $tahun]);
         return view('pages.admin.rekap-kas.rekapiuranagenda.index', ['jenis_iuran' => $jenis_iuran]);
     }
 
@@ -55,14 +51,12 @@ class RekapIuranAgendaController extends Controller
         $jenis_iuran = $request->jenis_iuran_id;
         $start = Carbon::parse($request->tglawal);
         $end = Carbon::parse($request->tglakhir);
-        // $total = KasIuranAgenda::where('jenis_iuran_id', $jenis_iuran)->get()->sum('total_biaya');
         $total = KasIuranAgenda::where('jenis_iuran_id', $jenis_iuran)
             ->whereDate('tanggal', '<=', $end)
             ->whereDate('tanggal', '>=', $start)
             ->get()->sum('total_biaya');
         $cetakrekapagenda = KasIuranAgenda::with('iuranagenda', 'jenisiuranagenda', 'petugastagihan', 'warga_agenda')->where('jenis_iuran_id', $jenis_iuran)->whereDate('tanggal', '<=', $end)
             ->whereDate('tanggal', '>=', $start)->get();
-        // $totall = 0 + $total;
         return view('pages.admin.rekap-kas.rekapiuranagenda.detail', ['cetakrekapagenda' => $cetakrekapagenda, 'total' => $total, 'jenis_iuran' => $jenis_iuran, 'tglawal' => $start, 'tglakhir' => $end]);
     }
 

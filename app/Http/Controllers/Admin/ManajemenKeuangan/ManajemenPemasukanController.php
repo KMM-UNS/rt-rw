@@ -25,7 +25,6 @@ class ManajemenPemasukanController extends Controller
         $pemasukan = $total_agenda + $total_wajib + $total_kondisional + $total_sukarela + $pemasukannn;
         $pemasukann = ManajemenPemasukan::all();
 
-        // return view('pages.admin.manajemen-keuangan.manajemen-pemasukan.index');
         return view('pages.admin.manajemen-keuangan.manajemen-pemasukan.index', ['total_wajib' => $total_wajib, 'total_agenda' => $total_agenda, 'pemasukan' => $pemasukan, 'total_kondisional' => $total_kondisional, 'total_sukarela' => $total_sukarela, 'pemasukann' => $pemasukann, 'pemasukannn' => $pemasukannn]);
     }
 
@@ -49,18 +48,6 @@ class ManajemenPemasukanController extends Controller
         $nominal = $request->nominal;
 
         ManajemenPemasukan::create($request->all());
-
-        // $masuk = new ManajemenPemasukan;
-        // $masuk->keterangan = $request->input('keterangan');
-        // $masuk->nominal = $request->input('nominal');
-
-
-
-        // $pemasukann = new ManajemenPemasukan();
-        // $pemasukann->keterangan = $request->input('keterangan');
-        // $pemasukann->nominal = $request->input('nominal');
-        // $pemasukann->save();
-        // return view('pages.admin.manajemen-keuangan.manajemen-pemasukan.index', ['total_wajib' => $total_wajib, 'total_agenda' => $total_agenda, 'pemasukan' => $pemasukan, 'pemasukann' => $pemasukann, 'pemasukannn' => $pemasukannn, 'total_kondisional' => $total_kondisional, 'total_sukarela' => $total_sukarela, 'keterangan' => $keterangan, 'nominal' => $nominal]);
         return redirect(route('admin.manajemen-keuangan.manajemen-pemasukan.index'))->withToastSuccess('Data tersimpan');
     }
 
@@ -74,7 +61,15 @@ class ManajemenPemasukanController extends Controller
         $pemasukan = $total_agenda + $total_wajib + $total_kondisional + $total_sukarela + $pemasukannn;
         $pemasukann = ManajemenPemasukan::all();
 
-        $pdf = PDF::loadView('pages.admin.manajemen-keuangan.manajemen-pemasukan.pemasukan_pdf', ['total_wajib' => $total_wajib, 'total_agenda' => $total_agenda, 'pemasukan' => $pemasukan, 'pemasukann' => $pemasukann, 'pemasukannn' => $pemasukannn, 'total_kondisional' => $total_kondisional, 'total_sukarela' => $total_sukarela,]);
+        $pdf = PDF::loadView('pages.admin.manajemen-keuangan.manajemen-pemasukan.pemasukan_pdf', [
+            'total_wajib' => $total_wajib,
+            'total_agenda' => $total_agenda,
+            'pemasukan' => $pemasukan,
+            'pemasukann' => $pemasukann,
+            'pemasukannn' => $pemasukannn,
+            'total_kondisional' => $total_kondisional,
+            'total_sukarela' => $total_sukarela,
+        ]);
         return $pdf->download('laporan-pemasukan.pdf');
     }
 

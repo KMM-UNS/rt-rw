@@ -15,11 +15,8 @@ class RekapIuranWajibController extends Controller
     public function index()
     {
         $jenis_iuran = IuranWajib::pluck('nama', 'id');
-
         return view('pages.admin.rekap-kas.rekapiuranwajib.index', ['jenis_iuran' => $jenis_iuran]);
     }
-
-
 
     public function create()
     {
@@ -30,7 +27,6 @@ class RekapIuranWajibController extends Controller
         $jenis_iuran = $request->jenis_iuran_id;
         $start = Carbon::parse($request->tglawal);
         $end = Carbon::parse($request->tglakhir);
-        // $total = KasIuranAgenda::where('jenis_iuran_id', $jenis_iuran)->get()->sum('total_biaya');
         $total = KasIuranWajib::where('jenis_iuran_id', $jenis_iuran)
             ->whereDate('tanggal', '<=', $end)
             ->whereDate('tanggal', '>=', $start)

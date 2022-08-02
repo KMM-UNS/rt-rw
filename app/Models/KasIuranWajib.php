@@ -48,7 +48,7 @@ class KasIuranWajib extends Model
     {
         return $this->morphToMany(Dokumen::class, 'dokumenable');
     }
-    //tamabahan dropdown pemberi
+    //tamabahan dropdown warga
     public function warga_wajib()
     {
         return $this->belongsTo(Keluarga::class, 'warga');

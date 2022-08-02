@@ -42,16 +42,35 @@
             <!-- end panel-heading -->
             <!-- begin panel-body -->
             <div class="panel-body">
-                <div class="form-group">
-                    <label for="keterangan">Keterangan</label>
-                    <input type="text" id="keterangan" name="keterangan" class="form-control" autofocus
-                        data-parsley-required="true" value="">
-                </div>
-                <div class="form-group">
-                    <label for="nominal">Nominal</label>
-                    <input type="text" id="nominal" name="nominal" class="form-control" autofocus
-                        data-parsley-required="true" value="">
-                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="keterangan">Keterangan</label>
+                            <input type="text" id="keterangan" name="keterangan" class="form-control" autofocus
+                            data-parsley-required="true" value="{{{ $data->keterangan ?? old('keterangan') }}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="nominal">Nominal</label>
+                            <input type="text" id="nominal" name="nominal" class="form-control" autofocus
+                            data-parsley-required="true" value="{{{ $data->nominal ?? old('nominal') }}}">
+                        </div>
+                    </div>
+                    {{-- <div class="col-md-5 high-10">
+                        <div class="form-group">
+                            <label for="foto_iurankondisional">Foto Bukti Pemasukan</label>
+                            @php
+                                    $imageSrc = null;
+                                    if(isset($data->dokumen)){
+                                    $imageSrc = $data->dokumen->toArray();
+                                    }
+                                    @endphp
+                                    <div class="row">
+                                        <x-form.ImageUploader :imageSrc="isset($imageSrc) ? asset(DataHelper::filterDokumenData($imageSrc, 'nama', 'foto_pemasukan')->first()['public_url']) : null" name="foto_pemasukan" title="Foto pemasukan" value="{{{ $data->dokumen  ?? old('foto_pemasukan') }}}" />
+                                    </div>
+                        </div>
+                </div> --}}
+            </div>
+
 
 
                 <!-- begin panel-footer -->

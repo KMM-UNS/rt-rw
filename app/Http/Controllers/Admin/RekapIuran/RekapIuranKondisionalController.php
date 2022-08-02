@@ -15,7 +15,6 @@ class RekapIuranKondisionalController extends Controller
     public function index()
     {
         $jenis_iuran = IuranKondisional::pluck('nama', 'id');
-
         return view('pages.admin.rekap-kas.rekapiurankondisional.index', ['jenis_iuran' => $jenis_iuran]);
     }
 
@@ -40,14 +39,12 @@ class RekapIuranKondisionalController extends Controller
         $jenis_iuran = $request->jenis_iuran_id;
         $start = Carbon::parse($request->tglawal);
         $end = Carbon::parse($request->tglakhir);
-        // $total = KasIuranAgenda::where('jenis_iuran_id', $jenis_iuran)->get()->sum('total_biaya');
         $total = KasIuranKondisional::where('jenis_iuran_id', $jenis_iuran)
             ->whereDate('tanggal', '<=', $end)
             ->whereDate('tanggal', '>=', $start)
             ->get()->sum('total_biaya');
         $cetakrekapkondisional = KasIuranKondisional::with('iurankondisional', 'jenisiurankondisional', 'petugastagihan', 'warga_kondisional')->where('jenis_iuran_id', $jenis_iuran)->whereDate('tanggal', '<=', $end)
             ->whereDate('tanggal', '>=', $start)->get();
-        // $totall = 0 + $total;
         return view('pages.admin.rekap-kas.rekapiurankondisional.detail', ['cetakrekapkondisional' => $cetakrekapkondisional, 'total' => $total, 'jenis_iuran' => $jenis_iuran, 'tglawal' => $start, 'tglakhir' => $end]);
     }
 

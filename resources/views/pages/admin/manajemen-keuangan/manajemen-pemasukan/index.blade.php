@@ -7,8 +7,7 @@
     <link href="{{ asset('/assets/plugins/datatables.net-bs4/css/dataTables.bootstrap4.css') }}" rel="stylesheet" />
     <link href="{{ asset('/assets/plugins/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}"
         rel="stylesheet" />
-    <link href="{{ asset('/assets/plugins/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') }}"
-        rel="stylesheet" />
+    <link href="{{ asset('/assets/plugins/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') }}" rel="stylesheet" />
     <!-- end datatables -->
 @endpush
 
@@ -57,12 +56,15 @@
                 <a href="{{ url('admin/manajemen-keuangan/manajemen-pemasukan/cetak_pdf') }}" class="btn btn-primary"
                     target="_blank">CETAK
                     PDF</a>
-                <table border="1" class="table">
+                <table style="width:100%" border="1" cellpadding="2" class="table">
                     <thead>
                         <tr>
-                            <th scope="col">Action</th>
+                            <th scope="col">No</th>
+                            <th scope="col">Tanggal Diinput</th>
+                            <th scope="col">Tanggal Diubah</th>
                             <th scope="col">Keterangan</th>
                             <th scope="col">Nominal</th>
+                            <th scope="col">Action</th>
 
                         </tr>
                     </thead>
@@ -70,43 +72,47 @@
                     <tbody>
                         <tr>
                             <td></td>
+                            <td></td>
+                            <td></td>
                             <td>Kas Iuran Wajib</td>
                             <td>Rp.{{ number_format($total_wajib, 0) }}</td>
                         </tr>
                         <tr>
+                            <td></td>
+                            <td></td>
                             <td></td>
                             <td>Kas Iuran Kondisional</td>
                             <td>Rp.{{ number_format($total_kondisional, 0) }}</td>
                         </tr>
                         <tr>
                             <td></td>
+                            <td></td>
+                            <td></td>
                             <td>Kas Iuran Sukarela</td>
                             <td>Rp.{{ number_format($total_sukarela, 0) }}</td>
                         </tr>
                         <tr>
                             <td></td>
+                            <td></td>
+                            <td></td>
                             <td>Kas Iuran Agenda</td>
                             <td>Rp.{{ number_format($total_agenda, 0) }}</td>
                         </tr>
+                        @php
+                            $no = 0;
+                        @endphp
                         @foreach ($pemasukann as $item)
                             <tr>
-                                {{-- <td>
-                                    <div class="btn-group">
-                                        <a class="btn btn-primary"
-                                            href="{{ route('admin.manajemen-keuangan.manajemen-pemasukan.edit', $item->id) }}">Edit</a>
-                                        <form
-                                            action="{{ route('admin.manajemen-keuangan.manajemen-pemasukan.destroy', $item->id) }}"
-                                            method="POST">
-                                            @csrf
-                                            @method('delete')
-                                            <button type="submit" class="btn btn-warning btn-sm"
-                                                onclick="return confirm('are you sure you want to delete this post')"><i
-                                                    class="fas fa-trash fa-fw">
-                                                    Delete</i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                </td> --}}
+                                @php
+                                    $no++;
+                                @endphp
+
+                                <td class="text-center">{{ $no }}</td>
+                                <td>{{ $item->created_at }}</td>
+                                <td>{{ $item->updated_at }}</td>
+                                {{-- <td>{{ date('d M Y', strtotime($item->created_at)) }}</td> --}}
+                                <td>{{ $item->keterangan }}</td>
+                                <td>Rp.{{ $item->nominal }}</td>
                                 <td>
                                     <form
                                         action="{{ route('admin.manajemen-keuangan.manajemen-pemasukan.destroy', $item->id) }}"
@@ -115,22 +121,16 @@
                                             href="{{ route('admin.manajemen-keuangan.manajemen-pemasukan.edit', $item->id) }}">Edit</a>
                                         @csrf
                                         @method('delete')
-                                        {{-- <button type="submit" class="btn btn-danger"
-                                            onclick="return confirm('are you sure you want to delete this post')">Delete
-                                        </button> --}}
-                                        <button type="submit" class="btn btn-danger btn-flat show_confirm"
-                                            data-toggle="tooltip" title='Delete'>Delete</button>
+                                        <button type="submit" class="btn btn-danger show_confirm" data-toggle="tooltip"
+                                            title='Delete'>Delete</button>
                                     </form>
                                 </td>
-                                <td>{{ $item->keterangan }}</td>
-                                <td>Rp.{{ $item->nominal }}</td>
-                                {{-- <td>Rp.{{ number_format($item->nominal, 0) }}</td> --}}
                             </tr>
                         @endforeach
 
                     </tbody>
 
-                    <td colspan="2"><b>Total</b></td>
+                    <td colspan="4"><b>Total</b></td>
                     <td><b>Rp. {{ number_format($pemasukan, 0) }}</b></td>
 
 

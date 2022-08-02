@@ -26,60 +26,79 @@
                             </div>
                         </div>
                         <!-- end panel-heading -->
+                        @if (empty($data) || $data->count() == 0)
+                            <!-- begin panel -->
+                            <div class="panel panel-inverse">
+                                <div class="panel-body mx-3 text-center">
+                                    <h3>Data Keluarga</h3>
+                                    <hr>
+                                    <p style="font-size: 14px">Anda belum mengisi data Diri Petugas.</p>
+                                    <a href="{{ route('user.petugas-iuran.data-petugas.create') }}"
+                                        class="btn btn-primary"><i class="fas fa-pencil-alt fa-fw mr-2"></i>Isi Data
+                                        Petugas</a>
+                                </div>
+                            </div>
+                            <!-- end panel -->
+                        @else
+                            {{-- <a class="btn btn-primary" href="{{ route('user.petugas-iuran.data-petugas.edit') }}">Edit</a> --}}
+                            <form action="{{ route('user.petugas-iuran.data-petugas.store') }}" id="form"
+                                name="form" method="POST" data-parsley-validate="true" enctype="multipart/form-data">
+                                {{-- @csrf
+                                @if (isset($data))
+                                    {{ method_field('PUT') }}
+                                @endif --}}
+                                <!-- begin panel-body -->
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col">
+                                            <img src="{{ asset($data->dokumen->first()['public_url']) }}" alt="Foto Petugas"
+                                                width="200">
+                                            {{-- <img src="/assets/img/user/user-1.jpg" alt="Foto Warga" width="200"> --}}
+                                        </div>
+                                        <div class="col">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col"> </th>
+                                                        <th scope="col"> </th>
 
-
-                        {{-- <a class="btn btn-primary" href="{{ route('user.petugas-iuran.data-petugas.edit') }}">Edit</a> --}}
-                        <form action="{{ route('user.petugas-iuran.data-petugas.store') }}" id="form" name="form"
-                            method="POST" data-parsley-validate="true" enctype="multipart/form-data">
-                            @csrf
-                            @if (isset($data))
-                                {{ method_field('PUT') }}
-                            @endif
-                            <!-- begin panel-body -->
-                            <div class="panel-body">
-                                <a href="{{ url('petugas-iuran/data-petugas/create') }}"
-                                    class="btn btn-success">CREATE</a>
-                                <div class="row">
-                                    <div class="col">
-                                        <img src="/assets/img/user/user-13.jpg" alt="Foto Petugas" width="200">
-                                    </div>
-                                    <div class="col">
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col"> </th>
-                                                    <th scope="col"> </th>
-
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($data1 as $item)
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {{-- @foreach ($data1 as $item) --}}
                                                     <tr>
                                                         <td>Nama</td>
                                                         <td> {{ Auth::user()->name }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>Tanggal Lahir</td>
-                                                        <td>{{ date('d M Y', strtotime($item->ttgl)) }}</td>
+                                                        <td>{{ date('d M Y', strtotime($data->ttgl)) }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>No. Telepon</td>
-                                                        <td>{{ $item->no_telp }}</td>
+                                                        <td>{{ $data->no_telp }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>Alamat</td>
-                                                        <td>{{ $item->alamat }}</td>
+                                                        <td>{{ $data->alamat }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>Pos</td>
-                                                        <td>{{ $item->poss->nama }}</td>
+                                                        <td>{{ $data->poss->nama }}</td>
                                                     </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
+                                                    {{-- @endforeach --}}
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+
+                                <div class="panel-footer">
+
+                                    <a href="{{ route('user.petugas-iuran.data-petugas.edit', $data->id) }}"
+                                        class="btn btn-success">Edit</a>
+                                </div>
+                        @endif
                         </form>
 
                     </div>

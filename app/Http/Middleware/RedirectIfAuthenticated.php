@@ -21,9 +21,9 @@ class RedirectIfAuthenticated
     {
 
         //tambahan
-        if (Auth::guard('admin')->check()) {
-            return redirect()->route('dashboard');
-        }
+        // if (Auth::guard('admin')->check()) {
+        //     return redirect()->route('dashboard');
+        // }
 
 
         $guards = empty($guards) ? [null] : $guards;

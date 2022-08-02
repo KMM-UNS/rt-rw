@@ -14,6 +14,7 @@ use App\Helpers\TrashHelper;
 use App\Helpers\FileUploaderHelper;
 use App\Http\Requests\Admin\IuranSukarelaForm;
 use App\Models\Keluarga;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 
 class KasIuranSukaRelaController extends Controller
@@ -32,14 +33,6 @@ class KasIuranSukaRelaController extends Controller
 
         return view('pages.user.kas-rt.kasiuransukarela.add-edit',  ['jenis_iuransukarela' => $jenis_iuransukarela, 'nama_petugas' => $nama_petugas, 'wargaa' => $wargaa, 'warga' => $warga]);
     }
-
-    // public function status($id)
-    // {
-    //     $sukarela = KasIuranSukarela::find($id);
-    //     $sukarela->status = !$sukarela->status;
-    //     $sukarela->save();
-    //     return redirect()->back();
-    // }
 
     public function store(IuranSukarelaForm $request, FileUploaderHelper $fileUploaderHelper)
     {
@@ -68,6 +61,13 @@ class KasIuranSukaRelaController extends Controller
             }
         });
         return redirect(route('user.kas-rt.kas-iuransukarela.index'))->withToastSuccess('Data tersimpan');
+    }
+
+    public function cetak_pdf($id)
+    {
+        $warga = KasIuranSukaRela::with(['iuransukarela', 'petugastagihan', 'postagihansukarela', 'warga_sukarela'])->findOrFail($id);
+        $pdf = PDF::loadView('pages.user.kas-rt.kasiuransukarela.sukarela_pdf', ['warga' => $warga]);
+        return $pdf->download('sukarela_buktipembayaran.pdf');
     }
 
     public function show($id)

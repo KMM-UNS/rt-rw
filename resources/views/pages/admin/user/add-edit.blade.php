@@ -40,7 +40,7 @@
         <div class="panel-body">
             <div class="form-group">
                 <label for="name">Nama Lengkap</label>
-                <input type="text" id="fullname" name="fullname" class="form-control" autofocus data-parsley-required="true" value="{{{ $data->nama ?? old('nama') }}}">
+                <input type="text" id="name" name="name" class="form-control" autofocus data-parsley-required="true" value="{{{ $data->name ?? old('name') }}}">
             </div>
             <div class="form-group">
                 <label for="name">Email</label>
@@ -58,11 +58,12 @@
                 <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" autofocus data-parsley-required="{{{ isset($data) ? 'false' : 'true' }}}" value="">
             </div>
             <div class="form-group">
-                <label for="name">Pengguna ini seorang admin?</label>
-                <select name="isAdmin" class="form-control">
+                <label for="name">Tentukan Role</label>
+                <x-form.Dropdown name="role_id" :options="$role" selected="{{{ old('role_id') ?? ($data['role_id'] ?? null) }}}" required />
+                {{-- <select name="isAdmin" class="form-control">
                     <option value="0" {{{ old('isAdmin') == 0 || (isset($data) && $data->isAdmin == 0) ? 'selected': '' }}}>Tidak</option>
                     <option value="1" {{{ old('isAdmin') == 1 || (isset($data) && $data->isAdmin == 1) ? 'selected': '' }}}>Ya</option>
-                </select>
+                </select> --}}
             </div>
         </div>
         <!-- end panel-body -->

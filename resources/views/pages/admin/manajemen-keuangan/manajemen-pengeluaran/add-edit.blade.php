@@ -42,21 +42,41 @@
             <!-- end panel-heading -->
             <!-- begin panel-body -->
             <div class="panel-body">
-                <div class="form-group">
-                    <label for="tanggal">Keterangan</label>
-                    <input type="date" id="tanggal" name="tanggal" class="form-control" autofocus
-                        data-parsley-required="true" value="{{{ $data->tanggal ?? old('tanggal') }}}">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="tanggal">Tanggal</label>
+                            <input type="date" id="tanggal" name="manajemen_pengeluarans_tanggal" class="form-control" autofocus
+                                data-parsley-required="true" value="{{{ $data->tanggal ?? old('manajemen_pengeluarans_tanggal') }}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="keterangan">Keterangan</label>
+                            <input type="text" id="keterangan" name="manajemen_pengeluarans_keterangan" class="form-control" autofocus
+                                data-parsley-required="true" value="{{{ $data->keterangan ?? old('manajemen_pengeluarans_keterangan') }}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="nominal">Nominal</label>
+                            <input type="text" id="nominal" name="manajemen_pengeluarans_nominal" class="form-control" autofocus
+                                data-parsley-required="true" value="{{{ $data->nominal ?? old('manajemen_pengeluarans_nominal') }}}">
+                        </div>
+                    </div>
+                    <div class="col-md-5 high-10">
+                        <div class="form-group">
+                            <label for="foto_iurankondisional">Foto Bukti Pengeluaran</label>
+                            {{-- <input type="file" id="foto_iurankondisional" name="foto_iurankondisional" class="form-control @error('image') is-invalid @enderror" autofocus data-parsley-required="true"> --}}
+                            @php
+                                    $imageSrc = null;
+                                    if(isset($data->dokumen)){
+                                    $imageSrc = $data->dokumen->toArray();
+                                    }
+                                    @endphp
+                                    <div class="row">
+                                        <x-form.ImageUploader :imageSrc="isset($imageSrc) ? asset(DataHelper::filterDokumenData($imageSrc, 'nama', 'foto_pengeluaran')->first()['public_url']) : null" name="foto_pengeluaran" title="Foto Pengeluaran" value="{{{ $data->dokumen  ?? old('foto_pengeluaran') }}}" />
+                                    </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="keterangan">Keterangan</label>
-                    <input type="text" id="keterangan" name="keterangan" class="form-control" autofocus
-                        data-parsley-required="true" value="{{{ $data->keterangan ?? old('keterangan') }}}">
-                </div>
-                <div class="form-group">
-                    <label for="nominal">Nominal</label>
-                    <input type="text" id="nominal" name="nominal" class="form-control" autofocus
-                        data-parsley-required="true" value="{{{ $data->nominal ?? old('nominal') }}}">
-                </div>
+
 
 
                 <!-- begin panel-footer -->

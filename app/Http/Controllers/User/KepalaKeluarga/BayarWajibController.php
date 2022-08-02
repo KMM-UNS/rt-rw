@@ -16,7 +16,11 @@ class BayarWajibController extends Controller
         $wargaa = Keluarga::with(['warga_wajib'])->get();
         $iuran_wajib = IuranWajib::all();
 
-        return view('pages.user.kepala-keluarga.index_wajib', ['pos_tagihan' => $pos_tagihan, 'wargaa' => $wargaa, 'iuran_wajib' => $iuran_wajib]);
+        return view('pages.user.kepala-keluarga.index_wajib', [
+            'pos_tagihan' => $pos_tagihan,
+            'wargaa' => $wargaa,
+            'iuran_wajib' => $iuran_wajib
+        ]);
     }
 
     public function create()

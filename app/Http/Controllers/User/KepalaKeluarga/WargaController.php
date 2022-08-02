@@ -24,7 +24,13 @@ class WargaController extends Controller
         $total_agenda = KasIuranAgenda::sum('total_biaya');
         $total_kondisional = KasIuranKondisional::sum('total_biaya');
         $total_sukarela = KasIuranSukaRela::sum('total_biaya');
-        return view('pages.user.kepala-keluarga.warga.index', ['wargaa' => $wargaa, 'total_wajib' => $total_wajib, 'total_agenda' => $total_agenda, 'total_kondisional' => $total_kondisional, 'total_sukarela' => $total_sukarela]);
+        return view('pages.user.kepala-keluarga.warga.index', [
+            'wargaa' => $wargaa,
+            'total_wajib' => $total_wajib,
+            'total_agenda' => $total_agenda,
+            'total_kondisional' => $total_kondisional,
+            'total_sukarela' => $total_sukarela
+        ]);
     }
 
     public function wargah()

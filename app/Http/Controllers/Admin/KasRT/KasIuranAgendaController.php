@@ -23,7 +23,6 @@ class KasIuranAgendaController extends Controller
 {
     public function index(KasIuranAgendaDataTable $dataTable)
     {
-
         return $dataTable->render('pages.admin.kas-rt.kasiuranagenda.index');
     }
 

@@ -7,8 +7,7 @@
     <link href="{{ asset('/assets/plugins/datatables.net-bs4/css/dataTables.bootstrap4.css') }}" rel="stylesheet" />
     <link href="{{ asset('/assets/plugins/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}"
         rel="stylesheet" />
-    <link href="{{ asset('/assets/plugins/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') }}"
-        rel="stylesheet" />
+    <link href="{{ asset('/assets/plugins/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') }}" rel="stylesheet" />
     <!-- end datatables -->
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 @endpush
@@ -40,11 +39,6 @@
         </div>
         <!-- end panel-heading -->
         <!-- begin panel-body -->
-        {{-- <div class="panel-body">
-            {{ $dataTable->table() }}
-        </div> --}}
-        {{-- <a href="{{ url('admin/manajemen-keuangan/manajemen-pengeluaran/create') }}"
-            class="btn btn-outline-info">CREATE</a> --}}
         <form action="{{ route('admin.manajemen-keuangan.manajemen-pengeluaran.store') }}" id="form" name="form"
             method="POST" data-parsley-validate="true" enctype="multipart/form-data">
             @csrf
@@ -61,40 +55,32 @@
                 <table border="1" cellpadding="2" class="table">
                     <thead>
                         <tr>
-                            <th scope="col">Action</th>
+                            <th scope="col">No.</th>
                             <th scope="col">Tanggal</th>
-                            <th scope="col">Nominal</th>
                             <th scope="col">Keterangan</th>
+                            <th scope="col">Nominal</th>
+                            <th scope="col">Foto Bukti</th>
+                            <th scope="col">Action</th>
 
                         </tr>
                     </thead>
 
                     <tbody>
-
+                        @php
+                            $no = 0;
+                        @endphp
                         @foreach ($pengeluarann as $item)
                             <tr>
-                                {{-- <td>
-                                    <div class="btn-group">
-                                        <a class="btn btn-primary"
-                                            href="{{ route('admin.manajemen-keuangan.manajemen-pengeluaran.edit', $item->id) }}">Edit</a>
-                                        <form
-                                            action="{{ route('admin.manajemen-keuangan.manajemen-pengeluaran.destroy', $item->id) }}"
-                                            method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-warning btn-sm"
-                                                onclick="return confirm('are you sure you want to delete this post')">
-                                                Delete
-                                            </button>
-                                        </form>
-                                    </div>
-                                </td> --}}
+                                @php
+                                    $no++;
+                                @endphp
+                                <td class="text-center">{{ $no }}</td>
+                                <td>{{ date('d M Y', strtotime($item->tanggal)) }}</td>
+                                <td>{{ $item->keterangan }}</td>
+                                <td>Rp.{{ number_format($item->nominal, 0) }}</td>
+                                <td> <img src="{{ asset($item->dokumen->first()['public_url']) }}" alt="Foto Pengeluaran"
+                                        width="200"></td>
                                 <td>
-                                    {{-- <a href="{{ route('admin.manajemen-keuangan.manajemen-pengeluaran.edit', $item->id) }}"
-                                        class="btn btn-dark buttons-edit"><i class="fas fa-edit"></i></a> --}}
-                                    {{-- <a href="{{ route('admin.manajemen-keuangan.manajemen-pengeluaran.destroy', $item->id) }}"
-                                        class="btn btn-danger buttons-delete"><i class="fas fa-trash fa-fw">Delete</i></a> --}}
-
                                     <form
                                         action="{{ route('admin.manajemen-keuangan.manajemen-pengeluaran.destroy', $item->id) }}"
                                         method="POST">
@@ -102,35 +88,18 @@
                                             href="{{ route('admin.manajemen-keuangan.manajemen-pengeluaran.edit', $item->id) }}">Edit</a>
                                         @csrf
                                         @method('delete')
-                                        {{-- <button type="submit" class="btn btn-danger"
-                                            onclick="return confirm('are you sure you want to delete this post')">Delete
-                                        </button> --}}
                                         <button type="submit" class="btn btn-danger btn-flat show_confirm"
                                             data-toggle="tooltip" title='Delete'>Delete</button>
                                     </form>
-                                    {{-- <form
-                                        action="{{ route('admin.manajemen-keuangan.manajemen-pengeluaran.edit', $item->id) }}"
-                                        method="Post">
-                                        <a class="btn btn-primary"
-                                            href="{{ route('admin.manajemen-keuangan.manajemen-pengeluaran.destroy', $item->id) }}">Edit</a>
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">Delete</button>
-                                    </form> --}}
                                 </td>
-                                <td>{{ date('d M Y', strtotime($item->tanggal)) }}</td>
-                                <td>{{ $item->keterangan }}</td>
-                                <td>Rp.{{ number_format($item->nominal, 0) }}</td>
                             </tr>
                         @endforeach
 
                     </tbody>
-
-                    <td><b>Total</b></td>
                     <td></td>
                     <td></td>
-
-                    <td colspan="cols-2"><b>Rp. {{ number_format($pengeluarannn, 0) }}</b></td>
+                    <td colspan="cols-3"><b>Total</b></td>
+                    <td colspan="cols-1"><b>Rp. {{ number_format($pengeluarannn, 0) }}</b></td>
 
 
 

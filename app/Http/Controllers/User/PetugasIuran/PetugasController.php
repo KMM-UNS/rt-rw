@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User\PetugasIuran;
 use App\Http\Controllers\Controller;
 use App\Models\Keluarga;
 use App\Models\PetugasTagihan;
+use App\Models\Pos;
 use Illuminate\Http\Request;
 
 class PetugasController extends Controller
@@ -16,13 +17,14 @@ class PetugasController extends Controller
      */
     public function index()
     {
-        $data = PetugasTagihan::where('id', auth()->user()->id)->first()->id;
-        $data1 = PetugasTagihan::where('id', $data)->with('poss')->get();
-        // $data1 = PetugasTagihan::where('petugas_id', auth()->user()->id)->first()->id;
-
-        // $data1 = KasIuranWajib::where('warga', $id_petugas)->get();
-        // return view('pages.user.petugas.index', ['data' => $data, 'data1' => $data1]);
-        return view('pages.user.petugas.index', ['data' => $data, 'data1' => $data1]);
+        $data = PetugasTagihan::with(['poss'])->where('user_id', auth()->user()->id)->first();
+        // $data1 = PetugasTagihan::where('id', $data)->with('poss')->get();
+        $data2 = Keluarga::where('id', auth()->user()->id)->first();
+        return view('pages.user.petugas.index', [
+            'data' => $data,
+            // 'data1' => $data1,
+            'data2' => $data2
+        ]);
     }
 
     /**
@@ -32,68 +34,73 @@ class PetugasController extends Controller
      */
     public function create()
     {
-        return view('pages.user.petugas.add-edit');
+        $pos = Pos::pluck('nama', 'id');
+        return view('pages.user.petugas.add-edit', ['pos' => $pos]);
     }
     // return view('pages.user.petugas.add-edit');
 
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        try {
+            $request->validate([
+                'nama' => 'required|min:3'
+            ]);
+        } catch (\Throwable $th) {
+            return back()->withInput()->withToastError($th->validator->messages()->all()[0]);
+        }
+        // dd($request->all());
+        try {
+            PetugasTagihan::create($request->all());
+        } catch (\Throwable $th) {
+            dd($th);
+            return back()->withInput()->withToastError('Something went wrong');
+        }
+
+        return redirect(route('user.petugas-iuran.data-petugas.index'))->withToastSuccess('Data tersimpan');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
 
     public function edit($id)
     {
-        $data1 = PetugasTagihan::findOrFail($id);
+        // $data = PetugasTagihan::findOrFail($id);
         // $pengeluarannn = ManajemenPengeluaran::sum('nominal');
-
+        $data = PetugasTagihan::where('id', auth()->user()->id)->first();
+        $data1 = PetugasTagihan::where('id', $data)->with('poss')->get();
+        $data2 = PetugasTagihan::findOrFail($id);
+        $pos = Pos::pluck('nama', 'id');
         return view('pages.user.petugas.add-edit', [
             'data1' => $data1,
+            'data2' => $data2,
+            'pos' => $pos
         ]);
+        // return ('berhasil');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $request->validate([
+                'nama' => 'required|min:3'
+            ]);
+        } catch (\Throwable $th) {
+            return back()->withInput()->withToastError($th->validator->messages()->all()[0]);
+        }
+
+        try {
+            $data2 = PetugasTagihan::findOrFail($id);
+            $data2->update($request->all());
+        } catch (\Throwable $th) {
+            return back()->withInput()->withToastError('Something went wrong');
+        }
+
+        return redirect(route('user.petugas-iuran.data-petugas.index'))->withToastSuccess('Data tersimpan');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //
