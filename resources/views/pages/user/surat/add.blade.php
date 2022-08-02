@@ -49,6 +49,9 @@
                             </div>
                         </div>
                     </div>
+                    <div id="syarat" class="container text-center my-3">
+
+                    </div>
                     <!-- end panel-body -->
                     <!-- begin panel-footer -->
 
@@ -91,14 +94,43 @@
     </script>
 <script>
     function suratChange() {
-    var keperluanSurat = document.getElementById("surat_keperluan_surat_id");
-    var keterangan = document.getElementById("keterangan");
+    const keperluanSurat = document.getElementById("surat_keperluan_surat_id");
+    const keterangan = document.getElementById("keterangan");
+    const syarat = document.getElementById("syarat");
+    const miskin = `<h5>Menurut Badan Pusat Statistik (BPS), terdapat 14 kriteria seseorang tergolong miskin, antara lain :</h5>
+                        <ol class="text-justify mx-5" style="font-size: 13px">
+                            <li>Luas lantai bangunan tempat tinggal kurang dari 8 meter persegi per orang</li>
+                            <li>Jenis lantai tempat tinggal terbuat dari tanah/bambu/kayu murahan</li>
+                            <li>Jenis dinding tempat tinggal dari bambu/rumbia/kayu berkualitas rendah/tembok tanpa diplester.</li>
+                            <li>Tidak memiliki fasilitas buang air besar/bersama-sama dengan rumah tangga lain.</li>
+                            <li>Sumber penerangan rumah tangga tidak menggunakan listrik.</li>
+                            <li>Sumber air minum berasal dari sumur/mata air tidak terlindung/sungai/air hujan.</li>
+                            <li>Bahan bakar untuk memasak sehari-hari adalah kayu bakar/arang/minyak tanah</li>
+                            <li>Hanya mengonsumsi daging/susu/ayam dalam satu kali seminggu.</li>
+                            <li>Hanya membeli satu stel pakaian baru dalam setahun</li>
+                            <li>Hanya sanggup makan sebanyak satu/dua kali dalam sehari</li>
+                            <li>Tidak sanggup membayar biaya pengobatan di puskesmas/poliklinik</li>
+                            <li>Sumber penghasilan kepala rumah tangga adalah: petani dengan luas lahan 500 meter persegi, buruh tani, nelayan, buruh bangunan, buruh perkebunan dan atau pekerjaan lainnya dengan pendapatan di bawah Rp 600.000 per bulan</li>
+                            <li>Sumber penghasilan kepala rumah tangga adalah: petani dengan luas lahan 500 meter persegi, buruh tani, nelayan, buruh bangunan, buruh perkebunan dan atau pekerjaan lainnya dengan pendapatan di bawah Rp 600.000 per bulan</li>
+                            <li>Tidak memiliki tabungan/barang yang mudah dijual dengan minimal Rp 500.000 seperti sepeda motor kredit/nonkredit, emas, ternak, kapal motor, atau barang modal lainnya.</li>
+                        </ol>
+                        <h5>Jika 9 dari 14 kriteria tersebut terpenuhi maka bisa dikategorikan miskin.</h5>`
 
         // if lainnya dipilih
         if (keperluanSurat.value == "7"){
+            while (syarat.hasChildNodes()) {
+                syarat.removeChild(syarat.firstChild);
+            }
             keterangan.style.display = "block";
         }
+        else if(keperluanSurat.value == "4"){
+            syarat.innerHTML = miskin;
+            keterangan.style.display = "none";
+        }
         else {
+            while (syarat.hasChildNodes()) {
+                syarat.removeChild(syarat.firstChild);
+            }
             keterangan.style.display = "none";
         }
     }

@@ -135,13 +135,13 @@
         </p>
         <div class="row">
             <div class="column" style="text-align:center;">
-                {{-- <img src="{{ asset($ttd_rw->first()['public_url']) }}" alt="ttd_rw" style= "width: 50%; height: 2.5cm;">
+                <p style="justify-self: center;margin: 1cm 0 0 0;">Mengetahui,</p>
+                <div src="" alt="ttd_rw" style= "width: 50%; height: 2.5cm;"></div>
                 <p style="justify-self: center;margin: 0 0 0 0;"> <u>{{ $app->ketua_rw }}</u></p>
-                <p style="justify-self: center;margin-top: 0;">Ketua RW {{ $app->rw }}</p> --}}
+                <p style="justify-self: center;margin-top: 0;">Ketua RW {{ $app->rw }}</p>
             </div>
             <div class="column" style="text-align:center;">
                 <p style="justify-self: center;">{{ str_replace("Kabupaten", "",ucwords(strtolower($app->kabupaten->name))) }}, {{ $surat->tanggal_disetujui->isoFormat('DD MMMM YYYY') }} </p>
-                <p style="justify-self: center;margin: 1cm 0 0 0;">Mengetahui,</p>
                     <img src="{{ asset($ttd_rt->first()['public_url']) }}" alt="ttd_rw" style="width: 50%; height: 2.5cm;">
                 <p style="justify-self: center;margin: 0 0 0 0;"> <u>{{ $app->ketua_rt }}</u></p>
                 <p style="justify-self: center;margin-top: 0;">Ketua RT {{ $app->rt }}</p>
