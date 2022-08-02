@@ -118,20 +118,28 @@
                 </div>
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-md-2 my-auto">
+                        <div class="col-md-1 my-auto">
                             <label for="kode_pos"><strong>Kode Pos</strong></label>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="">
                                 <input type="text" id="kode_pos" name="apps_kode_pos" class="form-control" autofocus data-parsley-required="true" value="{{{ old('apps_kode_pos') ?? ($data['kode_pos'] ?? null) }}}">
                             </div>
                         </div>
-                        <div class="col-md-2 my-auto">
+                        <div class="col-md-1 my-auto">
                             <label for="telepon"><strong>Telepon</strong></label>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="">
                                 <input type="text" id="telepon" name="apps_telepon" class="form-control" autofocus data-parsley-required="true" value="{{{ old('apps_telepon') ?? ($data['telepon'] ?? null) }}}">
+                            </div>
+                        </div>
+                        <div class="col-md-1 my-auto">
+                            <label for="email"><strong>Email</strong></label>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="">
+                                <input type="text" id="email" name="apps_email" class="form-control" autofocus data-parsley-required="true" value="{{{ old('apps_email') ?? ($data['email'] ?? null) }}}">
                             </div>
                         </div>
                     </div>
@@ -139,19 +147,19 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-2 my-auto">
-                            <label for="email"><strong>Email</strong></label>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="">
-                                <input type="text" id="email" name="apps_email" class="form-control" autofocus data-parsley-required="true" value="{{{ old('apps_email') ?? ($data['email'] ?? null) }}}">
-                            </div>
-                        </div>
-                        <div class="col-md-2 my-auto">
                             <label for="ketua_rt"><strong>Ketua RT</strong></label>
                         </div>
                         <div class="col-md-4">
                             <div class="">
                                 <input type="text" id="ketua_rt" name="apps_ketua_rt" class="form-control" autofocus data-parsley-required="true" value="{{{ old('apps_ketua_rt') ?? ($data['ketua_rt'] ?? null) }}}">
+                            </div>
+                        </div>
+                        <div class="col-md-2 my-auto">
+                            <label for="ketua_rw"><strong>Ketua RW</strong></label>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="">
+                                <input type="text" id="ketua_rw" name="apps_ketua_rw" class="form-control" autofocus data-parsley-required="true" value="{{{ old('apps_ketua_rw') ?? ($data['ketua_rw'] ?? null) }}}">
                             </div>
                         </div>
                     </div>
