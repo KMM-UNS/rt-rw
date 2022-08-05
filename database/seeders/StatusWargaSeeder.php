@@ -15,8 +15,9 @@ class StatusWargaSeeder extends Seeder
     public function run()
     {
         $status = [
-            'Warga Tetap',
-            'Warga Pendatang',
+            'Warga',
+            'Pindah',
+            'Meninggal'
         ];
 
         foreach ($status as $data) :
