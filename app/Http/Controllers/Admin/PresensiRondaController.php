@@ -31,6 +31,8 @@ class PresensiRondaController extends Controller
             $hari_id = $request->get("hari");
             $jadwal_ronda = JadwalRonda::whereHas('ronda', function ($query){
                 return $query->where('status', 'aktif');
+            })->whereHas('warga', function ($query){
+                return $query->where('status_warga_id', 1);
             })->where('hari_id', $hari_id )->get();
             // dd($jadwal_ronda);
         } else {

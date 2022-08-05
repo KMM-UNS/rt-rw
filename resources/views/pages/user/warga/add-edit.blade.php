@@ -160,11 +160,12 @@
                                       </div>
                                   </div>
                                   <div class="col-md-2 my-auto">
-                                      <label for="status_warga_id"><strong>Status Warga</strong></label>
+                                      {{-- <label for="status_warga_id"><strong>Status Warga</strong></label> --}}
                                   </div>
                                   <div class="col-md-4">
                                       <div class="input-group">
-                                          <x-form.Dropdown name="warga_status_warga_id" :options="$status_warga" selected="{{{ old('warga_status_warga_id') ?? ($data['status_warga_id'] ?? null) }}}" required />
+                                        <input type="hidden" name="warga_status_warga_id" id="" value="1">
+                                          {{-- <x-form.Dropdown name="warga_status_warga_id" :options="$status_warga" selected="{{{ old('warga_status_warga_id') ?? ($data['status_warga_id'] ?? null) }}}" required /> --}}
                                       </div>
                                   </div>
                               </div>

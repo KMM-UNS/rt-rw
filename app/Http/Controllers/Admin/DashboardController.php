@@ -27,29 +27,43 @@ class DashboardController extends Controller
     {
         $minggu = JadwalRonda::whereHas('ronda', function ($query){
             return $query->where('status', 'aktif');
-        })->with(['warga'])->where('hari_id', '1')->get();
+        })->whereHas('warga', function ($query){
+                return $query->where('status_warga_id', 1);
+            })->with(['warga'])->where('hari_id', '1')->get();
         $senin = JadwalRonda::whereHas('ronda', function ($query){
             return $query->where('status', 'aktif');
-        })->with(['warga'])->where('hari_id', '2')->get();
+        })->whereHas('warga', function ($query){
+                return $query->where('status_warga_id', 1);
+            })->with(['warga'])->where('hari_id', '2')->get();
         $selasa = JadwalRonda::whereHas('ronda', function ($query){
             return $query->where('status', 'aktif');
-        })->with(['warga'])->where('hari_id', '3')->get();
+        })->whereHas('warga', function ($query){
+                return $query->where('status_warga_id', 1);
+            })->with(['warga'])->where('hari_id', '3')->get();
         $rabu = JadwalRonda::whereHas('ronda', function ($query){
             return $query->where('status', 'aktif');
-        })->with(['warga'])->where('hari_id', '4')->get();
+        })->whereHas('warga', function ($query){
+                return $query->where('status_warga_id', 1);
+            })->with(['warga'])->where('hari_id', '4')->get();
         $kamis = JadwalRonda::whereHas('ronda', function ($query){
             return $query->where('status', 'aktif');
-        })->with(['warga'])->where('hari_id', '5')->get();
+        })->whereHas('warga', function ($query){
+                return $query->where('status_warga_id', 1);
+            })->with(['warga'])->where('hari_id', '5')->get();
         $jumat = JadwalRonda::whereHas('ronda', function ($query){
             return $query->where('status', 'aktif');
-        })->with(['warga'])->where('hari_id', '6')->get();
+        })->whereHas('warga', function ($query){
+                return $query->where('status_warga_id', 1);
+            })->with(['warga'])->where('hari_id', '6')->get();
         $sabtu = JadwalRonda::whereHas('ronda', function ($query){
             return $query->where('status', 'aktif');
-        })->with(['warga'])->where('hari_id', '7')->get();
+        })->whereHas('warga', function ($query){
+                return $query->where('status_warga_id', 1);
+            })->with(['warga'])->where('hari_id', '7')->get();
         // dd($jadwal);
         $app = App::first();
-        $warga = Warga::count();
-        $keluarga = Keluarga::count();
+        $warga = Warga::where('status_warga_id', 1)->count();
+        $keluarga = Keluarga::where('status_tinggal_id', 1)->count();
         $surat = Surat::where('status_surat_id', '!=', '1')->count();
         $rumah = Rumah::count();
         return view('pages.admin.dashboard', [

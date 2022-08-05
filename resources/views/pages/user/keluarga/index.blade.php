@@ -39,6 +39,14 @@
                 {{-- @endif --}}
             </div>
         </div>
+    @elseif($keluarga->status_tinggal_id == 2)
+    <div class="panel panel-inverse">
+        <div class="panel-body mx-3 text-center">
+            <h3>Data Keluarga</h3>
+            <hr>
+            <p style="font-size: 14px">Anda bukan lagi warga lingkungan ini.</p>
+        </div>
+    </div>
     @else
         <div class="panel panel-inverse">
             <div class="panel-body" style="font-size: 14px">

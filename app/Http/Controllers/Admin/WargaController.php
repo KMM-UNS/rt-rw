@@ -21,6 +21,7 @@ use App\Helpers\FileUploaderHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\WargaForm;
 use App\DataTables\Admin\WargaDataTable;
+use App\DataTables\Admin\WargaPindahDataTable;
 
 class WargaController extends Controller
 {

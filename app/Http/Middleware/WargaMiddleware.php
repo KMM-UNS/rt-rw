@@ -17,9 +17,9 @@ class WargaMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        $keluarga = Keluarga::where('createable_id', auth()->user()->id)->where('verified_at', '!=', null)->with('rumah')->first();
-        if($keluarga == null) {
-            return redirect(route('user.warga.index'));
+        $keluarga = Keluarga::where('createable_id', auth()->user()->id)->where('verified_at', '!=', null)->where('status_tinggal_id', 1)->with('rumah')->first();
+        if($keluarga == null){
+            return redirect()->back();
         }
         else {
             return $next($request);

@@ -7,6 +7,7 @@ use App\Models\Rumah;
 use App\Models\Warga;
 use Twilio\Rest\Client;
 use App\Models\Keluarga;
+use App\Models\WargaPindah;
 use App\Models\RiwayatRumah;
 use App\Models\StatusHunian;
 use Illuminate\Http\Request;
@@ -16,11 +17,11 @@ use Illuminate\Support\Facades\DB;
 use App\Helpers\FileUploaderHelper;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use App\Services\WhatsappApiServices;
 use Twilio\Exceptions\TwilioException;
 use App\Http\Requests\Admin\KeluargaForm;
 use App\DataTables\Admin\KeluargaDataTable;
 use App\DataTables\Admin\DetailKeluargaDataTable;
-use App\Services\WhatsappApiServices;
 
 class KeluargaController extends Controller
 {
@@ -160,6 +161,7 @@ class KeluargaController extends Controller
 
     public function pindah(Request $request, $id)
     {
+        // dd($request->all());
         $keluarga = Keluarga::findorFail($id);
         if ($request->lokasi == "Dalam Lingkungan")
         {
@@ -250,6 +252,19 @@ class KeluargaController extends Controller
                         $keluarga->status_tinggal_id = 2;
                         $keluarga->rumah_id = null;
                         $keluarga->save();
+
+                        // update status warga pindah
+                        $warga = Warga::where('keluarga_id', $keluarga->id)->get();
+                        // dd($warga);
+                        foreach ($warga as $w) {
+                            $w->status_warga_id = 2;
+                            $w->save();
+
+                            // menambah detail pindah ke setiap warga
+                            $warga_pindah = WargaPindah::createFromRequest($request);
+                            $warga_pindah->warga_id = $w->id;
+                            $warga_pindah->save();
+                        }
 
 
                 } catch (\Throwable $th) {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\DataTables\Admin\WargaPindahDataTable;
 use App\Models\Agama;
 use App\Models\Warga;
 use App\Models\Keluarga;

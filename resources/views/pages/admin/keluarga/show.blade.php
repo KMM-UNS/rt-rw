@@ -96,18 +96,23 @@
                                 <option value="Luar Lingkungan">Luar Lingkungan</option>
                             </select>
                         </div>
-                        <div id="dropdownRumah" class="mt-2">
-                            <label for="keluarga_rumah_id">Nomor Rumah</label>
-                            <x-form.Dropdown name="keluarga_rumah_id" :options="$rumah" selected="{{{ old('keluarga_rumah_id') ?? ($data['rumah_id'] ?? null) }}}" required />
+                        <div id="pindahDalam">
+                            <div id="dropdownRumah" class="mt-2">
+                                <label for="keluarga_rumah_id">Nomor Rumah</label>
+                                <x-form.Dropdown name="keluarga_rumah_id" :options="$rumah" selected="{{{ old('keluarga_rumah_id') ?? ($data['rumah_id'] ?? null) }}}" required />
+                            </div>
+                            <div id="dropdownStatus" class="mt-2">
+                                <label for="rumah_status_hunian_id">Jenis Hunian</label>
+                                <x-form.Dropdown name="rumah_status_hunian_id" :options="$status_hunian" selected="{{{ old('rumah_status_hunian_id') ?? ($data->rumah->status_hunian_id ?? null) }}}" required />
+                            </div>
                         </div>
-                        <div id="dropdownStatus" class="mt-2">
-                            <label for="rumah_status_hunian_id">Jenis Hunian</label>
-                            <x-form.Dropdown name="rumah_status_hunian_id" :options="$status_hunian" selected="{{{ old('rumah_status_hunian_id') ?? ($data->rumah->status_hunian_id ?? null) }}}" required />
+                        <div id="pindahLuar">
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <a href="javascript:;" class="btn btn-white" data-dismiss="modal">Tutup</a>
-                        <button type="submit" id="submit" class="btn btn-primary">Simpan</button>
+                        <hr>
+                        <div class="float-right">
+                            <a href="javascript:;" class="btn btn-white" data-dismiss="modal">Tutup</a>
+                            <button type="submit" id="submit" class="btn btn-primary">Simpan</button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -193,15 +198,58 @@
     $('.buttons-reload').trigger('click')
   })
 </script>
+<script src="{{ asset('/assets/js/custom/datetime-picker.js') }}"></script>
+<script src="{{ asset('/assets/plugins/parsleyjs/dist/parsley.js') }}"></script>
+<script src="{{ asset('/assets/js/custom/string-helper.js') }}"></script>
+<script src="{{ asset('/assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js') }}"></script>
+<script>
+    $( document ).ready(function() {
+        $("#from-datepicker").datepicker({
+            format: 'yyyy-mm-dd'
+        });
+        $("#from-datepicker").on("change", function () {
+            var fromdate = $(this).val();
+            alert(fromdate);
+        });
+    });
+    </script>
 <script>
     function pindahChange() {
-    var lokasiPindah = document.getElementById("pindah");
-    var keluargaId = document.getElementById("keluarga_rumah_id");
-    var statusId = document.getElementById("rumah_status_hunian_id");
-    var dropdownRumah = document.getElementById("dropdownRumah");
-    var dropdownStatus = document.getElementById("dropdownStatus");
-    var submit = document.getElementById("submit");
-    var rumah = "<?= "$data->rumah_id"?>";
+    const lokasiPindah = document.getElementById("pindah");
+    // const keluargaId = document.getElementById("keluarga_rumah_id");
+    // const statusId = document.getElementById("rumah_status_hunian_id");
+    // const dropdownRumah = document.getElementById("dropdownRumah");
+    // const dropdownStatus = document.getElementById("dropdownStatus");
+    const submit = document.getElementById("submit");
+    const pindahDalam = document.getElementById("pindahDalam");
+    const pindahLuar = document.getElementById("pindahLuar");
+    const rumah = "<?= "$data->rumah_id"?>";
+    const pindahDalamChild = `<div id="dropdownRumah" class="mt-2">
+                            <label for="keluarga_rumah_id">Nomor Rumah</label>
+                            <x-form.Dropdown name="keluarga_rumah_id" :options="$rumah" selected="{{{ old('keluarga_rumah_id') ?? ($data['rumah_id'] ?? null) }}}" required />
+                        </div>
+                        <div id="dropdownStatus" class="mt-2">
+                            <label for="rumah_status_hunian_id">Jenis Hunian</label>
+                            <x-form.Dropdown name="rumah_status_hunian_id" :options="$status_hunian" selected="{{{ old('rumah_status_hunian_id') ?? ($data->rumah->status_hunian_id ?? null) }}}" required />
+                        </div>`
+    const pindahLuarChild = `<div class="mt-2">
+                                <input type="hidden" id="keluarga_id" name="keluarga_id" value="{{ $data->id }}">
+                                <label for="warga_pindah_alamat_tujuan">Alamat Tujuan</label>
+                                <input type="text" id="alamat_tujuan" name="warga_pindah_alamat_tujuan" class="form-control" autofocus data-parsley-required="true" value="{{{ old('warga_alamat_tujuan') ?? ($data->warga->first()['alamat_tujuan'] ?? null) }}}">
+                            </div>
+                            <div class="mt-2">
+                                <label for="warga_pindah_tanggal_pindah">Tanggal Pindah</label>
+                                <div class="input-group date">
+                                    <input type="date" id="tanggal_pindah" name="warga_pindah_tanggal_pindah" class="form-control" autofocus data-parsley-required="true" value="{{{ old('warga_pindah_tanggal_pindah') ?? (isset($data->warga->first()['tanggal_pindah']) ? $data->warga->first()['tanggal_tiba']->format('dd-mm-YYYY') : null) ?? null}}}">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="mt-2">
+                                <label for="warga_pindah_keterangan">Keterangan</label>
+                                <input type="text" id="keterangan" name="warga_pindah_keterangan" class="form-control" autofocus value="{{{ old('warga_keterangan') ?? ($data->warga->first()['keterangan'] ?? null) }}}">
+                            </div>`
 
     function empty(e) {
     switch (e) {
@@ -219,24 +267,26 @@
 
     if (empty(rumah) && lokasiPindah.value == "Luar Lingkungan" ) {
         submit.disabled = true;
-        keluargaId.disabled = true;
-        statusId.disabled = true;
-        dropdownRumah.style.display = "none";
-        dropdownStatus.style.display = "none";
+        while (pindahDalam.hasChildNodes()) {
+                pindahDalam.removeChild(pindahDalam.firstChild);
+            }
+        while (pindahLuar.hasChildNodes()) {
+                pindahLuar.removeChild(pindahLuar.firstChild);
+            }
     }
     else if (lokasiPindah.value == "Luar Lingkungan"){
         submit.disabled = false;
-        keluargaId.disabled = true;
-        statusId.disabled = true;
-        dropdownRumah.style.display = "none";
-        dropdownStatus.style.display = "none";
+        while (pindahDalam.hasChildNodes()) {
+                pindahDalam.removeChild(pindahDalam.firstChild);
+            }
+        pindahLuar.innerHTML = pindahLuarChild;
     }
     else {
         submit.disabled = false;
-        keluargaId.disabled = false;
-        statusId.disabled = false;
-        dropdownRumah.style.display = "block";
-        dropdownStatus.style.display = "block";
+        pindahDalam.innerHTML = pindahDalamChild;
+        while (pindahLuar.hasChildNodes()) {
+                pindahLuar.removeChild(pindahLuar.firstChild);
+            }
     }
 }
 </script>

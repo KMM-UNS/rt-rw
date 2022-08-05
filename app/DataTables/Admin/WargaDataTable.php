@@ -44,7 +44,7 @@ class WargaDataTable extends DataTable
      */
     public function query(Warga $model)
     {
-        return $model->with(['keluarga', 'agama', 'status_keluarga'])->select('warga.*')->newQuery();
+        return $model->with(['keluarga', 'agama', 'status_keluarga'])->select('warga.*')->where('status_warga_id', 1)->newQuery();
     }
 
     /**

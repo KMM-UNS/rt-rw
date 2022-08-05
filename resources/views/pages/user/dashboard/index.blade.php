@@ -71,6 +71,8 @@
                                 </div>
                             </div>
                             @endif
+                        @elseif ($keluarga->status_tinggal_id != 1)
+                            <p style="font-size: 14px">Anda bukan lagi warga lingkungan ini.</p>
                         @endif
                     @endif
 

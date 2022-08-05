@@ -20,7 +20,7 @@ class DashboardController extends Controller
             // jika sudah mengisi data keluarga
             if(isset($keluarga)) {
                 // jika sudah mengisi data warga
-                $warga = Warga::select('id')->where('keluarga_id', $keluarga->id)->where('status_keluarga_id', '1')->first();
+                $warga = Warga::select('id')->where('keluarga_id', $keluarga->id)->where('status_keluarga_id', '1')->where('status_warga_id', 1)->first();
                 if(isset($warga)){
                     $jadwal = JadwalRonda::whereHas('ronda', function ($query){
                         return $query->where('status', 'aktif');
