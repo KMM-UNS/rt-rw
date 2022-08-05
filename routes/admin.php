@@ -28,7 +28,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         });
         Route::resource('rumah', 'RumahController');
         Route::resource('tamu', 'TamuController');
-        Route::resource('warga', 'WargaController');
+        Route::group(['prefix' => '/warga', 'as' => 'warga.'], function () {
+            Route::resource('/pindah', 'WargaPindahController');
+            Route::resource('/meninggal', 'WargaMeninggalController');
+            Route::resource('/', 'WargaController')->parameter('', 'warga');
+        });
         Route::group(['prefix' => '/keluarga', 'as' => 'keluarga.'], function () {
             Route::resource('/', 'KeluargaController')->parameter('','keluarga');
             Route::post('pindah/{id}', 'KeluargaController@pindah')->name('pindah');

@@ -103,4 +103,9 @@ class Warga extends Model
     {
         return $this->hasMany(PresensiRonda::class);
     }
+
+    public function warga_pindah()
+    {
+        return $this->hasMany(WargaPindah::class);
+    }
 }
