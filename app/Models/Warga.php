@@ -108,4 +108,9 @@ class Warga extends Model
     {
         return $this->hasMany(WargaPindah::class);
     }
+
+    public function warga_meninggal()
+    {
+        return $this->hasMany(WargaMeninggal::class);
+    }
 }

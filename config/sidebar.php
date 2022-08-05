@@ -28,8 +28,24 @@ return [
         [
             'icon' => 'fa fa-user',
             'title' => 'Warga',
-            'url' => '/admin/warga',
-            'caret' => false,
+            // 'url' => '/admin/warga',
+            // 'caret' => false,
+            'url' => 'javascript:;',
+            'caret' => true,
+            'sub_menu' => [
+                [
+                    'url' => '/admin/warga',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Warga'
+                ],
+                [
+                    'url' => '/admin/warga/pindah',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Warga Pindah'
+                ],
+                [
+                    'url' => '/admin/warga/meninggal',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Warga Meninggal'
+                ],
+            ]
         ],
         [
             'icon' => 'fa fa-home',
