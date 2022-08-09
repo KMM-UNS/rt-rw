@@ -16,7 +16,10 @@ return [
     ],
     'user_roles' => [
         'admin' => [
-            ['name' => "Admin", "email" => "admin@admin.com", "phone_number" => "083728290281","password" => 'password'],
+            ['name' => "Admin", "email" => "admin@admin.com", "phone_number" => "623728290281","password" => 'password'],
+        ],
+        'ketua_rt' => [
+            ['name' => "Ketua RT", "email" => "rt@admin.com", "phone_number" => "628113021011","password" => 'password'],
         ],
     ],
     'permissions_map' => [

@@ -82,8 +82,8 @@
                     </div>
                     <div class="col-md-6">
                         <div>
-                            <label>Nomor Rumah</label>
-                            <p class="font-weight-bold">{{ $keluarga->rumah['nomor_rumah'] }}</p>
+                            <label>Alamat Rumah</label>
+                            <p class="font-weight-bold">{{ $keluarga->rumah['alamat'] . 'No. ' .$keluarga->rumah['nomor_rumah'] ?? '-'}}</p>
                         </div>
                         <div>
                             <label>Nomor Telepon/HP</label>

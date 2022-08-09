@@ -15,8 +15,8 @@ class BerandaController extends Controller
     public function index()
     {
         $app = App::first();
-        $warga = Warga::count();
-        $keluarga = Keluarga::count();
+        $warga = Warga::where('status_warga_id', 1)->count();
+        $keluarga = Keluarga::where('status_tinggal_id', 1)->count();
         $surat = Surat::where('status_surat_id', '!=', '1')->count();
         $rumah = Rumah::count();
         // dd($keluarga);

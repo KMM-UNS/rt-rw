@@ -43,7 +43,6 @@
                 <div class="text-center my-2">
                     Masukkan kode OTP yang sudah dikirim ke nomor:
                     <strong class="text-center my-3">
-                        {{-- +6218215712448 --}}
                         {{session('phone_number')}}
                     </strong>
                 </div>
@@ -64,6 +63,18 @@
 
                     <div class="register-buttons">
                         <button type="submit" class="btn btn-success btn-block btn-lg">{{ __('Verifikasi') }}</button>
+                    </div>
+
+                </form>
+
+                  <form action="{{route('resend')}}" method="post">
+                    @csrf
+                    <div class="form-group m-b-15">
+                        <input type="hidden" name="phone_number" value="{{session('phone_number')}}">
+                    </div>
+
+                    <div class="register-buttons">
+                        <button type="submit" class="btn btn-default btn-block btn-lg">{{ __('Kirim Ulang OTP') }}</button>
                     </div>
 
                 </form>

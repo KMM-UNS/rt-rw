@@ -41,6 +41,7 @@ Route::get('/verify', function () {
 })->name('verify');
 
 Route::post('/register', 'AuthController@create')->name('register');
+Route::post('/resend', 'AuthController@resend')->name('resend');
 Route::post('/verify', 'AuthController@verify')->name('verify');
 
 Route::group(['prefix' => 'user', 'as' => 'user.'], function () {

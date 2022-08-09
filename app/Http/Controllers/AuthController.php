@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use App\Models\User;
+use App\Models\UsersTemp;
 use App\Services\WhatsappApiServices;
 use Twilio\Rest\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+
 class AuthController extends Controller
 {
     protected $whatsappApiServices;
@@ -26,22 +29,49 @@ class AuthController extends Controller
             'phone_number' => ['required', 'numeric', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
-        $otp = rand(0000, 9999);
-        $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'phone_number' => $data['phone_number'],
-            'password' => Hash::make($data['password']),
-            'otp' => $otp,
+        $otp = rand(1000, 9999);
+        $user_temp = UsersTemp::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'phone_number' => $data['phone_number'],
+                'password' => Hash::make($data['password']),
+                'otp' => $otp,
         ]);
-        $role = Role::where('name', 'warga')->first();
-        $user->attachRole($role);
+        // $user = User::create([
+        //     'name' => $data['name'],
+        //     'email' => $data['email'],
+        //     'phone_number' => $data['phone_number'],
+        //     'password' => Hash::make($data['password']),
+        //     'otp' => $otp,
+        // ]);
+        // $role = Role::where('name', 'warga')->first();
+        // $user->attachRole($role);
 
-        $body = 'Sistem Informasi RT - OTP ini digunakan untuk verifikasi akun. JANGAN BAGIKAN OTP INI KE SIAPAPUN. OTP:'. $user->otp;
+        $body = 'Sistem Informasi RT - OTP ini digunakan untuk verifikasi akun. JANGAN BAGIKAN OTP INI KE SIAPAPUN. OTP:'. $user_temp->otp;
 
-        $response = $this->whatsappApiServices->sendMessage($user->phone_number, $body);
+        $response = $this->whatsappApiServices->sendMessage($user_temp->phone_number, $body);
         // dd($user->phone_number);
-        return redirect()->route('verify')->with(['phone_number' => $data['phone_number']]);
+        return redirect()->route('verify')->with(['phone_number' => $user_temp['phone_number']]);
+    }
+
+    protected function resend(Request $request)
+    {
+        $data = $request->validate([
+            'phone_number' => ['required', 'string'],
+        ]);
+        $user_temp = UsersTemp::where('phone_number', $data['phone_number'])->first();
+
+        $otp = rand(1000, 9999);
+
+        $user_temp->update([
+            'otp' => $otp
+        ]);
+
+        $body = 'Sistem Informasi RT - OTP ini digunakan untuk verifikasi akun. JANGAN BAGIKAN OTP INI KE SIAPAPUN. OTP:'. $user_temp->otp;
+
+        $response = $this->whatsappApiServices->sendMessage($user_temp->phone_number, $body);
+        // dd($user->phone_number);
+        return redirect()->route('verify')->with(['phone_number' => $user_temp['phone_number']]);
     }
 
     protected function verify(Request $request)
@@ -53,10 +83,23 @@ class AuthController extends Controller
             'phone_number' => ['required', 'string'],
         ]);
 
-        $user = User::where('phone_number', $data['phone_number'])->first();
-        if ($user->otp == $data['otp']) {
-            $user->update(['isVerified' => true]);
+        $user_temp = UsersTemp::where('phone_number', $data['phone_number'])->orderBy('created_at', 'DESC')->first();
+        var_dump($user_temp);
+        if ($user_temp->otp == $data['otp']) {
+
+            $user = User::create([
+                    'name' => $user_temp['name'],
+                    'email' => $user_temp['email'],
+                    'phone_number' => $user_temp['phone_number'],
+                    'password' => Hash::make($user_temp['password']),
+                    'otp' => $user_temp['otp'],
+                    'isVerified' => true
+                ]);
+            $role = Role::where('name', 'warga')->first();
+            $user->attachRole($role);
             Auth::login($user);
+
+            $user_temp->delete();
             return redirect()->route('user.dashboard')->withToastSuccess('Nomor telepon terverifikasi');
         }
         return back()->with(['phone_number' => $request->phone_number, 'verification_code' => $request->verification_code])->withToastError('Kode verifikasi salah!');

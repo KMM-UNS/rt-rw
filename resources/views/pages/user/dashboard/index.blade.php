@@ -1,4 +1,5 @@
 @extends('layouts.user')
+@section('title', 'Dasbor')
 
 @section('content')
 <div class="container" style="font-size:14px">

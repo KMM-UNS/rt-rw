@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Master;
 
-use App\Datatables\Admin\Master\AgamaDataTable;
+use App\DataTables\Admin\Master\AgamaDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\MasterForm;
 use App\Models\Agama;
