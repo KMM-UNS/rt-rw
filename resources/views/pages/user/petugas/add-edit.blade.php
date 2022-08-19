@@ -33,43 +33,76 @@
             <!-- end panel-heading -->
             <!-- begin panel-body -->
             <div class="panel-body">
-                <div class="form-group">
-                    <label for="name">Namaaa</label>
-                    <input type="text" id="nama" name="nama" class="form-control" autofocus data-parsley-required="true" value="{{{  old('nama') ?? ($data2['nama'] ?? null) }}}">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="name">Namaaa</label>
+                            <input type="text" id="nama" name="petugas_tagihans_nama" class="form-control" autofocus data-parsley-required="true" value="{{{  old('petugas_tagihans_nama') ?? ($data2['nama'] ?? null) }}}">
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" id="user_id" name="user_id" class="form-control" autofocus  data-parsley-required="true"  value="{{Auth::user()->id}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="ttgl">Tanggal Lahir</label>
+                            <input type="date" id="ttgl" name="petugas_tagihans_ttgl" class="form-control" autofocus data-parsley-required="true" value="{{{  old('petugas_tagihans_ttgl') ?? ($data2['ttgl'] ?? null) }}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="no_telp">Nomor Telepon</label>
+                            <input type="text" id="no_telp" name="petugas_tagihans_no_telp" class="form-control" autofocus data-parsley-required="true" value="{{{  old('petugas_tagihans_no_telp') ?? ($data2['no_telp'] ?? null) }}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="alamat">Alamat</label>
+                            <input type="text" id="alamat" name="petugas_tagihans_alamat" class="form-control" autofocus data-parsley-required="true" value="{{{  old('petugas_tagihans_alamat') ?? ($data2['alamat'] ?? null) }}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="pos">Pos</label>
+                            <x-form.Dropdown name="petugas_tagihans_pos" :options="$pos" selected="{{{ old('petugas_tagihans_pos') ?? ($data2['pos'] ?? null) }}}" required />
+                        </div>
+                    </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="foto_iurankondisional">Foto Petugas</label>
+                        {{-- <input type="file" id="foto_iurankondisional" name="foto_iurankondisional" class="form-control @error('image') is-invalid @enderror" autofocus data-parsley-required="true"> --}}
+                        @php
+                                $imageSrc = null;
+                                if(isset($data->dokumen)){
+                                $imageSrc = $data->dokumen->toArray();
+                                }
+                                @endphp
+                                <div class="row">
+                                    <x-form.ImageUploader :imageSrc="isset($imageSrc) ? asset(DataHelper::filterDokumenData($imageSrc, 'nama', 'foto_petugas')->first()['public_url']) : null" name="foto_petugas" title="Foto TTD Pertugas" value="{{{ $data->dokumen  ?? old('foto_petugas') }}}"  />
+                                </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="foto_iurankondisional">Foto TTD Petugas</label>
+                        {{-- <input type="file" id="foto_iurankondisional" name="foto_iurankondisional" class="form-control @error('image') is-invalid @enderror" autofocus data-parsley-required="true"> --}}
+                        @php
+                                $imageSrc = null;
+                                if(isset($data->dokumen)){
+                                $imageSrc = $data->dokumen->toArray();
+                                }
+                                @endphp
+                                <div class="row">
+                                    <x-form.ImageUploader :imageSrc="isset($imageSrc) ? asset(DataHelper::filterDokumenData($imageSrc, 'nama', 'foto_ttd_petugas')->first()['public_url']) : null" name="foto_ttd_petugas" title="Foto TTD Pertugas" value="{{{ $data->dokumen  ?? old('foto_ttd_petugas') }}}"  />
+                                </div>
+                    </div>
+                    {{-- <div class="form-group">
+                        <label for="foto_iurankondisional">Foto TTD Bendahara</label>
+
+                        @php
+                                $imageSrc = null;
+                                if(isset($data->dokumen)){
+                                $imageSrc = $data->dokumen->toArray();
+                                }
+                                @endphp
+                                <div class="row">
+                                    <x-form.ImageUploader :imageSrc="isset($imageSrc) ? asset(DataHelper::filterDokumenData($imageSrc, 'nama', 'foto_ttd_bendahara')->first()['public_url']) : null" name="foto_ttd_bendahara" title="Foto TTD Bendahara" value="{{{ $data->dokumen  ?? old('foto_ttd_bendahara') }}}"  />
+                                </div>
+                    </div> --}}
+
                 </div>
-                <div class="form-group">
-                    <label for="user_id">user_id</label>
-                    <input type="text" id="user_id" name="user_id" class="form-control" autofocus  data-parsley-required="true"  value="{{Auth::user()->id}}">
-                </div>
-                <div class="form-group">
-                    <label for="ttgl">Tanggal Lahir</label>
-                    <input type="date" id="ttgl" name="ttgl" class="form-control" autofocus data-parsley-required="true" value="{{{ $data2->ttgl ?? old('ttgl') }}}">
-                </div>
-                <div class="form-group">
-                    <label for="no_telp">Nomor Telepon</label>
-                    <input type="text" id="no_telp" name="no_telp" class="form-control" autofocus data-parsley-required="true" value="{{{ $data2->no_telp ?? old('no_telp') }}}">
-                </div>
-                <div class="form-group">
-                    <label for="alamat">Alamat</label>
-                    <input type="text" id="alamat" name="alamat" class="form-control" autofocus data-parsley-required="true" value="{{{ $data2->alamat ?? old('alamat') }}}">
-                </div>
-                <div class="form-group">
-                    <label for="pos">Pos</label>
-                    <x-form.Dropdown name="pos" :options="$pos" selected="{{{ old('pos') ?? ($data2['pos'] ?? null) }}}" required />
-                </div>
-                <div class="form-group">
-                    <label for="foto_iurankondisional">Foto Petugas</label>
-                    {{-- <input type="file" id="foto_iurankondisional" name="foto_iurankondisional" class="form-control @error('image') is-invalid @enderror" autofocus data-parsley-required="true"> --}}
-                    @php
-                            $imageSrc = null;
-                            if(isset($data->dokumen)){
-                            $imageSrc = $data->dokumen->toArray();
-                            }
-                            @endphp
-                            <div class="row">
-                                <x-form.ImageUploader :imageSrc="isset($imageSrc) ? asset(DataHelper::filterDokumenData($imageSrc, 'nama', 'foto_petugas')->first()['public_url']) : null" name="foto_petugas" title="Foto Petugas" value="{{{ $data->dokumen  ?? old('foto_petugas') }}}" />
-                            </div>
-                  </div>
+
+
             </div>
             <!-- end panel-body -->
             <!-- begin panel-footer -->

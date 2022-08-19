@@ -5,24 +5,49 @@ namespace App\Http\Controllers\User\KepalaKeluarga;
 use App\Http\Controllers\Controller;
 use App\Models\IuranSukarela;
 use App\Models\KasIuranAgenda;
+use App\Models\KasIuranSukaRela;
 use App\Models\Keluarga;
 use App\Models\Pos;
 use Illuminate\Http\Request;
+use App\Models\Dokumen;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class BayarSukarelaController extends Controller
 {
     public function index()
     {
-        $pos_tagihan = Pos::pluck('nama', 'id');
-        $wargaa = Keluarga::with(['warga_sukarela'])->get();
-        $iuran_sukarela = IuranSukarela::all();
+        $bulan = date('m');
+        $tahun = date('Y');
+        $jenis_iuran = IuranSukarela::pluck('nama', 'id');
+        $wargaa = Keluarga::with(['warga_sukarela' => function ($query) use ($bulan, $tahun) {
+            return $query->whereMonth('tanggal', $bulan)->whereYear('tanggal', $tahun);
+        }])->get();
 
         return view('pages.user.kepala-keluarga.index_sukarela', [
-            'pos_tagihan' => $pos_tagihan,
-            'wargaa' => $wargaa,
-            'iuran_sukarela' => $iuran_sukarela
+            'jenis_iuran' => $jenis_iuran,
+            'wargaa' => $wargaa
         ]);
     }
+
+    // public function cetak_pendidikan()
+    // {
+    //     $wargaa = KasIuranSukaRela::where('jenis_iuran_id', 1)->with('warga_sukarela', 'iuransukarela')->get();
+    //     $warga = KasIuranSukaRela::where('jenis_iuran_id', 1)->with('warga_sukarela', 'iuransukarela')->first();
+    //     $total = KasIuranSukaRela::where('jenis_iuran_id', 1)->sum('total_biaya');
+    //     $data = Dokumen::where('nama', 'foto_ttd_petugas')->first();
+    //     $pdf = PDF::loadView('pages.user.kepala-keluarga.pdf_sukarela.warga_pdf_pendidikan', ['wargaa' => $wargaa, 'warga' => $warga, 'total' => $total, 'data' => $data]);
+    //     return $pdf->download('sukarela_setor_iuran_pendidikan.pdf');
+    // }
+
+    // public function cetak_arisan()
+    // {
+    //     $wargaa = KasIuranSukaRela::where('jenis_iuran_id', 2)->with('warga_sukarela', 'iuransukarela')->get();
+    //     $warga = KasIuranSukaRela::where('jenis_iuran_id', 2)->with('warga_sukarela', 'iuransukarela')->first();
+    //     $total = KasIuranSukaRela::where('jenis_iuran_id', 2)->sum('total_biaya');
+    //     $data = Dokumen::where('nama', 'foto_ttd_petugas')->first();
+    //     $pdf = PDF::loadView('pages.user.kepala-keluarga.pdf_sukarela.warga_pdf_arisan', ['wargaa' => $wargaa, 'warga' => $warga, 'total' => $total, 'data' => $data]);
+    //     return $pdf->download('sukarela_setor_iuran_arisan.pdf');
+    // }
 
     public function create()
     {
@@ -31,8 +56,18 @@ class BayarSukarelaController extends Controller
 
     public function store(Request $request)
     {
-        $wargaa = Keluarga::all();
-        return redirect(route('user.kepala-keluarga.bayar-iuransukarela.index_sukarela'))->withToastSuccess('Data tersimpan', ['wargaa' => $wargaa]);
+        $bulan = $request->bulan;
+        $tahun = $request->tahun;
+        $warga = Keluarga::with(['warga_sukarela' => function ($query) use ($bulan, $tahun) {
+            return $query->whereMonth('tanggal', $bulan)->whereYear('tanggal', $tahun);
+        }])->get();
+        $wargaa = KasIuranSukaRela::whereMonth('tanggal', $bulan)->whereYear('tanggal', $tahun)->get();
+        return view('pages.user.kepala-keluarga.pdf_sukarela.filter', [
+            'wargaa' => $wargaa,
+            'warga' => $warga,
+            'bulan' => $bulan,
+            'tahun' => $tahun,
+        ]);
     }
 
     public function status($id)
@@ -41,6 +76,36 @@ class BayarSukarelaController extends Controller
         $wargaa->status = !$wargaa->status;
         $wargaa->save();
         return redirect()->back();
+    }
+
+    public function cetak_pendidikan($bulann, $tahunn)
+    {
+        $bulan = $bulann;
+        $tahun = $tahunn;
+        $warga = Keluarga::with(['warga_sukarela' => function ($query) use ($bulan, $tahun) {
+            return $query->whereMonth('tanggal', $bulan)->whereYear('tanggal', $tahun);
+        }])->get();
+        $warga1 = KasIuranSukaRela::whereMonth('tanggal', $bulan)->whereYear('tanggal', $tahun)->first();
+        $wargaa = KasIuranSukaRela::whereMonth('tanggal', $bulan)->whereYear('tanggal', $tahun)->get();
+        $total = KasIuranSukaRela::where('jenis_iuran_id', 1)->whereMonth('tanggal', $bulan)->whereYear('tanggal', $tahun)->sum('total_biaya');
+        $data = Dokumen::where('nama', 'foto_ttd_petugas')->first();
+        $pdf =  PDF::loadView('pages.user.kepala-keluarga.pdf_sukarela.warga_pdf_pendidikan', ['wargaa' => $wargaa, 'warga' => $warga, 'warga1' => $warga1, 'total' => $total, 'data' => $data]);
+        return $pdf->download('sukarela_setor_iuran_pendidikan.pdf');
+    }
+
+    public function cetak_arisan($bulann, $tahunn)
+    {
+        $bulan = $bulann;
+        $tahun = $tahunn;
+        $warga = Keluarga::with(['warga_sukarela' => function ($query) use ($bulan, $tahun) {
+            return $query->whereMonth('tanggal', $bulan)->whereYear('tanggal', $tahun);
+        }])->get();
+        $warga1 = KasIuranSukaRela::whereMonth('tanggal', $bulan)->whereYear('tanggal', $tahun)->first();
+        $wargaa = KasIuranSukaRela::whereMonth('tanggal', $bulan)->whereYear('tanggal', $tahun)->get();
+        $total = KasIuranSukaRela::where('jenis_iuran_id', 2)->whereMonth('tanggal', $bulan)->whereYear('tanggal', $tahun)->sum('total_biaya');
+        $data = Dokumen::where('nama', 'foto_ttd_petugas')->first();
+        $pdf =  PDF::loadView('pages.user.kepala-keluarga.pdf_sukarela.warga_pdf_arisan', ['wargaa' => $wargaa, 'warga' => $warga, 'warga1' => $warga1, 'total' => $total, 'data' => $data]);
+        return $pdf->download('sukarela_setor_iuran_arisan.pdf');
     }
 
     public function show($id)

@@ -81,7 +81,11 @@ return [
                 [
                     'url' => '/admin/master-data/pos',
                     'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Pos'
-                ]
+                ],
+                // [
+                //     'url' => '/admin/master-data/data-diri',
+                //     'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Data Diri'
+                // ]
             ]
         ],
         [

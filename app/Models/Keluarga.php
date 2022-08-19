@@ -25,14 +25,6 @@ class Keluarga extends Model
     {
         return $this->belongsTo(Pos::class, 'pos_tagihan');
     }
-    // public function warga_wajibb()
-    // {
-    //     return $this->belongsTo(KasIuranWajib::class, 'warga');
-    // }
-    // public function pemberii()
-    // {
-    //     return $this->hasMany(KasIuranAgenda::class, 'warga');
-    // }
     public function warga_wajib()
     {
         return $this->hasMany(KasIuranWajib::class, 'warga');

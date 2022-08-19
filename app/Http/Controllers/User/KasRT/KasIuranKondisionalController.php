@@ -14,6 +14,7 @@ use App\Helpers\TrashHelper;
 use App\Helpers\FileUploaderHelper;
 use App\Http\Requests\Admin\IuranKondisionalForm;
 use App\Models\KasIuranAgenda;
+use App\Models\Dokumen;
 use App\Models\Keluarga;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
@@ -67,7 +68,10 @@ class KasIuranKondisionalController extends Controller
     public function cetak_pdf($id)
     {
         $warga = KasIuranKondisional::with(['iurankondisional', 'petugastagihan', 'postagihankondisional', 'warga_kondisional'])->findOrFail($id);
-        $pdf = PDF::loadView('pages.user.kas-rt.kasiurankondisional.kondisional_pdf', ['warga' => $warga]);
+        $data = Dokumen::where('nama', 'foto_ttd_petugas')->first();
+        $pdf = PDF::loadView('pages.user.kas-rt.kasiurankondisional.kondisional_pdf', ['warga' => $warga, 'data' => $data]);
+
+        // $pdf = PDF::loadView('pages.user.kas-rt.kasiurankondisional.kondisional_pdf', ['warga' => $warga]);
         return $pdf->download('kondisional_buktipembayaran.pdf');
     }
     public function show($id)

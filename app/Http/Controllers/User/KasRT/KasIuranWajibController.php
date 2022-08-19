@@ -10,7 +10,7 @@ use App\Models\KasIuranWajib;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\Dokumen;
 use Illuminate\Support\Facades\File;
 use App\Helpers\DataHelper;
 use App\Helpers\TrashHelper;
@@ -67,7 +67,9 @@ class KasIuranWajibController extends Controller
     public function cetak_pdf($id)
     {
         $warga = KasIuranWajib::with(['iuranwajib', 'petugastagihan', 'postagihanwajib', 'warga_wajib'])->findOrFail($id);
-        $pdf = PDF::loadView('pages.user.kas-rt.kasiuranwajib.wajib_pdf', ['warga' => $warga]);
+        $data = Dokumen::where('nama', 'foto_ttd_petugas')->first();
+        $pdf = PDF::loadView('pages.user.kas-rt.kasiuranwajib.wajib_pdf', ['warga' => $warga, 'data' => $data]);
+        // $pdf = PDF::loadView('pages.user.kas-rt.kasiuranwajib.wajib_pdf', ['warga' => $warga]);
         return $pdf->download('wajib_buktipembayaran.pdf');
     }
 

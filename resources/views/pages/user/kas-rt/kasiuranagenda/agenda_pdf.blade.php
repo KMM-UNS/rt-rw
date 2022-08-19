@@ -53,7 +53,8 @@
                 <div class="row">
                     <div class="col-10">
                         <p class="text-center">Petugas Tagihan</p>
-                        <p class="text-center">tanda tangan</p>
+                        <p class="text-center"> <img src="{{ asset($data['public_url']) }}" alt="Foto Petugas"
+                                width="200"></p>
                         <p class="text-center">{{ $warga->petugastagihan->nama }}</p>
                     </div>
 

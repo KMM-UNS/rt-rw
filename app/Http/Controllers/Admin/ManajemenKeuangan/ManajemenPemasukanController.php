@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\KasIuranWajib;
 use App\Models\ManajemenPemasukan;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\Dokumen;
 use Illuminate\Support\Facades\DB;
 
 class ManajemenPemasukanController extends Controller
@@ -58,11 +59,13 @@ class ManajemenPemasukanController extends Controller
         $total_kondisional = KasIuranKondisional::sum('total_biaya');
         $total_sukarela = KasIuranSukaRela::sum('total_biaya');
         $pemasukannn = ManajemenPemasukan::sum('nominal');
+        $data = Dokumen::where('nama', 'foto_ttd_bendahara')->first();
         $pemasukan = $total_agenda + $total_wajib + $total_kondisional + $total_sukarela + $pemasukannn;
         $pemasukann = ManajemenPemasukan::all();
 
         $pdf = PDF::loadView('pages.admin.manajemen-keuangan.manajemen-pemasukan.pemasukan_pdf', [
             'total_wajib' => $total_wajib,
+            'data' => $data,
             'total_agenda' => $total_agenda,
             'pemasukan' => $pemasukan,
             'pemasukann' => $pemasukann,

@@ -11,12 +11,13 @@
                         <!-- begin panel-heading -->
                         <div class="panel-heading">
                             <h4 class="panel-title">Notifikasi Pembayaran @yield('title')</h4>
-                            <div class="panel-heading-btn">
+                            <p style="text-align: left;">Periode : {{ date('M Y', strtotime($warga1->tanggal)) }}</p>
+                            {{-- <div class="panel-heading-btn">
                                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default"
                                     data-click="panel-expand"><i class="fa fa-expand"></i></a>
                                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
                                     data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                            </div>
+                            </div> --}}
                         </div>
                         <!-- end panel-heading -->
                         <!-- begin panel-body -->
@@ -55,15 +56,16 @@
                                         </tr>
                                     @endforeach
 
-                                    @foreach ($status2 as $j)
-                                        <tr>
-                                            <td width="150">Iuran Kebersiahan</td>
-                                            <td> <label for=""
-                                                    class="label {{ count($status2) != 0 ? 'label-success' : 'label-danger center' }}">{{ count($status2) != 0 ? 'Sudah Bayar' : 'Belum Bayar' }}</label>
-                                            </td>
+                                    <tr>
+                                        <td width="150">Iuran Kebersiahan</td>
+                                        <td> <label for=""
+                                                class="label {{ count($status2) != 0 ? 'label-success' : 'label-danger center' }}">{{ count($status2) != 0 ? 'Sudah Bayar' : 'Belum Bayar' }}</label>
+                                        </td>
+                                        @foreach ($status2 as $j)
                                             <td> {{ date('d M Y', strtotime($j->tanggal)) }}</td>
-                                        </tr>
-                                    @endforeach
+                                        @endforeach
+                                    </tr>
+
 
                                 </tbody>
                             </table>

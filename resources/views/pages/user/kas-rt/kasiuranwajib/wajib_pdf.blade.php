@@ -13,26 +13,6 @@
 </head>
 
 <body>
-    {{-- <h1 style="font-size: 16px; text-align: center;">
-        RUKUN TETANGGA 01 RUKUN WARGA 01
-    </h1>
-    <h1 style="font-size: 16px; text-align: center;">
-        KELURAHAN JEBRES KECAMATAN JEBRES
-    </h1>
-    <h1 style="font-size: 16px; text-align: center;">
-        KOTA SURAKARTA
-    </h1>
-    <h4 style="text-align: center; font-weight: normal; margin-bottom: 0;">
-        PERUMAHAN SEBELAS MARET, JEBRES, Kec. JEBRES, Kota SURAKARTA, JAWA TENGAH
-    </h4>
-    <h4 style="text-align: center; font-weight: normal; margin: 0;">
-        Telepon: 08988777788 Surel : uns@mail.com Kode Pos : 5612
-    </h4>
-    <hr style="border: 3px solid; margin-bottom: 1px;">
-    <hr style="margin-top: 0;">
-
-    <h3 style="font-size: 16px; text-align: center;">Tanda Bukti Pembayaran</h1> --}}
-
 
     <div class="card">
         {{-- <div style="width: 18rem;"> --}}
@@ -74,7 +54,9 @@
                 <div class="row">
                     <div class="col-10">
                         <p class="text-center">Petugas Tagihan</p>
-                        <p class="text-center">tanda tangan</p>
+                        {{-- <img src="{{ asset($data['public_url']) }}" alt="Foto Petugas" width="200"> --}}
+                        <p class="text-center"> <img src="{{ asset($data['public_url']) }}" alt="Foto Petugas"
+                                width="200"></p>
                         <p class="text-center">{{ $warga->petugastagihan->nama }}</p>
                     </div>
 
@@ -86,7 +68,7 @@
         </div>
         {{-- </div> --}}
     </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    {{-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
@@ -94,7 +76,7 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
-    </script>
+    </script> --}}
 </body>
 
 </html>

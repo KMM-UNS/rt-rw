@@ -20,7 +20,8 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-3 ">
-                                    <img src="/assets/img/user/user-13.jpg" alt="Foto Petugas" width="200">
+                                    <img src="{{ asset('/assets/img/user/user-13.jpg') }}" alt="Foto Petugas"
+                                        width="200">
                                 </div>
                                 <div class="col">
                                     <table class="table">

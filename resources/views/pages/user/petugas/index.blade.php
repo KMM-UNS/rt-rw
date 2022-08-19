@@ -51,8 +51,21 @@
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col">
-                                            <img src="{{ asset($data->dokumen->first()['public_url']) }}" alt="Foto Petugas"
-                                                width="200">
+                                            {{-- @foreach ($data->dokumen as $dokumen)
+                                                <img src="{{ asset($dokumen['public_url']) }}" alt="Foto Petugas"
+                                                    width="200">
+                                            @endforeach --}}
+                                            {{-- <p class="text-center"> <img src="{{ public_path($data3['public_url']) }}"
+                                                    alt="Foto Bendahara" width="200">
+                                            </p> --}}
+                                            {{-- {{ $data->dokumen->where('nama', 'foto_petugas') }} --}}
+                                            <p class="text-center"> <img
+                                                    src="{{ asset($data->dokumen->where('nama', 'foto_petugas')->first()['public_url']) }}"
+                                                    alt="Foto TTD" width="200"></p>
+                                            <p class="text-center"> <img
+                                                    src="{{ asset($data->dokumen->where('nama', 'foto_ttd_petugas')->first()['public_url']) }}"
+                                                    alt="Foto TTD" width="200"></p>
+
                                             {{-- <img src="/assets/img/user/user-1.jpg" alt="Foto Warga" width="200"> --}}
                                         </div>
                                         <div class="col">

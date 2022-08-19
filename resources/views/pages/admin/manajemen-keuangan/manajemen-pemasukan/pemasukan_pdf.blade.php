@@ -47,31 +47,37 @@
         <table style="width:100%" border="1" cellpadding="2" class="table">
             <thead>
                 <tr>
-                    <th scope="col">Nominal</th>
+                    <th scope="col">Tanggal</th>
                     <th scope="col">Keterangan</th>
+                    <th scope="col">Nominal</th>
 
                 </tr>
             </thead>
 
             <tbody>
                 <tr>
+                    <td></td>
                     <td>Kas Iuran Wajib</td>
                     <td>Rp. {{ number_format($total_wajib, 0) }}</td>
                 </tr>
                 <tr>
+                    <td></td>
                     <td>Kas Iuran Kondisional</td>
                     <td>Rp. {{ number_format($total_kondisional, 0) }}</td>
                 </tr>
                 <tr>
+                    <td></td>
                     <td>Kas Iuran Sukarela</td>
                     <td>Rp. {{ number_format($total_sukarela, 0) }}</td>
                 </tr>
                 <tr>
+                    <td></td>
                     <td>Kas Iuran Agenda</td>
                     <td>Rp. {{ number_format($total_agenda, 0) }}</td>
                 </tr>
                 @foreach ($pemasukann as $item)
                     <tr>
+                        <td>{{ date('d M Y', strtotime($item->created_at)) }}</td>
                         <td>{{ $item->keterangan }}</td>
                         <td>Rp. {{ number_format($item->nominal, 0) }}</td>
                     </tr>
@@ -80,11 +86,24 @@
             </tbody>
 
             <td><b>Total</b></td>
+            <td></td>
             <td colspan="1"><b>Rp. {{ number_format($pemasukan, 0) }}</b></td>
-
-
-
         </table>
+        <div>
+            <div class="row">
+                <div class="col-5"></div>
+                <div class="col-5">
+                    <p class="text-center">Mengetahui</p>
+                    <p class="text-center">Bendahara</p>
+                    <p class="text-center"> <img src="{{ public_path($data['public_url']) }}" alt="Foto Bendahara"
+                            width="200">
+                    </p>
+                    <p class="text-center"> Ayu Sulastri</p>
+                </div>
+
+            </div>
+        </div>
+
 
 
 </body>

@@ -37,8 +37,8 @@
                                             <input type="text" name="no_kk" class="form-control" autofocus data-parsley-required="true" value="{{{  old('no_kk') ?? ($data['no_kk'] ?? null) }}}">
                                         </div>
                                         <div class="form-group">
-                                            <label for="user_id">user_id</label>
-                                            <input type="text" id="user_id" name="user_id" class="form-control" autofocus  data-parsley-required="true"  value="{{Auth::user()->id}}">
+                                            {{-- <label for="user_id">user_id</label> --}}
+                                            <input type="hidden" id="user_id" name="user_id" class="form-control" autofocus  data-parsley-required="true"  value="{{Auth::user()->id}}">
                                         </div>
                                         <div class="form-group">
                                             <label for="telp">No.Telpon</label>

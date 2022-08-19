@@ -14,6 +14,7 @@ use App\Helpers\TrashHelper;
 use App\Helpers\FileUploaderHelper;
 use App\Http\Requests\Admin\IuranSukarelaForm;
 use App\Models\Keluarga;
+use App\Models\Dokumen;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 
@@ -66,7 +67,9 @@ class KasIuranSukaRelaController extends Controller
     public function cetak_pdf($id)
     {
         $warga = KasIuranSukaRela::with(['iuransukarela', 'petugastagihan', 'postagihansukarela', 'warga_sukarela'])->findOrFail($id);
-        $pdf = PDF::loadView('pages.user.kas-rt.kasiuransukarela.sukarela_pdf', ['warga' => $warga]);
+        // $pdf = PDF::loadView('pages.user.kas-rt.kasiuransukarela.sukarela_pdf', ['warga' => $warga]);
+        $data = Dokumen::where('nama', 'foto_ttd_petugas')->first();
+        $pdf = PDF::loadView('pages.user.kas-rt.kasiuransukarela.sukarela_pdf', ['warga' => $warga, 'data' => $data]);
         return $pdf->download('sukarela_buktipembayaran.pdf');
     }
 

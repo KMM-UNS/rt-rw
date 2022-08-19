@@ -12,23 +12,29 @@ use App\Models\KasIuranKondisional;
 use App\Models\KasIuranSukaRela;
 use App\Models\KasIuranWajib;
 use App\Models\Keluarga;
+use App\Models\Dokumen;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 
 class WargaController extends Controller
 {
 
     public function index()
     {
+        $bulan = date('m');
+        $tahun = date('Y');
+        $warga1 = KasIuranWajib::whereMonth('tanggal', $bulan)->whereYear('tanggal', $tahun)->first();
         $id_keluarga = Keluarga::where('user_id', auth()->user()->id)->first()->id;
-        $data1 = KasIuranWajib::where('warga', $id_keluarga)->get();
-        $data2 = KasIuranSukaRela::where('warga', $id_keluarga)->get();
-        $data3 = KasIuranKondisional::where('warga', $id_keluarga)->get();
-        $data4 = KasIuranAgenda::where('warga', $id_keluarga)->get();
+        $data1 = KasIuranWajib::where('warga', $id_keluarga)->whereMonth('tanggal', $bulan)->whereYear('tanggal', $tahun)->get();
+        $data2 = KasIuranSukaRela::where('warga', $id_keluarga)->whereMonth('tanggal', $bulan)->whereYear('tanggal', $tahun)->get();
+        $data3 = KasIuranKondisional::where('warga', $id_keluarga)->whereMonth('tanggal', $bulan)->whereYear('tanggal', $tahun)->get();
+        $data4 = KasIuranAgenda::where('warga', $id_keluarga)->whereMonth('tanggal', $bulan)->whereYear('tanggal', $tahun)->get();
 
         return view('wargaa', [
             'data1' => $data1,
+            'warga1' => $warga1,
             'data2' => $data2,
             'data3' => $data3,
             'data4' => $data4,
@@ -50,19 +56,25 @@ class WargaController extends Controller
 
     public function cetak_pdf_wajib()
     {
+        $bulan = date('m');
+        $tahun = date('Y');
         $id_keluarga = Keluarga::where('user_id', auth()->user()->id)->first()->id;
-        $warga = KasIuranWajib::with(['iuranwajib', 'petugastagihan', 'postagihanwajib', 'warga_wajib'])->where('warga', $id_keluarga)->get();
+        $warga = KasIuranWajib::with(['iuranwajib', 'petugastagihan', 'postagihanwajib', 'warga_wajib'])->where('warga', $id_keluarga)->whereMonth('tanggal', $bulan)->whereYear('tanggal', $tahun)->get();
         $wargaa = KasIuranWajib::with(['iuranwajib', 'petugastagihan', 'postagihanwajib', 'warga_wajib'])->where('warga', $id_keluarga)->first();
-        $pdf = PDF::loadView('warga_pdf_wajib', ['warga' => $warga, 'wargaa' => $wargaa]);
+        $data = Dokumen::where('nama', 'foto_ttd_petugas')->first();
+        $pdf = FacadePdf::loadView('warga_pdf_wajib', ['wargaa' => $wargaa, 'warga' => $warga, 'data' => $data]);
         return $pdf->download('wajib_buktipembayaranwarga.pdf');
     }
 
     public function cetak_pdf_sukarela()
     {
+        $bulan = date('m');
+        $tahun = date('Y');
         $id_keluarga = Keluarga::where('user_id', auth()->user()->id)->first()->id;
-        $warga = KasIuranSukaRela::with(['iuransukarela', 'petugastagihan', 'postagihansukarela', 'warga_sukarela'])->where('warga', $id_keluarga)->get();
+        $warga = KasIuranSukaRela::with(['iuransukarela', 'petugastagihan', 'postagihansukarela', 'warga_sukarela'])->where('warga', $id_keluarga)->whereMonth('tanggal', $bulan)->whereYear('tanggal', $tahun)->get();
         $wargaa = KasIuranSukaRela::with(['iuransukarela', 'petugastagihan', 'postagihansukarela', 'warga_sukarela'])->where('warga', $id_keluarga)->first();
-        $pdf = PDF::loadView('warga_pdf', ['warga' => $warga, 'wargaa' => $wargaa]);
+        $data = Dokumen::where('nama', 'foto_ttd_petugas')->first();
+        $pdf = FacadePdf::loadView('warga_pdf_sukarela', ['wargaa' => $wargaa, 'warga' => $warga, 'data' => $data]);
         return $pdf->download('sukarela_buktipembayaranwarga.pdf');
     }
 
@@ -71,7 +83,8 @@ class WargaController extends Controller
         $id_keluarga = Keluarga::where('user_id', auth()->user()->id)->first()->id;
         $warga = KasIuranKondisional::with(['iurankondisional', 'petugastagihan', 'postagihankondisional', 'warga_kondisional'])->where('warga', $id_keluarga)->get();
         $wargaa = KasIuranKondisional::with(['iurankondisional', 'petugastagihan', 'postagihankondisional', 'warga_kondisional'])->where('warga', $id_keluarga)->first();
-        $pdf = PDF::loadView('warga_pdf_kondisional', ['warga' => $warga, 'wargaa' => $wargaa]);
+        $data = Dokumen::where('nama', 'foto_ttd_petugas')->first();
+        $pdf = FacadePdf::loadView('warga_pdf_kondisional', ['wargaa' => $wargaa, 'warga' => $warga, 'data' => $data]);
         return $pdf->download('kondisional_buktipembayaranwarga.pdf');
     }
 
@@ -80,7 +93,8 @@ class WargaController extends Controller
         $id_keluarga = Keluarga::where('user_id', auth()->user()->id)->first()->id;
         $warga = KasIuranAgenda::with(['iuranagenda', 'petugastagihan', 'postagihanagenda', 'warga_agenda'])->where('warga', $id_keluarga)->get();
         $wargaa = KasIuranAgenda::with(['iuranagenda', 'petugastagihan', 'postagihanagenda', 'warga_agenda'])->where('warga', $id_keluarga)->first();
-        $pdf = PDF::loadView('warga_pdf_agenda', ['warga' => $warga, 'wargaa' => $wargaa]);
+        $data = Dokumen::where('nama', 'foto_ttd_petugas')->first();
+        $pdf = FacadePdf::loadView('warga_pdf_agenda', ['wargaa' => $wargaa, 'warga' => $warga, 'data' => $data]);
         return $pdf->download('agenda_buktipembayaranwarga.pdf');
     }
 

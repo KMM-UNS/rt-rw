@@ -14,6 +14,7 @@ use App\Helpers\DataHelper;
 use App\Helpers\TrashHelper;
 use App\Helpers\FileUploaderHelper;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\Dokumen;
 use App\Http\Requests\Admin\IuranAgendaForm;
 use App\Models\Keluarga;
 use Illuminate\Support\Facades\DB;
@@ -68,7 +69,9 @@ class KasIuranAgendaController extends Controller
     public function cetak_pdf($id)
     {
         $warga = KasIuranAgenda::with(['iuranagenda', 'petugastagihan', 'postagihanagenda', 'warga_agenda'])->findOrFail($id);
-        $pdf = PDF::loadView('pages.user.kas-rt.kasiuranagenda.agenda_pdf', ['warga' => $warga]);
+        $data = Dokumen::where('nama', 'foto_ttd_petugas')->first();
+        $pdf = PDF::loadView('pages.user.kas-rt.kasiuranagenda.agenda_pdf', ['warga' => $warga, 'data' => $data]);
+        // $pdf = PDF::loadView('pages.user.kas-rt.kasiuranagenda.agenda_pdf', ['warga' => $warga]);
         return $pdf->download('agenda_buktipembayaran.pdf');
     }
 

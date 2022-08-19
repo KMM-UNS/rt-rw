@@ -41,6 +41,15 @@ Route::group(['middleware' => 'auth:web', 'as' => 'user.'], function () {
             Route::get('/updatekondisional/status/{id}', 'BayarKondisionalController@status')->name('bayar-iurankondisional.status');
             Route::get('/updateagenda/status/{id}', 'BayarAgendaController@status')->name('bayar-iuranagenda.status');
             // Route::resource('bayar-iuranwajib', 'KeluargaaController');
+
+            Route::get('bayar-iuranwajib/cetak_iuran_sosial/{bulan}/{tahun}', 'BayarWajibController@cetak_sosial')->name('cetak_sosial');
+            Route::get('bayar-iuranwajib/cetak_iuran_kebersihan/{bulan}/{tahun}', 'BayarWajibController@cetak_kebersihan')->name('cetak_kebersihan');
+            Route::get('bayar-iuransukarela/cetak_iuran_pendidikan/{bulan}/{tahun}', 'BayarSukarelaController@cetak_pendidikan')->name('cetak_pendidikan');
+            Route::get('bayar-iuransukarela/cetak_iuran_arisan/{bulan}/{tahun}', 'BayarSukarelaController@cetak_arisan')->name('cetak_arisan');
+            Route::get('bayar-iurankondisional/cetak_iuran_dendaronda/{bulan}/{tahun}', 'BayarKondisionalController@cetak_dendaronda')->name('cetak_dendaronda');
+            Route::get('bayar-iuranagenda/cetak_iuran_halal/{bulan}/{tahun}', 'BayarAgendaController@cetak_halal')->name('cetak_halal');
+            Route::get('bayar-iuranagenda/cetak_iuran_hut/{bulan}/{tahun}', 'BayarAgendaController@cetak_hut')->name('cetak_hut');
+            Route::get('bayar-iuranwajib/detail', 'BayarWajibController@detaill')->name('detail_wajib');
             Route::resource('bayar-iuranwajib', 'BayarWajibController');
             Route::resource('bayar-iuransukarela', 'BayarSukarelaController');
             Route::resource('bayar-iurankondisional', 'BayarKondisionalController');
@@ -66,9 +75,9 @@ Route::group(['middleware' => 'auth:web', 'as' => 'user.'], function () {
             // Route::get('/wargak/status', 'WargaController@wargah');
             // Route::resource('wargak', 'WargaController');
             Route::get('/wargak/cetak_pdf_wajib/{jenis_iuran_id}', 'WargaController@cetak_pdf_wajib')->name('cetak_pdf_wajib');
-            // Route::get('/wargak/cetak_pdf_sukarela/{jenis_iuran_id}', 'WargaController@cetak_pdf_sukarela')->name('cetak_pdf_sukarela');
-            // Route::get('/wargak/cetak_pdf_kondisional/{jenis_iuran_id}', 'WargaController@cetak_pdf_kondisional')->name('cetak_pdf_kondisional');
-            // Route::get('/wargak/cetak_pdf_agenda/{jenis_iuran_id}', 'WargaController@cetak_pdf_agenda')->name('cetak_pdf_agenda');
+            Route::get('/wargak/cetak_pdf_sukarela/{jenis_iuran_id}', 'WargaController@cetak_pdf_sukarela')->name('cetak_pdf_sukarela');
+            Route::get('/wargak/cetak_pdf_kondisional/{jenis_iuran_id}', 'WargaController@cetak_pdf_kondisional')->name('cetak_pdf_kondisional');
+            Route::get('/wargak/cetak_pdf_agenda/{jenis_iuran_id}', 'WargaController@cetak_pdf_agenda')->name('cetak_pdf_agenda');
             Route::resource('/wargak', 'WargaController');
             Route::resource('/data-diri', 'DataWargaController');
         });

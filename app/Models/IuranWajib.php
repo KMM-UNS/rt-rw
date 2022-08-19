@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 
-class IuranWajib extends Model
+class  IuranWajib extends Model
 {
     use HasFactory;
     use SoftDeletes;

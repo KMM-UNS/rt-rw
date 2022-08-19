@@ -161,14 +161,14 @@ $headerTopMenu = !empty($headerTopMenu) ? $headerTopMenu : '';
         </li> --}}
         <li class="dropdown navbar-user">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="/assets/img/user/user-13.jpg" alt="" />
+                <img src="{{ asset('/assets/img/user/user-13.jpg') }}" alt="" />
                 @auth
                     <span class="d-none d-md-inline">{{ Auth::user()->name }}</span> <b class="caret"></b>
                 @endauth
             </a>
             <div class="dropdown-menu dropdown-menu-right">
-                <a href="javascript:;" class="dropdown-item">Edit Profile</a>
-                <a href="javascript:;" class="dropdown-item">Change Password</a>
+                <a href="{{ route('user.petugas-iuran.data-petugas.index') }}" class="dropdown-item">Edit Profile</a>
+                {{-- <a href="javascript:;" class="dropdown-item">Change Password</a> --}}
                 <div class="dropdown-divider"></div>
                 <form action="{{ request()->is('admin*') ? route('admin.logout') : route('logout') }}" method="post">
                     @csrf

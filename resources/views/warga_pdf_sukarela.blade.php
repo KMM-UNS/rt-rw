@@ -13,7 +13,6 @@
 </head>
 
 <body>
-
     <div class="card">
         {{-- <div style="width: 18rem;"> --}}
         <div class="card-header">
@@ -23,36 +22,16 @@
             <h5 class="card-title  text-center">TANDA BUKTI PEMBAYARAN</h5>
             <p class="card-text  text-center">RUKUN TETANGGA 01 RUKUN WARGA 01</p>
             <hr style="margin-top: 0;">
-            {{-- <a href="#" class="btn btn-primary">Go somewhere</a> --}}
-            {{-- <div class="row">
-                <div class="col-4">
-                    <ul class="list-group">
-                        <li class="list-group-item">Januari</li>
-                        <li class="list-group-item">Februari</li>
-                        <li class="list-group-item">Maret</li>
-                        <li class="list-group-item">April</li>
-                        <li class="list-group-item">Mei</li>
-                        <li class="list-group-item">Juni</li>
-                        <li class="list-group-item">Juli</li>
-                        <li class="list-group-item">Agustus</li>
-                        <li class="list-group-item">September</li>
-                        <li class="list-group-item">Oktober</li>
-                        <li class="list-group-item">Desember</li>
-                    </ul>
-                </div>
-                <div class="col-8">
-
-                </div>
-            </div> --}}
-
 
             @php
                 $status1 = $warga->where('jenis_iuran_id', 1);
                 $status2 = $warga->where('jenis_iuran_id', 2);
 
             @endphp
+            {{-- @foreach ($warga as $item1) --}}
             <p>Sudah terima dari Bapak/Ibu <b>{{ $wargaa->warga_sukarela->warga }}</b></p>
             <p>Keterangan pembayaran:</p>
+            {{-- @endforeach --}}
             @foreach ($status1 as $item)
                 <table align="">
 
@@ -113,7 +92,8 @@
                 <div class="row">
                     <div class="col-10">
                         <p class="text-center">Petugas Tagihan</p>
-                        <p class="text-center">tanda tangan</p>
+                        <p class="text-center"> <img src="{{ public_path($data['public_url']) }}" alt="Foto Petugas"
+                                width="200">
                         <p class="text-center">{{ $wargaa->petugastagihan->nama }}</p>
                     </div>
 

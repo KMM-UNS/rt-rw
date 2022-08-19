@@ -48,8 +48,8 @@
             <thead>
                 <tr>
                     <th scope="col">Tanggal</th>
-                    <th scope="col">Nominal</th>
                     <th scope="col">Keterangan</th>
+                    <th scope="col">Nominal</th>
                     {{-- <th scope="col">Bukti</th> --}}
                 </tr>
             </thead>
@@ -74,6 +74,20 @@
 
 
         </table>
+        <div>
+            <div class="row">
+                <div class="col-10">
+                    <p class="text-center">Mengetahui</p>
+                    <p class="text-center">Bendahara</p>
+                    <p class="text-center"> <img src="{{ public_path($data['public_url']) }}" alt="Foto Bendahara"
+                            width="200">
+                    </p>
+                    {{-- <p class="text-center"> {{ Auth::user()->name }}</p> --}}
+                    <p class="text-center"> Ayu Sulastri</p>
+                </div>
+
+            </div>
+        </div>
 
 
 </body>

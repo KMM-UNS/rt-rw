@@ -48,7 +48,7 @@ class PengeluaranForm extends FormRequest
     {
         $rules = [
             'foto_pengeluaran' => [
-                'mimes:png,jpeg,jpg|max:2048'
+                'mimes:pdf,png,jpeg,jpg|max:2048'
             ]
         ];
         $rules = [

@@ -12,6 +12,7 @@ use App\Helpers\DataHelper;
 use App\Helpers\TrashHelper;
 use App\Helpers\FileUploaderHelper;
 use App\Http\Requests\Admin\PengeluaranForm;
+use App\Models\Dokumen;
 
 class ManajemenPengeluaranController extends Controller
 {
@@ -86,7 +87,8 @@ class ManajemenPengeluaranController extends Controller
     {
         $pengeluarann = ManajemenPengeluaran::with('dokumen')->get();
         $pengeluarannn = ManajemenPengeluaran::sum('nominal');
-        $pdf = PDF::loadView('pages.admin.manajemen-keuangan.manajemen-pengeluaran.pengeluaran_pdf', ['pengeluarann' => $pengeluarann, 'pengeluarannn' => $pengeluarannn]);
+        $data = Dokumen::where('nama', 'foto_ttd_bendahara')->first();
+        $pdf = PDF::loadView('pages.admin.manajemen-keuangan.manajemen-pengeluaran.pengeluaran_pdf', ['pengeluarann' => $pengeluarann, 'pengeluarannn' => $pengeluarannn, 'data' => $data]);
         return $pdf->download('laporan-pengeluaran.pdf');
     }
 
