@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
+use App\Models\Temp;
 use App\Models\User;
-use App\Models\UsersTemp;
-use App\Services\WhatsappApiServices;
 use Twilio\Rest\Client;
+use App\Models\UsersTemp;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\DB;
+use App\Services\WhatsappApiServices;
 
 class AuthController extends Controller
 {
@@ -30,7 +31,7 @@ class AuthController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
         $otp = rand(1000, 9999);
-        $user_temp = UsersTemp::create([
+        $user_temp = Temp::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'phone_number' => $data['phone_number'],
@@ -59,7 +60,7 @@ class AuthController extends Controller
         $data = $request->validate([
             'phone_number' => ['required', 'string'],
         ]);
-        $user_temp = UsersTemp::where('phone_number', $data['phone_number'])->first();
+        $user_temp = Temp::where('phone_number', $data['phone_number'])->first();
 
         $otp = rand(1000, 9999);
 
@@ -83,17 +84,17 @@ class AuthController extends Controller
             'phone_number' => ['required', 'string'],
         ]);
 
-        $user_temp = UsersTemp::where('phone_number', $data['phone_number'])->orderBy('created_at', 'DESC')->first();
-        var_dump($user_temp);
+        $user_temp = Temp::orderBy('id', 'DESC')->where('phone_number', $data['phone_number'])->first();
+        // var_dump($user_temp);
         if ($user_temp->otp == $data['otp']) {
 
             $user = User::create([
                     'name' => $user_temp['name'],
                     'email' => $user_temp['email'],
                     'phone_number' => $user_temp['phone_number'],
-                    'password' => Hash::make($user_temp['password']),
+                    'password' => $user_temp['password'],
                     'otp' => $user_temp['otp'],
-                    'isVerified' => true
+                    'isVerified' => false
                 ]);
             $role = Role::where('name', 'warga')->first();
             $user->attachRole($role);

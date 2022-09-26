@@ -32,17 +32,6 @@ Route::get('/token', function () {
 Route::resource('beranda', 'BerandaController');
 Route::get('/edit-profile', 'ProfileController@edit')->name('edit-profile');
 
-Route::get('/register', function () {
-    return view('auth.register');
-})->name('register');
-
-Route::get('/verify', function () {
-    return view('auth.verify');
-})->name('verify');
-
-Route::post('/register', 'AuthController@create')->name('register');
-Route::post('/resend', 'AuthController@resend')->name('resend');
-Route::post('/verify', 'AuthController@verify')->name('verify');
 
 Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
     require base_path('vendor/laravel/fortify/routes/routes.php');
@@ -57,11 +46,23 @@ Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
             Route::get('/cetak/{id}', 'SuratController@cetak')->name('cetak');
             Route::resource('/', 'SuratController')->parameter('','surat');
         });
+        Route::resource('/ronda', 'PresensiRondaController');
         Route::resource('/tamu', 'TamuController');
         Route::resource('/warga', 'WargaController');
 
     });
 });
 
+Route::get('/register', function () {
+    return view('auth.register');
+})->name('register');
+
+Route::get('/verify', function () {
+    return view('auth.verify');
+})->name('verify');
+
+Route::post('/register', 'AuthController@create')->name('register');
+Route::post('/resend', 'AuthController@resend')->name('resend');
+Route::post('/verify', 'AuthController@verify')->name('verify');
 
 require __DIR__ . '/demo.php';
