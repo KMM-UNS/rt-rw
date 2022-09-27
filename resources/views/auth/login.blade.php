@@ -44,12 +44,12 @@
 				<div class="form-group m-b-15">
 					<input id="password" type="password" class="form-control form-control-lg @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Kata Sandi" />
 
-					@error('password')
-					<span class="invalid-feedback" role="alert">
-						<strong>{{ $message }}</strong>
-					</span>
-					@enderror
-				</div>
+                        @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
 
 				{{-- <div class="checkbox checkbox-css m-b-30">
 					<input type="checkbox" id="remember_me_checkbox" value="" />

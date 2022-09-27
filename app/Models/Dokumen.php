@@ -33,4 +33,27 @@ class Dokumen extends Model
     {
         return $this->morphedByMany(Tamu::class, 'dokumenable');
     }
+    
+    public function kasiurankondisional()
+    {
+        return $this->morphedByMany(KasIuranKondisional::class, 'dokumenable');
+    }
+
+    public function kasiuranwajib()
+    {
+        return $this->morphToMany(KasIuranWajib::class, 'dokumenable');
+    }
+    public function kasiuransukarela()
+    {
+        return $this->morphToMany(KasIuranSukaRela::class, 'dokumenable');
+    }
+    public function petugas_tagihan()
+    {
+        return $this->morphToMany(PetugasTagihan::class, 'dokumenable');
+    }
+    public function pengeluaran()
+    {
+        return $this->morphToMany(ManajemenPengeluaran::class, 'dokumenable');
+    }
+ 
 }

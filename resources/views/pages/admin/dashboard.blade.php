@@ -2,9 +2,9 @@
 @section('title', 'Dashboard')
 
 @push('css')
-<link href="/assets/plugins/jvectormap-next/jquery-jvectormap.css" rel="stylesheet" />
-<link href="/assets/plugins/nvd3/build/nv.d3.css" rel="stylesheet" />
-<link href="/assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
+    <link href="/assets/plugins/jvectormap-next/jquery-jvectormap.css" rel="stylesheet" />
+    <link href="/assets/plugins/nvd3/build/nv.d3.css" rel="stylesheet" />
+    <link href="/assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
 @endpush
 
 @section('content')

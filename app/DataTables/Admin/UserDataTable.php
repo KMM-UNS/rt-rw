@@ -2,6 +2,7 @@
 
 namespace App\DataTables\Admin;
 
+use App\Models\Keluarga;
 use App\Models\User;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
@@ -11,12 +12,6 @@ use Yajra\DataTables\Services\DataTable;
 
 class UserDataTable extends DataTable
 {
-    /**
-     * Build DataTable class.
-     *
-     * @param mixed $query Results from query() method.
-     * @return \Yajra\DataTables\DataTableAbstract
-     */
     public function dataTable($query)
     {
         return datatables()
@@ -30,7 +25,6 @@ class UserDataTable extends DataTable
                 $btn = $btn . '<a href="' . route('admin.users.edit', $row->id) . '" class="btn btn-dark buttons-edit"><i class="fas fa-edit"></i></a>';
                 $btn = $btn . '<a href="' . route('admin.users.destroy', $row->id) . '" class="btn btn-danger buttons-delete"><i class="fas fa-trash fa-fw"></i></a>';
                 $btn = $btn . '</div>';
-
                 return $btn;
             })
             ->editColumn('roles', function ($row) {
@@ -42,23 +36,12 @@ class UserDataTable extends DataTable
             });
     }
 
-    /**
-     * Get query source of dataTable.
-     *
-     * @param \App\App\Models\User $model
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
     public function query(User $model)
     {
         return $model->newQuery();
         return $model->with('roles:id,display_name')->newQuery();
     }
 
-    /**
-     * Optional method if you want to use html builder.
-     *
-     * @return \Yajra\DataTables\Html\Builder
-     */
     public function html()
     {
         return $this->builder()
@@ -83,11 +66,6 @@ class UserDataTable extends DataTable
             );
     }
 
-    /**
-     * Get columns.
-     *
-     * @return array
-     */
     protected function getColumns()
     {
         return [
@@ -105,11 +83,6 @@ class UserDataTable extends DataTable
         ];
     }
 
-    /**
-     * Get filename for export.
-     *
-     * @return string
-     */
     protected function filename()
     {
         return 'User_' . date('YmdHis');

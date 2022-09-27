@@ -94,13 +94,9 @@
                     <button type="submit" class="btn btn-success btn-block btn-lg">{{ __('Daftar') }}</button>
                 </div>
                 <p>
-                    <br />
-                    Sudah punya akun? <a href="{{route('login')}}">Masuk</a>
+                    Sistem Pendaftaran Mahasiswa Baru
                 </p>
-                <hr />
-                <p class="text-center text-grey-darker">
-                    &copy; <?= date('Y') ?> Mandiri Solusindo </p>
-            </form>
+            </div>
         </div>
         <!-- end login-content -->
         {{-- <div class="card-header">{{ __('Register') }}</div>

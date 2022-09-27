@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\AdminRole;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -41,7 +42,11 @@ class RegisterController extends Controller
     {
         $this->middleware('guest');
     }
-
+    // public function index()
+    // {
+    //     $role = AdminRole::pluck('nama', 'id');
+    //     return view('auth.register', ['role' => $role]);
+    // }
     /**
      * Get a validator for an incoming registration request.
      *

@@ -1,5 +1,5 @@
 @php
-$sidebarClass = (!empty($sidebarTransparent)) ? 'sidebar-transparent' : '';
+$sidebarClass = !empty($sidebarTransparent) ? 'sidebar-transparent' : '';
 @endphp
 <!-- begin #sidebar -->
 <div id="sidebar" class="sidebar {{ $sidebarClass }}">
@@ -25,65 +25,102 @@ $sidebarClass = (!empty($sidebarTransparent)) ? 'sidebar-transparent' : '';
         <!-- begin sidebar nav -->
         <ul class="nav">
             @if ($sidebarSearch)
-            <li class="nav-search">
-                <input type="text" class="form-control" placeholder="Sidebar menu filter..." data-sidebar-search="true" />
-            </li>
+                <li class="nav-search">
+                    <input type="text" class="form-control" placeholder="Sidebar menu filter..."
+                        data-sidebar-search="true" />
+                </li>
             @endif
             <li class="nav-header">Navigation</li>
-            @php
-            $currentUrl = (Request::path() != '/') ? '/'. Request::path() : '/';
+            <!-- begin #sidebar -->
+            <!-- terbaru -->
+            <div id="sidebar" class="sidebar" data-disable-slide-animation="true">
+                <!-- begin sidebar scrollbar -->
+                <div data-scrollbar="true" data-height="100%">
+                    <!-- begin sidebar user -->
+                    <ul class="nav">
+                        <li class="nav-profile">
+                            <a href="javascript:;" data-toggle="nav-profile">
+                                <div class="cover with-shadow"></div>
+                                <div class="image">
+                                    {{-- <img src="../assets/img/user/user-14.jpg" alt="" /> --}}
+                                </div>
+                                <div class="info">
+                                    <b class="caret pull-right"></b>
+                                    {{ Auth::user()->name }}
 
-            function renderSubMenu($value, $currentUrl) {
-            $subMenu = '';
-            $GLOBALS['sub_level'] += 1 ;
-            $GLOBALS['active'][$GLOBALS['sub_level']] = '';
-            $currentLevel = $GLOBALS['sub_level'];
-            foreach ($value as $key => $menu) {
-            $GLOBALS['subparent_level'] = '';
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <ul class="nav nav-profile">
+                                <li><a href="javascript:;"><i class="fa fa-cog"></i> Settings</a></li>
+                                <li><a href="javascript:;"><i class="fa fa-pencil-alt"></i> Send Feedback</a></li>
+                                <li><a href="javascript:;"><i class="fa fa-question-circle"></i> Helps</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <!-- end sidebar user -->
+                    <!-- begin sidebar nav -->
+                    <ul class="nav">
+                        <li class="nav-header">Navigation</li>
 
-            $subSubMenu = '';
-            $hasSub = (!empty($menu['sub_menu'])) ? 'has-sub' : '';
-            $hasCaret = (!empty($menu['sub_menu'])) ? '<b class="caret pull-right"></b>' : '';
-            $hasTitle = (!empty($menu['title'])) ? $menu['title'] : '';
-            $hasHighlight = (!empty($menu['highlight'])) ? '<i class="fa fa-paper-plane text-theme m-l-5"></i>' : '';
+                        <li class="">
+                            <a href="{{ url('/') }}">
+                                <i class="fa fa-th-large"></i>
+                                <span>Kembali ke Home</span>
+                            </a>
+                        </li>
+                        @if (auth()->check() && auth()->user()->role->nama === 'Warga')
+                            <li class="">
+                                <a href="{{ route('user.warga.data-diri.index') }}">
+                                    <i class="fa fa-id-card"></i>
+                                    <span>Data Diri</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a class="nav-link" href="{{ route('user.warga.wargak.index') }}">
+                                    <i class="fa fa-id-card"></i>
+                                    <span>Notifikasi Status Pembayaran Iuran</span>
 
-            if (!empty($menu['sub_menu'])) {
-            $subSubMenu .= '<ul class="sub-menu">';
-                $subSubMenu .= renderSubMenu($menu['sub_menu'], $currentUrl);
-                $subSubMenu .= '</ul>';
-            }
+                                </a>
+                            </li>
+                        @endif
 
             $active = (strstr($currentUrl, $menu['url'])) ? 'active' : '';
 
-            if ($active) {
-            $GLOBALS['parent_active'] = true;
-            $GLOBALS['active'][$GLOBALS['sub_level'] - 1] = true;
-            }
-            if (!empty($GLOBALS['active'][$currentLevel])) {
-            $active = 'active';
-            }
-            $subMenu .= '
-            <li class="'. $hasSub .' '. $active .'">
-                <a href="'. $menu['url'] .'">'. $hasCaret . $hasTitle . $hasHighlight .'</a>
-                '. $subSubMenu .'
-            </li>
-            ';
-            }
-            return $subMenu;
-            }
+                        @if (auth()->check() && auth()->user()->role->nama === 'Petugas')
+                            <li class="">
+                                <a href="{{ route('user.kepala-keluarga.warga.index') }}">
+                                    <i class="fa fa-th-large"></i>
+                                    <span>Dashboard</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="{{ route('user.petugas-iuran.data-petugas.index') }}">
+                                    <i class="fa fa-id-card"></i>
+                                    <span>Data Dirii</span>
+                                </a>
+                            </li>
+                            <li class="has-sub">
+                                <a href="javascript:;">
+                                    <b class="caret"></b>
+                                    <i class="fa fa-list-ol"></i>
+                                    <span>Pembayaran Iuran</span>
 
-            foreach (config('sidebar.menu_user') as $key => $menu) {
-            $GLOBALS['parent_active'] = '';
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="{{ route('user.kepala-keluarga.bayar-iuranwajib.index') }}">Data
+                                            Pembayaran Iuran Wajib</a></li>
+                                    <li><a href="{{ route('user.kepala-keluarga.bayar-iuransukarela.index') }}">Data
+                                            Pembayaran Iuran Suka Rela</a></li>
+                                    <li><a href="{{ route('user.kepala-keluarga.bayar-iurankondisional.index') }}">Data
+                                            Pembayaran Iuran Kondisional</a></li>
+                                    <li><a href="{{ route('user.kepala-keluarga.bayar-iuranagenda.index') }}">Data
+                                            Pembayaran Iuran Suka Agenda</a></li>
+                                </ul>
+                            </li>
 
-            $hasSub = (!empty($menu['sub_menu'])) ? 'has-sub' : '';
-            $hasCaret = (!empty($menu['caret'])) ? '<b class="caret"></b>' : '';
-            $hasIcon = (!empty($menu['icon'])) ? '<i class="'. $menu['icon'] .'"></i>' : '';
-            $hasImg = (!empty($menu['img'])) ? '<div class="icon-img"><img src="'. $menu['img'] .'" /></div>' : '';
-            $hasLabel = (!empty($menu['label'])) ? '<span class="label label-theme m-l-5">'. $menu['label'] .'</span>' : '';
-            $hasTitle = (!empty($menu['title'])) ? '<span>'. $menu['title'] . $hasLabel .'</span>' : '';
-            $hasBadge = (!empty($menu['badge'])) ? '<span class="badge pull-right">'. $menu['badge'] .'</span>' : '';
 
-            $subMenu = '';
 
             if (!empty($menu['sub_menu'])) {
             $GLOBALS['sub_level'] = 0;
@@ -108,7 +145,8 @@ $sidebarClass = (!empty($sidebarTransparent)) ? 'sidebar-transparent' : '';
             }
             @endphp
             <!-- begin sidebar minify button -->
-            <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
+            <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i
+                        class="fa fa-angle-double-left"></i></a></li>
             <!-- end sidebar minify button -->
         </ul>
         <!-- end sidebar nav -->

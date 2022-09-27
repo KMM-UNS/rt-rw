@@ -95,10 +95,101 @@ return [
         ],
         [
             'icon' => 'fa fa-cogs',
-            'title' => 'Master',
+            'title' => 'Master Bendahara',
             'url' => 'javascript:;',
             'caret' => true,
             'sub_menu' => [
+                [
+                    'url' => '/admin/master-data/iuran-wajib',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Iuran Wajib'
+                ], [
+                    'url' => '/admin/master-data/iuran-sukarela',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Iuran Suka Rela'
+                ], [
+                    'url' => '/admin/master-data/iuran-kondisional',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Iuran Kondisional'
+                ], [
+                    'url' => '/admin/master-data/iuran-agenda',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Iuran Agenda'
+                ],
+                //  [
+                //     'url' => '/admin/master-data/petugas-tagihan',
+                //     'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Petugas Tagihan'
+                // ],
+                [
+                    'url' => '/admin/master-data/pos',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Pos'
+                ],
+                // [
+                //     'url' => '/admin/master-data/data-diri',
+                //     'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Data Diri'
+                // ]
+            ]
+        ],
+        [
+            'icon' => 'fa fa-cogs',
+            'title' => 'Kas RT',
+            'url' => 'javascript:;',
+            'caret' => true,
+            'sub_menu' => [
+                [
+                    'url' => '/admin/kas-rt/kas-iuranwajib',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Kas Iuran Wajib'
+                ], [
+                    'url' => '/admin/kas-rt/kas-iuransukarela',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Kas Iuran Suka Rela'
+                ], [
+                    'url' => '/admin/kas-rt/kas-iurankondisional',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Kas Iuran Kondisional'
+                ], [
+                    'url' => '/admin/kas-rt/kas-iuranagenda',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Kas Iuran Agenda'
+                ],
+                // [
+                //     'url' => '/admin/kas-rt/iuran-bulanan',
+                //     'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Kas Iuran Bulanan'
+                // ]
+            ]
+        ],
+        [
+            'icon' => 'fa fa-cogs',
+            'title' => 'Rekap Iuran',
+            'url' => 'javascript:;',
+            'caret' => true,
+            'sub_menu' => [
+                [
+                    'url' => '/admin/rekap-kas/rekap-iuranwajib',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Rekap Iuran Wajib'
+                ], [
+                    'url' => '/admin/rekap-kas/rekap-iuransukarela',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Rekap Iuran Suka Rela'
+                ], [
+                    'url' => '/admin/rekap-kas/rekap-iurankondisional',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Rekap Iuran Kondisional'
+                ], [
+                    'url' => '/admin/rekap-kas/rekap-iuranagenda',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Rekap Iuran Agenda'
+                ]
+            ]
+        ],
+        [
+            'icon' => 'fa fa-cogs',
+            'title' => 'Manajemen Kuangan',
+            'url' => 'javascript:;',
+            'caret' => true,
+            'sub_menu' => [
+                [
+                    // 'url' => '/admin/manajemen-kas/pemasukan',
+                    'url' => '/admin/manajemen-keuangan/manajemen-pemasukan',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Manage Pemasukan'
+                ], [
+                    // 'url' => '/admin/manajemen-manajemen/pengeluaran',
+                    'url' => '/admin/manajemen-keuangan/manajemen-pengeluaran',
+                    'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Manage Pengeluaran'
+                ]
+            ]
+        ]
+
                  [
                     'url' => '/admin/master-data/agama',
                     'title' => '<i class="fa fa-ellipsis-h"></i>&nbsp;Agama'
@@ -216,6 +307,7 @@ return [
         ],
     ],
 
+
     'menu_user' => [
         [
             'icon' => 'fa fa-th-large',
@@ -243,6 +335,23 @@ return [
             'url' => '/user/tamu',
             'caret' => false
         ]
+    ],
+
+
+    'menu_warga' => [
+        [
+            'icon' => 'fa fa-th-large',
+            'title' => 'Dashboard Warga',
+            'url' => '/warga',
+            'caret' => false
+        ],
+        [
+            'icon' => 'fa fa-th-large',
+            'title' => 'Warga',
+            'url' => '/petugas/data-petugas',
+            'caret' => false
+
+        ],
     ],
 
 
