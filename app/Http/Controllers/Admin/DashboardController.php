@@ -21,12 +21,9 @@ use App\Models\Surat;
 use App\Models\Warga;
 use App\Models\Keluarga;
 use App\Models\JadwalRonda;
-use Illuminate\Http\Request;
-use App\Models\GolonganDarah;
 use App\Charts\Admin\SuratChart;
 use App\Charts\Admin\GenderChart;
 use App\Charts\Admin\PekerjaanChart;
-use App\Http\Controllers\Controller;
 use App\Charts\Admin\PendidikanChart;
 
 class DashboardController extends Controller
@@ -36,40 +33,7 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(KeuanganChart  $keuanganchart, KasChart $kaschart, KasIuranChart $kasiuranchart, TahunChart $tahunchart)
-    {
-        $total_wajib = KasIuranWajib::sum('total_biaya');
-        $total_agenda = KasIuranAgenda::sum('total_biaya');
-        $total_kondisional = KasIuranKondisional::sum('total_biaya');
-        $total_sukarela = KasIuranSukaRela::sum('total_biaya');
-        $pemasukannn = ManajemenPemasukan::sum('nominal');
-        $pengeluarannn = ManajemenPengeluaran::sum('nominal');
-        $pemasukann = ManajemenPemasukan::all();
-        $pengeluarann = ManajemenPengeluaran::all();
-        $saldoo = Saldo::all();
-        $saldooo = Saldo::sum('saldo');
-        $pengeluaran = 0 + $pengeluarannn;
-        $pemasukan = $total_agenda + $total_wajib + $total_kondisional + $total_sukarela + $pemasukannn;
-        $saldo =  $saldooo + $total_agenda + $total_wajib + $total_kondisional + $total_sukarela + $pemasukannn - $pengeluarannn;
-        return view('pages.admin.dashboard', [
-            'total_wajib' => $total_wajib,
-            'total_agenda' => $total_agenda,
-            'pemasukan' => $pemasukan,
-            'saldo' => $saldo,
-            'saldoo' => $saldoo,
-            'saldooo' => $saldooo,
-            'total_kondisional' => $total_kondisional,
-            'total_sukarela' => $total_sukarela,
-            'pemasukann' => $pemasukann,
-            'pemasukannn' => $pemasukannn,
-            'pengeluarann' => $pengeluarann,
-            'pengeluaran' => $pengeluaran,
-            'pengeluarannn' => $pengeluarannn,
-            'KeuanganChart' => $keuanganchart->build(),
-            'KasChart' => $kaschart->build(),
-            'KasIuranChart' => $kasiuranchart->build(),
-            'TahunChart' => $tahunchart->build()
-    public function index(GenderChart $genderChart, PendidikanChart $pendidikanChart, PekerjaanChart $pekerjaanChart, SuratChart $suratChart)
+    public function index(GenderChart $genderChart, PendidikanChart $pendidikanChart, PekerjaanChart $pekerjaanChart, SuratChart $suratChart, KeuanganChart  $keuanganchart, KasChart $kaschart, KasIuranChart $kasiuranchart, TahunChart $tahunchart)
     {
         $minggu = JadwalRonda::whereHas('ronda', function ($query){
             return $query->where('status', 'aktif');
@@ -112,6 +76,19 @@ class DashboardController extends Controller
         $keluarga = Keluarga::where('status_tinggal_id', 1)->count();
         $surat = Surat::where('status_surat_id', '!=', '1')->count();
         $rumah = Rumah::count();
+        $total_wajib = KasIuranWajib::sum('total_biaya');
+        $total_agenda = KasIuranAgenda::sum('total_biaya');
+        $total_kondisional = KasIuranKondisional::sum('total_biaya');
+        $total_sukarela = KasIuranSukaRela::sum('total_biaya');
+        $pemasukannn = ManajemenPemasukan::sum('nominal');
+        $pengeluarannn = ManajemenPengeluaran::sum('nominal');
+        $pemasukann = ManajemenPemasukan::all();
+        $pengeluarann = ManajemenPengeluaran::all();
+        $saldoo = Saldo::all();
+        $saldooo = Saldo::sum('saldo');
+        $pengeluaran = 0 + $pengeluarannn;
+        $pemasukan = $total_agenda + $total_wajib + $total_kondisional + $total_sukarela + $pemasukannn;
+        $saldo =  $saldooo + $total_agenda + $total_wajib + $total_kondisional + $total_sukarela + $pemasukannn - $pengeluarannn;
         return view('pages.admin.dashboard', [
             'minggu' => $minggu,
             'senin' => $senin,
@@ -125,10 +102,27 @@ class DashboardController extends Controller
             'keluarga' => $keluarga,
             'surat' => $surat,
             'rumah' => $rumah,
+            'total_wajib' => $total_wajib,
+            'total_agenda' => $total_agenda,
+            'pemasukan' => $pemasukan,
+            'saldo' => $saldo,
+            'saldoo' => $saldoo,
+            'saldooo' => $saldooo,
+            'total_kondisional' => $total_kondisional,
+            'total_sukarela' => $total_sukarela,
+            'pemasukann' => $pemasukann,
+            'pemasukannn' => $pemasukannn,
+            'pengeluarann' => $pengeluarann,
+            'pengeluaran' => $pengeluaran,
+            'pengeluarannn' => $pengeluarannn,
             'genderChart' => $genderChart->build(),
             'pendidikanChart' => $pendidikanChart->build(),
             'pekerjaanChart' => $pekerjaanChart->build(),
-            'suratChart' => $suratChart->build()
+            'suratChart' => $suratChart->build(),
+            'KeuanganChart' => $keuanganchart->build(),
+            'KasChart' => $kaschart->build(),
+            'KasIuranChart' => $kasiuranchart->build(),
+            'TahunChart' => $tahunchart->build()
         ]);
     }
 

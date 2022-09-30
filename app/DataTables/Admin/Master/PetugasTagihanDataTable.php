@@ -53,7 +53,7 @@ class PetugasTagihanDataTable extends DataTable
 
     public function query(PetugasTagihan $model)
     {
-        return $model->select('petugas_tagihans.*')->with(['pos']);
+        return $model->select('petugas_tagihan.*')->with(['user','pos']);
     }
 
 
@@ -66,7 +66,7 @@ class PetugasTagihanDataTable extends DataTable
             ->dom('<"dataTables_wrapper dt-bootstrap"B<"row"<"col-xl-7 d-block d-sm-flex d-xl-block justify-content-center"<"d-block d-lg-inline-flex"l>><"col-xl-5 d-flex d-xl-block justify-content-center"fr>>t<"row"<"col-sm-5"i><"col-sm-7"p>>>')
             ->orderBy(1)
             ->buttons(
-                // Button::make('create'),
+                Button::make('create'),
                 Button::make('export'),
                 Button::make('print'),
                 Button::make('reset'),
@@ -78,17 +78,17 @@ class PetugasTagihanDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            Column::make('user_id')->data('user.name')->title("Nama"),
+            // Column::make('ttgl'),
+            // Column::make('no_telp'),
+            // Column::make('alamat'),
+            Column::make('pos_id')->data('pos.nama')->title("Pos"),
+            Column::computed('image'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
                 ->width(60)
                 ->addClass('text-center'),
-            Column::make('nama'),
-            Column::make('ttgl'),
-            Column::make('no_telp'),
-            Column::make('alamat'),
-            Column::make('pos')->data('pos.nama'),
-            Column::computed('image'),
         ];
     }
 

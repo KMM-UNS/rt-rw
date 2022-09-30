@@ -100,8 +100,8 @@
                                     @foreach ($wargaa as $item)
                                         <tr>
                                             <td>{{ $item->no_kk }}</td>
-                                            <td>{{ $item->warga }}</td>
-                                            <td>{{ $item->pos->nama }}</td>
+                                            <td>{{ $item }}</td>
+                                            {{-- <td>{{ $item->pos->nama }}</td> --}}
                                             <td>{{ $item->telp }}</td>
                                             @php
                                                 $status1 = $item->warga_wajib->where('jenis_iuran_id', 7);

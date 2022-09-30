@@ -17,7 +17,7 @@ class KasIuranWajib extends Model
     public const ACTIVE = "aktif";
 
     protected $table = 'kas_iuran_wajibs';
-    protected $fillable = ['jenis_iuran_id', 'tanggal', 'warga', 'pos', 'total_biaya', 'status'];
+    protected $fillable = ['jenis_iuran_id', 'tanggal', 'petugas_id','keluarga_id', 'total_biaya', 'status'];
     // protected $dates = [
     //     'created_at'
     // ];
@@ -26,35 +26,31 @@ class KasIuranWajib extends Model
     {
         return $this->belongsTo(IuranWajib::class, 'jenis_iuran_id');
     }
+
     public function petugastagihan()
     {
-        return $this->belongsTo(PetugasTagihan::class, 'petugas');
+        return $this->belongsTo(PetugasTagihan::class, 'petugas_id');
     }
-    // public function namabulanss()
-    // {
-    //     return $this->belongsTo(Bulan::class, 'bulan');
-    // }
-    // public function tahuns()
-    // {
-    //     return $this->belongsTo(Tahun::class, 'tahun');
-    // }
 
     //membuat dropdown jenis iuran
     public function jenisiuranwajib()
     {
         return $this->belongsTo(IuranWajib::class, 'jenis_iuran_id');
     }
+
     public function dokumen()
     {
         return $this->morphToMany(Dokumen::class, 'dokumenable');
     }
+
     //tamabahan dropdown warga
-    public function warga_wajib()
+    public function keluarga()
     {
-        return $this->belongsTo(Keluarga::class, 'warga');
+        return $this->belongsTo(Keluarga::class);
     }
-    public function postagihanwajib()
-    {
-        return $this->belongsTo(Pos::class, 'pos');
-    }
+
+    // public function postagihanwajib()
+    // {
+    //     return $this->belongsTo(Pos::class, 'pos');
+    // }
 }

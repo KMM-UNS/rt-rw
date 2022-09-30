@@ -16,7 +16,7 @@ class KasIuranSukaRela extends Model
     public const ACTIVE = "aktif";
 
     protected $table = 'kas_iuran_suka_relas';
-    protected $fillable = ['jenis_iuran_id', 'tanggal', 'warga', 'pos', 'total_biaya', 'status'];
+    protected $fillable = ['jenis_iuran_id', 'tanggal', 'petugas_id','keluarga_id', 'total_biaya', 'status'];
     protected $dates = [
         'created_at'
     ];
@@ -27,7 +27,7 @@ class KasIuranSukaRela extends Model
     }
     public function petugastagihan()
     {
-        return $this->belongsTo(PetugasTagihan::class, 'petugas');
+        return $this->belongsTo(PetugasTagihan::class, 'petugas_id');
     }
     // public function namabulanss()
     // {
@@ -47,9 +47,9 @@ class KasIuranSukaRela extends Model
         return $this->morphToMany(Dokumen::class, 'dokumenable');
     }
     //tamabahan dropdown pemberi
-    public function warga_sukarela()
+    public function keluarga()
     {
-        return $this->belongsTo(Keluarga::class, 'warga');
+        return $this->belongsTo(Keluarga::class);
     }
     public function postagihansukarela()
     {

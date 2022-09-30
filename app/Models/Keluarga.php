@@ -17,8 +17,8 @@ class Keluarga extends Model
         'kepala_keluarga',
         'rumah_id',
         'telp',
-        'keterangan'
-        'pos_tagihan',
+        'keterangan',
+        'pos_id',
     ];
 
     public function dokumen()
@@ -58,26 +58,27 @@ class Keluarga extends Model
 
     public function pos()
     {
-        return $this->belongsTo(Pos::class, 'pos_tagihan');
+        return $this->belongsTo(Pos::class);
     }
+
     public function warga_wajib()
     {
         return $this->hasMany(KasIuranWajib::class, 'warga');
     }
+
     public function warga_kondisional()
     {
         return $this->hasMany(KasIuranKondisional::class, 'warga');
     }
+
     public function warga_sukarela()
     {
         return $this->hasMany(KasIuranSukaRela::class, 'warga');
     }
+
     public function warga_agenda()
     {
         return $this->hasMany(KasIuranAgenda::class, 'warga');
     }
-    public function postagihan()
-    {
-        return $this->belongsTo(Pos::class, 'pos_tagihan');
-    }
+
 }

@@ -46,7 +46,10 @@
 
             if (auth()->user()->hasRole('admin')) {
                 $menu = config('sidebar.menu');
-            } else {
+            } else if(auth()->user()->hasRole('bendahara')) {
+                $menu = config('sidebar.menu_bendahara');
+            }
+            else {
                 $menu = config('sidebar.menu_petugas');
             }
 

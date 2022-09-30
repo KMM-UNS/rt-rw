@@ -15,11 +15,10 @@ class CreateKasIuranSukaRelasTables extends Migration
     {
         Schema::create('kas_iuran_suka_relas', function (Blueprint $table) {
             $table->id();
-            $table->string('jenis_iuran_id');
+            $table->unsignedBigInteger('jenis_iuran_id');
             $table->date('tanggal');
-            $table->string('petugas');
-            $table->string('warga');
-            $table->string('pos');
+            $table->unsignedBigInteger('petugas_id');
+            $table->unsignedBigInteger('keluarga_id');
             $table->integer('total_biaya');
             $table->string('status');
             $table->timestamps();

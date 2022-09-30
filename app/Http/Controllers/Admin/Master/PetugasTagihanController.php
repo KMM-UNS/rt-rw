@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers\Admin\MAster;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\PetugasTagihan;
 use App\Models\Pos;
-use App\DataTables\Admin\Master\PetugasTagihanDataTable;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\File;
+use App\Models\User;
 use App\Helpers\DataHelper;
 use App\Helpers\TrashHelper;
+use Illuminate\Http\Request;
+use App\Models\PetugasTagihan;
+use Illuminate\Support\Facades\DB;
 use App\Helpers\FileUploaderHelper;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
 use App\Http\Requests\Admin\PetugasTagihanForm;
+use App\DataTables\Admin\Master\PetugasTagihanDataTable;
 
 class PetugasTagihanController extends Controller
 {
@@ -25,8 +26,12 @@ class PetugasTagihanController extends Controller
 
     public function create()
     {
-        $area_pos = Pos::pluck('nama', 'id');
-        return view('pages.admin.master.petugas-tagihan.add-edit', ['area_pos' => $area_pos]);
+        $user_id = User::pluck('name', 'id');
+        $pos_id = Pos::pluck('nama', 'id');
+        return view('pages.admin.master.petugas-tagihan.add-edit', [
+            'user_id' => $user_id,
+            'pos_id' => $pos_id
+        ]);
     }
 
     public function store(PetugasTagihanForm $request, FileUploaderHelper $fileUploaderHelper)

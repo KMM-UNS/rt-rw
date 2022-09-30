@@ -18,7 +18,7 @@
 	<link href="{{ asset('assets/css/one-page-parallax/style.min.css') }}" rel="stylesheet" />
 	<link href="{{ asset('assets/css/one-page-parallax/style-responsive.min.css') }}" rel="stylesheet" />
 	<link href="{{ asset('assets/css/one-page-parallax/theme/default.css') }}" id="theme" rel="stylesheet" />
-    <link href="{{ asset('/assets/css/default/style.css') }}" rel="stylesheet" />
+    {{-- <link href="{{ asset('/assets/css/default/style.css') }}" rel="stylesheet" /> --}}
 
 	<!-- ================== END BASE CSS STYLE ================== -->
 

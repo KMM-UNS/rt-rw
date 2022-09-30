@@ -20,6 +20,7 @@ class CreateKeluargaTable extends Migration
             $table->unsignedBigInteger('rumah_id')->nullable();
             $table->string('telp');
             $table->unsignedBigInteger('status_tinggal_id');
+            $table->unsignedBigInteger('pos_id')->nullable();
             $table->unsignedBigInteger('createable_id');
             $table->text('createable_type');
             $table->timestamp('verified_at')->nullable();
@@ -27,6 +28,7 @@ class CreateKeluargaTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
+            $table->foreign('pos_id')->references('id')->on('pos')->onUpdate('cascade')->onDelete('restrict');
             $table->foreign('rumah_id')->references('id')->on('rumah')->onUpdate('cascade')->onDelete('restrict');
             $table->foreign('status_tinggal_id')->references('id')->on('status_tinggal')->onUpdate('cascade')->onDelete('restrict');
             $table->foreign('createable_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('restrict');

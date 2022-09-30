@@ -10,6 +10,14 @@ return [
             'users' => 'c,r,u,d',
             'profile' => 'r,u'
         ],
+        'bendahara' => [
+            'users' => 'c,r,u,d',
+            'profile' => 'r,u'
+        ],
+        'petugas_iuran' => [
+            'users' => 'c,r,u,d',
+            'profile' => 'r,u'
+        ],
         'warga' => [
             'profile' => 'r,u'
         ]
@@ -20,6 +28,9 @@ return [
         ],
         'ketua_rt' => [
             ['name' => "Ketua RT", "email" => "rt@admin.com", "phone_number" => "628113021011","password" => 'password'],
+        ],
+        'bendahara' => [
+            ['name' => "Bendahara", "email" => "bendahara@admin.com", "phone_number" => "628113221011","password" => 'password'],
         ],
     ],
     'permissions_map' => [

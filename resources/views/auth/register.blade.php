@@ -4,7 +4,7 @@
 
 @push('css')
 <link href="{{ asset('/assets/plugins/smartwizard/dist/css/smart_wizard.css') }}" rel="stylesheet" />
-<link href="{{ asset('/assets/css/default/style.css') }}" rel="stylesheet" />
+{{-- <link href="{{ asset('/assets/css/default/style.css') }}" rel="stylesheet" /> --}}
 <link href="{{ asset('/assets/plugins/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet" />
 @endpush
 
@@ -94,9 +94,13 @@
                     <button type="submit" class="btn btn-success btn-block btn-lg">{{ __('Daftar') }}</button>
                 </div>
                 <p>
-                    Sistem Pendaftaran Mahasiswa Baru
+                    <br />
+                    Sudah punya akun? <a href="{{route('login')}}">Masuk</a>
                 </p>
-            </div>
+                <hr />
+                <p class="text-center text-grey-darker">
+                    &copy; <?= date('Y') ?> Mandiri Solusindo </p>
+            </form>
         </div>
         <!-- end login-content -->
         {{-- <div class="card-header">{{ __('Register') }}</div>

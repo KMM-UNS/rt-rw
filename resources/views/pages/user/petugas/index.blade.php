@@ -63,7 +63,7 @@
                                                     src="{{ asset($data->dokumen->where('nama', 'foto_petugas')->first()['public_url']) }}"
                                                     alt="Foto TTD" width="200"></p>
                                             <p class="text-center"> <img
-                                                    src="{{ asset($data->dokumen->where('nama', 'foto_ttd_petugas')->first()['public_url']) }}"
+                                                    {{-- src="{{ asset($data->dokumen->where('nama', 'foto_ttd_petugas')->first()['public_url']) }}" --}}
                                                     alt="Foto TTD" width="200"></p>
 
                                             {{-- <img src="/assets/img/user/user-1.jpg" alt="Foto Warga" width="200"> --}}
@@ -83,7 +83,7 @@
                                                         <td>Nama</td>
                                                         <td> {{ Auth::user()->name }}</td>
                                                     </tr>
-                                                    <tr>
+                                                    {{-- <tr>
                                                         <td>Tanggal Lahir</td>
                                                         <td>{{ date('d M Y', strtotime($data->ttgl)) }}</td>
                                                     </tr>
@@ -94,10 +94,10 @@
                                                     <tr>
                                                         <td>Alamat</td>
                                                         <td>{{ $data->alamat }}</td>
-                                                    </tr>
+                                                    </tr> --}}
                                                     <tr>
                                                         <td>Pos</td>
-                                                        <td>{{ $data->poss->nama }}</td>
+                                                        <td>{{ $data->pos->nama }}</td>
                                                     </tr>
                                                     {{-- @endforeach --}}
                                                 </tbody>

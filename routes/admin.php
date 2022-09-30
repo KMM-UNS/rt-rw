@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\RekapIuran\RekapIuranAgendaController;
+use Illuminate\Routing\RouteRegistrar;
 
 Route::get('/', function () {
     return redirect(route('home'));
@@ -10,7 +11,7 @@ Route::get('/', function () {
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     // require base_path('vendor/laravel/fortify/routes/routes.php');
 
-    Route::group(['namespace' => 'Admin', 'middleware' => ['role:admin|ketua_rt|ketua_rw']], function () {
+    Route::group(['namespace' => 'Admin', 'middleware' => ['role:admin|ketua_rt|bendahara']], function () {
         Route::get('/', function () {
             return redirect(route('admin.dashboard.index'));
         });
@@ -69,6 +70,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
             Route::resource('status-hunian', 'StatusHunianController');
             Route::resource('status-tinggal', 'StatusTinggalController');
             Route::resource('warga-negara', 'WargaNegaraController');
+
+        });
+
+        Route::group(['prefix' => '/master-data', 'as' => 'master-data.', 'namespace' => 'Master', 'middleware' => ['role:admin|bendahara']], function () {
             Route::resource('iuran-wajib', 'IuranWajibController');
             Route::resource('iuran-sukarela', 'IuranSukarelaController');
             Route::resource('iuran-kondisional', 'IuranKondisionalController');

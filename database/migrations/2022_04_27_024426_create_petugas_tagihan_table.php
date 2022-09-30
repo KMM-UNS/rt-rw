@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateWargasTable extends Migration
+class CreatePetugasTagihanTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class CreateWargasTable extends Migration
      */
     public function up()
     {
-        Schema::create('wargas', function (Blueprint $table) {
+        Schema::create('petugas_tagihan', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('pos_id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -26,6 +29,6 @@ class CreateWargasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('wargas');
+        Schema::dropIfExists('petugas_tagihan');
     }
 }

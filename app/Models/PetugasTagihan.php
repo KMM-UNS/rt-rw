@@ -15,8 +15,8 @@ class PetugasTagihan extends Model
 
     public const ACTIVE = "aktif";
 
-    protected $table = 'petugas_tagihans';
-    protected $fillable = ['nama', 'user_id', 'ttgl', 'no_telp', 'alamat', 'pos'];
+    protected $table = 'petugas_tagihan';
+    protected $fillable = [ 'user_id', 'pos_id'];
     protected $dates = [
         'created_at'
     ];
@@ -25,22 +25,32 @@ class PetugasTagihan extends Model
     {
         return $this->hasMany(KasIuranWajib::class);
     }
+
     public function KasIuranAgenda()
     {
         return $this->hasMany(KasIuranAgenda::class);
     }
+
     public function KasIuranKondisional()
     {
         return $this->hasMany(KasIuranKondisional::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function pos()
     {
-        return $this->belongsTo(Pos::class, 'pos');
+        return $this->belongsTo(Pos::class);
     }
-    public function poss()
-    {
-        return $this->belongsTo(Pos::class, 'pos');
-    }
+
+    // public function poss()
+    // {
+    //     return $this->belongsTo(Pos::class, 'pos');
+    // }
+
     public function dokumen()
     {
         return $this->morphToMany(Dokumen::class, 'dokumenable');

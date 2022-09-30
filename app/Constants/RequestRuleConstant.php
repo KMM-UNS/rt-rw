@@ -153,7 +153,7 @@ class RequestRuleConstant
             'tamu_keluarga_id' => 'required',
         ];
     }
-    
+
     public static function KasIuranWajibTable()
     {
         return [
@@ -207,23 +207,14 @@ class RequestRuleConstant
     public static function PetugasTagihanTable()
     {
         return [
-            'petugas_tagihans_nama' => 'required',
-            'petugas_tagihans_ttgl' => 'required',
-            'petugas_tagihans_no_telp' => 'required',
-            'petugas_tagihans_alamat' => 'required',
-            'petugas_tagihans_pos' => 'required'
+            'petugas_tagihan_user_id' => 'required',
+            // 'petugas_tagihans_ttgl' => 'required',
+            // 'petugas_tagihans_no_telp' => 'required',
+            // 'petugas_tagihans_alamat' => 'required',
+            'petugas_tagihan_pos_id' => 'required'
         ];
     }
-    public static function KeluargaTable()
-    {
-        return [
-            'keluargas_nama' => 'required',
-            // 'keluargas_ttgl' => 'required',
-            'keluargas_telp' => 'required',
-            // 'keluargas_alamat' => 'required',
-            // 'keluargas_pos' => 'required'
-        ];
-    }
+
     public static function PengeluaranTable()
     {
         return [

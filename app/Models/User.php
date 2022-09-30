@@ -58,4 +58,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsTo(AdminRole::class, 'role_id');
     }
+
+    public function petugas_tagihan()
+    {
+
+    }
 }
